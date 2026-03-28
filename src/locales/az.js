@@ -1,135 +1,486 @@
-﻿const az = {
+const az = {
   meta: {
-    title: "Morphix | 3D məhsul veb-saytları və konfiguratorlar",
+    title: "Morphix | Rəqəmsal Məhsul Studiyası",
     description:
-      "Morphix texniki və premium brendlər üçün 3D məhsul saytları, konfiguratorlar, təqdimat səhifələri və interaktiv rəqəmsal təcrübələr hazırlayır.",
+      "Morphix 3D məhsul saytları, interaktiv konfiquratorlar və immersiv veb təcrübələr üzrə ixtisaslaşmış rəqəmsal məhsul studiyasıdır.",
   },
   common: {
     brandName: "Morphix",
-    homeAriaLabel: "Morphix ana səhifəsi",
-    primaryNavAriaLabel: "Əsas naviqasiya",
+    homeAriaLabel: "Morphix ana səhifə",
+    primaryNavAriaLabel: "Əsas",
     languageSwitcherLabel: "Dil",
-    productExamplesAriaLabel: "Məhsul konfiguratoru nümunələri",
+    productExamplesAriaLabel: "Məhsul konfiqurator nümunələri",
   },
   nav: {
-    hero: "Ana blok",
-    capabilities: "İmkanlar",
+    home: "Ana səhifə",
+    services: "Xidmətlər",
+    work: "İşlər",
     pricing: "Qiymətlər",
     about: "Haqqımızda",
     contact: "Əlaqə",
-    cta: "Məhsulunuzu müzakirə edin",
+    cta: "Layihəyə başla",
   },
+  // ── ANA SƏHİFƏ ──
   hero: {
-    eyebrow: "3D məhsul saytları və konfiguratorlar",
-    proofline: [
-      "Three.js tətbiqi",
-      "3D modellər və renderlər daxildir",
-      "İstehsala hazır front-end təhvil",
-    ],
-    title: "Mürəkkəb məhsulları",
-    titleAccent: "anlamağı və konfiqurasiya etməyi asanlaşdıran 3D məhsul saytları.",
-    copy:
-      "Morphix konfiqurasiya olunan, texniki və premium məhsullar üçün ciddi, istehsala hazır rəqəmsal təcrübələr qurur. Aydın mesajlaşmanı, Three.js interaksiyasını, məhsul məntiqini və veb üçün optimallaşdırılmış asset təhvilini bir araya gətiririk ki, müştərilər seçimləri daha çox inamla və daha az sürtünmə ilə dəyərləndirə bilsinlər.",
-    primaryCta: "Konfiguratorunuzu planlayın",
-    secondaryCta: "Demo bölməsinə baxın",
-    stats: [
+    headline: "İnsanların həqiqətən kəşf etmək istədiyi məhsullar yaradırıq.",
+    subline:
+      "Morphix rəqəmsal məhsul studiyasıdır. Unudulmaz olmaqdan imtina edən brendlər üçün 3D saytlar, interaktiv konfiquratorlar və buraxılış təcrübələri dizayn edir və inkişaf etdiririk.",
+    primaryCta: "Layihəyə başla",
+    secondaryCta: "İşlərimizə baxın",
+  },
+  valueProps: {
+    eyebrow: "Niyə Morphix",
+    items: [
       {
-        label: "İstifadə ssenariləri",
-        value: "konfiguratorlar, təqdimat səhifələri, məhsul izahları",
+        title: "İnteraktiv, dekorativ deyil",
+        copy: "Hər 3D element alıcıya xidmət edir. Konfiqurasiya, müqayisə, kəşf — sadəcə göz ziyafəti deyil.",
       },
       {
-        label: "Məhsul məntiqi",
-        value: "ölçü, örtük, variantlar, modullar, əlavələr",
+        title: "İstehsal üçün mühəndislik edilib",
+        copy: "Three.js, optimallaşdırılmış resurslar, responsiv tərtibat. Sürətli yüklənir, rahat işləyir, təmiz miqyaslanır.",
       },
       {
-        label: "Təhvil",
-        value: "Three.js, assetlər, renderlər və təqdimat dəstəyi",
+        title: "Tam həcmli təhvil",
+        copy: "Strategiya, dizayn, 3D, front-end, buraxılış. Bir komanda, bir proses, heç bir boşluq.",
       },
     ],
-    stage: {
-      label: "Təqdimata strukturlaşdırılıb",
-      title: "Alıcıya fayda verdiyi yerdə 3D dərinliyi ilə ciddi məhsul hekayələndirməsi.",
-      copy:
-        "Məhsul hekayəsini, qarşılıqlı əlaqə modelini və təhvil sistemini birlikdə qururuq ki, sayt həm inandırıcı, həm sürətli, həm də idarəolunan qalsın.",
-      points: [
-        "Aydın səhifə strukturu",
-        "İnteraktiv məhsul məntiqi",
-        "3D assetlər və renderlər",
-        "İstehsala hazır təhvil",
+  },
+  servicesPreview: {
+    eyebrow: "Nə edirik",
+    title: "Konseptdən buraxılışa qədər hər şeyi biz həll edirik.",
+    items: [
+      { title: "3D Konfiquratorlar", copy: "Müştərilərinizə öz məhsullarını yaratmağa imkan verin." },
+      { title: "Məhsul Saytları", copy: "Sadəcə təsir etməyən, həm də satışa çevirən hekayə." },
+      { title: "Buraxılış Təcrübələri", copy: "Məhsul təqdimatları və kampaniyalar üçün immersiv səhifələr." },
+    ],
+    cta: "Bütün xidmətlər",
+  },
+  portfolioPreview: {
+    eyebrow: "Seçilmiş işlər",
+    title: "Həyata keçirdiyimiz məhsullar.",
+    projects: [
+      {
+        name: "Açıq Hava Yaşayış Konfiquratoru",
+        type: "Perqola Sistemi",
+        result: "Müştərilər idarə olunan 3D axınında ölçü, örtük, işıqlandırma və aksesuarları konfiqurasiya edir. Satışöncəsi sualları yarıya endirdi.",
+      },
+      {
+        name: "İstehlak Elektronikası Buraxılışı",
+        type: "Məhsul Saytı",
+        result: "Səhifədə qalma müddətini 3 dəfə artıran və demo sorğularında ölçülə bilən artım təmin edən interaktiv xüsusiyyət icmalı.",
+      },
+    ],
+    cta: "Bütün işlərə baxın",
+  },
+  trust: {
+    eyebrow: "Nəticələr",
+    items: [
+      { metric: "3×", label: "səhifədə qalma müddətində orta artım" },
+      { metric: "50%", label: "daha az satışöncəsi dəstək sualı" },
+      { metric: "40%", label: "məhsul səhifələrində daha yüksək konversiya" },
+    ],
+  },
+  homeContact: {
+    eyebrow: "Sürətli sorğu",
+    title: "Ağlınızda layihə var?",
+    copy: "Bizə yazın. 48 saat ərzində cavab verəcəyik.",
+    fields: {
+      name: { label: "Ad", placeholder: "Əli Həsənov" },
+      email: { label: "E-poçt", placeholder: "ali@sirket.az" },
+      message: { label: "Mesaj", placeholder: "Layihəniz haqqında qısaca məlumat verin..." },
+    },
+    submit: "Mesaj göndər",
+    successTitle: "Göndərildi!",
+    successCopy: "Tezliklə sizinlə əlaqə saxlayacağıq.",
+  },
+  homeCta: {
+    headline: "Məhsulunuzu unudulmaz etməyə hazırsınız?",
+    copy: "Nə qurduğunuzu bizə deyin. Mümkün olanları sizə göstərək.",
+    button: "Əlaqə saxlayın",
+  },
+  // ── XİDMƏTLƏR SƏHİFƏSİ ──
+  servicesPage: {
+    eyebrow: "Xidmətlər",
+    headline: "İnsanların yadda saxlayacağı məhsul buraxmaq üçün lazım olan hər şey.",
+    copy: "Biz strategiyanı, dizaynı, 3D mühəndisliyi və front-end inkişafını bir fokuslanmış əməkdaşlıqda birləşdiririk. Parça-parça podratçılar yox, təhvil xaosu yox.",
+    services: [
+      {
+        title: "3D Məhsul Konfiquratorları",
+        copy: "Müştərilərin ani vizual əks-əlaqə ilə ölçü, örtük, rəng, aksesuarlar və mühiti dəyişdirdiyi sayta inteqrasiya olunmuş konfiquratorlar. Three.js ilə işləyir, konversiya üçün dizayn edilib.",
+        tags: ["Three.js", "Məhsul Məntiqi", "Ticarətə Hazır"],
+      },
+      {
+        title: "Məhsul Buraxılış Saytları",
+        copy: "Məhsul hekayəsini, sübutu və konversiya strukturunu vahid aydın səyahətdə birləşdirən yüksək təsirli səhifələr. Məhsulunuzun dünya ilə tanışdığı an üçün qurulub.",
+        tags: ["Buraxılış", "Hekayə", "Konversiya"],
+      },
+      {
+        title: "3D Resurs İstehsalı",
+        copy: "Optimallaşdırılmış 3D modellər, studiya renderləri, məhsul kəsikləri və konfiqurasiyaya hazır resurs dəstləri. Saytınızın, kampaniyalarınızın və satış materiallarınızın ehtiyac duyduğu hər şey.",
+        tags: ["Modellər", "Renderlər", "WebGL Resursları"],
+      },
+      {
+        title: "İnteraktiv Məhsul Demoları",
+        copy: "Müştərilərin zəng etmədən əvvəl imkanları anlamalarına kömək edən idarə olunan 3D və hərəkət əsaslı icmallar. Təzyiqlə deyil, aydınlıqla satın.",
+        tags: ["Demo", "Təhsil", "Özünəxidmət"],
+      },
+      {
+        title: "Texniki İzahedicilər",
+        copy: "Təkcə mətnlə izah oluna bilməyən məhsullar üçün. Mürəkkəbi anlaşılan edən animasiyalı parçalanmalar, komponent görünüşləri və iş axını vizuallaşdırmaları.",
+        tags: ["Animasiya", "İzahedici", "Mürəkkəb Məhsullar"],
+      },
+      {
+        title: "Ticarətə Hazır Səhifələr",
+        copy: "Yüksək düşüncə tələb edən alışlar üçün dizayn edilmiş məhsul səhifələri. Müştəri ödənişə çatmadan qiyməti əsaslandıran aydın struktur, etibar siqnalları və vizual dərinlik.",
+        tags: ["E-ticarət", "Etibar", "Premium"],
+      },
+    ],
+    configurator: {
+      eyebrow: "Əsas imkan",
+      title: "Həqiqətən sövdələşmə bağlayan konfiquratorlar.",
+      copy: "Perqola, mebel, işıqlandırma, avadanlıq — real seçimləri olan hər şeyi satan brendlər üçün. İstifadəçilərin ölçüləri, materialları, aksesuarları və mühitləri ani vizual əks-əlaqə ilə tənzimlədikləri idarə olunan konfiquratorlar yaradırıq.",
+      features: [
+        {
+          title: "Əhəmiyyətli seçimlər",
+          copy: "Ölçü, örtük, rəng, əlavələr, işıqlandırma — yüksək təsirli seçimlər, bir təmiz interfeysdə.",
+        },
+        {
+          title: "Səhnəyə uyğun vizuallaşdırma",
+          copy: "Alıcıların məhsulu real mühitdə qiymətləndirməsi üçün mühitləri, kamera bucaqlarını və kontekstləri dəyişdirin.",
+        },
+        {
+          title: "Resurslar daxildir",
+          copy: "Düzgün buraxılış üçün lazım olan 3D modellər, materiallar və optimallaşdırılmış veb resursları təhvil veririk.",
+        },
+        {
+          title: "Veb üçün qurulub",
+          copy: "Responsiv, yüksək performanslı və qiymət məntiqi, CMS məzmunu və ticarət axınları ilə birləşməyə hazır.",
+        },
       ],
     },
-    delivery: {
-      chip: "Real məhsul komandaları üçün qurulub",
-      copy:
-        "Konfiqurasiya olunan məhsullar üçün sayt interfeysini, Three.js tətbiqini, 3D asset prosesini və komandanızın təqdimat, kampaniya və satış üçün ehtiyac duyduğu vizualları tam şəkildə üzərimizə götürə bilərik.",
-      points: [
-        "Məhsul səhifələri",
-        "Konfigurator məntiqi",
-        "Asset istehsalı",
-        "Təqdimat dəstəyi",
+    process: {
+      eyebrow: "Necə işləyirik",
+      title: "Dörd mərhələ. Sıfır qeyri-müəyyənlik.",
+      copy: "Hər əməkdaşlıq eyni struktura əməl edir. Həmişə harada olduğumuzu, növbəti addımı və nə alacağınızı bilirsiniz.",
+      steps: [
+        {
+          step: "01",
+          title: "Kəşf",
+          copy: "Məhsul, auditoriya və biznes məqsədi üzrə razılığa gəlirik. Fərziyyə yox — yalnız aydınlıq.",
+        },
+        {
+          step: "02",
+          title: "Struktur",
+          copy: "İnformasiya arxitekturası, wireframe-lər, hərəkət niyyəti. İstehsal başlamazdan əvvəl təcrübə aydın olur.",
+        },
+        {
+          step: "03",
+          title: "Qurma",
+          copy: "Dizayn, 3D, front-end, inteqrasiyalar. Hər şey birlikdə yüklənir, hər ölçüdə test edilir.",
+        },
+        {
+          step: "04",
+          title: "Buraxılış",
+          copy: "QA, yerləşdirmə və təmiz təhvil. Komandanız əminliklə idarə edə və genişləndirə bilər.",
+        },
       ],
     },
   },
+  // ── İŞLƏR SƏHİFƏSİ ──
+  workPage: {
+    eyebrow: "İşlər",
+    headline: "Buraxılışına kömək etdiyimiz məhsullar.",
+    copy: "Müxtəlif sahələrdən layihə seçmələri. Hər biri daha yaxşı hekayəyə ehtiyacı olan məhsulla başladı.",
+    projects: [
+      {
+        name: "Perqola Konfiqurator Sistemi",
+        type: "Açıq Hava Məhsulları",
+        result: "Tam konfiqurator təcrübəsi: ölçü, yan seçimlər, işıqlandırma, aksesuarlar və montaj — hamısı bir idarə olunan alış axınında.",
+        details: "Satışöncəsi sorğuları 50% azaltdı. Müştərilər komanda ilə əlaqə saxlamadan əvvəl əminliklə konfiqurasiya edir.",
+      },
+      {
+        name: "Premium İstehlak Elektronikası",
+        type: "Məhsul Buraxılışı",
+        result: "Mürəkkəb məhsul xəttini anlaşılan edən interaktiv xüsusiyyət icmalları və müqayisə görünüşləri.",
+        details: "Səhifədə qalma müddəti 3 dəfə artdı. İlk ay ərzində demo sorğularında ölçülə bilən artım.",
+      },
+      {
+        name: "Müəssisə SaaS Platforması",
+        type: "Məhsul Saytı",
+        result: "Mücərrəd platforma dəyərini qərar qəbul edənlər və qiymətləndiricilər üçün konkret, vizual hekayəyə çevirdi.",
+        details: "İlk zəngdən əvvəl potensial müştərilərə lazım olan aydınlığı verərək satış dövrünü qısaltdı.",
+      },
+      {
+        name: "Mebel Kolleksiyası Buraxılışı",
+        type: "E-ticarət",
+        result: "Örtük və mühit dəyişdirmə ilə 3D məhsul görüntüləyicisi. Müştərilər almadan əvvəl hər bucağı araşdırır.",
+        details: "Əvvəlki statik məhsul səhifələri ilə müqayisədə səbətə əlavə etmə nisbəti 40% daha yüksək.",
+      },
+      {
+        name: "Sənaye Avadanlığı İzahedicisi",
+        type: "Texniki Məhsul",
+        result: "Mürəkkəb maşınları texniki olmayan alıcılar üçün anlaşılan edən animasiyalı komponent parçalanmaları.",
+        details: "Sərgilər, satış təqdimatları və əsas məhsul saytı üzrə istifadə olunur.",
+      },
+    ],
+  },
+  // ── QİYMƏTLƏR SƏHİFƏSİ ──
+  pricingPage: {
+    eyebrow: "Qiymətlər",
+    headline: "Şəffaf qiymətlər. Sürpriz yoxdur.",
+    copy: "Başlanğıc nöqtəsi seçin. Hər əməkdaşlıq məhsulunuza, vaxt cədvəlinizə və məqsədlərinizə uyğun planlaşdırılır.",
+    badge: "Ən populyar",
+    cta: "Başlayın",
+    tiers: [
+      {
+        tier: "Əsas",
+        price: "$4,900",
+        subtitle: "Bir fokuslanmış məhsul səhifəsi və ya buraxılış təcrübəsi.",
+        features: [
+          "Kəşf seminarı və səhifə strategiyası",
+          "Bir yüksək təsirli məhsul səhifəsi",
+          "Bir əsas 3D və ya hərəkət ardıcıllığı",
+          "Responsiv QA və təmiz təhvil",
+        ],
+      },
+      {
+        tier: "İnkişaf",
+        price: "$14,900",
+        subtitle: "Daha dərin müştəri səyahətləri ilə çoxsəhifəli məhsul saytı.",
+        features: [
+          "Çoxbölməli məhsul saytı",
+          "Xüsusi səhnə keçidləri və hərəkət",
+          "CMS və ya API-yə hazır məzmun strukturu",
+          "Buraxılış dəstəyi və optimallaşdırma mərhələsi",
+        ],
+        featured: true,
+      },
+      {
+        tier: "Xüsusi",
+        price: "Danışaq",
+        subtitle: "Konfiquratorlar, mürəkkəb sistemlər və davamlı tərəfdaşlıqlar.",
+        features: [
+          "Verilənlərə əsaslanan 3D məhsul səhnələri",
+          "Ticarət, CRM və ya CMS inteqrasiyaları",
+          "Təkrar istifadə edilə bilən komponent və hərəkət kitabxanası",
+          "Davamlı optimallaşdırma və dəstək",
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: "Hər tarif planına nə daxildir?",
+        a: "Kəşf, dizayn, inkişaf, QA və yerləşdirmə. Əsas şeylər üçün əlavə ödəniş tələb etmirik.",
+      },
+      {
+        q: "Sonradan yüksəldə bilərəm?",
+        a: "Mütləq. Əsas layihələr nəticələr gəldikcə tez-tez İnkişaf və ya Xüsusi əməkdaşlıqlara çevrilir.",
+      },
+      {
+        q: "Tipik layihə nə qədər vaxt aparır?",
+        a: "Əsas: 2–3 həftə. İnkişaf: 4–8 həftə. Xüsusi: mürəkkəbliyə əsasən birlikdə planlaşdırılır.",
+      },
+      {
+        q: "Mövcud dizaynlarla işləyirsiniz?",
+        a: "Bəli. Brend sisteminizlə işləyə və ya sıfırdan dizayn edə bilərik — layihə üçün nə uyğundursa.",
+      },
+    ],
+  },
+  // ── HAQQIMIZDA SƏHİFƏSİ ──
+  aboutPage: {
+    eyebrow: "Haqqımızda",
+    headline: "Məhsul komandaları üçün qurulmuş studiya.",
+    copy: "Morphix mövcuddur, çünki məhsul buraxılışları şablon saytlardan və hazır renderlərdən daha yaxşısına layiqdir. Biz dizaynı, mühəndisliyi və 3D sənətkarlığını bir praktikada birləşdirən kiçik, fokuslanmış komandayıq.",
+    principles: [
+      {
+        title: "Şoua deyil, aydınlığa üstünlük",
+        copy: "Hərəkət və 3D-ni izah etmək üçün istifadə edirik, bəzəmək üçün deyil. Alıcıya anlamağa kömək etmirsə, buraxılmır.",
+      },
+      {
+        title: "Real komandalar üçün qurulub",
+        copy: "Təhvil verdiyimiz hər şey məzmun yeniləmələri, responsiv QA və uzunmüddətli texniki xidmət üçün strukturlaşdırılıb. Birdəfəlik qurmalar yox.",
+      },
+      {
+        title: "Bir komanda, bir proses",
+        copy: "Strategiya, dizayn, 3D və kod bir dam altındadır. Daha az təhvil — daha az itki.",
+      },
+    ],
+    story: {
+      title: "Necə işləyirik",
+      copy: "Biz mürəkkəb, konfiqurasiya edilə bilən və ya premium məhsullar satan şirkətlərdəki məhsul, marketinq və inkişaf komandaları ilə tərəfdaşlıq edirik. Bizim işimiz məhsulu daha asan anlaşılan və daha çətin unudulan etməkdir — sayt təcrübəsinin özü vasitəsilə.",
+    },
+  },
+  // ── ƏLAQƏ SƏHİFƏSİ (çoxaddımlı sehrbaz) ──
+  contactPage: {
+    eyebrow: "Əlaqə saxlayın",
+    headline: "Yadda qalacaq bir şey quraq.",
+    copy: "Layihənizi anlayıb fərdi təklif ilə cavab verə bilməyimiz üçün bir neçə sürətli addımdan keçin.",
+    facts: [
+      "48 saat ərzində cavab",
+      "Şablona deyil, fərdi təklif",
+      "Öhdəlik yox, təzyiq yox",
+    ],
+    wizard: {
+      stepLabel: "Addım",
+      previous: "Geri",
+      next: "Davam et",
+      submit: "Brifinqi göndər",
+      successTitle: "Brifinq göndərildi!",
+      successCopy: "Təfərrüatlar üçün təşəkkür edirik. 48 saat ərzində növbəti addımlarla sizə geri dönəcəyik.",
+      steps: [
+        { title: "Sizin haqqınızda", copy: "Kim olduğunuzu və sizə necə çatacağımızı söyləyin." },
+        { title: "Layihəniz", copy: "Nə qurursunuz və hansı mərhələdədir?" },
+        { title: "Həcm və məqsədlər", copy: "Nəyə ehtiyacınız var və təcrübə nəyə nail olmalıdır?" },
+        { title: "Vaxt cədvəli və büdcə", copy: "Dəqiq planlaşdıra bilməyimiz üçün məhdudiyyətlərinizi anlamağımıza kömək edin." },
+      ],
+    },
+    fields: {
+      fullName: { label: "Adınız", placeholder: "Əli Həsənov" },
+      email: { label: "İş e-poçtu", placeholder: "ali@sirket.az" },
+      company: { label: "Şirkət", placeholder: "Şimal Sistemləri" },
+      website: { label: "Mövcud sayt", placeholder: "simal.az" },
+      productName: { label: "Məhsul və ya təklif", placeholder: "Modul perqola seriyası" },
+      brief: {
+        label: "Əlavə kontekst",
+        placeholder: "Alış dövrləriniz, buraxılış vaxt cədvəliniz və ya texniki məhdudiyyətlər haqqında bilməli olduğumuz bir şey var?",
+      },
+    },
+    groups: {
+      projectType: {
+        label: "Nə planlaşdırırsınız?",
+        description: "Əsas əməkdaşlıq növünü seçin.",
+        multi: false,
+        options: [
+          { value: "configurator", label: "3D Konfiqurator" },
+          { value: "product-site", label: "Məhsul Saytı" },
+          { value: "launch-site", label: "Buraxılış Təcrübəsi" },
+          { value: "interactive-demo", label: "İnteraktiv Demo" },
+          { value: "redesign", label: "Saytın Yenidən Dizaynı" },
+        ],
+      },
+      productStage: {
+        label: "Layihə bu gün hansı mərhələdədir?",
+        description: "Məhsulun və ya kampaniyanın cari mərhələsi.",
+        multi: false,
+        options: [
+          { value: "new-launch", label: "Yeni buraxılış" },
+          { value: "growth", label: "İnkişaf təkanı" },
+          { value: "repositioning", label: "Yenidən mövqeləndirmə" },
+          { value: "sales-enable", label: "Satış dəstəyi" },
+        ],
+      },
+      goals: {
+        label: "Təcrübə nəyə gətirib çıxarmalıdır?",
+        description: "Uyğun olanların hamısını seçin.",
+        multi: true,
+        options: [
+          { value: "clarity", label: "Mürəkkəb təklifi aydınlaşdır" },
+          { value: "show-options", label: "Seçimləri vizual göstər" },
+          { value: "lead-quality", label: "Lid keyfiyyətini yaxşılaşdır" },
+          { value: "sales-support", label: "Satış söhbətlərini dəstəklə" },
+          { value: "launch-momentum", label: "Buraxılışı gücləndir" },
+        ],
+      },
+      deliverables: {
+        label: "Bizdən nə təhvil verməyimizi istəyirsiniz?",
+        description: "Bizim idarə etməyimizi istədiyiniz iş axınlarını seçin.",
+        multi: true,
+        options: [
+          { value: "strategy", label: "Strategiya və mesajlaşma" },
+          { value: "design-build", label: "UI dizayn və front-end" },
+          { value: "threejs", label: "Three.js / WebGL" },
+          { value: "models", label: "3D model istehsalı" },
+          { value: "renders", label: "Renderlər və hərəkət" },
+          { value: "cms", label: "CMS inteqrasiyası" },
+        ],
+      },
+      timeline: {
+        label: "Üstünlük verilən vaxt cədvəli",
+        description: "Hədəflədiyiniz tempi seçin.",
+        multi: false,
+        options: [
+          { value: "2-weeks", label: "2 həftə ərzində" },
+          { value: "1-month", label: "1 ay ərzində" },
+          { value: "2-3-months", label: "2–3 ay" },
+          { value: "flexible", label: "Çevik" },
+        ],
+      },
+      budget: {
+        label: "Büdcə aralığı",
+        description: "Düzgün həcmi tövsiyə etməyimizə kömək edir.",
+        multi: false,
+        options: [
+          { value: "4900-9900", label: "$4,900 – $9,900" },
+          { value: "10000-19900", label: "$10,000 – $19,900" },
+          { value: "20000-49900", label: "$20,000 – $49,900" },
+          { value: "50000-plus", label: "$50,000+" },
+        ],
+      },
+    },
+    stepLayout: [
+      { fieldKeys: ["fullName", "email", "company", "website"] },
+      { fieldKeys: ["productName"], groupKeys: ["projectType", "productStage"] },
+      { groupKeys: ["goals", "deliverables"] },
+      { fieldKeys: ["brief"], groupKeys: ["timeline", "budget"] },
+    ],
+  },
+  // ── KONFİQURATOR DEMO (Xidmətlər səhifəsində saxlanılır) ──
   configuratorDemo: {
-    eyebrow: "İnteraktiv konfigurator demosu",
-    title: "Həqiqi məhsul modelləri ilə işləyən real 3D konfigurator mühiti.",
-    copy:
-      "Divan, telefon və XR başlıq arasında keçid edin, sonra real GLB assetləri üzərində örtük, miqyas, fokus və səhnə presetlərini sınayın. Demo artıq statik illüstrasiya deyil, orbit idarələri və WebXR açılış imkanları olan canlı WebGL görüntüləyicisidir.",
+    eyebrow: "Canlı Demo",
+    title: "Özünüz sınayın.",
+    copy: "Məhsullar arasında keçid edin, örtükləri dəyişdirin, miqyası tənzimləyin və sərbəst fırladın. Bu real WebGL konfiquratordur — müştərilərə təhvil verdiyimiz eyni texnologiya.",
     sidebar: {
-      label: "Bu demonun göstərdiyi",
-      title: "Bir interfeys, bir neçə məhsul tipi, həqiqi 3D assetlər.",
-      copy:
-        "Eyni konfigurator arxitekturası mebeli, istehlakçı texnologiyalarını və XR avadanlıqlarını dəstəkləyə bilər, həm alıcı axınını strukturlaşdırılmış saxlayır, həm də premium sayt üçün kifayət qədər performans verir.",
+      label: "Bunun nəyi sübut edir",
+      title: "Bir interfeys. Çoxsaylı məhsul növləri.",
+      copy: "Eyni konfiqurator arxitekturası mebel, istehlak texnologiyası və XR avadanlığını dəstəkləyir — hamısı premium sayt üçün kifayət qədər performanslı.",
       points: [
-        "Həqiqi GLB model yüklənməsi",
-        "Örtük və miqyas presetləri",
-        "Səhnəyə uyğun məhsul təqdimatı",
-        "AR və VR sessiya dəstəyi",
+        "Real GLB modelləri",
+        "Örtük və miqyas əvvəlcədən parametrləri",
+        "Səhnəyə uyğun səhnələşdirmə",
+        "AR / VR hazır",
       ],
     },
     delivery: {
-      copy:
-        "Bu quruluşu variant məntiqi, qiymət qaydaları, CMS-dən gələn məhsul datası, analitika event-ləri və prodakşn buraxılışları üçün cihaz-spesifik AR və ya VR ötürməsi ilə genişləndirmək olar.",
+      copy: "Variant məntiqi, qiymət qaydaları, CMS verilənləri, analitika və cihaza xas AR/VR təhvili ilə genişləndirilə bilər.",
     },
     shell: {
-      label: "Real vaxt konfigurator demosu",
-      title: "Məhsul keçidi, seçim məntiqi və XR açılış nəzarətləri olan canlı WebGL görüntüləyici.",
-      copy:
-        "Aktiv modeli dəyişin, örtük və səhnə presetlərini sınayın, asseti sərbəst orbitlə yoxlayın və dəstəklənən cihazlarda məhsul axınından çıxmadan AR və ya VR açın.",
-      stageBadge: "Həqiqi model önbaxışı",
+      label: "Konfiqurator",
+      title: "Məhsul dəyişdirmə və seçim məntiqi ilə canlı 3D görüntüləyici.",
+      copy: "Modeli dəyişdirin, əvvəlcədən parametrləri sınayın, sərbəst fırladın və dəstəklənən cihazlarda AR və ya VR-i işə salın.",
+      stageBadge: "Canlı önizləmə",
       footerPoints: [
-        "Həqiqi 3D assetlər",
-        "Orbit və zoom",
-        "Örtük və səhnə məntiqi",
-        "AR / VR hazırdır",
+        "Real 3D resurslar",
+        "Fırlatma və yaxınlaşdırma",
+        "Örtük məntiqi",
+        "AR / VR hazır",
       ],
       viewer: {
-        loading: "Model yüklənir...",
-        error: "Bu model hazırda yüklənə bilmədi. Səhifəni yeniləyib yenidən cəhd edin.",
-        dragHint: "Orbit üçün sürüşdürün. Yaxınlaşdırmaq üçün skroll və ya pinch edin.",
-        xrNote: "AR və VR WebXR dəstəkləyən brauzer və cihazlarda açılır.",
-        arLaunch: "AR aç",
+        loading: "Model yüklənir…",
+        error: "Bu model yüklənə bilmədi. Səhifəni yeniləyib yenidən cəhd edin.",
+        dragHint: "Fırlatmaq üçün sürükləyin · Yaxınlaşdırmaq üçün sürüşdürün",
+        xrNote: "WebXR vasitəsilə dəstəklənən brauzer və cihazlarda AR və VR.",
+        arLaunch: "AR-a daxil ol",
         arExit: "AR-dan çıx",
-        arUnsupported: "AR əlçatan deyil",
-        vrLaunch: "VR aç",
+        arUnsupported: "AR mövcud deyil",
+        vrLaunch: "VR-a daxil ol",
         vrExit: "VR-dan çıx",
-        vrUnsupported: "VR əlçatan deyil",
+        vrUnsupported: "VR mövcud deyil",
       },
     },
   },
   heroConfiguratorProducts: [
     {
       key: "sofa",
-      label: "Lounge divan",
+      label: "İstirahət Divanı",
       category: "Mebel",
-      previewNote: "Örtük, ölçü izi və səhnə presetləri olan həqiqi divan modeli.",
+      previewNote: "Örtük, ölçü və səhnə parametrləri ilə real divan modeli.",
       controls: [
         {
           id: "size",
-          label: "Ölçü izi",
+          label: "Ölçü",
           type: "pill",
           options: [
-            { value: "compact", label: "Kompakt" },
+            { value: "compact", label: "Yığcam" },
             { value: "standard", label: "Standart" },
             { value: "expansive", label: "Geniş" },
           ],
@@ -149,9 +500,9 @@
           label: "Fokus",
           type: "pill",
           options: [
-            { value: "lounge", label: "Lounge baxışı" },
+            { value: "lounge", label: "İstirahət görünüşü" },
             { value: "detail", label: "Material detalı" },
-            { value: "styling", label: "Stil rakursu" },
+            { value: "styling", label: "Stil bucağı" },
           ],
         },
         {
@@ -160,7 +511,7 @@
           type: "pill",
           options: [
             { value: "loft", label: "Loft" },
-            { value: "showroom", label: "Şourum" },
+            { value: "showroom", label: "Sərgi salonu" },
             { value: "editorial", label: "Redaksiya" },
           ],
         },
@@ -169,17 +520,17 @@
     {
       key: "phone",
       label: "iPhone 14 Pro Max",
-      category: "İstehlakçı texnologiyası",
-      previewNote: "Örtük, miqyas və detal fokus presetləri olan həqiqi cihaz modeli.",
+      category: "İstehlak texnologiyası",
+      previewNote: "Örtük, miqyas və xüsusiyyət fokus parametrləri ilə real cihaz modeli.",
       controls: [
         {
           id: "size",
           label: "Miqyas",
           type: "pill",
           options: [
-            { value: "pocket", label: "Cib ölçüsü" },
+            { value: "pocket", label: "Cib" },
             { value: "standard", label: "Standart" },
-            { value: "hero", label: "Hero rakursu" },
+            { value: "hero", label: "Əsas görüntü" },
           ],
         },
         {
@@ -199,7 +550,7 @@
           options: [
             { value: "camera", label: "Kamera sistemi" },
             { value: "display", label: "Ekran şüşəsi" },
-            { value: "frame", label: "Titanium çərçivə" },
+            { value: "frame", label: "Titan çərçivə" },
           ],
         },
         {
@@ -216,16 +567,16 @@
     },
     {
       key: "headset",
-      label: "VR başlıq",
+      label: "VR Qulaqlıq",
       category: "XR avadanlığı",
-      previewNote: "Oturma, örtük və rejim presetləri olan həqiqi başlıq modeli.",
+      previewNote: "Uyğunluq, örtük və rejim parametrləri ilə real qulaqlıq modeli.",
       controls: [
         {
           id: "size",
-          label: "Oturma",
+          label: "Uyğunluq",
           type: "pill",
           options: [
-            { value: "compact", label: "Kompakt" },
+            { value: "compact", label: "Yığcam" },
             { value: "standard", label: "Standart" },
             { value: "extended", label: "Genişləndirilmiş" },
           ],
@@ -236,7 +587,7 @@
           type: "swatch",
           options: [
             { value: "carbon", label: "Karbon", color: "#4d5663" },
-            { value: "frost", label: "Buz", color: "#d6dde6" },
+            { value: "frost", label: "Şaxta", color: "#d6dde6" },
             { value: "neon", label: "Neon", color: "#6f8ffc" },
           ],
         },
@@ -263,457 +614,24 @@
       ],
     },
   ],
-  servicesSection: {
-    eyebrow: "Xidmətlər",
-    title: "Real alıcılar üçün hazırlanmış fərdiləşdirilə bilən məhsul konfiguratorları və məhsul saytları.",
-    copy:
-      "Biz müştərilərə satış komandası ilə danışmazdan və ya alış qərarı verməzdən əvvəl məhsulu konfiqurasiya etməyə, müqayisə etməyə və anlamağa kömək edən məhsul təcrübələri qururuq.",
-    showcaseEyebrow: "Konfigurator sistemləri",
-    showcaseTitle: "Real seçimlərə malik məhsullar üçün inkişaf etmiş sayt konfiguratorları hazırlayırıq.",
-    showcaseCopy:
-      "Pergola, mebel, işıqlandırma, avadanlıq və digər konfiqurasiya olunan məhsullar satan brendlər üçün istifadəçilərin ölçüləri, rəngləri, materialları, aksesuarları, yan modulları və mühit baxışlarını dərhal vizual geribildirimlə dəyişə bildiyi yönləndirilmiş konfiguratorlar yarada bilərik.",
-    configuratorFeatures: [
-      {
-        title: "Müştərilərin həqiqətən istifadə etdiyi seçim idarəetməsi",
-        copy:
-          "Ölçü, örtük, rəng, məhsul tipi, əlavələr, aksesuarlar, yan panellər, işıqlandırma və digər yüksək təsirli seçimlər bir aydın interfeysdə idarə oluna bilər.",
-      },
-      {
-        title: "Mühitdən asılı məhsul vizuallaşdırması",
-        copy:
-          "Alıcıların məhsulu daha real kontekstdə qiymətləndirə bilməsi üçün mühitləri, kamera baxışlarını və səhnələri dəyişə bilərik.",
-      },
-      {
-        title: "3D assetlər daxildir",
-        copy:
-          "Konfiguratoru düzgün şəkildə istifadəyə vermək üçün tələb olunan 3D modelləri, materialları, optimallaşdırılmış veb assetləri və dəstəkləyici renderləri təqdim edə bilərik.",
-      },
-      {
-        title: "Veb üçün Three.js ilə qurulur",
-        copy:
-          "Konfigurator sistemlərimiz responsive məhsul saytları üçün hazırlanır və qiymət məntiqi, CMS məzmunu və kommersiya axınları ilə inteqrasiya oluna bilir.",
-      },
-    ],
-    services: [
-      {
-        title: "Fərdi Three.js konfiguratorları",
-        copy:
-          "Müştərilərin ölçünü, örtüyü, rəngi, məhsul seçimlərini, əlavələri və baxışları dərhal vizual geribildirimlə dəyişə bildiyi sayt inteqrasiyalı konfiguratorlar.",
-        tags: ["Three.js", "Seçimlər", "Kommersiya"],
-      },
-      {
-        title: "Məhsul təqdimat saytları",
-        copy:
-          "Proqram təminatı, hardware və premium məhsullar üçün məhsul hekayəsini, sübutu və konversiya strukturunu vahid aydın müştəri yolunda birləşdirən təqdimat səhifələri.",
-        tags: ["Launch", "Mesajlaşma", "Konversiya"],
-      },
-      {
-        title: "3D model və render istehsalı",
-        copy:
-          "Saytlar, kampaniyalar və satış alətləri üçün optimallaşdırılmış 3D assetlər, studiya renderləri, məhsul kəsik görüntüləri və konfiguratora hazır model paketləri hazırlayırıq.",
-        tags: ["Modellər", "Renderlər", "Assetlər"],
-      },
-      {
-        title: "İnteraktiv məhsul demoları",
-        copy:
-          "Zəng sifariş etməzdən və ya sınağa başlamazdan əvvəl müştərilərə üstünlükləri, iş axınlarını və fərqləndirici xüsusiyyətləri anlamağa kömək edən yönləndirilmiş 3D və hərəkət əsaslı demolər.",
-        tags: ["Demo", "Maarifləndirmə", "Konversiya"],
-      },
-    ],
-    portfolioEyebrow: "Portfolio",
-    portfolioTitle:
-      "Mürəkkəb və ya premium təkliflər satan komandalar üçün nümayəndə məhsul istifadə ssenariləri.",
-    portfolio: [
-      {
-        name: "Pergola konfigurator sistemi",
-        type: "Açıq hava məhsulları",
-        result:
-          "Müştərilərin ölçünü, yan seçimləri, işıqlandırmanı, aksesuarları və montaj seçimlərini yönləndirilmiş alış axınında tənzimləyə bildiyi konfiqurasiya olunan məhsul təcrübəsi.",
-      },
-      {
-        name: "Premium istehlak elektronikası",
-        type: "İstehlak məhsulu",
-        result:
-          "Alışdan əvvəl anlayışı gücləndirmək üçün hazırlanmış interaktiv xüsusiyyət izahları və məhsul müqayisə baxışları.",
-      },
-      {
-        name: "Enterprise SaaS platforması",
-        type: "Proqram təminatı",
-        result:
-          "Platformanın abstrakt dəyərini qərarverənlər və qiymətləndiricilər üçün konkret hekayəyə çevirən yüksək aydınlıqlı sayt sistemi.",
-      },
-    ],
-  },
-  buildSection: {
-    eyebrow: "Nələri qura bilərik",
-    title: "Məhsul, marketinq və growth komandaları üçün nələr qura bilərik.",
-    copy:
-      "Məqsəd sadəcə yenilik xatirinə yenilik deyil. Məqsəd daha aydın məhsul hekayəsi, müştərinin daha yaxşı başa düşməsi və komandanızın inamla istifadəyə verə və idarə edə biləcəyi bir saytdır.",
-    items: [
-      {
-        title: "Sayt əsaslı məhsul konfiguratorları",
-        copy:
-          "Müştərilərin ölçünü, rəngi, materialı, məhsul variantlarını, aksesuarları və əlavələri birbaşa saytda dəyişə bildiyi interaktiv məhsul sistemləri.",
-      },
-      {
-        title: "Mühit və VR önbaxışları",
-        copy:
-          "Alıcıların uyğunluğu, miqyası və nəticəni daha yaxşı təsəvvür etməsi üçün məhsulu fərqli mühitlərdə və ya immersiv kontekstlərdə göstərən baxışlar.",
-      },
-      {
-        title: "3D model və render paketləri",
-        copy:
-          "Saytlar, konfiguratorlar, kampaniyalar və məhsul marketinq assetləri üçün istehsala hazır model yaratma, teksturalama, işıqlandırma və render çıxışları.",
-      },
-      {
-        title: "Texniki məhsul izahları",
-        copy:
-          "Mətnlə izahı çətin olan məhsullar üçün iş axınlarını, sistemləri və komponent baxışlarını əhatə edən strukturlaşdırılmış vizual hekayələndirmə.",
-      },
-      {
-        title: "Kommersiyaya hazır məhsul səhifələri",
-        copy:
-          "Xüsusilə daha uzun düşünmə mərhələsi tələb edən məhsullar üçün alışdan əvvəl müştəri anlayışını və etibarını artıran yüksək aydınlıqlı məhsul səhifələri.",
-      },
-      {
-        title: "Satış və təqdimat mikrosaytları",
-        copy:
-          "Təqdimatlar, ABM kampaniyaları, demolər və satış enablement üçün hekayənin fokuslu və inandırıcı qalmalı olduğu xüsusi səhifələr.",
-      },
-    ],
-  },
-  salesSection: {
-    eyebrow: "Satışa necə təsir edir",
-    title: "Sayt müştərini qərara necə yaxınlaşdırır.",
-    copy:
-      "Yaxşı məhsul marketinqi qarışıqlığı azaldır. Daha güclü rəqəmsal təcrübə ziyarətçilərə təklifi anlamağa, komandaya etibar etməyə və daha çox inamla irəliləməyə kömək edir.",
-    kicker: "Satış siqnalı",
-    drivers: [
-      {
-        title: "Məhsul qeyri-müəyyənliyini azaldır",
-        copy:
-          "Müştərilər sıx və ya texniki mesajları çözmədən məhsulun nə etdiyini, kim üçün olduğunu və niyə vacib olduğunu anlayırlar.",
-      },
-      {
-        title: "Qərar inamını artırır",
-        copy:
-          "Daha aydın vizuallar və yönləndirilmiş hərəkət alıcıların demo istəməzdən, satışla əlaqə saxlamazdan və ya checkout-a yaxınlaşmazdan əvvəl özlərini daha əmin hiss etməsinə kömək edir.",
-      },
-      {
-        title: "Daha düşünülmüş alışları dəstəkləyir",
-        copy:
-          "Premium, konfiqurasiya olunan və ya texniki məhsullar üçün daha güclü məhsul hekayəsi diqqəti əsaslandıra və daha uzun qiymətləndirmə prosesini dəstəkləyə bilər.",
-      },
-      {
-        title: "Lead keyfiyyətini yaxşılaşdırır",
-        copy:
-          "Sayt öncədən daha çox suala cavab verdikdə, satış danışıqları daha yaxşı kontekst və daha uyğun niyyətlə başlayır.",
-      },
-    ],
-  },
-  processSection: {
-    eyebrow: "Prosesimiz",
-    title: "Aydınlıq, sürət və səliqəli təhvil üçün qurulmuş çatdırılma prosesi.",
-    copy:
-      "Hər mərhələ işi stakeholder-lər üçün anlaşılan, istifadəyə verməyə cavabdeh komanda üçün isə idarəolunan saxlamaq üçün planlaşdırılıb.",
-    steps: [
-      {
-        step: "01",
-        title: "Kəşf və məqsədlər",
-        copy:
-          "Təcrübənin müştərilərin təklifi necə qiymətləndirdiyini dəstəkləməsi üçün məhsul, auditoriya, alış yolu və biznes məqsədi üzrə eyni xəttə gəlirik.",
-      },
-      {
-        step: "02",
-        title: "Struktur və prototip",
-        copy:
-          "Tam istehsal başlamazdan əvvəl təcrübənin aydın olması üçün informasiya iyerarxiyasını, səhifə strukturunu, hərəkət niyyətini və məzmun axınını xəritələndiririk.",
-      },
-      {
-        step: "03",
-        title: "Qurma və inteqrasiya",
-        copy:
-          "Saytı qurur, formaları və ya kommersiya axınlarını bağlayır, hər səhnəni responsive davranış, performans və davamlılıq üçün optimallaşdırırıq.",
-      },
-      {
-        step: "04",
-        title: "QA, təqdimat və təhvil",
-        copy:
-          "Breakpoint-lər üzrə test edirik, səliqəli şəkildə istifadəyə veririk və komandanızın inamla idarə edib genişləndirə biləcəyi istehsala hazır saytı təhvil veririk.",
-      },
-    ],
-  },
-  pricingSection: {
-    eyebrow: "Qiymətlər",
-    title: "Təqdimat işləri və daha uzunmüddətli məhsul marketinqi üçün əməkdaşlıq modelləri.",
-    copy:
-      "Bir fokuslu məhsul səhifəsi, çox bölməli sayt və ya məhsulun daha mürəkkəb sistem tələb etdiyi hallarda fərdi əməkdaşlıqla başlayın.",
-    badge: "Ən çox seçilən",
-    cta: "Sorğu göndərin",
-    tiers: [
-      {
-        tier: "Foundation",
-        price: "$4,900",
-        subtitle: "Bir fokuslu məhsul səhifəsi və ya təqdimat təcrübəsi üçün.",
-        features: [
-          "Kəşf workshop-u və səhifə planı",
-          "Bir yüksək təsirli məhsul səhifəsi",
-          "Bir əsas 3D hərəkət ardıcıllığı",
-          "Responsive QA və təhvil",
-        ],
-      },
-      {
-        tier: "Growth",
-        price: "$14,900",
-        subtitle: "Daha dərin müştəri səyahəti olan çox bölməli məhsul saytları üçün.",
-        features: [
-          "Çox bölməli məhsul saytı",
-          "Fərdi səhnə keçidləri və hərəkət sistemi",
-          "CMS və ya API-yə hazır məzmun strukturu",
-          "Təqdimat dəstəyi və optimizasiya",
-        ],
-        featured: true,
-      },
-      {
-        tier: "Custom",
-        price: "Fərdi",
-        subtitle:
-          "Konfiguratorlar, daha geniş sayt sistemləri və davamlı məhsul marketinqi işləri üçün.",
-        features: [
-          "Mürəkkəb data əsaslı məhsul səhnələri",
-          "Commerce, CRM və ya CMS inteqrasiyaları",
-          "Yenidən istifadə oluna bilən komponent və hərəkət sistemi",
-          "Davamlı optimizasiya və dəstək",
-        ],
-      },
-    ],
-  },
-  aboutSection: {
-    eyebrow: "Haqqımızda",
-    title: "Vizual, istifadəyə yararlı və davamlı məhsul marketinq təcrübələri qururuq.",
-    copy:
-      "Morphix saytın sadəcə yaxşı görünməsindən daha çoxunu tələb edən komandalarla işləyir. Sayt məhsulu izah etməli, alıcının yolunu dəstəkləməli və real təqdimat şərtlərinə tab gətirəcək qədər güclü olmalıdır.",
-    principles: [
-      {
-        title: "Əvvəlcə məhsulun başa düşülməsi",
-        copy:
-          "Hərəkəti səhifəni bəzəmək üçün deyil, məhsulu aydınlaşdırmaq üçün istifadə edirik. Mesaj oxunaqlı, qərar yolu isə aydın qalır.",
-      },
-      {
-        title: "Funksiyası olan hərəkət",
-        copy:
-          "Hər bir interaksiya istiqamət verməli, izah etməli və ya vurğulamalıdır. Əgər hərəkət müştəriyə kömək etmirsə, istifadəyə verilmir.",
-      },
-      {
-        title: "Real komandalar üçün qurulub",
-        copy:
-          "Yekun sayt istifadəyə verildikdən sonra məzmun yeniləmələri, responsive QA və uzunmüddətli davamlılıq üçün strukturlaşdırılır.",
-      },
-    ],
-  },
-  contactSection: {
-    eyebrow: "Layihə qəbulu",
-    title: "Doğru 3D təcrübəni mərhələli intake prosesi ilə formalaşdırın.",
-    copy:
-      "Bir neçə fokuslu addımdan keçin və nəyi istifadəyə verdiyinizi, kimə çatmaq istədiyinizi, hansı imkanlara ehtiyac duyduğunuzu və hansı məhdudiyyətləri nəzərə almalı olduğumuzu paylaşın.",
-    facts: [
-      "Addım-addım layihə kəşfi",
-      "Scope, sistemlər və assetlər əhatə olunur",
-      "Daha sürətli və daha dəqiq təkliflər",
-    ],
-    wizard: {
-      introLabel: "İnteraktiv brief qurucusu",
-      stepLabel: "Addım",
-      previous: "Geri",
-      next: "Davam et",
-      submit: "Təklif istəyin",
-      successTitle: "Brief qəbul edildi",
-      successCopy:
-        "İnputlarınız artıq sizə uyğun follow-up üçün strukturlaşdırılıb. İstəsəniz detalları yeniləyə və ya bunu növbəti müzakirənin əsası kimi istifadə edə bilərsiniz.",
-      steps: [
-        {
-          title: "Baza məlumatları",
-          copy: "Məhsul, şirkət və layihənin ümumi istiqaməti ilə başlayın.",
-        },
-        {
-          title: "Auditoriya və məqsədlər",
-          copy: "Kimi inandırmalı olduğunuzu və təcrübənin nəyi təmin etməli olduğunu qeyd edin.",
-        },
-        {
-          title: "Scope və sistemlər",
-          copy: "Layihəyə daxil olacaq deliverable-ları, inteqrasiyaları və assetləri seçin.",
-        },
-        {
-          title: "Zamanlama və əlaqə",
-          copy: "Timeline, büdcə və düzgün cavab verməyimiz üçün vacib olan son konteksti əlavə edin.",
-        },
-      ],
-    },
-    fields: {
-      company: { label: "Şirkət", placeholder: "Northline Systems" },
-      productName: { label: "Məhsul və ya təklif", placeholder: "Modul pergola xətti" },
-      website: { label: "Mövcud sayt", placeholder: "northline.com" },
-      fullName: { label: "Adınız", placeholder: "Alex Morgan" },
-      email: { label: "İş e-poçtu", placeholder: "alex@northlinesystems.com" },
-      brief: {
-        label: "Əlavə kontekst",
-        placeholder:
-          "Alış dövrləri, daxili təsdiqlər, təqdimat təzyiqi və ya texniki mürəkkəblik barədə bilməli olduğumuz başqa nə var?",
-      },
-    },
-    groups: {
-      projectType: {
-        label: "Nə planlaşdırırsınız?",
-        description: "Hazırda ehtiyac duyduğunuz əsas işi seçin.",
-        multi: false,
-        options: [
-          { value: "configurator", label: "3D konfigurator" },
-          { value: "product-site", label: "Məhsul saytı" },
-          { value: "launch-site", label: "Təqdimat mikrosaytı" },
-          { value: "interactive-demo", label: "İnteraktiv demo" },
-          { value: "redesign", label: "Sayt yenilənməsi" },
-        ],
-      },
-      productStage: {
-        label: "Layihə hazırda hansı mərhələdədir?",
-        description: "Məhsul və ya marketinq dövrünün indiki mərhələsini qeyd edin.",
-        multi: false,
-        options: [
-          { value: "new-launch", label: "Yeni təqdimat" },
-          { value: "growth-push", label: "Growth təkanına ehtiyac var" },
-          { value: "repositioning", label: "Yenidən mövqeləndirmə" },
-          { value: "sales-enable", label: "Satış dəstəyi" },
-        ],
-      },
-      audience: {
-        label: "Əsas auditoriya kimdir?",
-        description: "Saytın güclü xidmət etməli olduğu bütün qrupları seçin.",
-        multi: true,
-        options: [
-          { value: "end-customers", label: "Son müştərilər" },
-          { value: "enterprise-buyers", label: "Enterprise alıcılar" },
-          { value: "technical-evaluators", label: "Texniki qiymətləndiricilər" },
-          { value: "partners", label: "Distribyutorlar və partnyorlar" },
-          { value: "sales-teams", label: "Daxili satış komandaları" },
-        ],
-      },
-      goals: {
-        label: "Təcrübə nəyi təmin etməlidir?",
-        description: "Ən vacib nəticələri seçin.",
-        multi: true,
-        options: [
-          { value: "clarity", label: "Mürəkkəb təklifi aydınlaşdırmaq" },
-          { value: "show-options", label: "Seçimləri vizual göstərmək" },
-          { value: "lead-quality", label: "Lead keyfiyyətini artırmaq" },
-          { value: "sales-support", label: "Satış danışığını dəstəkləmək" },
-          { value: "launch-momentum", label: "Təqdimat kampaniyasını gücləndirmək" },
-        ],
-      },
-      deliverables: {
-        label: "Bizdən nəyi təhvil almaq istəyirsiniz?",
-        description: "Sahib olmağımızı istədiyiniz iş axınlarını seçin.",
-        multi: true,
-        options: [
-          { value: "strategy", label: "Sayt strategiyası və mesajlaşma" },
-          { value: "design-build", label: "UI dizaynı və front-end qurulması" },
-          { value: "threejs", label: "Three.js səhnələri və interaksiyalar" },
-          { value: "models", label: "3D model istehsalı" },
-          { value: "renders", label: "Render və motion asset paketi" },
-          { value: "cms", label: "CMS və ya məzmun strukturu" },
-        ],
-      },
-      integrations: {
-        label: "Hansı sistemlər vacibdir?",
-        description: "Layihənin qoşulmalı olduğu platformaları və məntiqi qeyd edin.",
-        multi: true,
-        options: [
-          { value: "cms", label: "CMS" },
-          { value: "crm", label: "CRM və ya formalar" },
-          { value: "commerce", label: "Commerce stack" },
-          { value: "pricing", label: "Qiymət və ya quote məntiqi" },
-          { value: "analytics", label: "Analitika" },
-          { value: "localization", label: "Lokallaşdırma" },
-        ],
-      },
-      assets: {
-        label: "Hazırda nələriniz var?",
-        description: "Hazır olan və hələ istehsal tələb edən materialları qeyd edin.",
-        multi: true,
-        options: [
-          { value: "brand", label: "Brend sistemi" },
-          { value: "copy", label: "Mesajlaşma və ya copy" },
-          { value: "cad", label: "CAD və ya 3D modellər" },
-          { value: "renders", label: "Foto və ya renderlər" },
-          { value: "team", label: "Daxili dev və ya marketinq komandası" },
-          { value: "none", label: "Sıfırdan başlayırıq" },
-        ],
-      },
-      timeline: {
-        label: "İstədiyiniz timeline",
-        description: "Hədəflədiyiniz sürəti seçin.",
-        multi: false,
-        options: [
-          { value: "2-weeks", label: "2 həftə içində" },
-          { value: "1-month", label: "1 ay içində" },
-          { value: "2-3-months", label: "2-3 ay içində" },
-          { value: "flexible", label: "Çevikdir" },
-        ],
-      },
-      budget: {
-        label: "Büdcə aralığı",
-        description: "Bu, başlanğıcdan düzgün scope tövsiyə etməyimizə kömək edir.",
-        multi: false,
-        options: [
-          { value: "4900-9900", label: "$4,900 - $9,900" },
-          { value: "10000-19900", label: "$10,000 - $19,900" },
-          { value: "20000-49900", label: "$20,000 - $49,900" },
-          { value: "50000-plus", label: "$50,000+" },
-        ],
-      },
-    },
-    summary: {
-      title: "Layihə xülasəsi",
-      empty: "Seçimləriniz burada canlı brief kimi toplanacaq.",
-      labels: {
-        projectType: "Layihə",
-        productStage: "Mərhələ",
-        audience: "Auditoriya",
-        goals: "Məqsədlər",
-        deliverables: "Deliverable-lar",
-        integrations: "İnteqrasiyalar",
-        assets: "Assetlər",
-        timeline: "Timeline",
-        budget: "Büdcə",
-      },
-    },
-  },
   footer: {
-    copy:
-      "Komandalara mürəkkəb təklifləri aydın izah etməyə və daha yaxşı müştəri qərarlarını dəstəkləməyə kömək edən məhsul saytları və interaktiv təcrübələr qururuq.",
-    cta: "Söhbətə başlayın",
-    capabilitiesTitle: "Nələri qururuq",
-    capabilities: [
-      "Məhsul təqdimat saytları",
-      "İnteraktiv xüsusiyyət demoləri",
-      "Konfigurator səyahətləri",
-      "İstehsala hazır sayt sistemləri",
+    copy: "3D saytlar, konfiquratorlar və buraxılış təcrübələri üzrə ixtisaslaşmış rəqəmsal məhsul studiyası.",
+    cta: "Layihəyə başla",
+    servicesTitle: "Xidmətlər",
+    services: [
+      "3D Konfiquratorlar",
+      "Məhsul Saytları",
+      "Buraxılış Təcrübələri",
+      "Resurs İstehsalı",
     ],
-    outcomesTitle: "Biznes təsiri",
-    outcomes: [
-      "Məhsulu aydınlaşdırın",
-      "Alıcı inamını artırın",
-      "Daha keyfiyyətli müraciətləri dəstəkləyin",
-      "Premium mövqelənməni gücləndirin",
-    ],
+    companyTitle: "Şirkət",
+    company: ["Haqqımızda", "İşlər", "Qiymətlər", "Əlaqə"],
     contactTitle: "Əlaqə",
     contactItems: [
       "hello@morphix.studio",
-      "Uzaqdan əməkdaşlıq, qlobal təhvil",
-      "Təklif 48 saat ərzində hazırlanır",
+      "Qlobal təhvil, uzaqdan iş",
     ],
-    pricingLink: "Əməkdaşlıq modellərinə baxın",
-    copyright:
-      "Copyright 2026 Morphix. Məhsul təqdimatları, demolər və müştəriyə yönəlik sayt sistemləri üçün hazırlanıb.",
+    copyright: "© 2026 Morphix. Bütün hüquqlar qorunur.",
   },
 };
 

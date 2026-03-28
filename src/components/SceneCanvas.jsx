@@ -1,831 +1,741 @@
 import { useEffect, useRef } from "react";
+import { useLocation } from "react-router-dom";
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+
 import knowledgeNetworkUrl from "../../3d models/knowledge_network.glb";
 import jupiterUrl from "../../3d models/jupiter.glb";
 import helixNebulaUrl from "../../3d models/helix_nebula_the_eye_of_god.glb";
 import kummerUrl from "../../3d models/kummer_surface_k3_flux__papp.glb";
 
+const ROUTE_SCENE_MAP = {
+  "/": "home",
+  "/services": "services",
+  "/work": "work",
+  "/pricing": "pricing",
+  "/about": "about",
+  "/contact": "contact",
+};
+
+const MODEL_CONFIG = {
+  home: {
+    url: knowledgeNetworkUrl,
+    scale: 9.4,
+    palette: [0x17324a, 0x476682, 0x89a5be, 0xdbe6ef],
+    glow: 0xc8d8e6,
+    shadowOpacity: 0.22,
+    cameraZ: 9.1,
+    baseRotationY: -0.22,
+    scrollYaw: 0.95,
+    scrollPitch: 0.22,
+    clickTwist: 0.16,
+    halo: 0xd8e3ee,
+    haloBackSize: 9.2,
+    haloFrontSize: 6.6,
+    haloBackOpacity: 0.14,
+    haloFrontOpacity: 0.12,
+    shellOpacity: 0.13,
+    revealDepth: 2.6,
+    revealMinScale: 0.74,
+    revealLift: 0.32,
+    baseX: 1.05,
+    baseY: -0.18,
+    tintColor: 0x4f84b5,
+    tintStrength: 0.4,
+    emissiveBoost: 1.18,
+  },
+  services: {
+    url: helixNebulaUrl,
+    scale: 7.2,
+    palette: [0x21364d, 0x56708a, 0x98a8b7, 0xe7ecef],
+    glow: 0xd4dde7,
+    shadowOpacity: 0.2,
+    cameraZ: 9.6,
+    baseRotationY: 0.12,
+    scrollYaw: 1.05,
+    scrollPitch: 0.18,
+    clickTwist: 0.14,
+    halo: 0xe0e6ee,
+    haloBackSize: 6.8,
+    haloFrontSize: 4.8,
+    haloBackOpacity: 0.08,
+    haloFrontOpacity: 0.06,
+    shellOpacity: 0.06,
+    revealDepth: 1.9,
+    revealMinScale: 0.86,
+    revealLift: 0.12,
+  },
+  work: {
+    url: jupiterUrl,
+    scale: 7.1,
+    palette: [0x2b425b, 0x6b8296, 0xb6c1c8, 0xdfd1bc],
+    glow: 0xd6dde5,
+    shadowOpacity: 0.18,
+    cameraZ: 9.3,
+    baseRotationY: 0.3,
+    scrollYaw: 0.82,
+    scrollPitch: 0.16,
+    clickTwist: 0.12,
+    halo: 0xe3e7eb,
+    haloBackSize: 6.8,
+    haloFrontSize: 4.8,
+    haloBackOpacity: 0.08,
+    haloFrontOpacity: 0.06,
+    shellOpacity: 0.06,
+    revealDepth: 1.8,
+    revealMinScale: 0.86,
+    revealLift: 0.1,
+  },
+  pricing: {
+    url: kummerUrl,
+    scale: 4.8,
+    palette: [0x27425c, 0x6e88a0, 0xc1ccd4, 0xd7bb95],
+    glow: 0xddd5cb,
+    shadowOpacity: 0.24,
+    cameraZ: 8.8,
+    baseRotationY: -0.14,
+    scrollYaw: 1.14,
+    scrollPitch: 0.25,
+    clickTwist: 0.18,
+    halo: 0xe5ddd4,
+    haloBackSize: 6.4,
+    haloFrontSize: 4.6,
+    haloBackOpacity: 0.08,
+    haloFrontOpacity: 0.06,
+    shellOpacity: 0.065,
+    revealDepth: 1.75,
+    revealMinScale: 0.84,
+    revealLift: 0.1,
+  },
+  about: {
+    url: knowledgeNetworkUrl,
+    scale: 8.2,
+    palette: [0x2e475f, 0x71899f, 0xbbcddb, 0xe6edf2],
+    glow: 0xdfe8ef,
+    shadowOpacity: 0.2,
+    cameraZ: 9.05,
+    baseRotationY: 0.2,
+    scrollYaw: 0.88,
+    scrollPitch: 0.16,
+    clickTwist: 0.12,
+    halo: 0xe7edf3,
+    haloBackSize: 8.5,
+    haloFrontSize: 6.2,
+    haloBackOpacity: 0.13,
+    haloFrontOpacity: 0.1,
+    shellOpacity: 0.12,
+    revealDepth: 2.35,
+    revealMinScale: 0.76,
+    revealLift: 0.28,
+    baseX: 0.7,
+    baseY: -0.12,
+    tintColor: 0x6a95bd,
+    tintStrength: 0.3,
+    emissiveBoost: 1.12,
+  },
+  contact: {
+    url: helixNebulaUrl,
+    scale: 5.8,
+    palette: [0x314c68, 0x7b8894, 0xc9baa6, 0xe8ecef],
+    glow: 0xe3ddd7,
+    shadowOpacity: 0.18,
+    cameraZ: 9.1,
+    baseRotationY: -0.28,
+    scrollYaw: 0.96,
+    scrollPitch: 0.22,
+    clickTwist: 0.16,
+    halo: 0xe9e4dd,
+    haloBackSize: 6.6,
+    haloFrontSize: 4.8,
+    haloBackOpacity: 0.08,
+    haloFrontOpacity: 0.06,
+    shellOpacity: 0.06,
+    revealDepth: 1.8,
+    revealMinScale: 0.84,
+    revealLift: 0.1,
+  },
+};
+
+const LIGHT_TARGETS = {
+  home: { key: 0x527596, fill: 0xa7bbcf, rim: 0xf8fbff, accent: 0xe0ebf5 },
+  services: { key: 0x4d6b88, fill: 0x9dafbf, rim: 0xf7fafc, accent: 0xdce5ed },
+  work: { key: 0x5f7489, fill: 0xb3b9bf, rim: 0xfcfbfa, accent: 0xe1d3c0 },
+  pricing: { key: 0x57718c, fill: 0xc0ab8d, rim: 0xfaf8f6, accent: 0xe4d7c8 },
+  about: { key: 0x63819c, fill: 0xb2c3d1, rim: 0xf8fbfd, accent: 0xe7eef5 },
+  contact: { key: 0x5c748c, fill: 0xc3b39f, rim: 0xfbfbfa, accent: 0xe7ddd2 },
+};
+
+const tempBox = new THREE.Box3();
+
+function setMaterialBaseOpacity(material, opacity, options = {}) {
+  const { forceTransparent = true } = options;
+  material.userData.originalTransparent = material.transparent ?? false;
+  material.userData.originalDepthWrite = material.depthWrite ?? true;
+  material.opacity = opacity;
+  material.userData.baseOpacity = opacity;
+  if (forceTransparent) {
+    material.transparent = true;
+  }
+}
+
+function createSoftGlowDisc(size, color, opacity) {
+  const material = new THREE.SpriteMaterial({
+    color,
+    transparent: true,
+    opacity,
+    depthWrite: false,
+    depthTest: false,
+  });
+  setMaterialBaseOpacity(material, opacity);
+
+  const sprite = new THREE.Sprite(material);
+  sprite.scale.set(size, size, 1);
+  return sprite;
+}
+
+function createDustCloud(count, bounds, color, size, opacity) {
+  const positions = new Float32Array(count * 3);
+  const geometry = new THREE.BufferGeometry();
+
+  for (let i = 0; i < count; i += 1) {
+    const i3 = i * 3;
+    positions[i3] = (Math.random() - 0.5) * bounds.x;
+    positions[i3 + 1] = (Math.random() - 0.5) * bounds.y;
+    positions[i3 + 2] = (Math.random() - 0.5) * bounds.z;
+  }
+
+  geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+
+  const material = new THREE.PointsMaterial({
+    color,
+    size,
+    transparent: true,
+    opacity,
+    depthWrite: false,
+    sizeAttenuation: true,
+    blending: THREE.AdditiveBlending,
+  });
+  setMaterialBaseOpacity(material, opacity);
+
+  return new THREE.Points(geometry, material);
+}
+
+function createShadowPlane(opacity = 0.2) {
+  const geometry = new THREE.PlaneGeometry(12, 12);
+  const material = new THREE.ShadowMaterial({
+    color: 0x000000,
+    transparent: true,
+    opacity,
+  });
+  setMaterialBaseOpacity(material, opacity);
+
+  const plane = new THREE.Mesh(geometry, material);
+  plane.rotation.x = -Math.PI / 2;
+  plane.position.y = -3.2;
+  plane.receiveShadow = true;
+  return plane;
+}
+
 function SceneCanvas() {
   const canvasRef = useRef(null);
+  const location = useLocation();
+  const sceneKeyRef = useRef("home");
+
+  useEffect(() => {
+    sceneKeyRef.current = ROUTE_SCENE_MAP[location.pathname] || "home";
+  }, [location.pathname]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
+    if (!canvas) return undefined;
 
-    if (!canvas) {
-      return undefined;
-    }
+    const getLowPower = () =>
+      window.innerWidth < 1200 || window.devicePixelRatio > 1.4;
 
-    const getLowPowerMode = () =>
-      window.innerWidth < 1280 || window.devicePixelRatio > 1.4;
-    let lowPowerMode = getLowPowerMode();
-    const particleMultiplier = lowPowerMode ? 0.45 : 0.68;
-    const curveSegments = lowPowerMode ? 96 : 136;
-    const loopSegments = lowPowerMode ? 72 : 108;
-    const torusTubularSegments = lowPowerMode ? 84 : 120;
+    let lowPower = getLowPower();
 
     const renderer = new THREE.WebGLRenderer({
       canvas,
       alpha: true,
-      antialias: !lowPowerMode,
+      antialias: !lowPower,
       powerPreference: "high-performance",
     });
-    const syncRendererQuality = () => {
-      lowPowerMode = getLowPowerMode();
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, lowPowerMode ? 1 : 1.25));
-    };
-    syncRendererQuality();
-    renderer.setClearAlpha(0);
+
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 0.96;
+    renderer.toneMappingExposure = 1.08;
+    renderer.setClearColor(0xffffff, 0);
+    renderer.shadowMap.enabled = !lowPower;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
     const scene = new THREE.Scene();
+
     const camera = new THREE.PerspectiveCamera(
-      50,
+      40,
       window.innerWidth / window.innerHeight,
       0.1,
-      140,
+      120
     );
-    camera.position.set(0, 0, 10);
+    camera.position.set(0, 0, MODEL_CONFIG.home.cameraZ);
 
-    const clock = new THREE.Clock();
-    const mouse = { x: 0, y: 0 };
-    let scrollProgress = 0;
-    let prevScrollProgress = 0;
-    let scrollSpeed = 0;
-    let activeSceneKey = "hero";
+    const timer = new THREE.Timer();
+    timer.connect(document);
+    timer.reset();
+    const loader = new GLTFLoader();
 
-    const ambientLight = new THREE.AmbientLight(0xffffff, 1.48);
-    const keyLight = new THREE.PointLight(0x304864, 7.2, 42);
-    const fillLight = new THREE.PointLight(0x6f8295, 5.1, 36);
-    const rimLight = new THREE.PointLight(0xc5cdd3, 4.6, 30);
-    keyLight.position.set(4, 4, 6);
-    fillLight.position.set(-4, -3, 5);
-    rimLight.position.set(0, 5, -3);
-    scene.add(ambientLight, keyLight, fillLight, rimLight);
-
-    const lightTargets = {
-      hero: {
-        key: new THREE.Color(0x304864),
-        fill: new THREE.Color(0x6f8295),
-        rim: new THREE.Color(0xc5cdd3),
-      },
-      services: {
-        key: new THREE.Color(0x36506a),
-        fill: new THREE.Color(0x7e91a3),
-        rim: new THREE.Color(0xd0d7dd),
-      },
-      portfolio: {
-        key: new THREE.Color(0x314a64),
-        fill: new THREE.Color(0x77889a),
-        rim: new THREE.Color(0xcfd6dc),
-      },
-      pricing: {
-        key: new THREE.Color(0x304762),
-        fill: new THREE.Color(0x9f8764),
-        rim: new THREE.Color(0xd4d8d6),
-      },
-      about: {
-        key: new THREE.Color(0x35506b),
-        fill: new THREE.Color(0x74889a),
-        rim: new THREE.Color(0xd6dde2),
-      },
-      contact: {
-        key: new THREE.Color(0x3f5e79),
-        fill: new THREE.Color(0x808991),
-        rim: new THREE.Color(0xd6dce0),
-      },
+    const interaction = {
+      scrollProgress: 0,
+      targetScrollProgress: 0,
+      scrollVelocity: 0,
+      clickImpulse: 0,
+      routeImpulse: 0.55,
+      globalLift: 0,
+      targetLift: 0,
     };
 
-    const makeGlassMaterial = (color, opacity, wireframe = false) => {
-      const material = new THREE.MeshStandardMaterial({
-        color,
-        transparent: true,
-        opacity,
-        roughness: 0.24,
-        metalness: 0.08,
-        wireframe,
-      });
-      material.userData.baseOpacity = opacity;
-      return material;
-    };
+    let lastScrollY = window.scrollY;
+    let lastWheelDir = 1;
 
-    const makeGlowMaterial = (color, opacity) => {
-      const material = new THREE.MeshBasicMaterial({
-        color,
-        transparent: true,
-        opacity,
-        depthWrite: false,
-      });
-      material.userData.baseOpacity = opacity;
-      return material;
-    };
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1.85);
+    const hemiLight = new THREE.HemisphereLight(0xffffff, 0xf3f4f6, 1.35);
 
-    const makePointsMaterial = (color, size, opacity) => {
-      const material = new THREE.PointsMaterial({
-        color,
-        size,
-        transparent: true,
-        opacity,
-        sizeAttenuation: true,
-        blending: THREE.AdditiveBlending,
-        depthWrite: false,
-      });
-      material.userData.baseOpacity = opacity;
-      return material;
-    };
+    const keyLight = new THREE.DirectionalLight(0x56718d, 3.8);
+    keyLight.position.set(4.5, 5.5, 7.5);
+    keyLight.castShadow = !lowPower;
+    keyLight.shadow.mapSize.set(1024, 1024);
+    keyLight.shadow.camera.left = -8;
+    keyLight.shadow.camera.right = 8;
+    keyLight.shadow.camera.top = 8;
+    keyLight.shadow.camera.bottom = -8;
+    keyLight.shadow.camera.near = 0.1;
+    keyLight.shadow.camera.far = 30;
+    keyLight.shadow.bias = -0.0004;
 
-    const makeParticleField = (count, spread, color, size = 0.04, opacity = 0.58) => {
-      const geometry = new THREE.BufferGeometry();
-      const finalCount = Math.max(24, Math.floor(count * particleMultiplier));
-      const positions = new Float32Array(finalCount * 3);
-      for (let index = 0; index < finalCount * 3; index += 1) {
-        positions[index] = (Math.random() - 0.5) * spread;
-      }
-      geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
-      return new THREE.Points(geometry, makePointsMaterial(color, size, opacity));
-    };
+    const fillLight = new THREE.PointLight(0xa1b4c6, 14, 30, 2);
+    fillLight.position.set(-5, -1.2, 8);
 
-    const makeHalo = (radius, color, opacity) => {
-      const halo = new THREE.Mesh(
-        new THREE.SphereGeometry(radius, lowPowerMode ? 10 : 14, lowPowerMode ? 8 : 12),
-        makeGlowMaterial(color, opacity),
+    const rimLight = new THREE.PointLight(0xffffff, 10, 30, 2);
+    rimLight.position.set(0, 5.5, -5);
+
+    const accentLight = new THREE.PointLight(0xe6edf4, 8, 24, 2);
+    accentLight.position.set(2.8, -2, 7);
+
+    scene.add(
+      ambientLight,
+      hemiLight,
+      keyLight,
+      fillLight,
+      rimLight,
+      accentLight
+    );
+
+    const backgroundGroup = new THREE.Group();
+
+    const leftGlow = createSoftGlowDisc(9.5, 0xe8f0f6, 0.2);
+    leftGlow.position.set(-5.8, 2.8, -14);
+
+    const rightGlow = createSoftGlowDisc(8.2, 0xf2eee9, 0.14);
+    rightGlow.position.set(5.5, -2.1, -13);
+
+    const topGlow = createSoftGlowDisc(7.8, 0xecf2f8, 0.16);
+    topGlow.position.set(0, 4.8, -16);
+
+    backgroundGroup.add(leftGlow, rightGlow, topGlow);
+    scene.add(backgroundGroup);
+
+    const shadowPlane = createShadowPlane(MODEL_CONFIG.home.shadowOpacity);
+    scene.add(shadowPlane);
+
+    const routeGroups = {};
+    const modelSlots = {};
+    const groupOpacity = {};
+    const groupTargetOpacity = {};
+
+    Object.keys(MODEL_CONFIG).forEach((key) => {
+      const cfg = MODEL_CONFIG[key];
+      const group = new THREE.Group();
+      group.visible = false;
+
+      const haloBack = createSoftGlowDisc(
+        cfg.haloBackSize ?? 6.8,
+        cfg.halo,
+        cfg.haloBackOpacity ?? 0.08
       );
-      return halo;
-    };
+      haloBack.position.set(0, 0.25, -1.8);
 
-    const makeRibbon = (points, color, opacity, radius = 0.04) => {
-      const curve = new THREE.CatmullRomCurve3(points);
-      const geometry = new THREE.TubeGeometry(
-        curve,
-        curveSegments,
-        radius,
-        lowPowerMode ? 8 : 10,
-        true,
+      const haloFront = createSoftGlowDisc(
+        cfg.haloFrontSize ?? 4.8,
+        cfg.glow,
+        cfg.haloFrontOpacity ?? 0.06
       );
-      const material = makeGlowMaterial(color, opacity);
-      return new THREE.Mesh(geometry, material);
-    };
+      haloFront.position.set(0, 0.05, 1.2);
 
-    const makeEllipseLoop = (radiusX, radiusZ, color, opacity, segments = loopSegments) => {
-      const points = [];
-      for (let index = 0; index < segments; index += 1) {
-        const angle = (index / segments) * Math.PI * 2;
-        points.push(new THREE.Vector3(Math.cos(angle) * radiusX, 0, Math.sin(angle) * radiusZ));
-      }
-      const geometry = new THREE.BufferGeometry().setFromPoints(points);
-      const material = new THREE.LineBasicMaterial({
-        color,
-        transparent: true,
-        opacity,
-        blending: THREE.AdditiveBlending,
+      const dust = createDustCloud(
+        lowPower ? 42 : 70,
+        new THREE.Vector3(8.5, 6.5, 5.5),
+        cfg.glow,
+        lowPower ? 0.04 : 0.05,
+        0.08
+      );
+
+      haloBack.userData.kind = "haloBack";
+      haloFront.userData.kind = "haloFront";
+      dust.userData.kind = "dust";
+
+      group.add(haloBack, haloFront, dust);
+
+      routeGroups[key] = group;
+      modelSlots[key] = null;
+      groupOpacity[key] = key === "home" ? 1 : 0;
+      groupTargetOpacity[key] = key === "home" ? 1 : 0;
+
+      scene.add(group);
+
+      loader.load(cfg.url, (gltf) => {
+        const modelRoot = new THREE.Group();
+        const model = gltf.scene;
+        const shellEntries = [];
+
+        tempBox.setFromObject(model);
+        const size = tempBox.getSize(new THREE.Vector3());
+        const center = tempBox.getCenter(new THREE.Vector3());
+        const maxDim = Math.max(size.x, size.y, size.z) || 1;
+        const scale = cfg.scale / maxDim;
+
+        model.position.set(
+          -center.x * scale,
+          -center.y * scale + 0.05,
+          -center.z * scale
+        );
+        model.scale.setScalar(scale);
+
+        const edgeMaterial = new THREE.MeshPhysicalMaterial({
+          color: new THREE.Color(cfg.glow),
+          transparent: true,
+          opacity: cfg.shellOpacity ?? 0.06,
+          depthWrite: false,
+          side: THREE.BackSide,
+          roughness: 0.7,
+          metalness: 0.06,
+          clearcoat: 0.2,
+          clearcoatRoughness: 0.8,
+        });
+        setMaterialBaseOpacity(edgeMaterial, cfg.shellOpacity ?? 0.06);
+
+        model.updateWorldMatrix(true, true);
+
+        model.traverse((child) => {
+          if (!child.isMesh) return;
+
+          child.castShadow = !lowPower;
+          child.receiveShadow = false;
+          const sourceMaterials = Array.isArray(child.material)
+            ? child.material
+            : [child.material];
+          const nextMaterials = sourceMaterials.map((sourceMaterial) => {
+            if (!sourceMaterial) return sourceMaterial;
+
+            const material = sourceMaterial.clone();
+            const sourceOpacity = sourceMaterial.opacity ?? 1;
+            const boostedOpacity = sourceMaterial.transparent
+              ? Math.min(1, sourceOpacity + 0.28)
+              : Math.max(sourceOpacity, 0.985);
+
+            setMaterialBaseOpacity(material, boostedOpacity, {
+              forceTransparent: sourceMaterial.transparent ?? false,
+            });
+            material.depthWrite = sourceMaterial.depthWrite;
+
+             if (cfg.tintColor && material.color) {
+              material.color.lerp(
+                new THREE.Color(cfg.tintColor),
+                cfg.tintStrength ?? 0.22
+              );
+            }
+
+            if ("emissiveIntensity" in material && material.emissiveIntensity !== undefined) {
+              material.emissiveIntensity =
+                (sourceMaterial.emissiveIntensity ?? 1) * (cfg.emissiveBoost ?? 1);
+            }
+
+            if ("emissive" in material && material.emissive && cfg.tintColor) {
+              material.emissive.lerp(
+                new THREE.Color(cfg.tintColor),
+                Math.min(0.35, (cfg.tintStrength ?? 0.22) * 0.7)
+              );
+            }
+
+            return material;
+          });
+
+          child.material = Array.isArray(child.material)
+            ? nextMaterials
+            : nextMaterials[0];
+
+          if (child.parent) {
+            const shell = new THREE.Mesh(child.geometry, edgeMaterial.clone());
+            shell.position.copy(child.position);
+            shell.quaternion.copy(child.quaternion);
+            shell.scale.copy(child.scale).multiplyScalar(1.025);
+            shell.renderOrder = -1;
+            shell.castShadow = false;
+            shell.receiveShadow = false;
+            shell.matrixAutoUpdate = true;
+            shell.userData.isModelShell = true;
+            shellEntries.push({ parent: child.parent, shell });
+          }
+        });
+
+        shellEntries.forEach(({ parent, shell }) => {
+          parent.add(shell);
+        });
+
+        modelRoot.add(model);
+        modelRoot.userData.baseRotationY = cfg.baseRotationY;
+        modelRoot.userData.baseScale = scale;
+        modelRoot.userData.scrollYaw = cfg.scrollYaw;
+        modelRoot.userData.scrollPitch = cfg.scrollPitch;
+        modelRoot.userData.clickTwist = cfg.clickTwist;
+        modelRoot.userData.cameraZ = cfg.cameraZ;
+        modelRoot.userData.shadowOpacity = cfg.shadowOpacity;
+        modelRoot.userData.baseY = cfg.baseY ?? 0;
+        modelRoot.userData.baseX = cfg.baseX ?? 0;
+        modelRoot.userData.lastAppliedProgress = 0;
+
+        group.add(modelRoot);
+        modelSlots[key] = modelRoot;
       });
-      material.userData.baseOpacity = opacity;
-      return new THREE.LineLoop(geometry, material);
-    };
+    });
 
-    const applyOpacity = (group, opacity) => {
+    function setGroupOpacity(group, opacity) {
       group.visible = opacity > 0.01;
-      if (!group.visible) {
-        return;
-      }
+      if (!group.visible) return;
 
-      group.traverse((item) => {
-        if (!item.material) {
-          return;
-        }
+      group.traverse((obj) => {
+        if (!obj.material) return;
+        const mats = Array.isArray(obj.material) ? obj.material : [obj.material];
+        mats.forEach((mat) => {
+          const base = mat.userData.baseOpacity ?? 1;
+          const nextOpacity = base * opacity;
+          const shouldBeTransparent =
+            opacity < 0.999 ||
+            (mat.userData.originalTransparent ?? false) ||
+            base < 0.999;
 
-        const materials = Array.isArray(item.material) ? item.material : [item.material];
-        materials.forEach((material) => {
-          if (material.transparent) {
-            material.opacity = (material.userData.baseOpacity ?? 1) * opacity;
+          mat.transparent = shouldBeTransparent;
+          mat.opacity = nextOpacity;
+
+          if ("depthWrite" in mat) {
+            mat.depthWrite = shouldBeTransparent
+              ? false
+              : (mat.userData.originalDepthWrite ?? true);
           }
         });
       });
-    };
-
-    const atmosphereGroup = new THREE.Group();
-    [
-      { color: 0x4f6782, scale: 1.9, x: -5.2, y: 2.3, z: -7 },
-      { color: 0x8f9aaa, scale: 1.5, x: 5.4, y: -2.1, z: -6 },
-      { color: 0xc4ccd2, scale: 1.3, x: 0.3, y: 4.4, z: -8 },
-    ].forEach((item, index) => {
-      const blob = new THREE.Mesh(
-        new THREE.IcosahedronGeometry(item.scale, lowPowerMode ? 1 : 2),
-        makeGlowMaterial(item.color, 0.055),
-      );
-      blob.position.set(item.x, item.y, item.z);
-      blob.userData = {
-        spinX: 0.001 + index * 0.0004,
-        spinY: 0.0016 + index * 0.0005,
-        drift: 0.18 + index * 0.04,
-        originalY: item.y,
-        phase: index * 1.8,
-      };
-      atmosphereGroup.add(blob);
-    });
-    scene.add(atmosphereGroup);
-
-    const heroGroup = new THREE.Group();
-    heroGroup.add(makeHalo(1.35, 0x62788f, 0.04));
-    heroGroup.add(makeParticleField(280, 14, 0x7f93ab, 0.016));
-    heroGroup.add(makeParticleField(120, 10, 0xc6ced5, 0.011));
-
-    let knowledgeModel = null;
-    const gltfLoader = new GLTFLoader();
-    gltfLoader.load(knowledgeNetworkUrl, (gltf) => {
-      knowledgeModel = gltf.scene;
-      const box = new THREE.Box3().setFromObject(knowledgeModel);
-      const size = box.getSize(new THREE.Vector3());
-      const maxDim = Math.max(size.x, size.y, size.z);
-      const scale = 7 / maxDim;
-      knowledgeModel.scale.setScalar(scale);
-      knowledgeModel.userData.maxDim = maxDim;
-      const center = box.getCenter(new THREE.Vector3());
-      knowledgeModel.position.set(
-        -center.x * scale,
-        -center.y * scale,
-        -center.z * scale,
-      );
-      knowledgeModel.traverse((child) => {
-        if (child.isMesh) {
-          const materials = Array.isArray(child.material)
-            ? child.material
-            : [child.material];
-          materials.forEach((mat) => {
-            mat.transparent = true;
-            mat.opacity = 0.35;
-            mat.userData.baseOpacity = 0.35;
-          });
-        }
-      });
-      heroGroup.add(knowledgeModel);
-    });
-    scene.add(heroGroup);
-
-    const jupiterGroup = new THREE.Group();
-    jupiterGroup.visible = false;
-    let jupiterModel = null;
-    gltfLoader.load(jupiterUrl, (gltf) => {
-      jupiterModel = gltf.scene;
-      const box = new THREE.Box3().setFromObject(jupiterModel);
-      const size = box.getSize(new THREE.Vector3());
-      const maxDim = Math.max(size.x, size.y, size.z);
-      const scale = 7 / maxDim;
-      jupiterModel.scale.setScalar(scale);
-      jupiterModel.userData.maxDim = maxDim;
-      const center = box.getCenter(new THREE.Vector3());
-      jupiterModel.position.set(
-        -center.x * scale,
-        -center.y * scale,
-        -center.z * scale,
-      );
-      const jupiterPalette = [
-        new THREE.Color(0x24466d),
-        new THREE.Color(0x4d6684),
-        new THREE.Color(0x96a4b4),
-        new THREE.Color(0x314c67),
-        new THREE.Color(0x5c6877),
-      ];
-      let colorIndex = 0;
-      jupiterModel.traverse((child) => {
-        if (child.isMesh) {
-          const materials = Array.isArray(child.material)
-            ? child.material
-            : [child.material];
-          materials.forEach((mat) => {
-            mat.color.copy(jupiterPalette[colorIndex % jupiterPalette.length]);
-            mat.transparent = true;
-            mat.opacity = 0.35;
-            mat.roughness = 0.35;
-            mat.metalness = 0.12;
-            mat.depthWrite = false;
-            mat.userData.baseOpacity = 0.35;
-            colorIndex += 1;
-          });
-        }
-      });
-      jupiterGroup.add(jupiterModel);
-    });
-    jupiterGroup.add(makeParticleField(200, 16, 0x8a9bb0, 0.014));
-    jupiterGroup.add(makeHalo(2.2, 0x6a7d90, 0.035));
-    scene.add(jupiterGroup);
-
-    const servicesGroup = new THREE.Group();
-    let helixModel = null;
-    gltfLoader.load(helixNebulaUrl, (gltf) => {
-      helixModel = gltf.scene;
-      const box = new THREE.Box3().setFromObject(helixModel);
-      const size = box.getSize(new THREE.Vector3());
-      const maxDim = Math.max(size.x, size.y, size.z);
-      const scale = 7 / maxDim;
-      helixModel.scale.setScalar(scale);
-      helixModel.userData.maxDim = maxDim;
-      const center = box.getCenter(new THREE.Vector3());
-      helixModel.position.set(
-        -center.x * scale,
-        -center.y * scale,
-        -center.z * scale,
-      );
-      const helixPalette = [
-        new THREE.Color(0x24466d),
-        new THREE.Color(0x4d6684),
-        new THREE.Color(0x96a4b4),
-        new THREE.Color(0x314c67),
-        new THREE.Color(0x5c6877),
-        new THREE.Color(0x132033),
-        new THREE.Color(0x7f93ab),
-      ];
-      let helixColorIndex = 0;
-      helixModel.traverse((child) => {
-        if (child.isMesh) {
-          const materials = Array.isArray(child.material)
-            ? child.material
-            : [child.material];
-          materials.forEach((mat) => {
-            mat.color.copy(helixPalette[helixColorIndex % helixPalette.length]);
-            mat.transparent = true;
-            mat.opacity = 0.35;
-            mat.roughness = 0.35;
-            mat.metalness = 0.12;
-            mat.depthWrite = false;
-            mat.userData.baseOpacity = 0.35;
-            helixColorIndex += 1;
-          });
-        }
-      });
-      servicesGroup.add(helixModel);
-    });
-    servicesGroup.add(makeParticleField(210, 14, 0x8a9bb0, 0.014, 0.22));
-    servicesGroup.add(makeHalo(2.0, 0x6a7d90, 0.035));
-    servicesGroup.visible = false;
-    scene.add(servicesGroup);
-
-    const kummerGroup = new THREE.Group();
-    let kummerModel = null;
-    gltfLoader.load(kummerUrl, (gltf) => {
-      kummerModel = gltf.scene;
-      const box = new THREE.Box3().setFromObject(kummerModel);
-      const size = box.getSize(new THREE.Vector3());
-      const maxDim = Math.max(size.x, size.y, size.z);
-      const scale = 4.5 / maxDim;
-      kummerModel.scale.setScalar(scale);
-      kummerModel.userData.maxDim = maxDim;
-      kummerModel.userData.baseSize = 4.5;
-      const center = box.getCenter(new THREE.Vector3());
-      kummerModel.position.set(
-        -center.x * scale,
-        -center.y * scale,
-        -center.z * scale,
-      );
-      const kummerPalette = [
-        new THREE.Color(0x24466d),
-        new THREE.Color(0x4d6684),
-        new THREE.Color(0x96a4b4),
-        new THREE.Color(0x314c67),
-        new THREE.Color(0x5c6877),
-      ];
-      let kummerColorIndex = 0;
-      kummerModel.traverse((child) => {
-        if (child.isMesh) {
-          const materials = Array.isArray(child.material)
-            ? child.material
-            : [child.material];
-          materials.forEach((mat) => {
-            mat.color.copy(kummerPalette[kummerColorIndex % kummerPalette.length]);
-            mat.transparent = true;
-            mat.opacity = 0.2;
-            mat.roughness = 0.35;
-            mat.metalness = 0.12;
-            mat.depthWrite = false;
-            mat.userData.baseOpacity = 0.2;
-            kummerColorIndex += 1;
-          });
-        }
-      });
-      kummerGroup.add(kummerModel);
-    });
-    kummerGroup.add(makeParticleField(200, 14, 0x8a9bb0, 0.014));
-    kummerGroup.add(makeHalo(2.0, 0x6a7d90, 0.035));
-    kummerGroup.visible = false;
-    scene.add(kummerGroup);
-
-    const portfolioGroup = new THREE.Group();
-    const portfolioLayouts = [
-      { position: [-4.1, 1.45, -1.15], size: [2.15, 1.32], color: 0x44627f, rotation: [0.02, 0.34, -0.04] },
-      { position: [-1.25, 0.9, -0.2], size: [2.0, 1.24], color: 0x6f8397, rotation: [-0.04, 0.12, 0.05] },
-      { position: [1.85, 1.1, 0.25], size: [2.7, 1.58], color: 0xb0bcc7, rotation: [0.03, -0.18, -0.03] },
-      { position: [-3.05, -1.25, -0.55], size: [2.3, 1.42], color: 0x4e6a86, rotation: [0.05, 0.22, -0.02] },
-      { position: [0.45, -1.02, 0.72], size: [3.0, 1.82], color: 0x8396a8, rotation: [-0.02, -0.08, 0.02] },
-      { position: [3.95, -1.35, -0.9], size: [1.95, 1.22], color: 0xc0c8cf, rotation: [0.06, -0.28, 0.05] },
-    ];
-    const portfolioLinePoints = [];
-    portfolioLayouts.forEach((item, index) => {
-      const plane = new THREE.PlaneGeometry(item.size[0], item.size[1]);
-      const panel = new THREE.Mesh(plane, makeGlassMaterial(item.color, 0.11));
-      panel.position.set(item.position[0], item.position[1], item.position[2]);
-      panel.rotation.set(item.rotation[0], item.rotation[1], item.rotation[2]);
-      panel.userData = {
-        isPortfolioPanel: true,
-        originalY: item.position[1],
-        originalRotationY: item.rotation[1],
-        phase: index * 0.72,
-      };
-      portfolioGroup.add(panel);
-
-      const outline = new THREE.Mesh(plane, makeGlassMaterial(item.color, 0.24, true));
-      outline.position.copy(panel.position);
-      outline.rotation.copy(panel.rotation);
-      outline.userData = panel.userData;
-      portfolioGroup.add(outline);
-
-      portfolioLinePoints.push(new THREE.Vector3(item.position[0], item.position[1], item.position[2]));
-    });
-
-    const railGeometry = new THREE.BufferGeometry().setFromPoints([
-      new THREE.Vector3(-5.2, 2.05, -1.65),
-      new THREE.Vector3(5.2, 1.45, -1.65),
-      new THREE.Vector3(-4.8, -0.05, -0.55),
-      new THREE.Vector3(4.9, -0.55, -0.55),
-      new THREE.Vector3(-4.2, -2.1, 0.55),
-      new THREE.Vector3(4.2, -2.55, 0.55),
-    ]);
-    const railMaterial = new THREE.LineBasicMaterial({
-      color: 0x8398ab,
-      transparent: true,
-      opacity: 0.1,
-      blending: THREE.AdditiveBlending,
-    });
-    railMaterial.userData.baseOpacity = 0.1;
-    const rails = new THREE.LineSegments(railGeometry, railMaterial);
-    rails.userData.isPortfolioRail = true;
-    portfolioGroup.add(rails);
-
-    const networkGeometry = new THREE.BufferGeometry().setFromPoints([
-      portfolioLinePoints[0], portfolioLinePoints[1],
-      portfolioLinePoints[1], portfolioLinePoints[2],
-      portfolioLinePoints[1], portfolioLinePoints[4],
-      portfolioLinePoints[3], portfolioLinePoints[4],
-      portfolioLinePoints[4], portfolioLinePoints[5],
-    ]);
-    const networkMaterial = new THREE.LineBasicMaterial({
-      color: 0x94a7b8,
-      transparent: true,
-      opacity: 0.12,
-      blending: THREE.AdditiveBlending,
-    });
-    networkMaterial.userData.baseOpacity = 0.12;
-    const networkLines = new THREE.LineSegments(networkGeometry, networkMaterial);
-    networkLines.userData.isPortfolioRail = true;
-    portfolioGroup.add(networkLines);
-    portfolioGroup.add(makeHalo(1.5, 0x8091a0, 0.03));
-    portfolioGroup.add(makeParticleField(220, 13, 0xaebac5, 0.014, 0.22));
-    portfolioGroup.visible = false;
-    scene.add(portfolioGroup);
-
-    const pricingGroup = new THREE.Group();
-    const pricingBaseRing = new THREE.Mesh(
-      new THREE.TorusGeometry(4.6, 0.05, 12, torusTubularSegments),
-      makeGlowMaterial(0x93a3b2, 0.09),
-    );
-    pricingBaseRing.rotation.x = Math.PI / 2.22;
-    pricingBaseRing.position.y = -1.75;
-    pricingBaseRing.userData.isPricingBase = true;
-    pricingGroup.add(pricingBaseRing);
-
-    [
-      { color: 0x37577a, height: 2.2, x: -3.45 },
-      { color: 0x748596, height: 3.2, x: 0 },
-      { color: 0xa28764, height: 2.7, x: 3.45 },
-    ].forEach((item, index) => {
-      const columnGeometry = new THREE.BoxGeometry(1.18, item.height, 1.18);
-      const column = new THREE.Mesh(columnGeometry, makeGlassMaterial(item.color, 0.16));
-      column.position.set(item.x, item.height / 2 - 1.25, 0);
-      column.userData = {
-        isPricingColumn: true,
-        baseY: item.height / 2 - 1.25,
-        phase: index * 1.2,
-      };
-      pricingGroup.add(column);
-
-      const columnOutline = new THREE.Mesh(columnGeometry, makeGlassMaterial(item.color, 0.24, true));
-      columnOutline.position.copy(column.position);
-      columnOutline.userData = column.userData;
-      pricingGroup.add(columnOutline);
-
-      const cap = new THREE.Mesh(
-        new THREE.TorusGeometry(0.95, 0.03, 10, lowPowerMode ? 72 : 96),
-        makeGlowMaterial(item.color, 0.16),
-      );
-      cap.position.set(item.x, item.height - 1.22, 0);
-      cap.rotation.x = Math.PI / 2.1;
-      cap.userData = {
-        isPricingRing: true,
-        baseY: item.height - 1.22,
-        phase: index * 1.4,
-      };
-      pricingGroup.add(cap);
-
-      const secondaryRing = new THREE.Mesh(
-        new THREE.TorusGeometry(1.42, 0.022, 10, lowPowerMode ? 72 : 96),
-        makeGlowMaterial(item.color, 0.1),
-      );
-      secondaryRing.position.set(item.x, 0.08, 0);
-      secondaryRing.rotation.x = Math.PI / (2.4 + index * 0.15);
-      secondaryRing.userData = {
-        isPricingRing: true,
-        baseY: 0.08,
-        phase: index * 1.1 + 0.8,
-      };
-      pricingGroup.add(secondaryRing);
-    });
-    pricingGroup.add(makeParticleField(170, 11, 0xb7c3cd, 0.013, 0.18));
-    pricingGroup.add(makeHalo(1.8, 0x8899a8, 0.03));
-    pricingGroup.visible = false;
-    scene.add(pricingGroup);
-
-    const aboutGroup = new THREE.Group();
-    [
-      { radiusX: 4.2, radiusZ: 2.6, color: 0x8ca0b4, opacity: 0.1, rotation: [Math.PI / 2.4, 0.1, 0] },
-      { radiusX: 3.1, radiusZ: 1.95, color: 0xa9916e, opacity: 0.08, rotation: [Math.PI / 2.1, 0.55, 0.35] },
-      { radiusX: 5.0, radiusZ: 3.0, color: 0xc3ccd3, opacity: 0.08, rotation: [Math.PI / 2.5, -0.48, -0.18] },
-    ].forEach((item, index) => {
-      const loop = makeEllipseLoop(item.radiusX, item.radiusZ, item.color, item.opacity, 140);
-      loop.rotation.set(item.rotation[0], item.rotation[1], item.rotation[2]);
-      loop.userData = {
-        isAboutLoop: true,
-        spinSpeed: 0.0012 + index * 0.0005,
-      };
-      aboutGroup.add(loop);
-    });
-
-    const aboutNodePositions = [];
-    for (let index = 0; index < 12; index += 1) {
-      const angle = (index / 12) * Math.PI * 2;
-      const radiusX = index % 2 === 0 ? 3.55 : 2.55;
-      const radiusZ = index % 2 === 0 ? 2.2 : 1.6;
-      const y = Math.sin(angle * 1.6) * 0.72;
-      const node = new THREE.Mesh(
-        new THREE.SphereGeometry(
-          index % 3 === 0 ? 0.13 : 0.1,
-          lowPowerMode ? 10 : 16,
-          lowPowerMode ? 10 : 16,
-        ),
-        makeGlowMaterial(index % 4 === 0 ? 0xa68f6f : 0x91a5b8, 0.18),
-      );
-      node.position.set(Math.cos(angle) * radiusX, y, Math.sin(angle) * radiusZ);
-      node.userData = {
-        isAboutNode: true,
-        phase: index * 0.55,
-        baseScale: 1,
-        baseY: y,
-      };
-      aboutNodePositions.push(node.position.clone());
-      aboutGroup.add(node);
     }
 
-    const aboutConnectionGeometry = new THREE.BufferGeometry().setFromPoints([
-      aboutNodePositions[0], aboutNodePositions[2],
-      aboutNodePositions[2], aboutNodePositions[5],
-      aboutNodePositions[5], aboutNodePositions[7],
-      aboutNodePositions[7], aboutNodePositions[10],
-      aboutNodePositions[1], aboutNodePositions[4],
-      aboutNodePositions[4], aboutNodePositions[8],
-      aboutNodePositions[3], aboutNodePositions[9],
-      aboutNodePositions[6], aboutNodePositions[11],
-    ]);
-    const aboutConnectionMaterial = new THREE.LineBasicMaterial({
-      color: 0x96a9ba,
-      transparent: true,
-      opacity: 0.09,
-      blending: THREE.AdditiveBlending,
-    });
-    aboutConnectionMaterial.userData.baseOpacity = 0.09;
-    const aboutConnections = new THREE.LineSegments(aboutConnectionGeometry, aboutConnectionMaterial);
-    aboutConnections.userData.isAboutConnections = true;
-    aboutGroup.add(aboutConnections);
-    aboutGroup.add(makeParticleField(280, 12, 0x9db0c1, 0.014, 0.2));
-    aboutGroup.add(makeParticleField(120, 8, 0xcfd6db, 0.01, 0.16));
-    aboutGroup.add(makeHalo(1.15, 0x8898a8, 0.04));
-    aboutGroup.visible = false;
-    scene.add(aboutGroup);
-
-    const contactGroup = new THREE.Group();
-    const beam = new THREE.Mesh(
-      new THREE.CylinderGeometry(0.09, 0.09, 4.9, lowPowerMode ? 12 : 18),
-      makeGlassMaterial(0x4c6b88, 0.24),
-    );
-    beam.userData = {
-      isContactBeam: true,
-      baseScaleY: 1,
-    };
-    contactGroup.add(beam);
-
-    const beaconCore = new THREE.Mesh(
-      new THREE.SphereGeometry(0.36, lowPowerMode ? 12 : 20, lowPowerMode ? 12 : 20),
-      makeGlassMaterial(0xa18b67, 0.32),
-    );
-    beaconCore.userData.isCore = true;
-    contactGroup.add(beaconCore);
-
-    [-1.05, 0.15, 1.2].forEach((y, index) => {
-      const ring = new THREE.Mesh(
-        new THREE.TorusGeometry(0.95 + index * 0.55, 0.03, 10, lowPowerMode ? 72 : 96),
-        makeGlowMaterial(index === 1 ? 0xa79270 : 0x9fb0bf, 0.12 - index * 0.018),
-      );
-      ring.position.y = y;
-      ring.rotation.x = Math.PI / (2.15 + index * 0.22);
-      ring.userData = {
-        isContactRing: true,
-        baseY: y,
-        baseScale: 1,
-        spinSpeed: 0.0016 + index * 0.0005,
-        phase: index * 0.85,
-      };
-      contactGroup.add(ring);
-    });
-
-    const signalGeometry = new THREE.BufferGeometry();
-    const signalPositions = new Float32Array(220 * 3);
-    for (let index = 0; index < 220; index += 1) {
-      const angle = Math.random() * Math.PI * 2;
-      const radius = 0.35 + Math.random() * 0.75;
-      signalPositions[index * 3] = Math.cos(angle) * radius;
-      signalPositions[index * 3 + 1] = Math.random() * 4.8 - 2.4;
-      signalPositions[index * 3 + 2] = Math.sin(angle) * radius;
-    }
-    signalGeometry.setAttribute("position", new THREE.BufferAttribute(signalPositions, 3));
-    const signalField = new THREE.Points(signalGeometry, makePointsMaterial(0xbcc7d0, 0.024, 0.24));
-    signalField.userData.isContactSignal = true;
-    contactGroup.add(signalField);
-
-    for (let index = 0; index < 5; index += 1) {
-      const node = new THREE.Mesh(
-        new THREE.SphereGeometry(0.1 + index * 0.01, lowPowerMode ? 10 : 14, lowPowerMode ? 10 : 14),
-        makeGlowMaterial(index % 2 === 0 ? 0xa48d69 : 0x8fa4b8, 0.16),
-      );
-      node.userData = {
-        isContactOrbiter: true,
-        orbitRadius: 1.15 + index * 0.34,
-        angleOffset: index * 1.1,
-        orbitHeight: -1.2 + index * 0.6,
-      };
-      contactGroup.add(node);
-    }
-    contactGroup.add(makeHalo(0.95, 0x8a98a6, 0.04));
-    contactGroup.visible = false;
-    scene.add(contactGroup);
-
-    const groups = {};
-
-    const currentOpacity = {
-      hero: 1,
-      services: 0,
-      portfolio: 0,
-      pricing: 0,
-      about: 0,
-      contact: 0,
-    };
-
-    const targetOpacity = { ...currentOpacity };
-
-    const getActiveScene = () => {
-      const markers = [...document.querySelectorAll("[data-scene-marker]")];
-      let nextScene = "hero";
-      const threshold = window.innerHeight * 0.42;
-
-      markers.forEach((marker) => {
-        const top = marker.getBoundingClientRect().top;
-        if (top <= threshold) {
-          nextScene = marker.dataset.sceneMarker ?? nextScene;
-        }
-      });
-
-      return nextScene;
-    };
-
-    const onScroll = () => {
-      const maxScroll = Math.max(
-        1,
-        document.documentElement.scrollHeight - window.innerHeight,
-      );
-      scrollProgress = window.scrollY / maxScroll;
-      activeSceneKey = getActiveScene();
-      Object.keys(targetOpacity).forEach((key) => {
-        targetOpacity[key] = key === activeSceneKey ? 1 : 0;
-      });
-    };
-
-    const onPointerMove = (event) => {
-      mouse.x = (event.clientX / window.innerWidth - 0.5) * 2;
-      mouse.y = (event.clientY / window.innerHeight - 0.5) * 2;
-    };
-
-    const resize = () => {
-      syncRendererQuality();
+    function resize() {
+      lowPower = getLowPower();
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, lowPower ? 1 : 1.35));
       renderer.setSize(window.innerWidth, window.innerHeight, false);
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
-    };
+    }
+
+    function onWheel(event) {
+      const dir = event.deltaY >= 0 ? 1 : -1;
+      lastWheelDir = dir;
+      interaction.scrollVelocity = THREE.MathUtils.clamp(
+        interaction.scrollVelocity + dir * 0.24,
+        -1.2,
+        1.2
+      );
+      interaction.targetLift = THREE.MathUtils.clamp(
+        interaction.targetLift + dir * 0.08,
+        -0.4,
+        0.4
+      );
+    }
+
+    function onScroll() {
+      const y = window.scrollY;
+      const delta = y - lastScrollY;
+      lastScrollY = y;
+
+      const maxScrollable = Math.max(
+        document.documentElement.scrollHeight - window.innerHeight,
+        1
+      );
+      const normalized = y / maxScrollable;
+
+      interaction.targetScrollProgress = normalized * 2 - 1;
+
+      const dir = delta === 0 ? lastWheelDir : Math.sign(delta);
+      interaction.scrollVelocity = THREE.MathUtils.clamp(
+        interaction.scrollVelocity + dir * Math.min(Math.abs(delta) * 0.0025, 0.22),
+        -1.25,
+        1.25
+      );
+      interaction.targetLift = THREE.MathUtils.clamp(
+        interaction.targetLift + dir * Math.min(Math.abs(delta) * 0.0009, 0.1),
+        -0.42,
+        0.42
+      );
+    }
+
+    function onPointerDown() {
+      interaction.clickImpulse = Math.min(interaction.clickImpulse + 1, 1.25);
+      interaction.routeImpulse = Math.min(interaction.routeImpulse + 0.08, 0.8);
+      interaction.targetLift = Math.min(interaction.targetLift + 0.1, 0.45);
+    }
 
     resize();
     onScroll();
 
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("mousemove", onPointerMove, { passive: true });
     window.addEventListener("resize", resize);
+    window.addEventListener("wheel", onWheel, { passive: true });
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("pointerdown", onPointerDown, { passive: true });
 
-    let animationFrameId = 0;
-    const animate = () => {
-      animationFrameId = window.requestAnimationFrame(animate);
-      const elapsed = clock.getElapsedTime();
+    let frameId = 0;
 
-      atmosphereGroup.children.forEach((blob) => {
-        blob.rotation.x += blob.userData.spinX;
-        blob.rotation.y += blob.userData.spinY;
-        blob.position.y =
-          blob.userData.originalY +
-          Math.sin(elapsed * blob.userData.drift + blob.userData.phase) * 0.26;
+    const animate = (time) => {
+      frameId = requestAnimationFrame(animate);
+
+      timer.update(time);
+      const elapsed = timer.getElapsed();
+      const activeKey = sceneKeyRef.current;
+      const activeConfig = MODEL_CONFIG[activeKey] || MODEL_CONFIG.home;
+      const activeLight = LIGHT_TARGETS[activeKey] || LIGHT_TARGETS.home;
+
+      Object.keys(groupTargetOpacity).forEach((key) => {
+        groupTargetOpacity[key] = key === activeKey ? 1 : 0;
       });
 
-      Object.keys(currentOpacity).forEach((key) => {
-        currentOpacity[key] += (targetOpacity[key] - currentOpacity[key]) * 0.028;
-        if (currentOpacity[key] < 0.005) currentOpacity[key] = 0;
-      });
+      interaction.scrollProgress +=
+        (interaction.targetScrollProgress - interaction.scrollProgress) * 0.08;
+      interaction.globalLift +=
+        (interaction.targetLift - interaction.globalLift) * 0.08;
 
-      scrollSpeed += (Math.abs(scrollProgress - prevScrollProgress) * 60 - scrollSpeed) * 0.06;
-      prevScrollProgress = scrollProgress;
-      const scrollDrive = Math.min(1, scrollSpeed * 10);
+      interaction.scrollVelocity *= 0.9;
+      interaction.clickImpulse *= 0.92;
+      interaction.routeImpulse *= 0.94;
+      interaction.targetLift *= 0.96;
 
-      const modelGroups = [
-        {
-          group: kummerGroup,
-          model: kummerModel,
-          opacity: currentOpacity.hero,
-        },
-        {
-          group: jupiterGroup,
-          model: jupiterModel,
-          opacity: currentOpacity.services,
-        },
-        {
-          group: heroGroup,
-          model: knowledgeModel,
-          opacity: Math.max(currentOpacity.portfolio, currentOpacity.pricing),
-        },
-        {
-          group: servicesGroup,
-          model: helixModel,
-          opacity: Math.max(currentOpacity.about, currentOpacity.contact),
-        },
-      ];
+      leftGlow.position.x = -5.8 + interaction.scrollProgress * 0.18;
+      leftGlow.position.y = 2.8 + interaction.globalLift * 0.2;
 
-      modelGroups.forEach(({ group, model, opacity }) => {
-        group.visible = opacity > 0.01;
+      rightGlow.position.x = 5.5 - interaction.scrollProgress * 0.12;
+      rightGlow.position.y = -2.1 - interaction.globalLift * 0.16;
+
+      topGlow.position.y = 4.8 + interaction.globalLift * 0.1;
+
+      Object.keys(routeGroups).forEach((key) => {
+        groupOpacity[key] += (groupTargetOpacity[key] - groupOpacity[key]) * 0.08;
+        if (groupOpacity[key] < 0.003) groupOpacity[key] = 0;
+
+        const group = routeGroups[key];
+        const opacity = groupOpacity[key];
+        setGroupOpacity(group, opacity);
+
         if (!group.visible) return;
 
-        applyOpacity(group, opacity);
+        const ease = opacity * opacity * (3 - 2 * opacity);
+        const cfg = MODEL_CONFIG[key];
+        const revealDepth = cfg.revealDepth ?? 1.8;
+        const revealLift = cfg.revealLift ?? 0.1;
+        const revealMinScale = cfg.revealMinScale ?? 0.86;
+        group.position.z = (1 - ease) * revealDepth;
+        group.position.y = interaction.globalLift * 0.12 * ease + (1 - ease) * revealLift;
+        group.scale.setScalar(revealMinScale + ease * (1 - revealMinScale));
 
-        const easeOpacity = opacity * opacity * (3 - 2 * opacity);
-        group.scale.setScalar(0.85 + easeOpacity * 0.15);
-        group.position.z = (1 - easeOpacity) * 2.5;
-        group.position.y += (0 - group.position.y) * 0.03;
-
-        if (model) {
-          model.rotation.y += 0.0005 + scrollDrive * 0.015;
-
-          const idlePulse = 1 + Math.sin(elapsed * 0.4) * 0.02;
-          const scrollPulse = 1 + scrollDrive * Math.sin(elapsed * 1.4) * 0.06;
-          const baseScale = (model.userData.baseSize || 7) / (model.userData.maxDim || 1);
-          model.scale.setScalar(baseScale * idlePulse * scrollPulse);
-
-          model.rotation.x +=
-            (Math.sin(elapsed * 0.15) * 0.015 - model.rotation.x) * 0.015;
-          model.rotation.z +=
-            (Math.cos(elapsed * 0.12) * 0.01 - model.rotation.z) * 0.015;
-        }
-
-        group.children.forEach((item) => {
-          if (item.isPoints) {
-            item.rotation.y += 0.00012;
+        group.children.forEach((child) => {
+          if (child.userData.kind === "haloBack") {
+            child.scale.setScalar(1 + interaction.clickImpulse * 0.03 + Math.abs(interaction.scrollVelocity) * 0.04);
+            child.position.y = 0.25 + interaction.globalLift * 0.24;
+          }
+          if (child.userData.kind === "haloFront") {
+            child.scale.setScalar(1 + interaction.clickImpulse * 0.05 + Math.abs(interaction.scrollVelocity) * 0.06);
+            child.position.y = 0.05 + interaction.globalLift * 0.18;
+          }
+          if (child.userData.kind === "dust") {
+            child.rotation.z += interaction.scrollVelocity * 0.008;
+            child.rotation.y += interaction.clickImpulse * 0.01;
+            child.position.y = interaction.globalLift * 0.28;
           }
         });
+
+        const modelRoot = modelSlots[key];
+        if (!modelRoot) return;
+
+        const isActive = key === activeKey;
+        const focus = isActive ? 1 : 0;
+        const scrollYaw = interaction.scrollProgress * modelRoot.userData.scrollYaw;
+        const scrollPitch = interaction.scrollProgress * modelRoot.userData.scrollPitch * 0.6;
+        const clickTwist = interaction.clickImpulse * modelRoot.userData.clickTwist;
+        const velocityTwist = interaction.scrollVelocity * 0.12;
+
+        const targetRotY =
+          modelRoot.userData.baseRotationY + scrollYaw + clickTwist + velocityTwist;
+        const targetRotX = scrollPitch - Math.abs(interaction.scrollVelocity) * 0.04;
+        const targetRotZ = interaction.scrollVelocity * 0.05 - interaction.clickImpulse * 0.04;
+
+        modelRoot.rotation.y += (targetRotY - modelRoot.rotation.y) * 0.08;
+        modelRoot.rotation.x += (targetRotX - modelRoot.rotation.x) * 0.08;
+        modelRoot.rotation.z += (targetRotZ - modelRoot.rotation.z) * 0.08;
+
+        const targetY = modelRoot.userData.baseY + interaction.globalLift * 0.42 + Math.abs(interaction.scrollVelocity) * 0.08;
+        const targetX = modelRoot.userData.baseX + interaction.scrollProgress * 0.22;
+        modelRoot.position.x += (targetX - modelRoot.position.x) * 0.08;
+        modelRoot.position.y += (targetY - modelRoot.position.y) * 0.08;
+
+        const scaleBoost =
+          1 + Math.abs(interaction.scrollVelocity) * 0.018 + interaction.clickImpulse * 0.028;
+        const revealScale = revealMinScale + ease * (1 - revealMinScale);
+        const targetScale = scaleBoost * (isActive ? 1 : 0.985) * revealScale;
+        modelRoot.scale.x += (targetScale - modelRoot.scale.x) * 0.08;
+        modelRoot.scale.y += (targetScale - modelRoot.scale.y) * 0.08;
+        modelRoot.scale.z += (targetScale - modelRoot.scale.z) * 0.08;
+
+        modelRoot.traverse((obj) => {
+          if (!obj.isMesh || !obj.material) return;
+          const mats = Array.isArray(obj.material) ? obj.material : [obj.material];
+          mats.forEach((mat) => {
+            if ("emissiveIntensity" in mat) {
+              mat.emissiveIntensity =
+                1 + Math.abs(interaction.scrollVelocity) * 0.18 + interaction.clickImpulse * 0.2;
+            }
+          });
+        });
+
+        if (focus > 0) {
+          shadowPlane.material.opacity +=
+            (activeConfig.shadowOpacity +
+              Math.abs(interaction.scrollVelocity) * 0.04 +
+              interaction.clickImpulse * 0.03 -
+              shadowPlane.material.opacity) *
+            0.08;
+        }
       });
 
-      const targetLight = lightTargets[activeSceneKey];
-      keyLight.color.lerp(targetLight.key, 0.04);
-      fillLight.color.lerp(targetLight.fill, 0.04);
-      rimLight.color.lerp(targetLight.rim, 0.04);
+      hemiLight.color.lerp(new THREE.Color(activeLight.rim), 0.06);
+      keyLight.color.lerp(new THREE.Color(activeLight.key), 0.06);
+      fillLight.color.lerp(new THREE.Color(activeLight.fill), 0.06);
+      rimLight.color.lerp(new THREE.Color(activeLight.rim), 0.06);
+      accentLight.color.lerp(new THREE.Color(activeLight.accent), 0.06);
 
-      keyLight.position.set(4, 4, 6);
-      fillLight.position.set(-4, -3, 5);
-      rimLight.position.set(0, 5, -3);
+      keyLight.position.x = 4.5 + interaction.scrollProgress * 0.7;
+      keyLight.position.y = 5.5 + interaction.globalLift * 0.35;
 
-      const targetCameraZ = 9.4 + scrollProgress * 1.2;
-      camera.position.x += (mouse.x * 0.15 - camera.position.x) * 0.02;
-      camera.position.y += (-mouse.y * 0.1 - camera.position.y) * 0.02;
-      camera.position.z += (targetCameraZ - camera.position.z) * 0.025;
+      fillLight.position.x = -5 - interaction.scrollProgress * 0.5;
+      fillLight.position.y = -1.2 - interaction.globalLift * 0.25;
+
+      accentLight.position.x = 2.8 + interaction.scrollVelocity * 0.9;
+      accentLight.position.y = -2 + interaction.globalLift * 0.4;
+
+      camera.position.x += (interaction.scrollProgress * 0.18 - camera.position.x) * 0.06;
+      camera.position.y += ((interaction.globalLift * 0.18) - camera.position.y) * 0.06;
+      camera.position.z += (activeConfig.cameraZ - camera.position.z) * 0.06;
       camera.lookAt(0, 0, 0);
 
       renderer.render(scene, camera);
@@ -834,20 +744,26 @@ function SceneCanvas() {
     animate();
 
     return () => {
-      window.cancelAnimationFrame(animationFrameId);
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("mousemove", onPointerMove);
+      cancelAnimationFrame(frameId);
       window.removeEventListener("resize", resize);
-      renderer.dispose();
+      window.removeEventListener("wheel", onWheel);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("pointerdown", onPointerDown);
+
       scene.traverse((item) => {
-        if (item.geometry) {
-          item.geometry.dispose();
-        }
+        if (item.geometry) item.geometry.dispose();
+
         if (item.material) {
-          const materials = Array.isArray(item.material) ? item.material : [item.material];
-          materials.forEach((material) => material.dispose());
+          const mats = Array.isArray(item.material) ? item.material : [item.material];
+          mats.forEach((mat) => {
+            if (mat.map) mat.map.dispose();
+            mat.dispose();
+          });
         }
       });
+
+      timer.dispose();
+      renderer.dispose();
     };
   }, []);
 

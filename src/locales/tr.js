@@ -1,118 +1,469 @@
-﻿const tr = {
+const tr = {
   meta: {
-    title: "Morphix | 3D ürün web siteleri ve konfigüratörler",
+    title: "Morphix | Dijital Ürün Stüdyosu",
     description:
-      "Morphix teknik ve premium markalar için 3D ürün siteleri, konfigüratörler, lansman sayfaları ve interaktif dijital deneyimler tasarlar ve geliştirir.",
+      "Morphix, 3D ürün web siteleri, interaktif yapılandırıcılar ve sürükleyici web deneyimleri konusunda uzmanlaşmış bir dijital ürün stüdyosudur.",
   },
   common: {
     brandName: "Morphix",
     homeAriaLabel: "Morphix ana sayfa",
-    primaryNavAriaLabel: "Ana gezinme",
+    primaryNavAriaLabel: "Ana menü",
     languageSwitcherLabel: "Dil",
-    productExamplesAriaLabel: "Ürün konfigüratörü örnekleri",
+    productExamplesAriaLabel: "Ürün yapılandırıcı örnekleri",
   },
   nav: {
-    hero: "Hero",
-    capabilities: "Yetenekler",
+    home: "Ana Sayfa",
+    services: "Hizmetler",
+    work: "Çalışmalar",
     pricing: "Fiyatlandırma",
     about: "Hakkımızda",
     contact: "İletişim",
-    cta: "Ürününüzü konuşalım",
+    cta: "Proje başlat",
   },
+  // ── ANA SAYFA ──
   hero: {
-    eyebrow: "3D ürün web siteleri ve konfigüratörler",
-    proofline: [
-      "Three.js uygulaması",
-      "3D modeller ve renderlar dahil",
-      "Prodüksiyona hazır front-end teslimi",
-    ],
-    title: "Karmaşık ürünleri",
-    titleAccent: "anlamayı ve yapılandırmayı kolaylaştıran 3D ürün web siteleri.",
-    copy:
-      "Morphix, konfigürasyona açık, teknik ve premium ürünler için ciddi ve prodüksiyona hazır deneyimler geliştirir. Müşterilerin seçenekleri daha yüksek güvenle ve daha az sürtünmeyle değerlendirebilmesi için net mesajlaşmayı, Three.js etkileşimini, ürün mantığını ve web'e hazır asset teslimini bir araya getiriyoruz.",
-    primaryCta: "Konfigüratörünüzü planlayın",
-    secondaryCta: "Demo bölümünü görün",
-    stats: [
+    headline: "İnsanların gerçekten keşfetmek istediği ürünler yapıyoruz.",
+    subline:
+      "Morphix bir dijital ürün stüdyosudur. Unutulmayı reddeden markalar için 3D web siteleri, interaktif yapılandırıcılar ve lansman deneyimleri tasarlıyor ve geliştiriyoruz.",
+    primaryCta: "Proje başlat",
+    secondaryCta: "Çalışmalarımızı gör",
+  },
+  valueProps: {
+    eyebrow: "Neden Morphix",
+    items: [
       {
-        label: "Kullanım alanları",
-        value: "konfigüratörler, lansman sayfaları, ürün anlatımları",
+        title: "İnteraktif, dekoratif değil",
+        copy: "Her 3D öğe alıcıya hizmet eder. Yapılandırma, karşılaştırma, keşif — sadece göz zevki değil.",
       },
       {
-        label: "Ürün mantığı",
-        value: "boyut, kaplama, varyantlar, modüller, ekler",
+        title: "Üretim için tasarlandı",
+        copy: "Three.js, optimize edilmiş varlıklar, duyarlı düzenler. Hızlı yayınlanır, sorunsuz çalışır, temiz ölçeklenir.",
       },
       {
-        label: "Teslimat",
-        value: "Three.js, assetler, renderlar ve lansman desteği",
+        title: "Uçtan uca teslimat",
+        copy: "Strateji, tasarım, 3D, ön yüz, lansman. Tek ekip, tek süreç, aktarım boşlukları yok.",
       },
     ],
-    stage: {
-      label: "Lansman için yapılandırıldı",
-      title: "Alıcıya fayda sağladığı yerde 3D derinlik kullanan ciddi ürün hikâye anlatımı.",
-      copy:
-        "Sitenin ikna edici, hızlı ve bakımı kolay kalması için ürün anlatımını, etkileşim modelini ve teslim sistemini birlikte tasarlıyoruz.",
-      points: [
-        "Net sayfa yapısı",
-        "İnteraktif ürün mantığı",
-        "3D assetler ve renderlar",
-        "Prodüksiyon handoff'u",
+  },
+  servicesPreview: {
+    eyebrow: "Ne yapıyoruz",
+    title: "Konseptten lansmana kadar her şeyi biz yönetiyoruz.",
+    items: [
+      { title: "3D Yapılandırıcılar", copy: "Müşterileriniz kendi ürünlerini oluştursun." },
+      { title: "Ürün Web Siteleri", copy: "Sadece etkilemekle kalmayan, dönüşüm sağlayan hikaye anlatımı." },
+      { title: "Lansman Deneyimleri", copy: "Ürün lansmanları ve kampanyalar için sürükleyici sayfalar." },
+    ],
+    cta: "Tüm hizmetler",
+  },
+  portfolioPreview: {
+    eyebrow: "Seçili çalışmalar",
+    title: "Hayata geçirdiğimiz ürünler.",
+    projects: [
+      {
+        name: "Açık Hava Yaşam Yapılandırıcısı",
+        type: "Pergola Sistemi",
+        result: "Müşteriler boyut, kaplama, aydınlatma ve aksesuarları yönlendirilmiş bir 3D akışta yapılandırıyor. Satış öncesi soruları yarıya indirdi.",
+      },
+      {
+        name: "Tüketici Elektroniği Lansmanı",
+        type: "Ürün Web Sitesi",
+        result: "Sayfada geçirilen süreyi 3 kat artıran ve demo taleplerinde ölçülebilir artış sağlayan interaktif özellik turu.",
+      },
+    ],
+    cta: "Tüm çalışmaları gör",
+  },
+  trust: {
+    eyebrow: "Sonuçlar",
+    items: [
+      { metric: "3×", label: "ortalama sayfa süresi artışı" },
+      { metric: "50%", label: "daha az satış öncesi destek sorusu" },
+      { metric: "40%", label: "ürün sayfalarında daha yüksek dönüşüm" },
+    ],
+  },
+  homeContact: {
+    eyebrow: "Hızlı soru",
+    title: "Aklınızda bir proje mi var?",
+    copy: "Bize yazın. 48 saat içinde dönüş yapacağız.",
+    fields: {
+      name: { label: "Ad", placeholder: "Ali Yılmaz" },
+      email: { label: "E-posta", placeholder: "ali@sirket.com" },
+      message: { label: "Mesaj", placeholder: "Projeniz hakkında kısaca bilgi verin..." },
+    },
+    submit: "Mesaj gönder",
+    successTitle: "Gönderildi!",
+    successCopy: "En kısa sürede sizinle iletişime geçeceğiz.",
+  },
+  homeCta: {
+    headline: "Ürününüzü unutulmaz kılmaya hazır mısınız?",
+    copy: "Bize ne üzerinde çalıştığınızı anlatın. Nelerin mümkün olduğunu gösterelim.",
+    button: "İletişime geç",
+  },
+  // ── HİZMETLER SAYFASI ──
+  servicesPage: {
+    eyebrow: "Hizmetler",
+    headline: "İnsanların hatırlayacağı bir ürün lansmanı için ihtiyacınız olan her şey.",
+    copy: "Strateji, tasarım, 3D mühendislik ve ön yüz geliştirmeyi tek bir odaklı çalışmada birleştiriyoruz. Parça parça tedarikçiler yok, aktarım karmaşası yok.",
+    services: [
+      {
+        title: "3D Ürün Yapılandırıcıları",
+        copy: "Müşterilerin boyut, kaplama, renk, aksesuar ve ortamı anında görsel geri bildirimle değiştirebildiği, web sitesine entegre yapılandırıcılar. Three.js ile güçlendirilmiş, dönüşüm için tasarlanmış.",
+        tags: ["Three.js", "Ürün Mantığı", "Ticarete Hazır"],
+      },
+      {
+        title: "Ürün Lansman Web Siteleri",
+        copy: "Ürün anlatısı, kanıt ve dönüşüm yapısını tek bir net yolculukta birleştiren yüksek etkili sayfalar. Ürününüzün dünyayla buluştuğu an için tasarlanmış.",
+        tags: ["Lansman", "Hikaye Anlatımı", "Dönüşüm"],
+      },
+      {
+        title: "3D Varlık Üretimi",
+        copy: "Optimize edilmiş 3D modeller, stüdyo görselleri, ürün kesit görünümleri ve yapılandırmaya hazır varlık setleri. Web siteniz, kampanyalarınız ve satış materyalleriniz için ihtiyacınız olan her şey.",
+        tags: ["Modeller", "Görselleştirme", "WebGL Varlıkları"],
+      },
+      {
+        title: "İnteraktif Ürün Demoları",
+        copy: "Müşterilerin bir görüşme planlamadan önce yetenekleri anlamasına yardımcı olan yönlendirilmiş 3D ve hareket odaklı turlar. Baskıyla değil, netlikle satış yapın.",
+        tags: ["Demo", "Eğitim", "Self Servis"],
+      },
+      {
+        title: "Teknik Açıklayıcılar",
+        copy: "Yalnızca metinle anlatılamayacak kadar karmaşık ürünler için. Karmaşık olanı anlaşılır kılan animasyonlu parça görünümleri, bileşen gösterimleri ve iş akışı görselleştirmeleri.",
+        tags: ["Animasyon", "Açıklayıcı", "Karmaşık Ürünler"],
+      },
+      {
+        title: "Ticarete Hazır Sayfalar",
+        copy: "Yüksek değerlendirme gerektiren satın almalar için tasarlanmış ürün sayfaları. Müşteri ödeme aşamasına ulaşmadan fiyatı haklı kılan net yapı, güven sinyalleri ve görsel derinlik.",
+        tags: ["E-ticaret", "Güven", "Premium"],
+      },
+    ],
+    configurator: {
+      eyebrow: "Öne çıkan yetenek",
+      title: "Gerçekten satış kapatan yapılandırıcılar.",
+      copy: "Pergola, mobilya, aydınlatma, ekipman satan markalar için — gerçek seçenekleri olan her şey. Kullanıcıların boyutları, malzemeleri, aksesuarları ve ortamları anında görsel geri bildirimle ayarlayabildiği yönlendirilmiş yapılandırıcılar oluşturuyoruz.",
+      features: [
+        {
+          title: "Önemli olan seçenekler",
+          copy: "Boyut, kaplama, renk, eklentiler, aydınlatma — yüksek etkili tercihler, tek temiz bir arayüzde.",
+        },
+        {
+          title: "Sahne duyarlı görselleştirme",
+          copy: "Alıcıların ürünü gerçekçi bir ortamda değerlendirmesi için ortamları, kamera açılarını ve bağlamları değiştirin.",
+        },
+        {
+          title: "Varlıklar dahil",
+          copy: "Düzgün bir lansman için gereken 3D modelleri, malzemeleri ve optimize edilmiş web varlıklarını teslim ediyoruz.",
+        },
+        {
+          title: "Web için tasarlandı",
+          copy: "Duyarlı, performanslı ve fiyatlandırma mantığı, CMS içeriği ve ticaret akışlarıyla bağlantıya hazır.",
+        },
       ],
     },
-    delivery: {
-      chip: "Gerçek ürün ekipleri için tasarlandı",
-      copy:
-        "Konfigürasyona açık ürünlerde web sitesi arayüzünü, Three.js uygulamasını, 3D asset sürecini ve ekibinizin lansman, kampanya ve satış için ihtiyaç duyduğu görselleri üstlenebiliriz.",
-      points: [
-        "Ürün sayfaları",
-        "Konfigüratör mantığı",
-        "Asset üretimi",
-        "Lansman desteği",
+    process: {
+      eyebrow: "Nasıl çalışıyoruz",
+      title: "Dört aşama. Sıfır belirsizlik.",
+      copy: "Her çalışma aynı yapıyı izler. Nerede olduğumuzu, sıradakinin ne olduğunu ve ne alacağınızı her zaman bilirsiniz.",
+      steps: [
+        {
+          step: "01",
+          title: "Keşif",
+          copy: "Ürün, hedef kitle ve iş hedefi üzerinde uzlaşıyoruz. Varsayım yok — sadece netlik.",
+        },
+        {
+          step: "02",
+          title: "Yapılandırma",
+          copy: "Bilgi mimarisi, wireframe'ler, hareket niyeti. Üretim başlamadan önce deneyim netleşir.",
+        },
+        {
+          step: "03",
+          title: "Geliştirme",
+          copy: "Tasarım, 3D, ön yüz, entegrasyonlar. Her şey birlikte yayınlanır, her kırılma noktasında test edilir.",
+        },
+        {
+          step: "04",
+          title: "Lansman",
+          copy: "Kalite kontrolü, dağıtım ve temiz bir teslim. Ekibiniz güvenle işletebilir ve genişletebilir.",
+        },
       ],
     },
   },
+  // ── ÇALIŞMALAR SAYFASI ──
+  workPage: {
+    eyebrow: "Çalışmalar",
+    headline: "Lansmanına yardımcı olduğumuz ürünler.",
+    copy: "Farklı sektörlerden bir seçki. Her biri daha iyi bir hikayeye ihtiyaç duyan bir ürünle başladı.",
+    projects: [
+      {
+        name: "Pergola Yapılandırıcı Sistemi",
+        type: "Dış Mekan Ürünleri",
+        result: "Tam bir yapılandırıcı deneyimi: boyut, yan seçenekler, aydınlatma, aksesuarlar ve montaj — hepsi tek bir yönlendirilmiş satın alma akışında.",
+        details: "Satış öncesi soruları %50 azalttı. Müşteriler ekiple iletişime geçmeden önce güvenle kendi yapılandırmalarını yapıyor.",
+      },
+      {
+        name: "Premium Tüketici Elektroniği",
+        type: "Ürün Lansmanı",
+        result: "Karmaşık bir ürün yelpazesini anlaşılır kılan interaktif özellik turları ve karşılaştırma görünümleri.",
+        details: "Sayfada geçirilen sürede 3 kat artış. İlk ay içinde demo taleplerinde ölçülebilir yükseliş.",
+      },
+      {
+        name: "Kurumsal SaaS Platformu",
+        type: "Ürün Web Sitesi",
+        result: "Soyut platform değerini karar vericiler ve değerlendiriciler için somut, görsel bir hikayeye dönüştürdü.",
+        details: "Potansiyel müşterilere ilk görüşmeden önce ihtiyaç duydukları netliği sağlayarak satış döngüsünü kısalttı.",
+      },
+      {
+        name: "Mobilya Koleksiyonu Lansmanı",
+        type: "E-ticaret",
+        result: "Kaplama ve ortam değiştirme özellikli 3D ürün görüntüleyici. Müşteriler satın almadan önce her açıyı keşfediyor.",
+        details: "Önceki statik ürün sayfalarına kıyasla %40 daha yüksek sepete ekleme oranı.",
+      },
+      {
+        name: "Endüstriyel Ekipman Açıklayıcısı",
+        type: "Teknik Ürün",
+        result: "Karmaşık makineleri teknik olmayan alıcılar için anlaşılır kılan animasyonlu bileşen görünümleri.",
+        details: "Fuarlarda, satış sunumlarında ve ana ürün sitesinde kullanıldı.",
+      },
+    ],
+  },
+  // ── FİYATLANDIRMA SAYFASI ──
+  pricingPage: {
+    eyebrow: "Fiyatlandırma",
+    headline: "Şeffaf fiyatlandırma. Sürpriz yok.",
+    copy: "Bir başlangıç noktası seçin. Her çalışma ürününüze, zaman çizelgenize ve hedeflerinize göre kapsamlandırılır.",
+    badge: "En popüler",
+    cta: "Başlayın",
+    tiers: [
+      {
+        tier: "Temel",
+        price: "$4,900",
+        subtitle: "Odaklı tek bir ürün sayfası veya lansman deneyimi.",
+        features: [
+          "Keşif atölyesi ve sayfa stratejisi",
+          "Bir yüksek etkili ürün sayfası",
+          "Bir birincil 3D veya hareket sekansı",
+          "Duyarlı kalite kontrolü ve temiz teslim",
+        ],
+      },
+      {
+        tier: "Büyüme",
+        price: "$14,900",
+        subtitle: "Daha derin müşteri yolculuklarıyla çok sayfalı ürün sitesi.",
+        features: [
+          "Çok bölümlü ürün web sitesi",
+          "Özel sahne geçişleri ve hareket",
+          "CMS veya API'ye hazır içerik yapısı",
+          "Lansman desteği ve optimizasyon geçişi",
+        ],
+        featured: true,
+      },
+      {
+        tier: "Özel",
+        price: "Konuşalım",
+        subtitle: "Yapılandırıcılar, karmaşık sistemler ve süregelen ortaklıklar.",
+        features: [
+          "Veri odaklı 3D ürün sahneleri",
+          "Ticaret, CRM veya CMS entegrasyonları",
+          "Yeniden kullanılabilir bileşen ve hareket kütüphanesi",
+          "Sürekli optimizasyon ve destek",
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: "Her pakete neler dahil?",
+        a: "Keşif, tasarım, geliştirme, kalite kontrolü ve dağıtım. Temel özellikler için ekstra ücret almıyoruz.",
+      },
+      {
+        q: "Sonradan yükseltebilir miyim?",
+        a: "Kesinlikle. Temel projeler, sonuçlar geldikçe sıklıkla Büyüme veya Özel çalışmalara dönüşür.",
+      },
+      {
+        q: "Tipik bir proje ne kadar sürer?",
+        a: "Temel: 2–3 hafta. Büyüme: 4–8 hafta. Özel: karmaşıklığa göre birlikte kapsamlandırılır.",
+      },
+      {
+        q: "Mevcut tasarımlarla çalışıyor musunuz?",
+        a: "Evet. Marka sisteminizden yola çıkabiliriz veya sıfırdan tasarlayabiliriz — proje için hangisi mantıklıysa.",
+      },
+    ],
+  },
+  // ── HAKKIMIZDA SAYFASI ──
+  aboutPage: {
+    eyebrow: "Hakkımızda",
+    headline: "Ürün ekipleri için kurulmuş bir stüdyo.",
+    copy: "Morphix, ürün lansmanlarının şablon siteler ve stok görsellerden daha iyisini hak ettiği için var. Tasarım, mühendislik ve 3D zanaatı tek bir uygulamada birleştiren küçük, odaklı bir ekibiz.",
+    principles: [
+      {
+        title: "Gösteriden önce netlik",
+        copy: "Hareket ve 3D'yi açıklamak için kullanıyoruz, süslemek için değil. Alıcının anlamasına yardımcı olmuyorsa yayınlanmaz.",
+      },
+      {
+        title: "Gerçek ekipler için tasarlandı",
+        copy: "Teslim ettiğimiz her şey içerik güncellemeleri, duyarlı kalite kontrolü ve uzun vadeli bakım için yapılandırılmıştır. Tek kullanımlık yapılar yok.",
+      },
+      {
+        title: "Tek ekip, tek süreç",
+        copy: "Strateji, tasarım, 3D ve kod tek çatı altında yaşar. Daha az aktarım, çeviride kaybolan daha az şey demektir.",
+      },
+    ],
+    story: {
+      title: "Nasıl çalışıyoruz",
+      copy: "Karmaşık, yapılandırılabilir veya premium ürünler satan şirketlerdeki ürün, pazarlama ve büyüme ekipleriyle ortaklık kuruyoruz. İşimiz, ürünü anlaşılması daha kolay ve unutulması daha zor kılmak — web sitesi deneyiminin kendisi aracılığıyla.",
+    },
+  },
+  // ── İLETİŞİM SAYFASI (çok adımlı sihirbaz) ──
+  contactPage: {
+    eyebrow: "İletişime geçin",
+    headline: "Hatırlanmaya değer bir şey inşa edelim.",
+    copy: "Projenizi anlayabilmemiz ve size özel bir teklifle dönebilmemiz için birkaç hızlı adımı tamamlayın.",
+    facts: [
+      "48 saat içinde yanıt",
+      "Şablona dayalı değil, size özel teklif",
+      "Zorunluluk yok, baskı yok",
+    ],
+    wizard: {
+      stepLabel: "Adım",
+      previous: "Geri",
+      next: "Devam",
+      submit: "Özeti gönder",
+      successTitle: "Özet gönderildi!",
+      successCopy: "Detaylar için teşekkürler. 48 saat içinde sonraki adımlarla size dönüş yapacağız.",
+      steps: [
+        { title: "Hakkınızda", copy: "Bize kim olduğunuzu ve nasıl ulaşacağımızı söyleyin." },
+        { title: "Projeniz", copy: "Ne üzerinde çalışıyorsunuz ve hangi aşamada?" },
+        { title: "Kapsam ve hedefler", copy: "Neye ihtiyacınız var ve deneyim ne sağlamalı?" },
+        { title: "Zaman çizelgesi ve bütçe", copy: "Doğru kapsam belirleyebilmemiz için kısıtlamalarınızı anlamamıza yardımcı olun." },
+      ],
+    },
+    fields: {
+      fullName: { label: "Adınız", placeholder: "Ali Yılmaz" },
+      email: { label: "İş e-postası", placeholder: "ali@sirket.com" },
+      company: { label: "Şirket", placeholder: "Kuzey Sistemleri" },
+      website: { label: "Mevcut web sitesi", placeholder: "kuzeysistem.com" },
+      productName: { label: "Ürün veya teklif", placeholder: "Modüler pergola serisi" },
+      brief: {
+        label: "Ek bilgi",
+        placeholder: "Satın alma döngüleriniz, lansman zaman çizelgeniz veya teknik kısıtlamalarınız hakkında bilmemiz gereken bir şey var mı?",
+      },
+    },
+    groups: {
+      projectType: {
+        label: "Ne planlıyorsunuz?",
+        description: "Birincil çalışma türünü seçin.",
+        multi: false,
+        options: [
+          { value: "configurator", label: "3D Yapılandırıcı" },
+          { value: "product-site", label: "Ürün Web Sitesi" },
+          { value: "launch-site", label: "Lansman Deneyimi" },
+          { value: "interactive-demo", label: "İnteraktif Demo" },
+          { value: "redesign", label: "Site Yeniden Tasarımı" },
+        ],
+      },
+      productStage: {
+        label: "Proje bugün nerede?",
+        description: "Ürün veya kampanyanın mevcut aşaması.",
+        multi: false,
+        options: [
+          { value: "new-launch", label: "Yeni lansman" },
+          { value: "growth", label: "Büyüme hamlesi" },
+          { value: "repositioning", label: "Yeniden konumlandırma" },
+          { value: "sales-enable", label: "Satış etkinleştirme" },
+        ],
+      },
+      goals: {
+        label: "Deneyim neyi yönlendirmeli?",
+        description: "Geçerli olanların hepsini seçin.",
+        multi: true,
+        options: [
+          { value: "clarity", label: "Karmaşık bir teklifi netleştir" },
+          { value: "show-options", label: "Seçenekleri görsel olarak göster" },
+          { value: "lead-quality", label: "Potansiyel müşteri kalitesini artır" },
+          { value: "sales-support", label: "Satış görüşmelerini destekle" },
+          { value: "launch-momentum", label: "Lansmanı güçlendir" },
+        ],
+      },
+      deliverables: {
+        label: "Bizden ne teslim etmemizi istiyorsunuz?",
+        description: "Sahiplenmemizi istediğiniz iş akışlarını seçin.",
+        multi: true,
+        options: [
+          { value: "strategy", label: "Strateji ve mesajlaşma" },
+          { value: "design-build", label: "UI tasarım ve ön yüz" },
+          { value: "threejs", label: "Three.js / WebGL" },
+          { value: "models", label: "3D model üretimi" },
+          { value: "renders", label: "Görselleştirme ve hareket" },
+          { value: "cms", label: "CMS entegrasyonu" },
+        ],
+      },
+      timeline: {
+        label: "Tercih edilen zaman çizelgesi",
+        description: "Hedeflediğiniz tempoyu seçin.",
+        multi: false,
+        options: [
+          { value: "2-weeks", label: "2 hafta içinde" },
+          { value: "1-month", label: "1 ay içinde" },
+          { value: "2-3-months", label: "2–3 ay" },
+          { value: "flexible", label: "Esnek" },
+        ],
+      },
+      budget: {
+        label: "Bütçe aralığı",
+        description: "Doğru kapsamı önermemize yardımcı olur.",
+        multi: false,
+        options: [
+          { value: "4900-9900", label: "$4,900 – $9,900" },
+          { value: "10000-19900", label: "$10,000 – $19,900" },
+          { value: "20000-49900", label: "$20,000 – $49,900" },
+          { value: "50000-plus", label: "$50,000+" },
+        ],
+      },
+    },
+    stepLayout: [
+      { fieldKeys: ["fullName", "email", "company", "website"] },
+      { fieldKeys: ["productName"], groupKeys: ["projectType", "productStage"] },
+      { groupKeys: ["goals", "deliverables"] },
+      { fieldKeys: ["brief"], groupKeys: ["timeline", "budget"] },
+    ],
+  },
+  // ── YAPILANDIRICI DEMO (Hizmetler sayfasında) ──
   configuratorDemo: {
-    eyebrow: "İnteraktif konfigüratör demosu",
-    title: "Gerçek ürün modelleriyle çalışan gerçek bir 3D konfigüratör alanı.",
-    copy:
-      "Koltuk, telefon ve XR başlığı arasında geçiş yapın; ardından gerçek GLB assetleri üzerinde kaplama, ölçek, odak ve sahne presetlerini test edin. Demo artık statik bir illüstrasyon değil, orbit kontrolleri ve WebXR başlatma yetenekleri olan canlı bir WebGL görüntüleyicisidir.",
+    eyebrow: "Canlı Demo",
+    title: "Kendiniz deneyin.",
+    copy: "Ürünler arasında geçiş yapın, kaplamaları değiştirin, ölçeği ayarlayın ve özgürce döndürün. Bu gerçek bir WebGL yapılandırıcı — müşterilere teslim ettiğimiz teknolojinin aynısı.",
     sidebar: {
-      label: "Bu demonun kanıtladığı",
-      title: "Tek arayüz, birden fazla ürün tipi, gerçek 3D assetler.",
-      copy:
-        "Aynı konfigüratör mimarisi; mobilya, tüketici elektroniği ve XR donanımını desteklerken seçim akışını düzenli tutabilir ve premium bir web sitesi için yeterli performansı koruyabilir.",
+      label: "Bunun kanıtladığı",
+      title: "Tek arayüz. Birden fazla ürün tipi.",
+      copy: "Aynı yapılandırıcı mimarisi mobilya, tüketici teknolojisi ve XR donanımını destekler — hepsi premium bir web sitesi için yeterince performanslı.",
       points: [
-        "Gerçek GLB model yükleme",
-        "Kaplama ve ölçek presetleri",
-        "Sahneye uygun ürün sunumu",
-        "AR ve VR oturum desteği",
+        "Gerçek GLB modelleri",
+        "Kaplama ve ölçek ön ayarları",
+        "Sahne duyarlı sahneleme",
+        "AR / VR hazır",
       ],
     },
     delivery: {
-      copy:
-        "Bu yapı; varyant mantığı, fiyat kuralları, CMS beslemeli ürün verisi, analitik event'leri ve prodüksiyon lansmanları için cihaza özel AR veya VR aktarımlarıyla genişletilebilir.",
+      copy: "Varyant mantığı, fiyatlandırma kuralları, CMS verileri, analitik ve cihaza özel AR/VR aktarımı ile genişletilebilir.",
     },
     shell: {
-      label: "Gerçek zamanlı konfigüratör demosu",
-      title: "Ürün geçişi, seçenek mantığı ve XR başlatma kontrolleri olan canlı WebGL görüntüleyicisi.",
-      copy:
-        "Aktif modeli değiştirin, kaplama ve sahne presetlerini deneyin, asseti serbestçe döndürün ve desteklenen cihazlarda ürün akışından çıkmadan AR veya VR başlatın.",
-      stageBadge: "Gerçek model önizlemesi",
+      label: "Yapılandırıcı",
+      title: "Ürün değiştirme ve seçenek mantığı ile canlı 3D görüntüleyici.",
+      copy: "Modeli değiştirin, ön ayarları test edin, özgürce döndürün ve desteklenen cihazlarda AR veya VR başlatın.",
+      stageBadge: "Canlı önizleme",
       footerPoints: [
-        "Gerçek 3D assetler",
-        "Orbit ve zoom",
-        "Kaplama ve sahne mantığı",
+        "Gerçek 3D varlıklar",
+        "Döndür ve yakınlaştır",
+        "Kaplama mantığı",
         "AR / VR hazır",
       ],
       viewer: {
-        loading: "Model yükleniyor...",
-        error: "Bu model şu anda yüklenemedi. Sayfayı yenileyip tekrar deneyin.",
-        dragHint: "Orbit için sürükleyin. Yakınlaştırmak için scroll veya pinch kullanın.",
-        xrNote: "AR ve VR, WebXR destekleyen tarayıcı ve cihazlarda açılır.",
-        arLaunch: "AR başlat",
-        arExit: "AR'dan çık",
+        loading: "Model yükleniyor…",
+        error: "Bu model yüklenemedi. Lütfen sayfayı yenileyip tekrar deneyin.",
+        dragHint: "Döndürmek için sürükleyin · Yakınlaştırmak için kaydırın",
+        xrNote: "WebXR aracılığıyla desteklenen tarayıcı ve cihazlarda AR ve VR.",
+        arLaunch: "AR'ye gir",
+        arExit: "AR'den çık",
         arUnsupported: "AR kullanılamıyor",
-        vrLaunch: "VR başlat",
-        vrExit: "VR'dan çık",
+        vrLaunch: "VR'ye gir",
+        vrExit: "VR'den çık",
         vrUnsupported: "VR kullanılamıyor",
       },
     },
@@ -120,13 +471,13 @@
   heroConfiguratorProducts: [
     {
       key: "sofa",
-      label: "Lounge kanepe",
+      label: "Dinlenme Kanepesi",
       category: "Mobilya",
-      previewNote: "Kaplama, ölçü izi ve sahne presetleri olan gerçek kanepe modeli.",
+      previewNote: "Kaplama, alan ve sahneleme ön ayarlarına sahip gerçek kanepe modeli.",
       controls: [
         {
           id: "size",
-          label: "Yerleşim izi",
+          label: "Alan",
           type: "pill",
           options: [
             { value: "compact", label: "Kompakt" },
@@ -149,7 +500,7 @@
           label: "Odak",
           type: "pill",
           options: [
-            { value: "lounge", label: "Lounge görünümü" },
+            { value: "lounge", label: "Dinlenme görünümü" },
             { value: "detail", label: "Malzeme detayı" },
             { value: "styling", label: "Stil açısı" },
           ],
@@ -159,9 +510,9 @@
           label: "Sahne",
           type: "pill",
           options: [
-            { value: "loft", label: "Loft" },
+            { value: "loft", label: "Çatı katı" },
             { value: "showroom", label: "Showroom" },
-            { value: "editorial", label: "Editoryal" },
+            { value: "editorial", label: "Editöryal" },
           ],
         },
       ],
@@ -169,8 +520,8 @@
     {
       key: "phone",
       label: "iPhone 14 Pro Max",
-      category: "Tüketici elektroniği",
-      previewNote: "Kaplama, ölçek ve detay odağı presetleri olan gerçek cihaz modeli.",
+      category: "Tüketici teknolojisi",
+      previewNote: "Kaplama, ölçek ve özellik odaklı ön ayarlara sahip gerçek cihaz modeli.",
       controls: [
         {
           id: "size",
@@ -179,7 +530,7 @@
           options: [
             { value: "pocket", label: "Cep" },
             { value: "standard", label: "Standart" },
-            { value: "hero", label: "Hero çekim" },
+            { value: "hero", label: "Vitrin çekimi" },
           ],
         },
         {
@@ -208,7 +559,7 @@
           type: "pill",
           options: [
             { value: "studio", label: "Stüdyo" },
-            { value: "retail", label: "Perakende" },
+            { value: "retail", label: "Mağaza" },
             { value: "night", label: "Gece" },
           ],
         },
@@ -216,13 +567,13 @@
     },
     {
       key: "headset",
-      label: "VR başlık",
+      label: "VR Başlık",
       category: "XR donanımı",
-      previewNote: "Oturma, kaplama ve mod presetleri olan gerçek başlık modeli.",
+      previewNote: "Oturum, kaplama ve mod ön ayarlarına sahip gerçek başlık modeli.",
       controls: [
         {
           id: "size",
-          label: "Oturma",
+          label: "Oturum",
           type: "pill",
           options: [
             { value: "compact", label: "Kompakt" },
@@ -246,7 +597,7 @@
           type: "pill",
           options: [
             { value: "gaming", label: "Oyun" },
-            { value: "productivity", label: "Verimlilik" },
+            { value: "productivity", label: "Üretkenlik" },
             { value: "demo", label: "Demo" },
           ],
         },
@@ -257,465 +608,31 @@
           options: [
             { value: "stage", label: "Sahne" },
             { value: "lab", label: "Laboratuvar" },
-            { value: "immersive", label: "İmmersif" },
+            { value: "immersive", label: "Sürükleyici" },
           ],
         },
       ],
     },
   ],
-  servicesSection: {
-    eyebrow: "Hizmetler",
-    title: "Gerçek alıcılar için tasarlanmış özelleştirilebilir ürün konfigüratörleri ve ürün web siteleri.",
-    copy:
-      "Müşterilerin satış ekibiyle konuşmadan veya satın alma kararı vermeden önce ne aldığını yapılandırma, karşılaştırma ve anlayış yoluyla netleştiren ürün deneyimleri tasarlıyoruz.",
-    showcaseEyebrow: "Konfigüratör sistemleri",
-    showcaseTitle: "Gerçek dünya seçeneklerine sahip ürünler için gelişmiş web konfigüratörleri geliştiriyoruz.",
-    showcaseCopy:
-      "Pergola, mobilya, aydınlatma, ekipman ve diğer konfigürasyona açık ürünleri satan markalar için kullanıcıların ölçüleri, renkleri, malzemeleri, aksesuarları, yan modülleri ve ortam görünümlerini anında görsel geri bildirimle değiştirebildiği yönlendirmeli konfigüratörler oluşturabiliriz.",
-    configuratorFeatures: [
-      {
-        title: "Müşterilerin gerçekten kullandığı seçenek kontrolleri",
-        copy:
-          "Boyut, kaplama, renk, ürün tipi, ekler, aksesuarlar, yan paneller, aydınlatma ve diğer yüksek etkili seçenekler tek ve net bir arayüzde yönetilebilir.",
-      },
-      {
-        title: "Ortama duyarlı ürün görselleştirme",
-        copy:
-          "Alıcıların ürünü daha gerçekçi bir bağlamda değerlendirebilmesi için ortamlar, kamera açıları ve bağlamsal sahneler arasında geçiş yapabiliriz.",
-      },
-      {
-        title: "3D assetler dahil",
-        copy:
-          "Konfigüratörü doğru şekilde yayına almak için gereken 3D modelleri, malzemeleri, optimize edilmiş web assetlerini ve destekleyici renderları sağlayabiliriz.",
-      },
-      {
-        title: "Web için Three.js ile geliştirilir",
-        copy:
-          "Konfigüratör sistemlerimiz responsive ürün siteleri için tasarlanır ve fiyat mantığı, CMS içeriği ve ticari akışlara entegre edilebilir.",
-      },
-    ],
-    services: [
-      {
-        title: "Özel Three.js konfigüratörleri",
-        copy:
-          "Müşterilerin boyut, kaplama, renk, ürün seçenekleri, ekler ve görünümleri anında görsel geri bildirimle değiştirmesine olanak tanıyan, web sitesine entegre konfigüratörler.",
-        tags: ["Three.js", "Seçenekler", "Ticaret"],
-      },
-      {
-        title: "Ürün lansman web siteleri",
-        copy:
-          "Yazılım, donanım ve premium ürünler için ürün hikâyesini, kanıtı ve dönüşüm yapısını tek bir net müşteri yolculuğunda birleştiren lansman sayfaları.",
-        tags: ["Launch", "Mesajlaşma", "Dönüşüm"],
-      },
-      {
-        title: "3D model ve render üretimi",
-        copy:
-          "Web siteleri, kampanyalar ve satış araçları için optimize 3D assetler, stüdyo renderları, ürün kesitleri ve konfigürasyona hazır model setleri üretiyoruz.",
-        tags: ["Modeller", "Renderlar", "Assetler"],
-      },
-      {
-        title: "İnteraktif ürün demoları",
-        copy:
-          "Müşterilerin arama planlamadan veya deneme başlatmadan önce yetenekleri, iş akışlarını ve fark yaratan unsurları anlamasına yardımcı olan yönlendirmeli 3D ve motion odaklı demolari hazırlıyoruz.",
-        tags: ["Demo", "Eğitim", "Dönüşüm"],
-      },
-    ],
-    portfolioEyebrow: "Portföy",
-    portfolioTitle:
-      "Karmaşık veya premium teklif satan ekipler için temsili ürün kullanım senaryoları.",
-    portfolio: [
-      {
-        name: "Pergola konfigüratör sistemi",
-        type: "Açık hava ürünleri",
-        result:
-          "Müşterilerin boyutu, yan seçenekleri, aydınlatmayı, aksesuarları ve montaj tercihlerini tek bir yönlendirmeli satın alma akışında ayarlayabildiği konfigürasyona açık ürün deneyimi.",
-      },
-      {
-        name: "Premium tüketici elektroniği",
-        type: "Tüketici ürünü",
-        result:
-          "Satın alma öncesi anlayışı güçlendirmek için tasarlanmış interaktif özellik anlatımları ve ürün karşılaştırma görünümleri.",
-      },
-      {
-        name: "Kurumsal SaaS platformu",
-        type: "Yazılım",
-        result:
-          "Platformun soyut değerini karar vericiler ve değerlendirme yapan kişiler için somut bir hikâyeye dönüştüren, yüksek netlikte bir site sistemi.",
-      },
-    ],
-  },
-  buildSection: {
-    eyebrow: "Neler geliştirebiliriz",
-    title: "Ürün, pazarlama ve growth ekipleri için neler geliştirebiliriz.",
-    copy:
-      "Amaç sadece yenilik olsun diye yenilik yapmak değil. Amaç daha net bir ürün hikâyesi, daha iyi müşteri anlayışı ve ekibinizin güvenle yayına alıp yönetebileceği bir site oluşturmaktır.",
-    items: [
-      {
-        title: "Web tabanlı ürün konfigüratörleri",
-        copy:
-          "Müşterilerin boyut, renk, malzeme, ürün varyantları, aksesuarlar ve ekleri doğrudan site üzerinden değiştirebildiği interaktif ürün sistemleri.",
-      },
-      {
-        title: "Ortam ve VR önizlemeleri",
-        copy:
-          "Alıcıların uyumu, ölçeği ve sonucu daha iyi hayal edebilmesi için ürünü farklı ortamlara veya immersive bağlamlara yerleştiren görünümler.",
-      },
-      {
-        title: "3D model ve render paketleri",
-        copy:
-          "Web siteleri, konfigüratörler, kampanyalar ve ürün pazarlama assetleri için prodüksiyona hazır modelleme, kaplama, ışıklandırma ve render çıktıları.",
-      },
-      {
-        title: "Teknik ürün anlatımları",
-        copy:
-          "Metinle anlatılması zor olan ürünler için iş akışları, sistemler ve bileşen görünümlerini kapsayan yapılı görsel hikâye anlatımı.",
-      },
-      {
-        title: "Ticarete hazır ürün sayfaları",
-        copy:
-          "Özellikle daha uzun değerlendirme süreci gerektiren ürünlerde satın alma öncesi müşteri anlayışını ve güveni artıran net ürün sayfaları.",
-      },
-      {
-        title: "Satış ve lansman microsite'ları",
-        copy:
-          "Lansmanlar, ABM kampanyaları, demoları ve sales enablement süreçleri için hikâyenin odaklı ve ikna edici kalması gereken özel sayfalar.",
-      },
-    ],
-  },
-  salesSection: {
-    eyebrow: "Satışı nasıl artırır",
-    title: "Site müşterilerin karara ilerlemesine nasıl yardım eder.",
-    copy:
-      "İyi ürün pazarlaması belirsizliği azaltır. Daha güçlü bir dijital deneyim ziyaretçilerin teklifi anlamasına, ekibe güvenmesine ve daha emin şekilde ilerlemesine yardım eder.",
-    kicker: "Satış sinyali",
-    drivers: [
-      {
-        title: "Ürün belirsizliğini azaltır",
-        copy:
-          "Müşteriler yoğun veya teknik mesajları çözmek zorunda kalmadan ürünün ne yaptığını, kimin için olduğunu ve neden önemli olduğunu anlar.",
-      },
-      {
-        title: "Karar güvenini artırır",
-        copy:
-          "Daha net görseller ve yönlendirmeli motion, alıcıların demo talep etmeden, satışla iletişime geçmeden veya checkout'a ilerlemeden önce kendilerini daha emin hissetmesine yardım eder.",
-      },
-      {
-        title: "Daha uzun değerlendirme gerektiren alışları destekler",
-        copy:
-          "Premium, konfigürasyona açık veya teknik ürünlerde daha güçlü bir ürün hikâyesi dikkati haklı çıkarabilir ve daha uzun bir değerlendirme sürecini destekleyebilir.",
-      },
-      {
-        title: "Lead kalitesini iyileştirir",
-        copy:
-          "Site daha fazla soruyu önceden yanıtladığında, satış görüşmeleri daha iyi bir bağlam ve daha nitelikli bir niyetle başlar.",
-      },
-    ],
-  },
-  processSection: {
-    eyebrow: "Sürecimiz",
-    title: "Netlik, hız ve temiz handoff için tasarlanmış bir teslim süreci.",
-    copy:
-      "Her aşama, çalışmanın paydaşlar için anlaşılır ve lansmandan sorumlu ekip için yönetilebilir kalması için tasarlanmıştır.",
-    steps: [
-      {
-        step: "01",
-        title: "Keşif ve hedefler",
-        copy:
-          "Deneyimin müşterilerin teklifi gerçekte nasıl değerlendirdiğini desteklemesi için ürün, hedef kitle, satın alma yolculuğu ve iş hedefi üzerinde hizalanıyoruz.",
-      },
-      {
-        step: "02",
-        title: "Yapı ve prototip",
-        copy:
-          "Tam üretime geçmeden önce deneyimin net olması için bilgi hiyerarşisini, sayfa yapısını, motion niyetini ve içerik akışlarını haritalandırıyoruz.",
-      },
-      {
-        step: "03",
-        title: "Geliştirme ve entegrasyon",
-        copy:
-          "Siteyi geliştiriyor, formları veya ticari akışları bağlıyor ve her sahneyi responsive davranış, performans ve sürdürülebilirlik için optimize ediyoruz.",
-      },
-      {
-        step: "04",
-        title: "QA, lansman ve handoff",
-        copy:
-          "Breakpoint'ler genelinde test ediyor, temiz bir şekilde yayına alıyor ve ekibinizin güvenle işletebileceği ve geliştirebileceği prodüksiyona hazır bir site teslim ediyoruz.",
-      },
-    ],
-  },
-  pricingSection: {
-    eyebrow: "Fiyatlandırma",
-    title: "Lansman işleri ve uzun vadeli ürün pazarlaması için çalışma modelleri.",
-    copy:
-      "Tek bir odaklı ürün sayfasıyla, çok bölümlü bir siteyle veya ürünün daha karmaşık bir sistem gerektirdiği durumlarda özel bir kapsamla başlayın.",
-    badge: "En çok talep edilen",
-    cta: "Hemen iletişin",
-    tiers: [
-      {
-        tier: "Foundation",
-        price: "$4,900",
-        subtitle: "Tek bir odaklı ürün sayfası veya lansman deneyimi için.",
-        features: [
-          "Keşif atölyeleri ve sayfa planı",
-          "Tek bir yüksek etkili ürün sayfası",
-          "Tek bir ana 3D motion sekansı",
-          "Responsive QA ve handoff",
-        ],
-      },
-      {
-        tier: "Growth",
-        price: "$14,900",
-        subtitle: "Daha derin müşteri yolculukları olan çok bölümlü ürün siteleri için.",
-        features: [
-          "Çok bölümlü ürün web sitesi",
-          "Özel sahne geçişleri ve motion sistemi",
-          "CMS veya API'ye hazır içerik yapısı",
-          "Lansman desteği ve optimizasyon",
-        ],
-        featured: true,
-      },
-      {
-        tier: "Custom",
-        price: "Özel",
-        subtitle:
-          "Konfigüratörler, daha kapsamlı site sistemleri ve sürekli ürün pazarlama çalışmaları için.",
-        features: [
-          "Karmaşık veri odaklı ürün sahneleri",
-          "Commerce, CRM veya CMS entegrasyonları",
-          "Yeniden kullanılabilir bileşen ve motion sistemi",
-          "Sürekli optimizasyon ve destek",
-        ],
-      },
-    ],
-  },
-  aboutSection: {
-    eyebrow: "Hakkımızda",
-    title: "Görsel, kullanışlı ve sürdürülebilir ürün pazarlama deneyimleri tasarlıyoruz.",
-    copy:
-      "Morphix, web sitesinin sadece iyi görünmesinden fazlasına ihtiyaç duyan ekiplerle çalışır. Site ürünü açıklamalı, alıcı yolculuğunu desteklemeli ve gerçek lansman koşullarına dayanacak kadar güçlü olmalıdır.",
-    principles: [
-      {
-        title: "Önce ürünün anlaşılması",
-        copy:
-          "Motion'u sayfayı süslemek için değil ürünü netleştirmek için kullanıyoruz. Mesaj okunabilir, karar yolu ise net kalır.",
-      },
-      {
-        title: "Bir amacı olan motion",
-        copy:
-          "Her etkileşim yön bulmaya, açıklamaya veya vurgulamaya hizmet etmelidir. Motion müşteriye yardım etmiyorsa yayına alınmaz.",
-      },
-      {
-        title: "Gerçek ekipler için tasarlandı",
-        copy:
-          "Nihai site, lansmandan sonra içerik güncellemeleri, responsive QA ve uzun vadeli sürdürülebilirlik için yapılandırılır.",
-      },
-    ],
-  },
-  contactSection: {
-    eyebrow: "Proje intake'i",
-    title: "Doğru 3D deneyimi yönlendirmeli bir intake ile şekillendirin.",
-    copy:
-      "Birkaç odaklı adımdan geçin ve neyi yayına aldığınızı, kime ulaşmak istediğinizi, hangi yeteneklere ihtiyaç duyduğunuzu ve hangi kısıtları tasarımda dikkate almamız gerektiğini paylaşın.",
-    facts: [
-      "Adım adım proje keşfi",
-      "Kapsam, sistemler ve assetler birlikte ele alınır",
-      "Daha hızlı ve daha isabetli teklif süreci",
-    ],
-    wizard: {
-      introLabel: "İnteraktif brief oluşturucu",
-      stepLabel: "Adım",
-      previous: "Geri",
-      next: "Devam et",
-      submit: "Teklif isteyin",
-      successTitle: "Brief kaydedildi",
-      successCopy:
-        "Intake girdiniz artık size özel bir follow-up için yapılandırıldı. İsterseniz detayları geliştirebilir veya bunu bir sonraki görüşmenin temeli olarak kullanabilirsiniz.",
-      steps: [
-        {
-          title: "Temeller",
-          copy: "Ürün, şirket ve projenin genel yönüyle başlayın.",
-        },
-        {
-          title: "Hedef kitle ve amaçlar",
-          copy: "Kimi ikna etmeniz gerektiğini ve deneyimin neyi başarması gerektiğini belirtin.",
-        },
-        {
-          title: "Kapsam ve sistemler",
-          copy: "Projede önemli olacak deliverable'ları, entegrasyonları ve assetleri seçin.",
-        },
-        {
-          title: "Zamanlama ve iletişim",
-          copy: "Timeline, bütçe ve güçlü bir geri dönüş yapmamız için gereken son bağlamı ekleyin.",
-        },
-      ],
-    },
-    fields: {
-      company: { label: "Şirket", placeholder: "Northline Systems" },
-      productName: { label: "Ürün veya teklif", placeholder: "Modüler pergola serisi" },
-      website: { label: "Mevcut web sitesi", placeholder: "northline.com" },
-      fullName: { label: "Adınız", placeholder: "Alex Morgan" },
-      email: { label: "İş e-postası", placeholder: "alex@northlinesystems.com" },
-      brief: {
-        label: "Ek bağlam",
-        placeholder:
-          "Satın alma döngüsü, iç onay süreçleri, lansman baskısı veya teknik karmaşıklık hakkında bilmemiz gereken başka ne var?",
-      },
-    },
-    groups: {
-      projectType: {
-        label: "Ne planlıyorsunuz?",
-        description: "Şu anda ihtiyaç duyduğunuz ana çalışma tipini seçin.",
-        multi: false,
-        options: [
-          { value: "configurator", label: "3D konfigüratör" },
-          { value: "product-site", label: "Ürün web sitesi" },
-          { value: "launch-site", label: "Lansman microsite'ı" },
-          { value: "interactive-demo", label: "İnteraktif demo" },
-          { value: "redesign", label: "Site yeniden tasarımı" },
-        ],
-      },
-      productStage: {
-        label: "Proje bugün hangi aşamada?",
-        description: "Ürün veya pazarlama döngüsündeki mevcut noktayı paylaşın.",
-        multi: false,
-        options: [
-          { value: "new-launch", label: "Yeni lansman" },
-          { value: "growth-push", label: "Growth ivmesi gerekiyor" },
-          { value: "repositioning", label: "Yeniden konumlandırma" },
-          { value: "sales-enable", label: "Satış desteği" },
-        ],
-      },
-      audience: {
-        label: "Ana hedef kitle kim?",
-        description: "Sitenin güçlü şekilde hizmet etmesi gereken tüm grupları seçin.",
-        multi: true,
-        options: [
-          { value: "end-customers", label: "Son kullanıcılar" },
-          { value: "enterprise-buyers", label: "Kurumsal alıcılar" },
-          { value: "technical-evaluators", label: "Teknik değerlendiriciler" },
-          { value: "partners", label: "Distribütörler ve iş ortakları" },
-          { value: "sales-teams", label: "İç satış ekipleri" },
-        ],
-      },
-      goals: {
-        label: "Deneyim neyi sağlamalı?",
-        description: "Sizin için en önemli sonuçları seçin.",
-        multi: true,
-        options: [
-          { value: "clarity", label: "Karmaşık teklifi netleştirmek" },
-          { value: "show-options", label: "Seçenekleri görsel olarak göstermek" },
-          { value: "lead-quality", label: "Lead kalitesini artırmak" },
-          { value: "sales-support", label: "Satış görüşmelerini desteklemek" },
-          { value: "launch-momentum", label: "Lansman kampanyasını güçlendirmek" },
-        ],
-      },
-      deliverables: {
-        label: "Bizden ne teslim etmemizi istiyorsunuz?",
-        description: "Sahiplenmemizi istediğiniz iş akışlarını seçin.",
-        multi: true,
-        options: [
-          { value: "strategy", label: "Site stratejisi ve mesajlaşma" },
-          { value: "design-build", label: "UI tasarımı ve front-end geliştirme" },
-          { value: "threejs", label: "Three.js sahneleri ve etkileşimler" },
-          { value: "models", label: "3D model üretimi" },
-          { value: "renders", label: "Render veya motion asset paketi" },
-          { value: "cms", label: "CMS veya içerik yapısı" },
-        ],
-      },
-      integrations: {
-        label: "Hangi sistemler önemli?",
-        description: "Projenin bağlanması gereken platformları ve mantığı işaretleyin.",
-        multi: true,
-        options: [
-          { value: "cms", label: "CMS" },
-          { value: "crm", label: "CRM veya formlar" },
-          { value: "commerce", label: "Commerce altyapısı" },
-          { value: "pricing", label: "Fiyat veya teklif mantığı" },
-          { value: "analytics", label: "Analitik" },
-          { value: "localization", label: "Yerelleştirme" },
-        ],
-      },
-      assets: {
-        label: "Şu anda elinizde neler var?",
-        description: "Hazır olan materyalleri ve hâlâ üretim gerektirenleri belirtin.",
-        multi: true,
-        options: [
-          { value: "brand", label: "Marka sistemi" },
-          { value: "copy", label: "Mesajlaşma veya copy" },
-          { value: "cad", label: "CAD veya 3D modeller" },
-          { value: "renders", label: "Fotoğraf veya renderlar" },
-          { value: "team", label: "İç dev veya pazarlama ekibi" },
-          { value: "none", label: "Sıfırdan başlıyoruz" },
-        ],
-      },
-      timeline: {
-        label: "Tercih edilen timeline",
-        description: "Hedeflediğiniz tempoyu seçin.",
-        multi: false,
-        options: [
-          { value: "2-weeks", label: "2 hafta içinde" },
-          { value: "1-month", label: "1 ay içinde" },
-          { value: "2-3-months", label: "2-3 ay içinde" },
-          { value: "flexible", label: "Esnek" },
-        ],
-      },
-      budget: {
-        label: "Bütçe aralığı",
-        description: "Bu, başlangıçta doğru kapsamı önermemize yardımcı olur.",
-        multi: false,
-        options: [
-          { value: "4900-9900", label: "$4,900 - $9,900" },
-          { value: "10000-19900", label: "$10,000 - $19,900" },
-          { value: "20000-49900", label: "$20,000 - $49,900" },
-          { value: "50000-plus", label: "$50,000+" },
-        ],
-      },
-    },
-    summary: {
-      title: "Proje özeti",
-      empty: "Seçimleriniz burada canlı bir brief olarak oluşacak.",
-      labels: {
-        projectType: "Proje",
-        productStage: "Aşama",
-        audience: "Hedef kitle",
-        goals: "Amaçlar",
-        deliverables: "Deliverable'lar",
-        integrations: "Entegrasyonlar",
-        assets: "Assetler",
-        timeline: "Timeline",
-        budget: "Bütçe",
-      },
-    },
-  },
   footer: {
-    copy:
-      "Ekiplerin karmaşık teklifleri net bir şekilde anlatmasına ve daha iyi müşteri kararlarını desteklemesine yardım eden ürün web siteleri ve interaktif deneyimler geliştiriyoruz.",
-    cta: "Bir görüşme başlatın",
-    capabilitiesTitle: "Neler geliştiriyoruz",
-    capabilities: [
-      "Ürün lansman web siteleri",
-      "İnteraktif özellik demoları",
-      "Konfigüratör yolculukları",
-      "Prodüksiyona hazır site sistemleri",
+    copy: "3D web siteleri, yapılandırıcılar ve lansman deneyimleri konusunda uzmanlaşmış dijital ürün stüdyosu.",
+    cta: "Proje başlat",
+    servicesTitle: "Hizmetler",
+    services: [
+      "3D Yapılandırıcılar",
+      "Ürün Web Siteleri",
+      "Lansman Deneyimleri",
+      "Varlık Üretimi",
     ],
-    outcomesTitle: "İş etkisi",
-    outcomes: [
-      "Ürünü netleştirin",
-      "Alıcı güvenini artırın",
-      "Daha nitelikli talepleri destekleyin",
-      "Premium konumlanmayı güçlendirin",
-    ],
+    companyTitle: "Şirket",
+    company: ["Hakkımızda", "Çalışmalar", "Fiyatlandırma", "İletişim"],
     contactTitle: "İletişim",
     contactItems: [
       "hello@morphix.studio",
-      "Uzaktan iş birliği, global teslimat",
-      "48 saat içinde teklif geri dönüşü",
+      "Küresel teslimat, uzaktan öncelikli",
     ],
-    pricingLink: "Çalışma modellerini görün",
-    copyright:
-      "Copyright 2026 Morphix. Ürün lansmanları, demoları ve müşteriye dönük site sistemleri için geliştirildi.",
+    copyright: "© 2026 Morphix. Tüm hakları saklıdır.",
   },
 };
 
 export default tr;
-
