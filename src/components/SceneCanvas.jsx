@@ -11,6 +11,7 @@ import kummerUrl from "../../3d models/kummer_surface_k3_flux__papp.glb";
 const ROUTE_SCENE_MAP = {
   "/": "home",
   "/services": "services",
+  "/playground": "about",
   "/work": "work",
   "/pricing": "pricing",
   "/about": "about",

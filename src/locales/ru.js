@@ -10,10 +10,13 @@ const ru = {
     primaryNavAriaLabel: "Основная навигация",
     languageSwitcherLabel: "Язык",
     productExamplesAriaLabel: "Примеры конфигуратора продуктов",
+    mobileNavOpenLabel: "Открыть меню навигации",
+    mobileNavCloseLabel: "Закрыть меню навигации",
   },
   nav: {
     home: "Главная",
     services: "Услуги",
+    playground: "Playground",
     work: "Работы",
     pricing: "Цены",
     about: "О нас",

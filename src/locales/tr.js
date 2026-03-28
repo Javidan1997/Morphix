@@ -10,10 +10,13 @@ const tr = {
     primaryNavAriaLabel: "Ana menü",
     languageSwitcherLabel: "Dil",
     productExamplesAriaLabel: "Ürün yapılandırıcı örnekleri",
+    mobileNavOpenLabel: "Gezinme menüsünü aç",
+    mobileNavCloseLabel: "Gezinme menüsünü kapat",
   },
   nav: {
     home: "Ana Sayfa",
     services: "Hizmetler",
+    playground: "Playground",
     work: "Çalışmalar",
     pricing: "Fiyatlandırma",
     about: "Hakkımızda",

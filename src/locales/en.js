@@ -10,10 +10,13 @@ const en = {
     primaryNavAriaLabel: "Primary",
     languageSwitcherLabel: "Language",
     productExamplesAriaLabel: "Product configurator examples",
+    mobileNavOpenLabel: "Open navigation menu",
+    mobileNavCloseLabel: "Close navigation menu",
   },
   nav: {
     home: "Home",
     services: "Services",
+    playground: "Playground",
     work: "Work",
     pricing: "Pricing",
     about: "About",

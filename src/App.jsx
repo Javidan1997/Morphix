@@ -15,6 +15,7 @@ import Work from "./pages/Work";
 import Pricing from "./pages/Pricing";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import Playground from "./pages/Playground";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -73,6 +74,7 @@ function App() {
           <Route path="/services" element={<Services content={content} />} />
           <Route path="/work" element={<Work content={content} />} />
           <Route path="/pricing" element={<Pricing content={content} />} />
+          <Route path="/playground" element={<Playground content={content} />} />
           <Route path="/about" element={<About content={content} />} />
           <Route path="/contact" element={<Contact content={content} />} />
         </Routes>

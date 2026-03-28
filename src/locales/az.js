@@ -10,10 +10,13 @@ const az = {
     primaryNavAriaLabel: "Əsas",
     languageSwitcherLabel: "Dil",
     productExamplesAriaLabel: "Məhsul konfiqurator nümunələri",
+    mobileNavOpenLabel: "Naviqasiya menyusunu aç",
+    mobileNavCloseLabel: "Naviqasiya menyusunu bağla",
   },
   nav: {
     home: "Ana səhifə",
     services: "Xidmətlər",
+    playground: "Playground",
     work: "İşlər",
     pricing: "Qiymətlər",
     about: "Haqqımızda",

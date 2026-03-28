@@ -57,6 +57,7 @@ function Footer({ language }) {
           <span>{f.copyright}</span>
           <div className="footer-links">
             <Link to="/services">{content.nav.services}</Link>
+            <Link to="/playground">{content.nav.playground}</Link>
             <Link to="/work">{content.nav.work}</Link>
             <Link to="/pricing">{content.nav.pricing}</Link>
             <Link to="/contact">{content.nav.contact}</Link>
