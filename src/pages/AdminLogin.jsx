@@ -14,10 +14,10 @@ function AdminLogin() {
   });
   const [error, setError] = useState("");
 
-  const redirectPath = location.state?.from || "/admin";
+  const redirectPath = location.state?.from || "/admin/overview";
 
   if (session) {
-    return <Navigate to="/admin" replace />;
+    return <Navigate to="/admin/overview" replace />;
   }
 
   const updateField = (field, value) => {

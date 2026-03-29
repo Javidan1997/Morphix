@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import {
   getInitialLanguage,
   LANGUAGE_STORAGE_KEY,
@@ -19,6 +19,11 @@ import Contact from "./pages/Contact";
 import Playground from "./pages/Playground";
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
+import AdminContentEditor from "./pages/AdminContentEditor";
+import AdminTemplates from "./pages/AdminTemplates";
+import AdminMediaLibrary from "./pages/AdminMediaLibrary";
+import AdminInquiries from "./pages/AdminInquiries";
+import AdminAccess from "./pages/AdminAccess";
 import { useContentAdmin } from "./admin/ContentAdminContext";
 
 function ScrollToTop() {
@@ -94,7 +99,55 @@ function App() {
             path="/admin"
             element={(
               <AdminRoute>
-                <AdminDashboard content={content} />
+                <Navigate replace to="/admin/overview" />
+              </AdminRoute>
+            )}
+          />
+          <Route
+            path="/admin/overview"
+            element={(
+              <AdminRoute>
+                <AdminDashboard />
+              </AdminRoute>
+            )}
+          />
+          <Route
+            path="/admin/content"
+            element={(
+              <AdminRoute>
+                <AdminContentEditor />
+              </AdminRoute>
+            )}
+          />
+          <Route
+            path="/admin/templates"
+            element={(
+              <AdminRoute>
+                <AdminTemplates />
+              </AdminRoute>
+            )}
+          />
+          <Route
+            path="/admin/media"
+            element={(
+              <AdminRoute>
+                <AdminMediaLibrary />
+              </AdminRoute>
+            )}
+          />
+          <Route
+            path="/admin/inquiries"
+            element={(
+              <AdminRoute>
+                <AdminInquiries />
+              </AdminRoute>
+            )}
+          />
+          <Route
+            path="/admin/access"
+            element={(
+              <AdminRoute>
+                <AdminAccess />
               </AdminRoute>
             )}
           />
