@@ -3,6 +3,9 @@ import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { TransformControls } from "three/examples/jsm/controls/TransformControls.js";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader.js";
+import { ColladaLoader } from "three/examples/jsm/loaders/ColladaLoader.js";
+import { TDSLoader } from "three/examples/jsm/loaders/TDSLoader.js";
 import { clone as cloneScene } from "three/examples/jsm/utils/SkeletonUtils.js";
 import { XREstimatedLight } from "three/examples/jsm/webxr/XREstimatedLight.js";
 import { XRPlanes } from "three/examples/jsm/webxr/XRPlanes.js";
@@ -28,6 +31,9 @@ const tempVectorD = new THREE.Vector3();
 
 const SNAPSHOT_STORAGE_KEY = "morphix-playground-snapshots:v2";
 const ROOT_SELECTION_KEY = "__asset__";
+const DIRECT_UPLOAD_EXTENSIONS = new Set(["glb", "gltf", "fbx", "dae", "3ds"]);
+const CONVERSION_REQUIRED_EXTENSIONS = new Set(["skp", "dwg"]);
+const UPLOAD_ACCEPT_ATTR = ".glb,.gltf,.fbx,.dae,.3ds,.skp,.dwg,model/gltf-binary";
 
 /* ── built-in asset library ── */
 const BUILTIN_LIBRARY = [
@@ -333,6 +339,9 @@ const RAL_COLOR_OPTIONS = [
 ];
 
 const DEFAULT_CUSTOM_MATERIAL_COLOR = RAL_COLOR_OPTIONS[1].hex;
+const DEFAULT_MAIN_MATERIAL_COLOR = RAL_COLOR_OPTIONS[1].hex;
+const DEFAULT_SUB_MATERIAL_COLOR = RAL_COLOR_OPTIONS[3].hex;
+const DEFAULT_SUB_COLOR_RATIO = 20;
 
 /* ── keyboard shortcuts reference ── */
 const SHORTCUTS = [
@@ -760,6 +769,84 @@ function getSharedTargetColor(targets) {
   return colors[0];
 }
 
+function getMeshTriangleWeight(node) {
+  if (!node?.geometry) return 1;
+  if (node.geometry.index?.count) return Math.max(1, node.geometry.index.count / 3);
+  if (node.geometry.attributes?.position?.count) return Math.max(1, node.geometry.attributes.position.count / 3);
+  return 1;
+}
+
+function splitTargetsByRatio(targets, subColorRatio) {
+  if (!targets.length) return { mainTargets: [], subTargets: [] };
+  if (targets.length === 1) return { mainTargets: targets, subTargets: [] };
+
+  const normalizedRatio = THREE.MathUtils.clamp(subColorRatio / 100, 0, 1);
+  if (normalizedRatio <= 0) return { mainTargets: targets, subTargets: [] };
+  if (normalizedRatio >= 1) return { mainTargets: [], subTargets: targets };
+
+  const weightedTargets = targets
+    .map((node) => ({ node, weight: getMeshTriangleWeight(node) }))
+    .sort((left, right) => left.weight - right.weight);
+
+  const totalWeight = weightedTargets.reduce((sum, item) => sum + item.weight, 0);
+  const targetSubWeight = totalWeight * normalizedRatio;
+  const subTargets = [];
+  let subWeight = 0;
+
+  for (let index = 0; index < weightedTargets.length; index += 1) {
+    const item = weightedTargets[index];
+    const isLastRemainingTarget = index === weightedTargets.length - 1;
+    if (subTargets.length > 0 && subWeight >= targetSubWeight) break;
+    if (isLastRemainingTarget) break;
+    subTargets.push(item.node);
+    subWeight += item.weight;
+  }
+
+  if (!subTargets.length) subTargets.push(weightedTargets[0].node);
+
+  const subKeys = new Set(subTargets.map((node) => node.userData.editorOverrideKey).filter(Boolean));
+  const mainTargets = targets.filter((node) => !subKeys.has(node.userData.editorOverrideKey));
+  return { mainTargets, subTargets };
+}
+
+function getInitialMobileLayout() {
+  return typeof window !== "undefined" && window.matchMedia?.("(max-width: 640px)").matches;
+}
+
+function getFileExtension(value = "") {
+  const cleanValue = value.split("?")[0].split("#")[0];
+  const match = cleanValue.match(/\.([a-z0-9]+)$/i);
+  return match ? match[1].toLowerCase() : "";
+}
+
+function getFormatLabel(extension) {
+  return extension ? extension.toUpperCase() : "3D";
+}
+
+async function loadSceneAsset(source, format) {
+  switch (format) {
+    case "glb":
+    case "gltf": {
+      const gltf = await new GLTFLoader().loadAsync(source);
+      return { scene: gltf.scene, animations: gltf.animations ?? [] };
+    }
+    case "fbx": {
+      const scene = await new FBXLoader().loadAsync(source);
+      return { scene, animations: scene.animations ?? [] };
+    }
+    case "dae": {
+      const collada = await new ColladaLoader().loadAsync(source);
+      return { scene: collada.scene, animations: collada.animations ?? collada.scene?.animations ?? [] };
+    }
+    case "3ds": {
+      const scene = await new TDSLoader().loadAsync(source);
+      return { scene, animations: [] };
+    }
+    default:
+      throw new Error(`Unsupported asset format: ${format}`);
+  }
+}
+
 /* ══════════════════════════════════════
    COMPONENT
    ══════════════════════════════════════ */
@@ -865,10 +952,11 @@ function PlaygroundExperience({ viewerText, libraryProducts }) {
   const [actionMessage, setActionMessage] = useState("");
   const [activePresetKey, setActivePresetKey] = useState("");
   const [isDropActive, setIsDropActive] = useState(false);
+  const [isMobileLayout, setIsMobileLayout] = useState(getInitialMobileLayout);
 
   /* new state */
-  const [leftPanelOpen, setLeftPanelOpen] = useState(true);
-  const [rightPanelOpen, setRightPanelOpen] = useState(true);
+  const [leftPanelOpen, setLeftPanelOpen] = useState(() => !getInitialMobileLayout());
+  const [rightPanelOpen, setRightPanelOpen] = useState(() => !getInitialMobileLayout());
   const [leftTab, setLeftTab] = useState("assets");
   const [rightTab, setRightTab] = useState("inspector");
   const [showShortcuts, setShowShortcuts] = useState(false);
@@ -879,6 +967,9 @@ function PlaygroundExperience({ viewerText, libraryProducts }) {
   const [bloomThreshold, setBloomThreshold] = useState(0.85);
   const [cameraFov, setCameraFov] = useState(40);
   const [customMaterialColor, setCustomMaterialColor] = useState(DEFAULT_CUSTOM_MATERIAL_COLOR);
+  const [mainMaterialColor, setMainMaterialColor] = useState(DEFAULT_MAIN_MATERIAL_COLOR);
+  const [subMaterialColor, setSubMaterialColor] = useState(DEFAULT_SUB_MATERIAL_COLOR);
+  const [subColorRatio, setSubColorRatio] = useState(DEFAULT_SUB_COLOR_RATIO);
   const [materialOverrides, setMaterialOverrides] = useState({});
   const [measureMode, setMeasureMode] = useState(false);
   const [measureResult, setMeasureResult] = useState(null);
@@ -911,10 +1002,35 @@ function PlaygroundExperience({ viewerText, libraryProducts }) {
   const materialColorTargets = getColorOverrideTargets(selectedObjectRef.current, activeModelRef.current);
   const activeRalColorKey =
     RAL_COLOR_OPTIONS.find((option) => option.hex.toLowerCase() === customMaterialColor.toLowerCase())?.key ?? "";
+  const activeMainRalColorKey =
+    RAL_COLOR_OPTIONS.find((option) => option.hex.toLowerCase() === mainMaterialColor.toLowerCase())?.key ?? "";
+  const activeSubRalColorKey =
+    RAL_COLOR_OPTIONS.find((option) => option.hex.toLowerCase() === subMaterialColor.toLowerCase())?.key ?? "";
   const canEditSelectedMaterialColor = materialColorTargets.length > 0;
+  const canApplyTwoToneSplit = materialColorTargets.length > 1;
 
   /* ── action helpers ── */
   const pushActionMessage = (message) => setActionMessage(message);
+  const closePanels = () => {
+    setLeftPanelOpen(false);
+    setRightPanelOpen(false);
+  };
+
+  const toggleLeftPanel = () => {
+    setLeftPanelOpen((current) => {
+      const next = !current;
+      if (isMobileLayout && next) setRightPanelOpen(false);
+      return next;
+    });
+  };
+
+  const toggleRightPanel = () => {
+    setRightPanelOpen((current) => {
+      const next = !current;
+      if (isMobileLayout && next) setLeftPanelOpen(false);
+      return next;
+    });
+  };
 
   const updateSelectionState = (node) => {
     const transformControls = transformControlsRef.current;
@@ -993,6 +1109,9 @@ function PlaygroundExperience({ viewerText, libraryProducts }) {
     presetKey: activePresetKey,
     uploadLabel: uploadedAsset?.label ?? "",
     materialOverrides,
+    mainMaterialColor,
+    subMaterialColor,
+    subColorRatio,
     bloomEnabled,
     bloomStrength,
     bloomRadius,
@@ -1029,6 +1148,9 @@ function PlaygroundExperience({ viewerText, libraryProducts }) {
         ? config.materialOverrides
         : {}
     );
+    if (typeof config.mainMaterialColor === "string") setMainMaterialColor(config.mainMaterialColor);
+    if (typeof config.subMaterialColor === "string") setSubMaterialColor(config.subMaterialColor);
+    if (typeof config.subColorRatio === "number") setSubColorRatio(config.subColorRatio);
     if (typeof config.bloomEnabled === "boolean") setBloomEnabled(config.bloomEnabled);
     if (typeof config.bloomStrength === "number") setBloomStrength(config.bloomStrength);
     if (typeof config.cameraFov === "number") setCameraFov(config.cameraFov);
@@ -1094,13 +1216,19 @@ function PlaygroundExperience({ viewerText, libraryProducts }) {
   const handlePresetApply = (preset) => {
     setActivePresetKey(preset.key);
     applyConfiguration({ ...preset.config, presetKey: preset.key });
+    if (isMobileLayout) setLeftPanelOpen(false);
     pushActionMessage(`${preset.label} loaded.`);
   };
 
   const handleFileLoad = (file) => {
     if (!file) return;
-    if (!/\.(glb|gltf)$/i.test(file.name)) {
-      pushActionMessage("Use a .glb or .gltf file.");
+    const extension = getFileExtension(file.name);
+    if (CONVERSION_REQUIRED_EXTENSIONS.has(extension)) {
+      pushActionMessage(`${getFormatLabel(extension)} needs conversion to GLB, FBX, DAE, or 3DS before preview.`);
+      return;
+    }
+    if (!DIRECT_UPLOAD_EXTENSIONS.has(extension)) {
+      pushActionMessage("Use GLB, GLTF, FBX, DAE, or 3DS. SKP and DWG need conversion first.");
       return;
     }
     if (activeUploadUrlRef.current) {
@@ -1113,15 +1241,17 @@ function PlaygroundExperience({ viewerText, libraryProducts }) {
       key: "upload",
       label: file.name.replace(/\.[^/.]+$/, ""),
       category: "Local asset",
-      description: "Uploaded from your machine for staging and review.",
+      description: `${getFormatLabel(extension)} asset uploaded from your machine for staging and review.`,
       fitSize: 3.7,
       source: objectUrl,
       sourceType: "upload",
+      format: extension,
     });
     setActivePresetKey("");
     setMaterialOverrides({});
     setSelectedPath(ROOT_SELECTION_KEY);
     setSelectionInfo(EMPTY_SELECTION);
+    if (isMobileLayout) setLeftPanelOpen(false);
     pushActionMessage("Local asset staged.");
   };
 
@@ -1170,6 +1300,45 @@ function PlaygroundExperience({ viewerText, libraryProducts }) {
     });
     setCustomMaterialColor(getNodeMaterialBaseColor(materialColorTargets[0]) || DEFAULT_CUSTOM_MATERIAL_COLOR);
     pushActionMessage("Material color reset.");
+  };
+
+  const applyTwoToneMaterialSplit = () => {
+    if (!materialColorTargets.length) {
+      pushActionMessage("Load an asset to apply main and sub colors.");
+      return;
+    }
+    if (materialColorTargets.length < 2) {
+      pushActionMessage("Select the full asset or a group with multiple meshes to apply a main/sub color split.");
+      return;
+    }
+
+    const normalizedMainColor = normalizeColorValue(mainMaterialColor);
+    const normalizedSubColor = normalizeColorValue(subMaterialColor);
+    const { subTargets } = splitTargetsByRatio(materialColorTargets, subColorRatio);
+
+    setMaterialOverrides((current) => {
+      const nextOverrides = { ...current };
+      materialColorTargets.forEach((node) => {
+        const key = node.userData.editorOverrideKey;
+        if (!key) return;
+        nextOverrides[key] = normalizedMainColor;
+      });
+      subTargets.forEach((node) => {
+        const key = node.userData.editorOverrideKey;
+        if (!key) return;
+        nextOverrides[key] = normalizedSubColor;
+      });
+      return nextOverrides;
+    });
+
+    const mainShare = Math.max(0, 100 - subColorRatio);
+    pushActionMessage(`Applied ${mainShare}/${subColorRatio} main/sub color split.`);
+  };
+
+  const resetTwoToneControls = () => {
+    setMainMaterialColor(DEFAULT_MAIN_MATERIAL_COLOR);
+    setSubMaterialColor(DEFAULT_SUB_MATERIAL_COLOR);
+    setSubColorRatio(DEFAULT_SUB_COLOR_RATIO);
   };
 
   const toggleFullscreen = () => {
@@ -1284,6 +1453,25 @@ renderer.setAnimationLoop(animate);
   useEffect(() => {
     try { window.localStorage.setItem(SNAPSHOT_STORAGE_KEY, JSON.stringify(savedSnapshots)); } catch {}
   }, [savedSnapshots]);
+
+  useEffect(() => {
+    if (typeof window === "undefined" || !window.matchMedia) return undefined;
+    const media = window.matchMedia("(max-width: 640px)");
+    const syncLayout = () => setIsMobileLayout(media.matches);
+    syncLayout();
+    if (media.addEventListener) {
+      media.addEventListener("change", syncLayout);
+      return () => media.removeEventListener("change", syncLayout);
+    }
+    media.addListener(syncLayout);
+    return () => media.removeListener(syncLayout);
+  }, []);
+
+  useEffect(() => {
+    if (!isMobileLayout) return;
+    setLeftPanelOpen(false);
+    setRightPanelOpen(false);
+  }, [isMobileLayout]);
 
   /* toast auto-dismiss */
   useEffect(() => {
@@ -1685,22 +1873,21 @@ renderer.setAnimationLoop(animate);
       try {
         let templateScene;
         let animations = [];
+        const assetFormat = activeAsset.format || getFileExtension(activeAsset.source) || "glb";
 
         if (activeAsset.sourceType === "upload") {
-          const loader = new GLTFLoader();
-          const gltf = await loader.loadAsync(activeAsset.source);
-          templateScene = gltf.scene;
-          animations = gltf.animations ?? [];
+          const uploadedAsset = await loadSceneAsset(activeAsset.source, assetFormat);
+          templateScene = uploadedAsset.scene;
+          animations = uploadedAsset.animations;
         } else {
           const cached = modelCacheRef.current.get(activeAsset.key);
           if (cached) {
             templateScene = cached.scene;
             animations = cached.animations;
           } else {
-            const loader = new GLTFLoader();
-            const gltf = await loader.loadAsync(activeAsset.source);
-            templateScene = gltf.scene;
-            animations = gltf.animations ?? [];
+            const libraryAsset = await loadSceneAsset(activeAsset.source, assetFormat);
+            templateScene = libraryAsset.scene;
+            animations = libraryAsset.animations;
             modelCacheRef.current.set(activeAsset.key, { scene: templateScene, animations });
           }
         }
@@ -1964,10 +2151,10 @@ renderer.setAnimationLoop(animate);
      ══════════════════════════════════════ */
 
   return (
-    <div className="pg-workspace">
+    <div className={`pg-workspace ${isMobileLayout ? "is-mobile-layout" : ""}`}>
       {/* ── Header Bar ── */}
       <header className="pg-header">
-        <div className="pg-header-section">
+        <div className="pg-header-section pg-header-brand">
           <span className="pg-logo">Morphix</span>
           <span className="pg-sep">/</span>
           <span className="pg-header-label">Playground</span>
@@ -2016,7 +2203,7 @@ renderer.setAnimationLoop(animate);
           </div>
         </div>
 
-        <div className="pg-header-section">
+        <div className="pg-header-section pg-header-actions">
           <button className="pg-btn" type="button" onClick={exportViewportImage} title="Export PNG (P)">Export</button>
           <button className="pg-btn" type="button" onClick={saveSnapshot} title="Save Snapshot">Snap</button>
           <button className="pg-btn" type="button" onClick={() => setShowCodeExport(true)} title="Code Export">Code</button>
@@ -2050,12 +2237,20 @@ renderer.setAnimationLoop(animate);
 
       {/* ── Body: panels + viewport ── */}
       <div className="pg-body">
+        {isMobileLayout && (leftPanelOpen || rightPanelOpen) && (
+          <button
+            aria-label="Close playground panels"
+            className="pg-mobile-backdrop"
+            type="button"
+            onClick={closePanels}
+          />
+        )}
 
         {/* Left panel toggle */}
         <button
           className="pg-panel-toggle pg-panel-toggle-left"
           type="button"
-          onClick={() => setLeftPanelOpen((v) => !v)}
+          onClick={toggleLeftPanel}
           title="Toggle panel (T)"
         >
           {leftPanelOpen ? "\u25C0" : "\u25B6"}
@@ -2096,6 +2291,7 @@ renderer.setAnimationLoop(animate);
                           setAssetKey(item.key);
                           setActivePresetKey("");
                           setMaterialOverrides({});
+                          if (isMobileLayout) setLeftPanelOpen(false);
                         }}
                       >
                         <strong>{item.label}</strong>
@@ -2128,12 +2324,12 @@ renderer.setAnimationLoop(animate);
               {leftTab === "upload" && (
                 <div className="pg-section">
                   <div className="pg-section-label">Local Asset</div>
-                  <p className="pg-muted">Drop a .glb or .gltf file into the viewport, or use the button below.</p>
+                  <p className="pg-muted">Drop a GLB, GLTF, FBX, DAE, or 3DS file into the viewport. SKP and DWG still need conversion first.</p>
                   <input
                     ref={fileInputRef}
                     className="pg-file-input"
                     type="file"
-                    accept=".glb,.gltf,model/gltf-binary"
+                    accept={UPLOAD_ACCEPT_ATTR}
                     onChange={(e) => handleFileLoad(e.target.files?.[0])}
                   />
                   <div className="pg-upload-actions">
@@ -2163,7 +2359,10 @@ renderer.setAnimationLoop(animate);
                         <button
                           className="pg-item pg-item-snap"
                           type="button"
-                          onClick={() => applyConfiguration(snapshot.config)}
+                          onClick={() => {
+                            applyConfiguration(snapshot.config);
+                            if (isMobileLayout) setLeftPanelOpen(false);
+                          }}
                         >
                           <strong>{snapshot.label}</strong>
                           <span>{snapshot.config.assetKey === "upload" ? snapshot.config.uploadLabel || "Upload" : snapshot.config.assetKey}</span>
@@ -2237,7 +2436,7 @@ renderer.setAnimationLoop(animate);
             {isDropActive && (
               <div className="pg-drop-overlay">
                 <strong>Drop your model here</strong>
-                <span>GLB and GLTF files stage directly into the workbench.</span>
+                <span>GLB, GLTF, FBX, DAE, and 3DS files stage directly into the workbench.</span>
               </div>
             )}
 
@@ -2247,11 +2446,40 @@ renderer.setAnimationLoop(animate);
           </div>
         </div>
 
+        {isMobileLayout && (
+          <div className="pg-mobile-dock">
+            <button
+              className={`pg-mobile-dock-btn ${leftPanelOpen ? "is-active" : ""}`}
+              type="button"
+              onClick={toggleLeftPanel}
+            >
+              <strong>Library</strong>
+              <span>Assets</span>
+            </button>
+            <button
+              className={`pg-mobile-dock-btn ${rightPanelOpen ? "is-active" : ""}`}
+              type="button"
+              onClick={toggleRightPanel}
+            >
+              <strong>Controls</strong>
+              <span>Scene</span>
+            </button>
+            <button className="pg-mobile-dock-btn" type="button" onClick={focusSelection}>
+              <strong>Frame</strong>
+              <span>Focus</span>
+            </button>
+            <button className="pg-mobile-dock-btn" type="button" onClick={resetTransforms}>
+              <strong>Reset</strong>
+              <span>Pose</span>
+            </button>
+          </div>
+        )}
+
         {/* Right panel toggle */}
         <button
           className="pg-panel-toggle pg-panel-toggle-right"
           type="button"
-          onClick={() => setRightPanelOpen((v) => !v)}
+          onClick={toggleRightPanel}
           title="Toggle panel (N)"
         >
           {rightPanelOpen ? "\u25B6" : "\u25C0"}
@@ -2536,6 +2764,101 @@ renderer.setAnimationLoop(animate);
                       <span className="pg-tint-value">{customMaterialColor.toUpperCase()}</span>
                       <button className="pg-btn pg-btn-sm" type="button" onClick={resetSelectedMaterialColor} disabled={!canEditSelectedMaterialColor}>
                         Reset
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="pg-section">
+                    <div className="pg-section-label">Main + Sub Color</div>
+                    <p className="pg-muted">
+                      {canApplyTwoToneSplit
+                        ? "Set a main color, a sub color, and the accent share for multi-part models like 80/20 product finishes."
+                        : "Select the full asset or a group with multiple meshes to apply a main/sub color split."}
+                    </p>
+
+                    <div className="pg-color-split-grid">
+                      <div className="pg-color-card">
+                        <div className="pg-color-card-head">
+                          <strong>Main color</strong>
+                          <span>{mainMaterialColor.toUpperCase()}</span>
+                        </div>
+                        <div className="pg-swatch-row">
+                          {RAL_COLOR_OPTIONS.map((option) => (
+                            <button
+                              key={`main-${option.key}`}
+                              className={`pg-swatch-btn ${activeMainRalColorKey === option.key ? "is-active" : ""}`}
+                              type="button"
+                              onClick={() => setMainMaterialColor(option.hex)}
+                              title={`${option.code} ${option.label}`}
+                            >
+                              <span className="pg-swatch-btn-fill" style={{ backgroundColor: option.hex }} />
+                            </button>
+                          ))}
+                        </div>
+                        <div className="pg-tint-row">
+                          <label className="pg-color-picker">
+                            <span>Custom</span>
+                            <input
+                              className="pg-color-input"
+                              type="color"
+                              value={mainMaterialColor}
+                              onChange={(e) => setMainMaterialColor(e.target.value)}
+                            />
+                          </label>
+                        </div>
+                      </div>
+
+                      <div className="pg-color-card">
+                        <div className="pg-color-card-head">
+                          <strong>Sub color</strong>
+                          <span>{subMaterialColor.toUpperCase()}</span>
+                        </div>
+                        <div className="pg-swatch-row">
+                          {RAL_COLOR_OPTIONS.map((option) => (
+                            <button
+                              key={`sub-${option.key}`}
+                              className={`pg-swatch-btn ${activeSubRalColorKey === option.key ? "is-active" : ""}`}
+                              type="button"
+                              onClick={() => setSubMaterialColor(option.hex)}
+                              title={`${option.code} ${option.label}`}
+                            >
+                              <span className="pg-swatch-btn-fill" style={{ backgroundColor: option.hex }} />
+                            </button>
+                          ))}
+                        </div>
+                        <div className="pg-tint-row">
+                          <label className="pg-color-picker">
+                            <span>Custom</span>
+                            <input
+                              className="pg-color-input"
+                              type="color"
+                              value={subMaterialColor}
+                              onChange={(e) => setSubMaterialColor(e.target.value)}
+                            />
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+
+                    <label className="pg-slider">
+                      <span>Sub share</span>
+                      <input
+                        type="range"
+                        min="5"
+                        max="95"
+                        step="5"
+                        value={subColorRatio}
+                        onChange={(e) => setSubColorRatio(Number(e.target.value))}
+                      />
+                      <strong>{subColorRatio}%</strong>
+                    </label>
+
+                    <div className="pg-color-actions">
+                      <button className="pg-btn pg-btn-accent" type="button" onClick={applyTwoToneMaterialSplit} disabled={!canApplyTwoToneSplit}>
+                        Apply {100 - subColorRatio}/{subColorRatio} Split
+                      </button>
+                      <button className="pg-btn" type="button" onClick={resetTwoToneControls}>
+                        Reset Split
                       </button>
                     </div>
                   </div>
