@@ -3,9 +3,9 @@ import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { clone as cloneScene } from "three/examples/jsm/utils/SkeletonUtils.js";
-import sofaUrl from "../../3d models/3d_sofa_rendering.glb";
-import phoneUrl from "../../3d models/iphone_14_pro_max.glb";
-import headsetUrl from "../../3d models/vr_glasses.glb";
+import sofaUrl from "../../3d models/3d_sofa_rendering.glb?url";
+import phoneUrl from "../../3d models/iphone_14_pro_max.glb?url";
+import headsetUrl from "../../3d models/vr_glasses.glb?url";
 
 const MODEL_SOURCES = {
   sofa: sofaUrl,

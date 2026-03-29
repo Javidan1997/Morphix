@@ -14,13 +14,13 @@ import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
 import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass.js";
 import { OutputPass } from "three/examples/jsm/postprocessing/OutputPass.js";
 
-import sofaUrl from "../../3d models/3d_sofa_rendering.glb";
-import phoneUrl from "../../3d models/iphone_14_pro_max.glb";
-import headsetUrl from "../../3d models/vr_glasses.glb";
-import networkUrl from "../../3d models/knowledge_network.glb";
-import nebulaUrl from "../../3d models/helix_nebula_the_eye_of_god.glb";
-import jupiterUrl from "../../3d models/jupiter.glb";
-import kummerUrl from "../../3d models/kummer_surface_k3_flux__papp.glb";
+import sofaUrl from "../../3d models/3d_sofa_rendering.glb?url";
+import phoneUrl from "../../3d models/iphone_14_pro_max.glb?url";
+import headsetUrl from "../../3d models/vr_glasses.glb?url";
+import networkUrl from "../../3d models/knowledge_network.glb?url";
+import nebulaUrl from "../../3d models/helix_nebula_the_eye_of_god.glb?url";
+import jupiterUrl from "../../3d models/jupiter.glb?url";
+import kummerUrl from "../../3d models/kummer_surface_k3_flux__papp.glb?url";
 
 /* ── temp math objects ── */
 const tempBox = new THREE.Box3();

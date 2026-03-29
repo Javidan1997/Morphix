@@ -3,10 +3,10 @@ import { useLocation } from "react-router-dom";
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 
-import knowledgeNetworkUrl from "../../3d models/knowledge_network.glb";
-import jupiterUrl from "../../3d models/jupiter.glb";
-import helixNebulaUrl from "../../3d models/helix_nebula_the_eye_of_god.glb";
-import kummerUrl from "../../3d models/kummer_surface_k3_flux__papp.glb";
+import knowledgeNetworkUrl from "../../3d models/knowledge_network.glb?url";
+import jupiterUrl from "../../3d models/jupiter.glb?url";
+import helixNebulaUrl from "../../3d models/helix_nebula_the_eye_of_god.glb?url";
+import kummerUrl from "../../3d models/kummer_surface_k3_flux__papp.glb?url";
 
 const ROUTE_SCENE_MAP = {
   "/": "home",

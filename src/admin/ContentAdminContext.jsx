@@ -1,4 +1,4 @@
-import { createContext, useContext, useMemo, useState } from "react";
+import React, { createContext, useContext, useMemo, useState } from "react";
 import { locales as baseLocales } from "../locales";
 
 const CONTENT_OVERRIDES_STORAGE_KEY = "morphix.admin.content.overrides.v1";
