@@ -1,6 +1,6 @@
 const ADMIN_LOCAL_SESSION_KEY = "morphix.admin.session.local";
 const ADMIN_TEMP_SESSION_KEY = "morphix.admin.session.temp";
-const DEFAULT_ADMIN_EMAIL = "admin@morphix.studio";
+const DEFAULT_ADMIN_EMAIL = "admin@configuro.studio";
 const DEFAULT_ADMIN_PASSWORD = "MorphixAdmin2026!";
 
 function getStorage(type) {

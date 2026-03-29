@@ -2,13 +2,13 @@ import { pageMediaSections } from "./pageMedia";
 
 const en = {
   meta: {
-    title: "Morphix | Digital Product Studio",
+    title: "Configuro | Digital Product Studio",
     description:
-      "Morphix is a digital product studio specializing in 3D product websites, interactive configurators, and immersive web experiences.",
+      "Configuro is a digital product studio specializing in 3D product websites, interactive configurators, and immersive web experiences.",
   },
   common: {
-    brandName: "Morphix",
-    homeAriaLabel: "Morphix home",
+    brandName: "Configuro",
+    homeAriaLabel: "Configuro home",
     primaryNavAriaLabel: "Primary",
     languageSwitcherLabel: "Language",
     productExamplesAriaLabel: "Product configurator examples",
@@ -29,12 +29,12 @@ const en = {
   hero: {
     headline: "We build products people actually want to explore.",
     subline:
-      "Morphix is a digital product studio. We design and engineer 3D websites, interactive configurators, and launch experiences for brands that refuse to be forgettable.",
+      "Configuro is a digital product studio. We design and engineer 3D websites, interactive configurators, and launch experiences for brands that refuse to be forgettable.",
     primaryCta: "Start a project",
     secondaryCta: "See our work",
   },
   valueProps: {
-    eyebrow: "Why Morphix",
+    eyebrow: "Why Configuro",
     items: [
       {
         title: "Interactive, not decorative",
@@ -427,7 +427,7 @@ const en = {
   aboutPage: {
     eyebrow: "About",
     headline: "A studio built for product teams.",
-    copy: "Morphix exists because product launches deserve better than template sites and stock renders. We're a small, focused team that combines design, engineering, and 3D craft into one practice.",
+    copy: "Configuro exists because product launches deserve better than template sites and stock renders. We're a small, focused team that combines design, engineering, and 3D craft into one practice.",
     principles: [
       {
         title: "Clarity over spectacle",
@@ -765,10 +765,10 @@ const en = {
     company: ["About", "Work", "Pricing", "Contact"],
     contactTitle: "Contact",
     contactItems: [
-      "hello@morphix.studio",
+      "hello@configuro.studio",
       "Global delivery, remote-first",
     ],
-    copyright: "© 2026 Morphix. All rights reserved.",
+    copyright: "© 2026 Configuro. All rights reserved.",
   },
 };
 

@@ -26,7 +26,7 @@ export function AdminAuthProvider({ children }) {
 
       const nextSession = {
         email: credentialConfig.email,
-        name: "Morphix Admin",
+        name: "Configuro Admin",
         loginAt: new Date().toISOString(),
         remember: Boolean(remember),
       };

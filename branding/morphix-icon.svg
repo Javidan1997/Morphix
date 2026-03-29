@@ -1,25 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" width="96" height="96">
   <defs>
-    <linearGradient id="topFace" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#B06AFF"/>
-      <stop offset="100%" stop-color="#7C3AED"/>
+    <linearGradient id="tileGrad" x1="12%" y1="10%" x2="88%" y2="90%">
+      <stop offset="0%" stop-color="#132844"/>
+      <stop offset="52%" stop-color="#123A67"/>
+      <stop offset="100%" stop-color="#11589A"/>
     </linearGradient>
+    <linearGradient id="markTop" x1="18%" y1="18%" x2="90%" y2="90%">
+      <stop offset="0%" stop-color="#E8FDFF"/>
+      <stop offset="100%" stop-color="#7EDBFF"/>
+    </linearGradient>
+    <linearGradient id="markSide" x1="12%" y1="12%" x2="88%" y2="100%">
+      <stop offset="0%" stop-color="#69EDFF"/>
+      <stop offset="100%" stop-color="#2493F2"/>
+    </linearGradient>
+    <linearGradient id="markBottom" x1="0%" y1="20%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#76F3D7"/>
+      <stop offset="100%" stop-color="#33A6FF"/>
+    </linearGradient>
+    <filter id="tileShadow" x="-25%" y="-25%" width="150%" height="160%">
+      <feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#06101F" flood-opacity="0.22"/>
+    </filter>
   </defs>
 
-  <!-- Isometric Cube Mark -->
-  <!-- Top face: violet (light source from top-left) -->
-  <polygon points="50,10 90,30 50,50 10,30" fill="url(#topFace)"/>
-  <!-- Left face: deep dark violet (shadow) -->
-  <polygon points="10,30 50,50 50,90 10,70" fill="#1A0870"/>
-  <!-- Right face: kinetic magenta (accent) -->
-  <polygon points="90,30 90,70 50,90 50,50" fill="#D91F8C"/>
+  <g filter="url(#tileShadow)">
+    <rect x="8" y="8" width="80" height="80" rx="24" fill="url(#tileGrad)"/>
+    <rect x="8.5" y="8.5" width="79" height="79" rx="23.5" fill="none" stroke="rgba(255,255,255,0.14)"/>
 
-  <!-- Inner edge definition lines -->
-  <line x1="50" y1="10" x2="50" y2="50" stroke="rgba(255,255,255,0.22)" stroke-width="1"/>
-  <line x1="10" y1="30" x2="50" y2="50" stroke="rgba(255,255,255,0.14)" stroke-width="0.8"/>
-  <line x1="90" y1="30" x2="50" y2="50" stroke="rgba(255,255,255,0.14)" stroke-width="0.8"/>
-  <line x1="50" y1="50" x2="50" y2="90" stroke="rgba(0,0,0,0.25)" stroke-width="0.8"/>
-  <line x1="50" y1="50" x2="10" y2="70" stroke="rgba(0,0,0,0.18)" stroke-width="0.7"/>
-  <line x1="50" y1="50" x2="90" y2="70" stroke="rgba(0,0,0,0.18)" stroke-width="0.7"/>
+    <polygon points="30,26 57,26 69,32 56,39 29,39 18,33" fill="url(#markTop)"/>
+    <polygon points="18,33 29,39 29,57 18,63 12,59 12,38" fill="url(#markSide)"/>
+    <polygon points="29,57 56,57 69,63 57,70 30,70 18,63" fill="url(#markBottom)"/>
+
+    <polygon points="55,41 69,48 55,55 41,48" fill="#FFFFFF"/>
+
+    <line x1="18" y1="33" x2="29" y2="39" stroke="rgba(255,255,255,0.18)" stroke-width="1"/>
+    <line x1="18" y1="63" x2="29" y2="57" stroke="rgba(255,255,255,0.16)" stroke-width="1"/>
+    <line x1="29" y1="39" x2="29" y2="57" stroke="rgba(255,255,255,0.14)" stroke-width="1"/>
+  </g>
 </svg>

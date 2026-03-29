@@ -71,7 +71,7 @@ function AdminTemplates() {
       : slugify(getPageFilterLabel(activePageFilter));
 
     link.href = url;
-    link.download = `morphix-content-${activeLocale}-${scopeLabel}.csv`;
+    link.download = `configuro-content-${activeLocale}-${scopeLabel}.csv`;
     link.click();
     URL.revokeObjectURL(url);
 

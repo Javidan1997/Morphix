@@ -42,7 +42,7 @@ function AdminLogin() {
       <div className="admin-login-shell">
         <section className="admin-login-brand">
           <div className="admin-login-brand-head">
-            <img src={logoUrl} alt="Morphix" />
+            <img src={logoUrl} alt="Configuro" />
             <span className="chip">Admin access</span>
           </div>
 
@@ -75,7 +75,7 @@ function AdminLogin() {
           <div className="admin-login-card-head">
             <span className="metric-label">Sign in</span>
             <h2>Admin panel login</h2>
-            <p>Use the configured admin credentials to open the Morphix control room.</p>
+            <p>Use the configured admin credentials to open the Configuro control room.</p>
           </div>
 
           <form className="admin-login-form" onSubmit={handleSubmit}>
@@ -84,7 +84,7 @@ function AdminLogin() {
               <input
                 type="email"
                 value={form.email}
-                placeholder="admin@morphix.studio"
+                placeholder="admin@configuro.studio"
                 onChange={(event) => updateField("email", event.target.value)}
                 autoComplete="username"
               />

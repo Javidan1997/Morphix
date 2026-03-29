@@ -44,13 +44,13 @@ function App() {
   useEffect(() => {
     window.localStorage.setItem(LANGUAGE_STORAGE_KEY, language);
     document.documentElement.lang = language;
-    document.title = isAdminRoute ? "Morphix Admin" : content.meta.title;
+    document.title = isAdminRoute ? "Configuro Admin" : content.meta.title;
     const description = document.querySelector('meta[name="description"]');
     if (description) {
       description.setAttribute(
         "content",
         isAdminRoute
-          ? "Morphix admin panel for site operations, inquiries, and content readiness."
+          ? "Configuro admin panel for site operations, inquiries, and content readiness."
           : content.meta.description,
       );
     }

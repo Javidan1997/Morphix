@@ -137,7 +137,7 @@ export function parseContentTemplateCsv(text) {
   const isValidHeader = TEMPLATE_HEADERS.every((header, index) => headers[index] === header);
 
   if (!isValidHeader) {
-    throw new Error("The uploaded file does not match the Morphix content template format.");
+    throw new Error("The uploaded file does not match the Configuro content template format.");
   }
 
   return dataLines

@@ -1189,7 +1189,7 @@ function PlaygroundExperience({ viewerText, libraryProducts }) {
     if (!renderer) return;
     const link = document.createElement("a");
     link.href = renderer.domElement.toDataURL("image/png");
-    link.download = `morphix-playground-${Date.now()}.png`;
+    link.download = `configuro-playground-${Date.now()}.png`;
     link.click();
     pushActionMessage("PNG exported.");
   };
@@ -1354,7 +1354,7 @@ function PlaygroundExperience({ viewerText, libraryProducts }) {
   const generateThreeJsCode = () => {
     const cfg = getCurrentConfiguration();
     const env = ENVIRONMENT_PRESETS[cfg.environmentKey] ?? ENVIRONMENT_PRESETS.studio;
-    return `// Morphix Playground \u2014 Three.js Scene Export
+    return `// Configuro Playground \u2014 Three.js Scene Export
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
@@ -2209,7 +2209,7 @@ renderer.setAnimationLoop(animate);
       {/* ── Header Bar ── */}
       <header className="pg-header">
         <div className="pg-header-section pg-header-brand">
-          <span className="pg-logo">Morphix</span>
+          <span className="pg-logo">Configuro</span>
           <span className="pg-sep">/</span>
           <span className="pg-header-label">Playground</span>
         </div>

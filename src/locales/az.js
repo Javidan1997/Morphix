@@ -2,13 +2,13 @@ import { pageMediaSections } from "./pageMedia";
 
 const az = {
   meta: {
-    title: "Morphix | Rəqəmsal Məhsul Studiyası",
+    title: "Configuro | Rəqəmsal Məhsul Studiyası",
     description:
-      "Morphix 3D məhsul saytları, interaktiv konfiquratorlar və immersiv veb təcrübələr üzrə ixtisaslaşmış rəqəmsal məhsul studiyasıdır.",
+      "Configuro 3D məhsul saytları, interaktiv konfiquratorlar və immersiv veb təcrübələr üzrə ixtisaslaşmış rəqəmsal məhsul studiyasıdır.",
   },
   common: {
-    brandName: "Morphix",
-    homeAriaLabel: "Morphix ana səhifə",
+    brandName: "Configuro",
+    homeAriaLabel: "Configuro ana səhifə",
     primaryNavAriaLabel: "Əsas",
     languageSwitcherLabel: "Dil",
     productExamplesAriaLabel: "Məhsul konfiqurator nümunələri",
@@ -29,12 +29,12 @@ const az = {
   hero: {
     headline: "İnsanların həqiqətən kəşf etmək istədiyi məhsullar yaradırıq.",
     subline:
-      "Morphix rəqəmsal məhsul studiyasıdır. Unudulmaz olmaqdan imtina edən brendlər üçün 3D saytlar, interaktiv konfiquratorlar və buraxılış təcrübələri dizayn edir və inkişaf etdiririk.",
+      "Configuro rəqəmsal məhsul studiyasıdır. Unudulmaz olmaqdan imtina edən brendlər üçün 3D saytlar, interaktiv konfiquratorlar və buraxılış təcrübələri dizayn edir və inkişaf etdiririk.",
     primaryCta: "Layihəyə başla",
     secondaryCta: "İşlərimizə baxın",
   },
   valueProps: {
-    eyebrow: "Niyə Morphix",
+    eyebrow: "Niyə Configuro",
     items: [
       {
         title: "İnteraktiv, dekorativ deyil",
@@ -434,7 +434,7 @@ const az = {
   aboutPage: {
     eyebrow: "Haqqımızda",
     headline: "Məhsul komandaları üçün qurulmuş studiya.",
-    copy: "Morphix mövcuddur, çünki məhsul buraxılışları şablon saytlardan və hazır renderlərdən daha yaxşısına layiqdir. Biz dizaynı, mühəndisliyi və 3D sənətkarlığını bir praktikada birləşdirən kiçik, fokuslanmış komandayıq.",
+    copy: "Configuro mövcuddur, çünki məhsul buraxılışları şablon saytlardan və hazır renderlərdən daha yaxşısına layiqdir. Biz dizaynı, mühəndisliyi və 3D sənətkarlığını bir praktikada birləşdirən kiçik, fokuslanmış komandayıq.",
     principles: [
       {
         title: "Şoua deyil, aydınlığa üstünlük",
@@ -772,10 +772,10 @@ const az = {
     company: ["Haqqımızda", "İşlər", "Qiymətlər", "Əlaqə"],
     contactTitle: "Əlaqə",
     contactItems: [
-      "hello@morphix.studio",
+      "hello@configuro.studio",
       "Qlobal təhvil, uzaqdan iş",
     ],
-    copyright: "© 2026 Morphix. Bütün hüquqlar qorunur.",
+    copyright: "© 2026 Configuro. Bütün hüquqlar qorunur.",
   },
 };
 

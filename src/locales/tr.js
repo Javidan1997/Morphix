@@ -2,13 +2,13 @@ import { pageMediaSections } from "./pageMedia";
 
 const tr = {
   meta: {
-    title: "Morphix | Dijital Ürün Stüdyosu",
+    title: "Configuro | Dijital Ürün Stüdyosu",
     description:
-      "Morphix, 3D ürün web siteleri, interaktif yapılandırıcılar ve sürükleyici web deneyimleri konusunda uzmanlaşmış bir dijital ürün stüdyosudur.",
+      "Configuro, 3D ürün web siteleri, interaktif yapılandırıcılar ve sürükleyici web deneyimleri konusunda uzmanlaşmış bir dijital ürün stüdyosudur.",
   },
   common: {
-    brandName: "Morphix",
-    homeAriaLabel: "Morphix ana sayfa",
+    brandName: "Configuro",
+    homeAriaLabel: "Configuro ana sayfa",
     primaryNavAriaLabel: "Ana menü",
     languageSwitcherLabel: "Dil",
     productExamplesAriaLabel: "Ürün yapılandırıcı örnekleri",
@@ -29,12 +29,12 @@ const tr = {
   hero: {
     headline: "İnsanların gerçekten keşfetmek istediği ürünler yapıyoruz.",
     subline:
-      "Morphix bir dijital ürün stüdyosudur. Unutulmayı reddeden markalar için 3D web siteleri, interaktif yapılandırıcılar ve lansman deneyimleri tasarlıyor ve geliştiriyoruz.",
+      "Configuro bir dijital ürün stüdyosudur. Unutulmayı reddeden markalar için 3D web siteleri, interaktif yapılandırıcılar ve lansman deneyimleri tasarlıyor ve geliştiriyoruz.",
     primaryCta: "Proje başlat",
     secondaryCta: "Çalışmalarımızı gör",
   },
   valueProps: {
-    eyebrow: "Neden Morphix",
+    eyebrow: "Neden Configuro",
     items: [
       {
         title: "İnteraktif, dekoratif değil",
@@ -434,7 +434,7 @@ const tr = {
   aboutPage: {
     eyebrow: "Hakkımızda",
     headline: "Ürün ekipleri için kurulmuş bir stüdyo.",
-    copy: "Morphix, ürün lansmanlarının şablon siteler ve stok görsellerden daha iyisini hak ettiği için var. Tasarım, mühendislik ve 3D zanaatı tek bir uygulamada birleştiren küçük, odaklı bir ekibiz.",
+    copy: "Configuro, ürün lansmanlarının şablon siteler ve stok görsellerden daha iyisini hak ettiği için var. Tasarım, mühendislik ve 3D zanaatı tek bir uygulamada birleştiren küçük, odaklı bir ekibiz.",
     principles: [
       {
         title: "Gösteriden önce netlik",
@@ -772,10 +772,10 @@ const tr = {
     company: ["Hakkımızda", "Çalışmalar", "Fiyatlandırma", "İletişim"],
     contactTitle: "İletişim",
     contactItems: [
-      "hello@morphix.studio",
+      "hello@configuro.studio",
       "Küresel teslimat, uzaktan öncelikli",
     ],
-    copyright: "© 2026 Morphix. Tüm hakları saklıdır.",
+    copyright: "© 2026 Configuro. Tüm hakları saklıdır.",
   },
 };
 

@@ -217,7 +217,7 @@ function Services({ content }) {
                   <span />
                   <span />
                 </div>
-                <span className="playground-preview-path">morphix.app/playground</span>
+                <span className="playground-preview-path">configuro.studio/playground</span>
               </div>
 
               <div className="playground-preview-body">

@@ -4,7 +4,7 @@ import { useAdminAuth } from "../admin/AdminAuthContext";
 import { ADMIN_NAV_ITEMS, formatDate } from "../admin/adminConfig";
 
 function AdminShell({
-  eyebrow = "Morphix Admin",
+  eyebrow = "Configuro Admin",
   title,
   description,
   badges = [],
@@ -19,10 +19,10 @@ function AdminShell({
         <aside className="admin-sidebar">
           <div className="admin-sidebar-brand">
             <div className="admin-sidebar-brand-head">
-              <img src={logoUrl} alt="Morphix" />
+              <img src={logoUrl} alt="Configuro" />
               <span className="chip">Admin</span>
             </div>
-            <h1>Morphix admin</h1>
+            <h1>Configuro admin</h1>
             <p>Cleaner, smaller pages for content, templates, media, and inquiries.</p>
           </div>
 
