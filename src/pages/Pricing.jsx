@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import MediaSlotsSection from "../components/MediaSlotsSection";
 
 function Pricing({ content }) {
-  const { pricingPage, nav } = content;
+  const { pricingPage, nav, pricingMediaGallery } = content;
   const [openFaq, setOpenFaq] = useState(null);
 
   return (
@@ -46,6 +47,8 @@ function Pricing({ content }) {
           </div>
         </div>
       </section>
+
+      <MediaSlotsSection copy={pricingMediaGallery} />
 
       {/* FAQ */}
       <section className="section-block faq-section">

@@ -1,3 +1,5 @@
+import { pageMediaSections } from "./pageMedia";
+
 const tr = {
   meta: {
     title: "Morphix | Dijital Ürün Stüdyosu",
@@ -101,11 +103,57 @@ const tr = {
     copy: "Bize ne üzerinde çalıştığınızı anlatın. Nelerin mümkün olduğunu gösterelim.",
     button: "İletişime geç",
   },
+  ...pageMediaSections.tr,
+  mediaSlotsShared: {
+    eyebrow: "Medya alanları",
+    title: "Görseller ve render videoları için ayrılmış alan.",
+    copy: "Bu yer tutucuları final ürün görselleri, lansman hareketleri, turntable render videoları veya kısa walkthrough kayıtları hazır olduğunda kullanabilirsiniz.",
+    items: [
+      {
+        type: "image",
+        label: "Görsel alanı",
+        title: "Sabit görsel veya render",
+        copy: "Ürün fotoğrafları, malzeme yakın planları, anotasyonlu görseller veya güçlü hero render'ları için kullanın.",
+      },
+      {
+        type: "video",
+        label: "Render video alanı",
+        title: "Hareketli render veya walkthrough",
+        copy: "Turntable videoları, özellik anlatımları, UI kayıtları veya kısa lansman sekansları için kullanın.",
+      },
+    ],
+    note: "Bu alanlar, her sayfayı yeniden tasarlamadan son varlıklarla daha sonra değiştirilebilmesi için eklendi.",
+  },
   // ── HİZMETLER SAYFASI ──
   servicesPage: {
     eyebrow: "Hizmetler",
     headline: "İnsanların hatırlayacağı bir ürün lansmanı için ihtiyacınız olan her şey.",
     copy: "Strateji, tasarım, 3D mühendislik ve ön yüz geliştirmeyi tek bir odaklı çalışmada birleştiriyoruz. Parça parça tedarikçiler yok, aktarım karmaşası yok.",
+    servicesIntro: {
+      eyebrow: "Neler inşa edebiliriz",
+      title: "Ürününüzün satış biçimine uyan destek.",
+      copy: "Bazı projelerin tek ve güçlü bir çıktıya ihtiyacı olur. Bazılarıysa tüm lansman sistemine. Biz netlik, görsel kalite ve etkileşimin en çok önem kazandığı yerde devreye giriyoruz.",
+    },
+    story: {
+      panelLabel: "Müşterilerin genelde ihtiyacı olan",
+      title: "Ürünü düşünebilen ve işi gerçekten çıkarabilen bir ortak.",
+      copy: "Çoğu ekip bize kusursuz bir brief ile gelmiyor. Ellerinde güçlü bir ürün, yarım kalmış varlıklar, lansman baskısı ve mevcut sunumun yapılan işi tam yansıtmadığı hissi oluyor.",
+      points: [
+        {
+          title: "Güzel çıktılardan önce net düşünce",
+          copy: "Deneyimi tasarlamadan önce alıcının neyi görmesi, neyi karşılaştırması ve neye güvenmesi gerektiğini anlıyoruz.",
+        },
+        {
+          title: "Tasarım ve geliştirme aynı odada",
+          copy: "Metin, düzen, hareket, 3D ve ön yüz birlikte şekilleniyor; böylece sonuç parça parça değil, tek bir bütün gibi hissediyor.",
+        },
+        {
+          title: "Lansmandan sonra da kullanışlı",
+          copy: "Teslimatlar sadece ilk kampanya için değil, satış, pazarlama ve ürün ekiplerinin sonraki kullanımına da hizmet edecek şekilde hazırlanıyor.",
+        },
+      ],
+      note: "Özellikle seçenekli, teknik ayrıntısı yüksek veya fiyatını anlatmak için daha güçlü bir hikaye gerektiren ürünlerde iyi sonuç veriyoruz.",
+    },
     services: [
       {
         title: "3D Ürün Yapılandırıcıları",
@@ -138,6 +186,95 @@ const tr = {
         tags: ["E-ticaret", "Güven", "Premium"],
       },
     ],
+    mediaShowcase: {
+      eyebrow: "Hizmet kanıt planı",
+      title: "Teklifin gerçekten hak edildiğini hissettiren medya alanları.",
+      copy: "Tek bir jenerik satır yerine bu bölüm artık lansman hareketi, detay render'ları, arayüz kayıtları, karşılaştırma kareleri ve teslim kanıtı için daha dolu bir yapı sunuyor.",
+      layout: "storyboard",
+      highlights: ["5 alan", "Ürün + UX kanıtı", "Gerçek satış görüşmeleri için"],
+      items: [
+        {
+          type: "video",
+          label: "Açılış filmi",
+          meta: "İlk izlenim",
+          title: "Marka açılışı, proje tanıtımı veya kısa walkthrough",
+          copy: "Hizmet detaylarına geçmeden önce sayfaya otorite ve hareket kazandıran videoyla başlayın.",
+          size: "hero",
+        },
+        {
+          type: "image",
+          label: "Detay görseli",
+          meta: "Zanaat sinyali",
+          title: "Yakın plan render, malzeme ailesi veya yüzey sistemi",
+          copy: "Yüzeyler, kaplamalar, yapısal detaylar ve premium ürün kareleri için kullanın.",
+          size: "standard",
+        },
+        {
+          type: "video",
+          label: "UX kaydı",
+          meta: "Etkileşim kanıtı",
+          title: "Yapılandırıcı akışı, mobil kullanım veya UI walkthrough",
+          copy: "Seçenek değişimleri, kamera hareketi, akış durumları veya kompakt mobil demoyu burada gösterin.",
+          size: "tall",
+        },
+        {
+          type: "image",
+          label: "Karşılaştırma karesi",
+          meta: "Değer anlatımı",
+          title: "Önce-sonra ekranı, anotasyon katmanı veya kanıt grafiği",
+          copy: "Ticari değeri birkaç saniyede daha anlaşılır kılan görseller için bu alanı ayırın.",
+          size: "wide",
+        },
+        {
+          type: "image",
+          label: "Teslim panosu",
+          meta: "Neler çıkar",
+          title: "Asset kütüphanesi, kampanya görselleri veya teslim karesi",
+          copy: "Çalışmanın sadece fikir seviyesinde kalmadığını, lansman ve satış için de kullanılabildiğini gösteren bir kareyle bitirin.",
+          size: "standard",
+        },
+      ],
+      note: "Bu bölüm, doldurulmayı bekleyen jenerik blok gibi değil, belgelenmiş yetkinlik gibi hissettirmek için tasarlandı.",
+    },
+    playgroundRedirect: {
+      eyebrow: "Playground",
+      title: "İnteraktif bölüm artık Playground'da yaşıyor.",
+      copy: "Malzemeleri denemek, dosya yüklemek ve ürün seçeneklerini keşfetmek için daha doğru yer orası. Hizmetler sayfası teklifi net anlatmalı, kullanıcı etkileşime hazır olduğunda ise onu özel bir ortama yönlendirmeli.",
+      features: [
+        {
+          title: "Daha temiz bir akış",
+          copy: "Ziyaretçi burada hizmeti anlar, denemek istediğinde ise dikkat dağıtmayan ayrı bir arayüze geçer.",
+        },
+        {
+          title: "Keşif için daha fazla alan",
+          copy: "Playground yüklemeleri, malzeme değişimlerini, çift renk testlerini ve gelecekteki editör özelliklerini bu sayfayı kalabalıklaştırmadan taşıyabilir.",
+        },
+        {
+          title: "Mobilde daha iyi deneyim",
+          copy: "Mobil dostu Playground akışı, uzun bir pazarlama sayfası içindeki gömülü demo yerine etkileşim için çok daha uygun bir yer.",
+        },
+      ],
+      primaryCta: "Playground'u aç",
+      secondaryCta: "Proje başlat",
+      previewLabel: "Playground önizleme",
+      previewTitle: "Hikayeden etkileşime daha güçlü bir geçiş",
+      previewCopy: "Sayfanın içine mini bir yapılandırıcı sıkıştırmak yerine, deneyimi önceden gösteriyor ve kullanıcıyı hazır olduğunda tam Playground'a yönlendiriyoruz.",
+      previewChips: ["Varlık yükleme", "Malzeme kontrolleri", "Mobil uyumlu"],
+      previewCards: [
+        {
+          title: "Gerçek modeller getirin",
+          copy: "Desteklenen 3D dosyaları, yalnızca gezinmek yerine test etmek için tasarlanmış bir alanda inceleyin.",
+        },
+        {
+          title: "Kaplamaları bilinçli ayarlayın",
+          copy: "Daha gerçekçi sunumlar için RAL renkleri değiştirin, özel renk seçin ve ana/yardımcı renk kombinasyonlarını deneyin.",
+        },
+        {
+          title: "Arayüze nefes alacak alan verin",
+          copy: "Playground, sıkıştırılmış bir demo bloğuna göre genişletmesi daha kolay ve kullanması daha rahat bir ortam sunuyor.",
+        },
+      ],
+    },
     configurator: {
       eyebrow: "Öne çıkan yetenek",
       title: "Gerçekten satış kapatan yapılandırıcılar.",
@@ -187,6 +324,10 @@ const tr = {
           copy: "Kalite kontrolü, dağıtım ve temiz bir teslim. Ekibiniz güvenle işletebilir ve genişletebilir.",
         },
       ],
+    },
+    bottomCta: {
+      title: "Daha iyi bir dijital hikayeye ihtiyaç duyan bir ürününüz mü var?",
+      copy: "Karmaşık olanı daha net, daha güçlü ve satması daha kolay bir deneyime dönüştürelim.",
     },
   },
   // ── ÇALIŞMALAR SAYFASI ──

@@ -9,6 +9,7 @@ import { locales } from "./locales";
 import SceneCanvas from "./components/SceneCanvas";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import AdminRoute from "./components/AdminRoute";
 import Home from "./pages/Home";
 import Services from "./pages/Services";
 import Work from "./pages/Work";
@@ -16,6 +17,9 @@ import Pricing from "./pages/Pricing";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Playground from "./pages/Playground";
+import AdminLogin from "./pages/AdminLogin";
+import AdminDashboard from "./pages/AdminDashboard";
+import { useContentAdmin } from "./admin/ContentAdminContext";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -26,18 +30,26 @@ function ScrollToTop() {
 }
 
 function App() {
+  const location = useLocation();
   const [language, setLanguage] = useState(() => getInitialLanguage(locales));
-  const content = locales[language] ?? locales[fallbackLanguage];
+  const { mergedLocales } = useContentAdmin();
+  const content = mergedLocales[language] ?? mergedLocales[fallbackLanguage];
+  const isAdminRoute = location.pathname.startsWith("/admin");
 
   useEffect(() => {
     window.localStorage.setItem(LANGUAGE_STORAGE_KEY, language);
     document.documentElement.lang = language;
-    document.title = content.meta.title;
+    document.title = isAdminRoute ? "Morphix Admin" : content.meta.title;
     const description = document.querySelector('meta[name="description"]');
     if (description) {
-      description.setAttribute("content", content.meta.description);
+      description.setAttribute(
+        "content",
+        isAdminRoute
+          ? "Morphix admin panel for site operations, inquiries, and content readiness."
+          : content.meta.description,
+      );
     }
-  }, [content.meta.description, content.meta.title, language]);
+  }, [content.meta.description, content.meta.title, isAdminRoute, language]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -65,10 +77,10 @@ function App() {
 
   return (
     <>
-      <SceneCanvas />
-      <div className="page-shell">
+      {!isAdminRoute ? <SceneCanvas /> : null}
+      <div className={isAdminRoute ? "admin-shell" : "page-shell"}>
         <ScrollToTop />
-        <Header language={language} setLanguage={setLanguage} />
+        {!isAdminRoute ? <Header language={language} setLanguage={setLanguage} /> : null}
         <Routes>
           <Route path="/" element={<Home content={content} />} />
           <Route path="/services" element={<Services content={content} />} />
@@ -77,8 +89,17 @@ function App() {
           <Route path="/playground" element={<Playground content={content} />} />
           <Route path="/about" element={<About content={content} />} />
           <Route path="/contact" element={<Contact content={content} />} />
+          <Route path="/admin/login" element={<AdminLogin />} />
+          <Route
+            path="/admin"
+            element={(
+              <AdminRoute>
+                <AdminDashboard content={content} />
+              </AdminRoute>
+            )}
+          />
         </Routes>
-        <Footer language={language} />
+        {!isAdminRoute ? <Footer language={language} /> : null}
       </div>
     </>
   );

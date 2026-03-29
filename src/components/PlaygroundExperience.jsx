@@ -1675,6 +1675,7 @@ renderer.setAnimationLoop(animate);
 
     const onSessionEnd = () => {
       activeXrModeRef.current = null;
+      xrModeRef.current = "";
       setXrMode("");
       renderer.setClearAlpha(1);
       if (xrEstimatedLightRef.current) xrEstimatedLightRef.current.visible = false;
@@ -2124,25 +2125,78 @@ renderer.setAnimationLoop(animate);
   /* XR launcher */
   const launchXrSession = async (mode) => {
     const renderer = rendererRef.current;
-    if (!renderer || !navigator.xr) return;
-    const activeSession = renderer.xr.getSession();
-    if (activeSession) {
-      if (xrMode === mode) await activeSession.end();
+
+    /* Guard: WebXR API must exist */
+    if (!renderer) return;
+    if (!navigator.xr) {
+      pushActionMessage("WebXR is not available in this browser.");
       return;
     }
+
+    /* If a session is already running, end it */
+    const activeSession = renderer.xr.getSession();
+    if (activeSession) {
+      try {
+        await activeSession.end();
+      } catch {
+        /* session already ended */
+      }
+      return;
+    }
+
+    /* Check support before requesting — give user a clear message */
     try {
-      const init =
-        mode === "immersive-ar"
-          ? { optionalFeatures: ["local-floor", "light-estimation", "dom-overlay", "plane-detection"], domOverlay: { root: rootRef.current } }
-          : { optionalFeatures: ["local-floor", "bounded-floor", "hand-tracking"] };
-      activeXrModeRef.current = mode;
-      const session = await navigator.xr.requestSession(mode, init);
-      await renderer.xr.setSession(session);
-      setXrMode(mode);
+      const supported = await navigator.xr.isSessionSupported(mode);
+      if (!supported) {
+        const hint =
+          mode === "immersive-ar"
+            ? "AR requires an Android device with ARCore (Chrome) or iOS with WebXR support."
+            : "VR requires a connected headset or browser WebXR extension.";
+        pushActionMessage(hint);
+        return;
+      }
     } catch {
+      /* isSessionSupported failed — still attempt the session below */
+    }
+
+    /* Build session init — keep it minimal to avoid rejection on strict browsers */
+    const arInit = {
+      requiredFeatures: ["local-floor"],
+      optionalFeatures: ["light-estimation", "plane-detection"],
+    };
+
+    /* Only add dom-overlay when the root element is in the DOM */
+    const overlayRoot = rootRef.current?.closest(".pg-workspace") ?? rootRef.current;
+    if (overlayRoot && document.contains(overlayRoot)) {
+      arInit.optionalFeatures.push("dom-overlay");
+      arInit.domOverlay = { root: overlayRoot };
+    }
+
+    const vrInit = {
+      requiredFeatures: ["local-floor"],
+      optionalFeatures: ["bounded-floor", "hand-tracking"],
+    };
+
+    try {
+      activeXrModeRef.current = mode;
+      const session = await navigator.xr.requestSession(
+        mode,
+        mode === "immersive-ar" ? arInit : vrInit
+      );
+      await renderer.xr.setSession(session);
+      xrModeRef.current = mode;
+      setXrMode(mode);
+    } catch (err) {
       activeXrModeRef.current = null;
+      xrModeRef.current = "";
       setXrMode("");
-      pushActionMessage("XR session could not start on this device.");
+      const msg =
+        err?.name === "NotAllowedError"
+          ? "XR permission denied — allow camera/motion access and retry."
+          : err?.name === "NotSupportedError"
+          ? "This XR mode is not supported on your device."
+          : "XR session could not start. Make sure you are on HTTPS and using a supported device.";
+      pushActionMessage(msg);
     }
   };
 
@@ -2215,22 +2269,46 @@ renderer.setAnimationLoop(animate);
           </button>
           <span className="pg-divider" />
           <button
-            className={`pg-btn pg-btn-xr ${xrMode === "immersive-ar" ? "is-active" : ""}`}
+            className={`pg-btn pg-btn-xr ${xrMode === "immersive-ar" ? "is-active" : ""} ${!xrSupport.checked ? "is-checking" : ""}`}
             type="button"
-            disabled={!xrSupport.checked || !xrSupport.ar}
+            disabled={!xrSupport.checked}
             onClick={() => launchXrSession("immersive-ar")}
-            title={copy.xrNote}
+            title={
+              !xrSupport.checked
+                ? "Checking AR support…"
+                : !xrSupport.ar
+                ? "AR unavailable on this device — click for details"
+                : copy.xrNote
+            }
           >
-            {xrSupport.ar ? (xrMode === "immersive-ar" ? copy.arExit : copy.arLaunch) : copy.arUnsupported}
+            {!xrSupport.checked
+              ? "AR…"
+              : xrMode === "immersive-ar"
+              ? copy.arExit
+              : xrSupport.ar
+              ? copy.arLaunch
+              : copy.arUnsupported}
           </button>
           <button
-            className={`pg-btn pg-btn-xr ${xrMode === "immersive-vr" ? "is-active" : ""}`}
+            className={`pg-btn pg-btn-xr ${xrMode === "immersive-vr" ? "is-active" : ""} ${!xrSupport.checked ? "is-checking" : ""}`}
             type="button"
-            disabled={!xrSupport.checked || !xrSupport.vr}
+            disabled={!xrSupport.checked}
             onClick={() => launchXrSession("immersive-vr")}
-            title={copy.xrNote}
+            title={
+              !xrSupport.checked
+                ? "Checking VR support…"
+                : !xrSupport.vr
+                ? "VR unavailable on this device — click for details"
+                : copy.xrNote
+            }
           >
-            {xrSupport.vr ? (xrMode === "immersive-vr" ? copy.vrExit : copy.vrLaunch) : copy.vrUnsupported}
+            {!xrSupport.checked
+              ? "VR…"
+              : xrMode === "immersive-vr"
+              ? copy.vrExit
+              : xrSupport.vr
+              ? copy.vrLaunch
+              : copy.vrUnsupported}
           </button>
         </div>
       </header>

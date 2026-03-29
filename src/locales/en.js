@@ -1,3 +1,5 @@
+import { pageMediaSections } from "./pageMedia";
+
 const en = {
   meta: {
     title: "Morphix | Digital Product Studio",
@@ -101,92 +103,224 @@ const en = {
     copy: "Tell us what you're building. We'll show you what's possible.",
     button: "Get in touch",
   },
+  ...pageMediaSections.en,
+  mediaSlotsShared: {
+    eyebrow: "Media slots",
+    title: "Reserved space for images and render video.",
+    copy:
+      "Use these placeholders across the site for final product stills, launch motion, turntable renders, or short walkthrough captures as assets become available.",
+    items: [
+      {
+        type: "image",
+        label: "Image slot",
+        title: "Still image or render",
+        copy: "Use this for product photography, close-up materials, annotated stills, or polished hero renders.",
+      },
+      {
+        type: "video",
+        label: "Render video slot",
+        title: "Motion render or walkthrough",
+        copy: "Use this for turntable videos, feature reveals, UI captures, or short launch sequences.",
+      },
+    ],
+    note: "These placeholders are designed to be replaced with final assets later without restructuring each page.",
+  },
   // ── SERVICES PAGE ──
   servicesPage: {
     eyebrow: "Services",
-    headline: "Everything you need to launch a product people remember.",
-    copy: "We combine strategy, design, 3D engineering, and front-end development into one focused engagement. No piecemeal vendors, no handoff chaos.",
+    headline: "Services for products that need more than a pretty landing page.",
+    copy:
+      "We help teams turn complex, configurable, or premium products into digital experiences people can actually understand. That can mean strategy, sharper copy, 3D assets, a launch site, or the interactive layer that ties it all together.",
+    servicesIntro: {
+      eyebrow: "What we can build",
+      title: "Support that fits the way your product is sold.",
+      copy:
+        "Some projects need one focused deliverable. Others need the whole launch system. We step in where clarity, visuals, and interaction matter most.",
+    },
+    story: {
+      panelLabel: "What clients usually need",
+      title: "A partner who can think about the product and make the thing.",
+      copy:
+        "Most teams do not come to us with a tidy brief. They come with a strong product, half-finished assets, internal pressure to launch, and a sense that the current presentation is underselling the work.",
+      points: [
+        {
+          title: "Clear thinking before pretty output",
+          copy: "We start by understanding what buyers need to see, compare, and trust before we design the experience around it.",
+        },
+        {
+          title: "Design and build in the same room",
+          copy: "Copy, layout, motion, 3D, and front-end are shaped together, so the final result feels cohesive instead of stitched together.",
+        },
+        {
+          title: "Useful after launch too",
+          copy: "The deliverables are meant to help sales, marketing, and product teams keep using the work after the first campaign goes live.",
+        },
+      ],
+      note:
+        "We are especially helpful when the product has options, technical detail, or a price point that asks customers to spend time understanding what makes it worth it.",
+    },
     services: [
       {
         title: "3D Product Configurators",
-        copy: "Website-integrated configurators where customers change size, finish, color, accessories, and environment with instant visual feedback. Powered by Three.js, designed for conversion.",
+        copy:
+          "Interactive product experiences where customers can change materials, dimensions, options, and presentation states without losing the thread. Useful when the buying decision depends on seeing the product adapt in real time.",
         tags: ["Three.js", "Product Logic", "Commerce-Ready"],
       },
       {
         title: "Product Launch Websites",
-        copy: "High-impact pages that combine product narrative, proof, and conversion structure into a single clear journey. Built for the moment your product meets the world.",
+        copy:
+          "Launch pages and microsites that do more than look polished. We structure the story, proof, and calls to action so the page explains the product and builds confidence at the same time.",
         tags: ["Launch", "Storytelling", "Conversion"],
       },
       {
         title: "3D Asset Production",
-        copy: "Optimized 3D models, studio renders, product cutaways, and configuration-ready asset sets. Everything your website, campaigns, and sales materials need.",
+        copy:
+          "Optimized models, clean materials, still renders, cutaways, and web-ready asset sets that work across the site, presentations, paid campaigns, and the configurator itself.",
         tags: ["Models", "Renders", "WebGL Assets"],
       },
       {
         title: "Interactive Product Demos",
-        copy: "Guided 3D and motion-led walkthroughs that help customers understand capabilities before they book a call. Sell through clarity, not pressure.",
+        copy:
+          "Guided demos and motion-led walkthroughs that help people understand how the product works before they ever talk to sales. Great for reducing repetitive questions and making technical products feel approachable.",
         tags: ["Demo", "Education", "Self-Serve"],
       },
       {
         title: "Technical Explainers",
-        copy: "For products too complex for text alone. Animated breakdowns, component views, and workflow visualizations that make the complex feel approachable.",
+        copy:
+          "For products that break the moment you try to explain them in plain paragraphs. We turn mechanisms, systems, and workflows into visuals people can follow without a technical background.",
         tags: ["Animation", "Explainer", "Complex Products"],
       },
       {
         title: "Commerce-Ready Pages",
-        copy: "Product pages designed for higher-consideration purchases. Clear structure, trust signals, and visual depth that justify the price before the customer reaches checkout.",
+        copy:
+          "Product pages for considered purchases, where people need reassurance before checkout. We combine stronger hierarchy, visual proof, and better interaction so the price makes more sense before the cart appears.",
         tags: ["E-commerce", "Trust", "Premium"],
       },
     ],
-    configurator: {
-      eyebrow: "Featured capability",
-      title: "Configurators that actually close deals.",
-      copy: "For brands selling pergolas, furniture, lighting, equipment — anything with real options. We create guided configurators where users adjust dimensions, materials, accessories, and environments with immediate visual feedback.",
+    mediaShowcase: {
+      eyebrow: "Work samples",
+      title: "A few good examples will sell this page better than more claims.",
+      copy:
+        "Use this area for the pieces that help someone quickly understand the level of work: one short video, a strong still, an interface capture, and a simple proof image.",
+      layout: "storyboard",
+      highlights: ["Short intro video", "Strong still", "Interface capture", "Proof image"],
+      items: [
+        {
+          type: "video",
+          label: "Opening film",
+          meta: "First impression",
+          title: "Brand reveal, project intro, or short walkthrough",
+          copy: "Keep this short. It only needs to give people a feel for the quality of the work.",
+          size: "hero",
+        },
+        {
+          type: "image",
+          label: "Detail still",
+          meta: "Craft signal",
+          title: "Close-up render, material family, or product finish system",
+          copy: "Use one clear still that shows the finish, detail, or visual quality you want to be known for.",
+          size: "standard",
+        },
+        {
+          type: "video",
+          label: "UX capture",
+          meta: "Interaction proof",
+          title: "Configurator sequence, mobile flow, or UI walkthrough",
+          copy: "If interaction is part of the service, this is the place to show it plainly.",
+          size: "tall",
+        },
+        {
+          type: "image",
+          label: "Comparison frame",
+          meta: "Value explanation",
+          title: "Before-and-after screen, annotation layer, or proof graphic",
+          copy: "A simple comparison or annotated image often explains the value faster than another paragraph.",
+          size: "wide",
+        },
+        {
+          type: "image",
+          label: "Delivery board",
+          meta: "What ships",
+          title: "Asset library, campaign stills, or client-ready handoff frame",
+          copy: "Finish with something that shows the work is usable after launch, not just nice to look at.",
+          size: "standard",
+        },
+      ],
+      note:
+        "This section should feel like real evidence of the work, not a promise of what might be added later.",
+    },
+    playgroundRedirect: {
+      eyebrow: "Playground",
+      title: "The interactive part now lives in Playground.",
+      copy:
+        "That is the better place to actually test materials, upload files, and explore product options. The Services page should explain the offer clearly, then hand people off to a dedicated environment when they want to interact.",
       features: [
         {
-          title: "Options that matter",
-          copy: "Size, finish, color, attachments, lighting — the high-impact choices, handled in one clean interface.",
+          title: "Cleaner journey",
+          copy: "Visitors can read about the service here, then move into a focused interface when they are ready to try it.",
         },
         {
-          title: "Scene-aware visualization",
-          copy: "Switch environments, camera angles, and contexts so buyers evaluate the product in a realistic setting.",
+          title: "More room to explore",
+          copy: "Playground can carry uploads, material changes, dual-color testing, and future editor features without making this page feel crowded.",
         },
         {
-          title: "Assets included",
-          copy: "We deliver the 3D models, materials, and optimized web assets needed to launch properly.",
+          title: "Better UX on mobile",
+          copy: "The mobile-friendly Playground flow is a better home for interaction than an embedded demo inside a long marketing page.",
+        },
+      ],
+      primaryCta: "Open Playground",
+      secondaryCta: "Start a project",
+      previewLabel: "Playground preview",
+      previewTitle: "A stronger handoff from story to interaction",
+      previewCopy:
+        "Instead of dropping a mini configurator into the page, we now preview the experience and send people to the full Playground when they want to explore properly.",
+      previewChips: ["Asset upload", "Material controls", "Mobile-friendly"],
+      previewCards: [
+        {
+          title: "Bring in real models",
+          copy: "Use supported 3D files to review products in a space designed for testing instead of just browsing.",
         },
         {
-          title: "Built for the web",
-          copy: "Responsive, performant, and ready to connect with pricing logic, CMS content, and commerce flows.",
+          title: "Adjust finishes with intent",
+          copy: "Swap RAL colors, use custom picking, and test main plus sub color combinations for more realistic presentations.",
+        },
+        {
+          title: "Give the UI room to breathe",
+          copy: "Playground is easier to extend, easier to use, and a much better place for interaction than a compressed demo block.",
         },
       ],
     },
     process: {
       eyebrow: "How we work",
-      title: "Four phases. Zero ambiguity.",
-      copy: "Every engagement follows the same structure. You always know where we are, what's next, and what you're getting.",
+      title: "A simple process, even when the product is complex.",
+      copy:
+        "We keep the workflow clear on purpose. You should always know what we are making, why it matters, and what is happening next.",
       steps: [
         {
           step: "01",
           title: "Discovery",
-          copy: "We align on the product, audience, and business goal. No assumptions — just clarity.",
+          copy: "We figure out what the product is, what makes it valuable, and where the current presentation is losing people.",
         },
         {
           step: "02",
-          title: "Structure",
-          copy: "Information architecture, wireframes, motion intent. The experience is clear before production begins.",
+          title: "Direction",
+          copy: "We shape the narrative, page flow, interaction plan, and visual references before deep production begins.",
         },
         {
           step: "03",
           title: "Build",
-          copy: "Design, 3D, front-end, integrations. Everything ships together, tested across every breakpoint.",
+          copy: "Design, 3D, frontend, and asset production move together so the final experience feels consistent across every touchpoint.",
         },
         {
           step: "04",
-          title: "Launch",
-          copy: "QA, deployment, and a clean handoff. Your team can operate and extend with confidence.",
+          title: "Release",
+          copy: "We polish, test, launch, and hand things over in a way your team can actually keep using and extending.",
         },
       ],
+    },
+    bottomCta: {
+      title: "Have a product that needs a better digital story?",
+      copy: "We can help you turn the complexity into something clearer, sharper, and easier to sell.",
     },
   },
   // ── WORK PAGE ──

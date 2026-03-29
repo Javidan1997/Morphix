@@ -1,8 +1,19 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import MediaSlotsSection from "../components/MediaSlotsSection";
+import { createInquiry } from "../admin/inquiries";
 
 function Home({ content }) {
-  const { hero, valueProps, servicesPreview, portfolioPreview, trust, homeContact, homeCta } = content;
+  const {
+    hero,
+    valueProps,
+    servicesPreview,
+    portfolioPreview,
+    trust,
+    homeContact,
+    homeCta,
+    homeMediaGallery,
+  } = content;
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [sent, setSent] = useState(false);
 
@@ -92,6 +103,8 @@ function Home({ content }) {
         </div>
       </section>
 
+      <MediaSlotsSection copy={homeMediaGallery} />
+
       {/* Trust / Metrics */}
       <section className="section-block trust-section">
         <div className="container">
@@ -119,7 +132,16 @@ function Home({ content }) {
             <form
               className="glass-card home-contact-form reveal"
               style={{ transitionDelay: "0.1s" }}
-              onSubmit={(e) => { e.preventDefault(); setSent(true); }}
+              onSubmit={(e) => {
+                e.preventDefault();
+                createInquiry({
+                  source: "home-form",
+                  fullName: form.name,
+                  email: form.email,
+                  brief: form.message,
+                });
+                setSent(true);
+              }}
             >
               {sent ? (
                 <div className="contact-success">

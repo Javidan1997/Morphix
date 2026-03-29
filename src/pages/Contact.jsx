@@ -1,4 +1,6 @@
 import { useState } from "react";
+import MediaSlotsSection from "../components/MediaSlotsSection";
+import { createInquiry } from "../admin/inquiries";
 
 const defaultIntake = {
   fullName: "",
@@ -16,11 +18,12 @@ const defaultIntake = {
 };
 
 function Contact({ content }) {
-  const { contactPage } = content;
+  const { contactPage, contactMediaGallery } = content;
   const { wizard, fields, groups, stepLayout } = contactPage;
   const [step, setStep] = useState(0);
   const [intake, setIntake] = useState(defaultIntake);
   const [submitted, setSubmitted] = useState(false);
+  const [submissionSaved, setSubmissionSaved] = useState(false);
 
   const totalSteps = wizard.steps.length;
   const currentStep = wizard.steps[step];
@@ -29,11 +32,13 @@ function Contact({ content }) {
 
   const updateField = (field, value) => {
     setSubmitted(false);
+    setSubmissionSaved(false);
     setIntake((prev) => ({ ...prev, [field]: value }));
   };
 
   const toggleValue = (field, value) => {
     setSubmitted(false);
+    setSubmissionSaved(false);
     setIntake((prev) => {
       const current = prev[field];
       if (Array.isArray(current)) {
@@ -50,6 +55,13 @@ function Contact({ content }) {
 
   const goNext = () => {
     if (step === totalSteps - 1) {
+      if (!submissionSaved) {
+        createInquiry({
+          ...intake,
+          source: "contact-wizard",
+        });
+        setSubmissionSaved(true);
+      }
       setSubmitted(true);
       return;
     }
@@ -220,6 +232,8 @@ function Contact({ content }) {
           </div>
         </div>
       </section>
+
+      <MediaSlotsSection copy={contactMediaGallery} />
     </main>
   );
 }

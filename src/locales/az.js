@@ -1,3 +1,5 @@
+import { pageMediaSections } from "./pageMedia";
+
 const az = {
   meta: {
     title: "Morphix | Rəqəmsal Məhsul Studiyası",
@@ -101,11 +103,57 @@ const az = {
     copy: "Nə qurduğunuzu bizə deyin. Mümkün olanları sizə göstərək.",
     button: "Əlaqə saxlayın",
   },
+  ...pageMediaSections.az,
+  mediaSlotsShared: {
+    eyebrow: "Media sahələri",
+    title: "Şəkillər və render videoları üçün ayrılmış yer.",
+    copy: "Bu yer tutucuları yekun məhsul vizualları, buraxılış hərəkətləri, turntable render videoları və ya qısa walkthrough yazıları hazır olduqda istifadə edə bilərsiniz.",
+    items: [
+      {
+        type: "image",
+        label: "Şəkil sahəsi",
+        title: "Statik şəkil və ya render",
+        copy: "Məhsul fotoları, material yaxın planları, anotasiyalı vizuallar və ya güclü hero render-ləri üçün istifadə edin.",
+      },
+      {
+        type: "video",
+        label: "Render video sahəsi",
+        title: "Hərəkətli render və ya walkthrough",
+        copy: "Turntable videoları, xüsusiyyət təqdimatları, UI yazıları və ya qısa buraxılış səhnələri üçün istifadə edin.",
+      },
+    ],
+    note: "Bu sahələr hər səhifəni yenidən qurmağa ehtiyac qalmadan son materiallarla sonradan əvəzlənə bilməsi üçün əlavə edilib.",
+  },
   // ── XİDMƏTLƏR SƏHİFƏSİ ──
   servicesPage: {
     eyebrow: "Xidmətlər",
     headline: "İnsanların yadda saxlayacağı məhsul buraxmaq üçün lazım olan hər şey.",
     copy: "Biz strategiyanı, dizaynı, 3D mühəndisliyi və front-end inkişafını bir fokuslanmış əməkdaşlıqda birləşdiririk. Parça-parça podratçılar yox, təhvil xaosu yox.",
+    servicesIntro: {
+      eyebrow: "Nə qura bilərik",
+      title: "Məhsulunuzun satılma üsuluna uyğun dəstək.",
+      copy: "Bəzi layihələrə tək, güclü bir nəticə lazımdır. Bəzilərinə isə bütöv buraxılış sistemi. Biz aydınlığın, vizual keyfiyyətin və interaktivliyin ən vacib olduğu yerdə qoşuluruq.",
+    },
+    story: {
+      panelLabel: "Müştərilərin adətən ehtiyac duyduğu",
+      title: "Məhsulu düşünə bilən və işi həqiqətən qura bilən tərəfdaş.",
+      copy: "Çox komanda bizə ideal brief ilə gəlmir. Onların əlində güclü məhsul, yarımçıq resurslar, buraxılış təzyiqi və mövcud təqdimatın görülən işi tam göstərmədiyi hissi olur.",
+      points: [
+        {
+          title: "Gözəl görüntüdən əvvəl aydın düşüncə",
+          copy: "Təcrübəni dizayn etməzdən əvvəl alıcının nəyi görməli, nəyi müqayisə etməli və nəyə güvənməli olduğunu anlayırıq.",
+        },
+        {
+          title: "Dizayn və qurma eyni axında",
+          copy: "Mətn, düzən, hərəkət, 3D və front-end birlikdə formalaşır; buna görə nəticə sonradan yığılmış yox, bütöv görünür.",
+        },
+        {
+          title: "Buraxılışdan sonra da faydalı",
+          copy: "Təhvil verilənlər yalnız ilk kampaniya üçün deyil, satış, marketinq və məhsul komandalarının sonradan istifadəsi üçün də yararlı olur.",
+        },
+      ],
+      note: "Xüsusilə seçimli, texniki detallı və ya dəyərini anlatmaq üçün daha güclü hekayə tələb edən məhsullarda yaxşı nəticə veririk.",
+    },
     services: [
       {
         title: "3D Məhsul Konfiquratorları",
@@ -138,6 +186,95 @@ const az = {
         tags: ["E-ticarət", "Etibar", "Premium"],
       },
     ],
+    mediaShowcase: {
+      eyebrow: "Xidmət sübut planı",
+      title: "Təklifin həqiqətən əsaslandırıldığını hiss etdirən media sahələri.",
+      copy: "Tək bir ümumi sətir əvəzinə bu bölmə indi buraxılış hərəkəti, detal renderləri, interfeys yazıları, müqayisə kadrları və təhvil sübutu üçün daha zəngin quruluş daşıyır.",
+      layout: "storyboard",
+      highlights: ["5 sahə", "Məhsul + UX sübutu", "Real satış söhbətləri üçün"],
+      items: [
+        {
+          type: "video",
+          label: "Açılış filmi",
+          meta: "İlk təəssürat",
+          title: "Brend açılışı, layihə təqdimatı və ya qısa walkthrough",
+          copy: "Xidmət hekayəsi dərinləşməzdən əvvəl səhifəyə çəkisi olan bir video ilə başlayın.",
+          size: "hero",
+        },
+        {
+          type: "image",
+          label: "Detal şəkli",
+          meta: "Ustalıq siqnalı",
+          title: "Yaxın plan render, material ailəsi və ya səth sistemi",
+          copy: "Səthlər, örtüklər, konstruksiya detalları və premium məhsul kadrları üçün istifadə edin.",
+          size: "standard",
+        },
+        {
+          type: "video",
+          label: "UX yazısı",
+          meta: "İnteraksiya sübutu",
+          title: "Konfiqurator axını, mobil istifadə və ya UI walkthrough",
+          copy: "Seçim dəyişikliklərini, kamera hərəkətini, axın vəziyyətlərini və ya yığcam mobil demonu burada göstərin.",
+          size: "tall",
+        },
+        {
+          type: "image",
+          label: "Müqayisə kadrı",
+          meta: "Dəyər izahı",
+          title: "Əvvəl-sonra ekranı, anotasiya qatı və ya sübut qrafiki",
+          copy: "Kommersiya dəyərini saniyələr içində daha aydın göstərən vizuallar üçün bu sahəni ayırın.",
+          size: "wide",
+        },
+        {
+          type: "image",
+          label: "Təhvil lövhəsi",
+          meta: "Nə çıxır",
+          title: "Asset kitabxanası, kampaniya şəkilləri və ya təhvil kadrı",
+          copy: "İşin təkcə konsept kimi qalmadığını, buraxılış və satış üçün də istifadə oluna bildiyini göstərən kadrla tamamlayın.",
+          size: "standard",
+        },
+      ],
+      note: "Bölmə doldurulmağı gözləyən ümumi blok kimi yox, sənədləşdirilmiş bacarıq kimi hiss etdirilmək üçün qurulub.",
+    },
+    playgroundRedirect: {
+      eyebrow: "Playground",
+      title: "İnteraktiv hissə indi Playground-da yaşayır.",
+      copy: "Materialları sınamaq, fayl yükləmək və məhsul seçimlərini araşdırmaq üçün daha doğru yer oradır. Xidmətlər səhifəsi təklifi aydın izah etməli, istifadəçi qarşılıqlı əlaqəyə hazır olanda isə onu ayrıca mühitə yönləndirməlidir.",
+      features: [
+        {
+          title: "Daha təmiz keçid",
+          copy: "İstifadəçi burada xidməti anlayır, sınamaq istəyəndə isə diqqəti dağıtmayan ayrıca interfeysə keçir.",
+        },
+        {
+          title: "Araşdırmaq üçün daha çox yer",
+          copy: "Playground yükləmələri, material dəyişikliklərini, iki rəng testlərini və gələcək editor xüsusiyyətlərini bu səhifəni sıxmadan daşıya bilir.",
+        },
+        {
+          title: "Mobildə daha yaxşı təcrübə",
+          copy: "Mobil üçün uyğunlaşdırılmış Playground axını, uzun marketinq səhifəsindəki kiçik demo blokundan daha məqsədyönlü mühit yaradır.",
+        },
+      ],
+      primaryCta: "Playground-u aç",
+      secondaryCta: "Layihəyə başla",
+      previewLabel: "Playground önizləməsi",
+      previewTitle: "Hekayədən qarşılıqlı təcrübəyə daha güclü keçid",
+      previewCopy: "Səhifənin içinə kiçik konfiqurator yerləşdirmək əvəzinə, təcrübəni öncədən göstərir və istifadəçini hazır olanda tam Playground-a yönləndiririk.",
+      previewChips: ["Resurs yükləmə", "Material idarələri", "Mobil uyğunluq"],
+      previewCards: [
+        {
+          title: "Real modellər gətirin",
+          copy: "Dəstəklənən 3D faylları sadəcə baxmaq üçün deyil, test etmək üçün qurulmuş məkanda yoxlayın.",
+        },
+        {
+          title: "Səthləri məqsədli tənzimləyin",
+          copy: "Daha real təqdimatlar üçün RAL rənglərini dəyişin, fərdi rəng seçin və əsas/köməkçi rəng kombinasiyalarını sınayın.",
+        },
+        {
+          title: "İnterfeysə nəfəs almaq üçün yer verin",
+          copy: "Playground sıx demo blokundan daha rahat istifadə olunan və gələcəkdə genişləndirilməsi daha asan olan mühitdir.",
+        },
+      ],
+    },
     configurator: {
       eyebrow: "Əsas imkan",
       title: "Həqiqətən sövdələşmə bağlayan konfiquratorlar.",
@@ -187,6 +324,10 @@ const az = {
           copy: "QA, yerləşdirmə və təmiz təhvil. Komandanız əminliklə idarə edə və genişləndirə bilər.",
         },
       ],
+    },
+    bottomCta: {
+      title: "Daha yaxşı rəqəmsal hekayəyə ehtiyacı olan məhsulunuz var?",
+      copy: "Mürəkkəb olanı daha aydın, daha güclü və satması daha asan olan təcrübəyə çevirək.",
     },
   },
   // ── İŞLƏR SƏHİFƏSİ ──

@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
+import MediaSlotsSection from "../components/MediaSlotsSection";
 
 function Work({ content }) {
-  const { workPage, nav } = content;
+  const { workPage, nav, workMediaGallery } = content;
 
   return (
     <main className="page-work">
@@ -31,6 +32,8 @@ function Work({ content }) {
           </div>
         </div>
       </section>
+
+      <MediaSlotsSection copy={workMediaGallery} />
 
       <section className="section-block cta-section">
         <div className="container cta-container reveal">
