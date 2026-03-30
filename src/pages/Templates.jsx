@@ -48,6 +48,29 @@ const PAGE_COPY_BY_LANGUAGE = {
       remove: "Del",
       desktop: "Desktop",
       mobile: "Mobile",
+      layouts: "Layout direction",
+      density: "Content density",
+      shapes: "Shape language",
+      surfaces: "Surface treatment",
+      duplicate: "Copy",
+      width: "Section width",
+      contained: "Contained",
+      wide: "Wide",
+      full: "Full",
+      emphasis: "Section emphasis",
+      quiet: "Quiet",
+      balanced: "Balanced",
+      spotlight: "Spotlight",
+      columns: "Grid density",
+      auto: "Auto",
+      twoColumns: "2-up",
+      threeColumns: "3-up",
+      fourColumns: "4-up",
+      alignment: "Content alignment",
+      start: "Start",
+      center: "Center",
+      split: "Split",
+      resetSection: "Reset section styling",
     },
     summary: {
       eyebrow: "Current Theme DNA",
@@ -56,6 +79,8 @@ const PAGE_COPY_BY_LANGUAGE = {
         "The preset controls the overall pacing, the palette controls the mood, and the section stack shapes the full journey. That gives the page a clearer identity before UI polish starts.",
       presetIdentity: "Preset identity",
       colorDirection: "Color direction",
+      layoutDirection: "Layout direction",
+      shapeLanguage: "Shape language",
       selectedSection: "Selected section",
       sectionsInFlow: "Sections in flow",
     },
@@ -129,6 +154,29 @@ const PAGE_COPY_BY_LANGUAGE = {
       remove: "Sil",
       desktop: "Desktop",
       mobile: "Mobil",
+      layouts: "Layout istiqaməti",
+      density: "Məzmun sıxlığı",
+      shapes: "Forma dili",
+      surfaces: "Səth üslubu",
+      duplicate: "Kopya",
+      width: "Bölmə eni",
+      contained: "Standart",
+      wide: "Geniş",
+      full: "Tam",
+      emphasis: "Bölmə vurğusu",
+      quiet: "Sakit",
+      balanced: "Balanslı",
+      spotlight: "Vurğulu",
+      columns: "Grid sıxlığı",
+      auto: "Avto",
+      twoColumns: "2 sütun",
+      threeColumns: "3 sütun",
+      fourColumns: "4 sütun",
+      alignment: "Məzmun düzülüşü",
+      start: "Başlanğıc",
+      center: "Mərkəz",
+      split: "Split",
+      resetSection: "Bölmə stilini sıfırla",
     },
     summary: {
       eyebrow: "Cari Tema DNA-sı",
@@ -137,6 +185,8 @@ const PAGE_COPY_BY_LANGUAGE = {
         "Preset ümumi ritmi, palitra vizual tonu, bölmə sırası isə tam yolçuluğu müəyyən edir. Beləliklə, UI cilalanmazdan əvvəl səhifənin kimliyi aydınlaşır.",
       presetIdentity: "Preset kimliyi",
       colorDirection: "Rəng istiqaməti",
+      layoutDirection: "Layout istiqaməti",
+      shapeLanguage: "Forma dili",
       selectedSection: "Seçilən bölmə",
       sectionsInFlow: "Axındakı bölmələr",
     },
@@ -210,6 +260,29 @@ const PAGE_COPY_BY_LANGUAGE = {
       remove: "Удал.",
       desktop: "Desktop",
       mobile: "Mobile",
+      layouts: "Направление layout",
+      density: "Плотность контента",
+      shapes: "Язык форм",
+      surfaces: "Стиль поверхностей",
+      duplicate: "Копия",
+      width: "Ширина секции",
+      contained: "Стандарт",
+      wide: "Широко",
+      full: "Во всю ширину",
+      emphasis: "Акцент секции",
+      quiet: "Спокойно",
+      balanced: "Баланс",
+      spotlight: "Акцент",
+      columns: "Плотность сетки",
+      auto: "Авто",
+      twoColumns: "2 колонки",
+      threeColumns: "3 колонки",
+      fourColumns: "4 колонки",
+      alignment: "Выравнивание",
+      start: "Слева",
+      center: "По центру",
+      split: "Сплит",
+      resetSection: "Сбросить стиль секции",
     },
     summary: {
       eyebrow: "DNA текущей темы",
@@ -218,6 +291,8 @@ const PAGE_COPY_BY_LANGUAGE = {
         "Пресет задаёт ритм, палитра определяет настроение, а стек секций формирует весь путь по странице. Поэтому у шаблона появляется ясная идентичность ещё до финального UI-polish.",
       presetIdentity: "Идентичность пресета",
       colorDirection: "Цветовое направление",
+      layoutDirection: "Направление layout",
+      shapeLanguage: "Язык форм",
       selectedSection: "Выбранная секция",
       sectionsInFlow: "Секций в потоке",
     },
@@ -291,6 +366,29 @@ const PAGE_COPY_BY_LANGUAGE = {
       remove: "Sil",
       desktop: "Desktop",
       mobile: "Mobil",
+      layouts: "Yerlesim yonu",
+      density: "Icerik yogunlugu",
+      shapes: "Sekil dili",
+      surfaces: "Yuzey stili",
+      duplicate: "Kopya",
+      width: "Bolum genisligi",
+      contained: "Standart",
+      wide: "Genis",
+      full: "Tam",
+      emphasis: "Bolum vurgusu",
+      quiet: "Sakin",
+      balanced: "Dengeli",
+      spotlight: "Vurgulu",
+      columns: "Grid yogunlugu",
+      auto: "Oto",
+      twoColumns: "2 kolon",
+      threeColumns: "3 kolon",
+      fourColumns: "4 kolon",
+      alignment: "Icerik hizasi",
+      start: "Baslangic",
+      center: "Merkez",
+      split: "Split",
+      resetSection: "Bolum stilini sifirla",
     },
     summary: {
       eyebrow: "Mevcut Tema DNA'si",
@@ -299,6 +397,8 @@ const PAGE_COPY_BY_LANGUAGE = {
         "Preset genel ritmi belirler, palet duyguyu kurar ve bolum sirasi tum yolculugu sekillendirir. Boylece arayuz cilasindan once sayfanin kimligi netlesir.",
       presetIdentity: "Preset kimligi",
       colorDirection: "Renk yonu",
+      layoutDirection: "Yerlesim yonu",
+      shapeLanguage: "Sekil dili",
       selectedSection: "Secili bolum",
       sectionsInFlow: "Akistaki bolumler",
     },
@@ -388,6 +488,12 @@ const TEMPLATE_PRESETS = [
     copy:
       "Balanced between product story and conversion. Best for premium brands that need hierarchy, product cards, and enough atmosphere to feel elevated.",
     defaultPalette: "linen",
+    themeSettings: {
+      layout: "editorial",
+      shape: "soft",
+      surface: "elevated",
+      density: "balanced",
+    },
     sections: ["hero", "announcement", "collection", "story", "testimonials", "cta"],
     strengths: ["Editorial pacing", "Premium product cards", "Clean CTA rhythm"],
   },
@@ -399,6 +505,12 @@ const TEMPLATE_PRESETS = [
     copy:
       "Stronger contrast, more visual momentum, and section sequencing tuned for launches where attention and energy matter.",
     defaultPalette: "signal",
+    themeSettings: {
+      layout: "campaign",
+      shape: "sharp",
+      surface: "glass",
+      density: "compact",
+    },
     sections: ["hero", "mosaic", "collection", "comparison", "testimonials", "cta"],
     strengths: ["Campaign sequencing", "Visual density", "Stronger urgency"],
   },
@@ -410,6 +522,12 @@ const TEMPLATE_PRESETS = [
     copy:
       "Leaner, calmer, and more product-forward. Good for teams that want sections to stay useful and commercial without feeling over-designed.",
     defaultPalette: "skyline",
+    themeSettings: {
+      layout: "grid",
+      shape: "sculpted",
+      surface: "outline",
+      density: "airy",
+    },
     sections: ["hero", "collection", "story", "faq", "cta"],
     strengths: ["Product-first layout", "Simple navigation", "Low-friction browsing"],
   },
@@ -556,10 +674,164 @@ const PREVIEW_MODES = [
   { key: "mobile", label: "Mobile" },
 ];
 
-function createSection(type, index = 0) {
+const LAYOUT_PRESETS = [
+  {
+    key: "editorial",
+    label: "Editorial Flow",
+    badge: "Story-led",
+    copy: "Contained sections, calmer pacing, and more whitespace between narrative beats.",
+  },
+  {
+    key: "split",
+    label: "Split Commerce",
+    badge: "Balanced",
+    copy: "A strong two-column rhythm for storytelling, product context, and merchandising.",
+  },
+  {
+    key: "grid",
+    label: "Grid System",
+    badge: "Browse-first",
+    copy: "Denser cards, broader content rows, and a more structured template skeleton.",
+  },
+  {
+    key: "campaign",
+    label: "Campaign Stack",
+    badge: "High-energy",
+    copy: "Full-width moments, bolder accents, and stronger launch-page momentum.",
+  },
+];
+
+const SHAPE_PRESETS = [
+  {
+    key: "soft",
+    label: "Soft Radius",
+    badge: "Balanced",
+    copy: "Friendly rounded corners that still feel premium and structured.",
+    shellRadius: "1.65rem",
+    storeRadius: "1.5rem",
+    sectionRadius: "1.35rem",
+    cardRadius: "1.05rem",
+    pillRadius: "999px",
+  },
+  {
+    key: "sharp",
+    label: "Sharp Frame",
+    badge: "Architectural",
+    copy: "Straighter corners for a more editorial, crisp, and technical storefront.",
+    shellRadius: "0.9rem",
+    storeRadius: "0.7rem",
+    sectionRadius: "0.7rem",
+    cardRadius: "0.55rem",
+    pillRadius: "0.75rem",
+  },
+  {
+    key: "sculpted",
+    label: "Sculpted",
+    badge: "Modern",
+    copy: "Bigger outer curves with tighter inner cards for a more art-directed rhythm.",
+    shellRadius: "2rem",
+    storeRadius: "1.75rem",
+    sectionRadius: "1.55rem",
+    cardRadius: "0.95rem",
+    pillRadius: "999px",
+  },
+  {
+    key: "capsule",
+    label: "Capsule",
+    badge: "Expressive",
+    copy: "High-radius components that feel softer, more fashion-led, and more playful.",
+    shellRadius: "2.1rem",
+    storeRadius: "2rem",
+    sectionRadius: "1.9rem",
+    cardRadius: "1.35rem",
+    pillRadius: "999px",
+  },
+];
+
+const SURFACE_PRESETS = [
+  {
+    key: "flat",
+    label: "Flat Surface",
+    badge: "Minimal",
+    copy: "Lower elevation and cleaner panels for a restrained UI direction.",
+  },
+  {
+    key: "outline",
+    label: "Outline",
+    badge: "Structured",
+    copy: "Sharper borders and quieter fills for catalog-heavy browsing experiences.",
+  },
+  {
+    key: "elevated",
+    label: "Elevated",
+    badge: "Premium",
+    copy: "More dimensional cards with subtle lift and polished hierarchy.",
+  },
+  {
+    key: "glass",
+    label: "Glass Layer",
+    badge: "Atmospheric",
+    copy: "Translucent chrome and frosted surfaces for a more advanced visual system.",
+  },
+];
+
+const DENSITY_PRESETS = [
+  {
+    key: "airy",
+    label: "Airy",
+    badge: "Relaxed",
+    copy: "More whitespace and larger section framing for brands that want breathing room.",
+    sectionGap: "1.15rem",
+    sectionPadding: "1.65rem",
+    cardPadding: "1.1rem",
+  },
+  {
+    key: "balanced",
+    label: "Balanced",
+    badge: "Default",
+    copy: "A comfortable middle ground between premium whitespace and strong information density.",
+    sectionGap: "0.95rem",
+    sectionPadding: "1.35rem",
+    cardPadding: "1rem",
+  },
+  {
+    key: "compact",
+    label: "Compact",
+    badge: "Dense",
+    copy: "Tighter spacing that works well for launch pages, catalogs, and busier commerce layouts.",
+    sectionGap: "0.72rem",
+    sectionPadding: "1.08rem",
+    cardPadding: "0.9rem",
+  },
+];
+
+function getDefaultSectionOptions(type) {
+  const defaultsByType = {
+    hero: { width: "full", emphasis: "spotlight", columns: "auto", alignment: "split" },
+    announcement: { width: "full", emphasis: "quiet", columns: "3", alignment: "center" },
+    collection: { width: "wide", emphasis: "balanced", columns: "3", alignment: "auto" },
+    story: { width: "wide", emphasis: "balanced", columns: "auto", alignment: "split" },
+    mosaic: { width: "full", emphasis: "spotlight", columns: "3", alignment: "split" },
+    comparison: { width: "contained", emphasis: "balanced", columns: "3", alignment: "auto" },
+    testimonials: { width: "wide", emphasis: "balanced", columns: "3", alignment: "auto" },
+    faq: { width: "contained", emphasis: "quiet", columns: "auto", alignment: "auto" },
+    cta: { width: "full", emphasis: "spotlight", columns: "auto", alignment: "split" },
+  };
+
+  return defaultsByType[type] ?? {
+    width: "wide",
+    emphasis: "balanced",
+    columns: "auto",
+    alignment: "auto",
+  };
+}
+
+function createSection(type, index = 0, overrides = {}) {
   return {
     id: `${type}-${index}-${Math.random().toString(36).slice(2, 8)}`,
     type,
+    ...getDefaultSectionOptions(type),
+    ...overrides,
   };
 }
 
@@ -675,6 +947,94 @@ function buildCustomPalette(customColors) {
   };
 }
 
+function getSurfaceTokens(surfaceKey, palette) {
+  const isDarkPalette = getLuminance(palette.page) < 0.3;
+  const lightGlass = withAlpha("#ffffff", isDarkPalette ? 0.1 : 0.7);
+
+  if (surfaceKey === "flat") {
+    return {
+      cardBg: palette.surface,
+      cardBorder: palette.border,
+      cardShadow: "none",
+      chromeBg: withAlpha(palette.page, isDarkPalette ? 0.86 : 0.74),
+      backdrop: "0px",
+    };
+  }
+
+  if (surfaceKey === "outline") {
+    return {
+      cardBg: withAlpha(palette.page, isDarkPalette ? 0.2 : 0.55),
+      cardBorder: withAlpha(palette.text, isDarkPalette ? 0.22 : 0.13),
+      cardShadow: "none",
+      chromeBg: withAlpha(palette.page, isDarkPalette ? 0.74 : 0.68),
+      backdrop: "0px",
+    };
+  }
+
+  if (surfaceKey === "glass") {
+    return {
+      cardBg: withAlpha(palette.surface, isDarkPalette ? 0.56 : 0.76),
+      cardBorder: lightGlass,
+      cardShadow: isDarkPalette
+        ? "0 22px 42px rgba(0, 0, 0, 0.26)"
+        : "0 18px 34px rgba(24, 29, 40, 0.08)",
+      chromeBg: withAlpha(palette.page, isDarkPalette ? 0.64 : 0.5),
+      backdrop: "18px",
+    };
+  }
+
+  return {
+    cardBg: palette.surface,
+    cardBorder: "transparent",
+    cardShadow: isDarkPalette
+      ? "0 24px 52px rgba(0, 0, 0, 0.28)"
+      : "0 18px 34px rgba(24, 29, 40, 0.08)",
+    chromeBg: withAlpha(palette.page, isDarkPalette ? 0.9 : 0.78),
+    backdrop: "0px",
+  };
+}
+
+function getThemeStyleTokens(palette, shapeKey, densityKey, surfaceKey) {
+  const shapeProfile = SHAPE_PRESETS.find((item) => item.key === shapeKey) ?? SHAPE_PRESETS[0];
+  const densityProfile = DENSITY_PRESETS.find((item) => item.key === densityKey) ?? DENSITY_PRESETS[1];
+  const surfaceTokens = getSurfaceTokens(surfaceKey, palette);
+
+  return {
+    "--theme-canvas": palette.canvas,
+    "--theme-frame": palette.frame,
+    "--theme-page": palette.page,
+    "--theme-surface": palette.surface,
+    "--theme-surface-strong": palette.surfaceStrong,
+    "--theme-text": palette.text,
+    "--theme-muted": palette.muted,
+    "--theme-accent": palette.accent,
+    "--theme-accent-soft": palette.accentSoft,
+    "--theme-border": palette.border,
+    "--theme-hero": palette.hero,
+    "--theme-shadow": palette.shadow,
+    "--theme-inverse": palette.inverse,
+    "--theme-shell-radius": shapeProfile.shellRadius,
+    "--theme-store-radius": shapeProfile.storeRadius,
+    "--theme-section-radius": shapeProfile.sectionRadius,
+    "--theme-card-radius": shapeProfile.cardRadius,
+    "--theme-pill-radius": shapeProfile.pillRadius,
+    "--theme-section-gap": densityProfile.sectionGap,
+    "--theme-section-padding": densityProfile.sectionPadding,
+    "--theme-card-padding": densityProfile.cardPadding,
+    "--theme-card-bg": surfaceTokens.cardBg,
+    "--theme-card-border": surfaceTokens.cardBorder,
+    "--theme-card-shadow": surfaceTokens.cardShadow,
+    "--theme-chrome-bg": surfaceTokens.chromeBg,
+    "--theme-backdrop-blur": surfaceTokens.backdrop,
+  };
+}
+
+function formatSectionSetting(section) {
+  return [section.width, section.emphasis, section.columns === "auto" ? "auto grid" : `${section.columns}-up`, section.alignment]
+    .filter(Boolean)
+    .join(" · ");
+}
+
 function drawRoundedRect(ctx, x, y, width, height, radius, fillStyle, strokeStyle = "") {
   ctx.beginPath();
   ctx.moveTo(x + radius, y);
@@ -699,7 +1059,17 @@ function drawRoundedRect(ctx, x, y, width, height, radius, fillStyle, strokeStyl
   }
 }
 
-function buildTemplateSnapshot({ brand, preset, palette, sections, previewMode }) {
+function buildTemplateSnapshot({
+  brand,
+  preset,
+  palette,
+  sections,
+  previewMode,
+  layoutProfile,
+  shapeProfile,
+  surfaceProfile,
+  densityProfile,
+}) {
   const canvas = document.createElement("canvas");
   canvas.width = 880;
   canvas.height = 640;
@@ -720,7 +1090,11 @@ function buildTemplateSnapshot({ brand, preset, palette, sections, previewMode }
   ctx.fillText(brand, 64, 74);
   ctx.font = "600 14px Manrope, sans-serif";
   ctx.fillStyle = palette.muted;
-  ctx.fillText(`${preset.label} · ${palette.label} · ${previewMode}`, 64, 560);
+  ctx.fillText(
+    `${preset.label} · ${palette.label} · ${layoutProfile.label} · ${shapeProfile.label} · ${previewMode}`,
+    64,
+    560,
+  );
 
   ctx.fillStyle = withAlpha(palette.text, 0.14);
   ctx.beginPath();
@@ -780,7 +1154,13 @@ function buildTemplateSnapshot({ brand, preset, palette, sections, previewMode }
   ctx.fillText("Compact PNG summary", 456, 156);
   ctx.font = "500 13px Manrope, sans-serif";
   ctx.fillStyle = palette.muted;
-  ctx.fillText("Saved with preset, palette, section stack, and preview mode.", 456, 218);
+  ctx.fillText("Saved with layout, shape, surface, density, section stack, and preview mode.", 456, 218);
+  ctx.font = "700 12px Manrope, sans-serif";
+  ctx.fillStyle = palette.text;
+  ctx.fillText("Theme system", 456, 248);
+  ctx.font = "500 12px Manrope, sans-serif";
+  ctx.fillStyle = palette.muted;
+  ctx.fillText(`${surfaceProfile.label} · ${densityProfile.label}`, 456, 268);
 
   ctx.fillStyle = palette.page;
   ctx.font = "700 15px Manrope, sans-serif";
@@ -810,7 +1190,15 @@ function PreviewSection({ section, index, preset, isSelected, onSelect }) {
   }
 
   const baseProps = {
-    className: `theme-preview-section theme-preview-${section.type} ${isSelected ? "is-selected" : ""}`,
+    className: [
+      "theme-preview-section",
+      `theme-preview-${section.type}`,
+      `theme-section-width-${section.width}`,
+      `theme-section-emphasis-${section.emphasis}`,
+      `theme-section-columns-${section.columns}`,
+      `theme-section-align-${section.alignment}`,
+      isSelected ? "is-selected" : "",
+    ].filter(Boolean).join(" "),
     onClick: () => onSelect(section.id),
     onKeyDown: (event) => {
       if (event.key === "Enter" || event.key === " ") {
@@ -822,6 +1210,9 @@ function PreviewSection({ section, index, preset, isSelected, onSelect }) {
     tabIndex: 0,
     "aria-pressed": isSelected,
   };
+  const styleMeta = (
+    <span className="theme-preview-style-meta">{formatSectionSetting(section)}</span>
+  );
 
   if (section.type === "hero") {
     return (
@@ -838,6 +1229,7 @@ function PreviewSection({ section, index, preset, isSelected, onSelect }) {
               <span className="theme-preview-primary">Shop the story</span>
               <span className="theme-preview-secondary">View collection</span>
             </div>
+            {styleMeta}
           </div>
           <div className="theme-preview-hero-stack">
             <div className="theme-preview-float-card">
@@ -862,6 +1254,7 @@ function PreviewSection({ section, index, preset, isSelected, onSelect }) {
           <span>New collection live now</span>
           <span>Premium support within 24h</span>
         </div>
+        {styleMeta}
       </section>
     );
   }
@@ -877,8 +1270,9 @@ function PreviewSection({ section, index, preset, isSelected, onSelect }) {
           <h3>Merchandising that still feels designed.</h3>
           <p>Three product cards, strong image rhythm, and just enough copy to support the sale.</p>
         </div>
+        {styleMeta}
         <div className="theme-preview-card-grid">
-          {[1, 2, 3].map((item) => (
+          {[1, 2, 3, 4].map((item) => (
             <article className="theme-preview-product-card" key={item}>
               <div className="theme-preview-product-media" />
               <strong>Signature Product {item}</strong>
@@ -905,6 +1299,7 @@ function PreviewSection({ section, index, preset, isSelected, onSelect }) {
               Use this section for craftsmanship, category positioning, brand philosophy, or the reason the product
               deserves its price.
             </p>
+            {styleMeta}
           </div>
           <div className="theme-preview-story-panel">
             <div className="theme-preview-story-frame" />
@@ -925,6 +1320,7 @@ function PreviewSection({ section, index, preset, isSelected, onSelect }) {
           <span className="theme-preview-kicker">Media Mosaic</span>
           <span className="theme-preview-index">0{index + 1}</span>
         </div>
+        {styleMeta}
         <div className="theme-preview-mosaic-grid">
           <div className="theme-preview-mosaic-card is-large" />
           <div className="theme-preview-mosaic-card" />
@@ -941,8 +1337,9 @@ function PreviewSection({ section, index, preset, isSelected, onSelect }) {
           <span className="theme-preview-kicker">Comparison Table</span>
           <span className="theme-preview-index">0{index + 1}</span>
         </div>
+        {styleMeta}
         <div className="theme-preview-compare-grid">
-          {["Core", "Plus", "Studio"].map((tier) => (
+          {["Core", "Plus", "Studio", "Enterprise"].map((tier) => (
             <article className="theme-preview-compare-card" key={tier}>
               <strong>{tier}</strong>
               <span>Designed for a clearer package story.</span>
@@ -965,8 +1362,9 @@ function PreviewSection({ section, index, preset, isSelected, onSelect }) {
           <span className="theme-preview-kicker">Proof Layer</span>
           <span className="theme-preview-index">0{index + 1}</span>
         </div>
+        {styleMeta}
         <div className="theme-preview-quote-grid">
-          {["Marketing Lead", "Founder", "Creative Director"].map((author) => (
+          {["Marketing Lead", "Founder", "Creative Director", "Merch Lead"].map((author) => (
             <article className="theme-preview-quote-card" key={author}>
               <p>
                 "This section gives the template a stronger sense of trust without breaking the visual rhythm of the
@@ -987,6 +1385,7 @@ function PreviewSection({ section, index, preset, isSelected, onSelect }) {
           <span className="theme-preview-kicker">FAQ</span>
           <span className="theme-preview-index">0{index + 1}</span>
         </div>
+        {styleMeta}
         <div className="theme-preview-faq-list">
           {[
             "Can this template support multiple collections?",
@@ -1009,6 +1408,7 @@ function PreviewSection({ section, index, preset, isSelected, onSelect }) {
         <div>
           <span className="theme-preview-kicker">Final CTA</span>
           <h3>Close the page with a confident next step.</h3>
+          {styleMeta}
         </div>
         <div className="theme-preview-action-row">
           <span className="theme-preview-primary">Start your build</span>
@@ -1024,9 +1424,19 @@ function Templates({ content, language }) {
   const defaultPreset = TEMPLATE_PRESETS[0];
   const initialState = useMemo(() => createPresetState(defaultPreset), [defaultPreset]);
   const defaultPalette = PALETTES.find((palette) => palette.key === defaultPreset.defaultPalette) ?? PALETTES[0];
+  const defaultThemeSettings = defaultPreset.themeSettings ?? {
+    layout: LAYOUT_PRESETS[0].key,
+    shape: SHAPE_PRESETS[0].key,
+    surface: SURFACE_PRESETS[2].key,
+    density: DENSITY_PRESETS[1].key,
+  };
   const [presetKey, setPresetKey] = useState(defaultPreset.key);
   const [paletteKey, setPaletteKey] = useState(defaultPreset.defaultPalette);
   const [previewMode, setPreviewMode] = useState(PREVIEW_MODES[0].key);
+  const [layoutKey, setLayoutKey] = useState(defaultThemeSettings.layout);
+  const [shapeKey, setShapeKey] = useState(defaultThemeSettings.shape);
+  const [surfaceKey, setSurfaceKey] = useState(defaultThemeSettings.surface);
+  const [densityKey, setDensityKey] = useState(defaultThemeSettings.density);
   const [sections, setSections] = useState(initialState.sections);
   const [selectedSectionId, setSelectedSectionId] = useState(initialState.selectedSectionId);
   const [customColors, setCustomColors] = useState(() => paletteToCustomColors(defaultPalette));
@@ -1042,6 +1452,10 @@ function Templates({ content, language }) {
 
   const activePreset = TEMPLATE_PRESETS.find((preset) => preset.key === presetKey) ?? defaultPreset;
   const activePresetPalette = PALETTES.find((palette) => palette.key === activePreset.defaultPalette) ?? PALETTES[0];
+  const activeLayout = LAYOUT_PRESETS.find((item) => item.key === layoutKey) ?? LAYOUT_PRESETS[0];
+  const activeShape = SHAPE_PRESETS.find((item) => item.key === shapeKey) ?? SHAPE_PRESETS[0];
+  const activeSurface = SURFACE_PRESETS.find((item) => item.key === surfaceKey) ?? SURFACE_PRESETS[2];
+  const activeDensity = DENSITY_PRESETS.find((item) => item.key === densityKey) ?? DENSITY_PRESETS[1];
   const basePalette = PALETTES.find((palette) => palette.key === paletteKey) ?? PALETTES[0];
   const activePalette = paletteKey === CUSTOM_PALETTE_KEY ? buildCustomPalette(customColors) : basePalette;
   const selectedSection = sections.find((section) => section.id === selectedSectionId) ?? sections[0];
@@ -1050,24 +1464,15 @@ function Templates({ content, language }) {
   const sectionLabels = sections.map((section) => ({
     key: section.id,
     label: SECTION_LIBRARY[section.type]?.label ?? section.type,
+    type: section.type,
+    width: section.width,
+    emphasis: section.emphasis,
+    columns: section.columns,
+    alignment: section.alignment,
   }));
   const themeStyle = useMemo(
-    () => ({
-      "--theme-canvas": activePalette.canvas,
-      "--theme-frame": activePalette.frame,
-      "--theme-page": activePalette.page,
-      "--theme-surface": activePalette.surface,
-      "--theme-surface-strong": activePalette.surfaceStrong,
-      "--theme-text": activePalette.text,
-      "--theme-muted": activePalette.muted,
-      "--theme-accent": activePalette.accent,
-      "--theme-accent-soft": activePalette.accentSoft,
-      "--theme-border": activePalette.border,
-      "--theme-hero": activePalette.hero,
-      "--theme-shadow": activePalette.shadow,
-      "--theme-inverse": activePalette.inverse,
-    }),
-    [activePalette],
+    () => getThemeStyleTokens(activePalette, shapeKey, densityKey, surfaceKey),
+    [activePalette, densityKey, shapeKey, surfaceKey],
   );
 
   const designBrief = useMemo(() => {
@@ -1075,18 +1480,37 @@ function Templates({ content, language }) {
       form.note.trim(),
       `Preset: ${activePreset.label}`,
       `Palette: ${activePalette.label}`,
+      `Layout: ${activeLayout.label}`,
+      `Shape: ${activeShape.label}`,
+      `Surface: ${activeSurface.label}`,
+      `Density: ${activeDensity.label}`,
       `Preview: ${previewMode}`,
-      `Sections: ${sectionLabels.map((section) => section.label).join(", ")}`,
+      `Sections: ${sectionLabels.map((section) => `${section.label} (${formatSectionSetting(section)})`).join(", ")}`,
     ].filter(Boolean);
 
     return summaryLines.join("\n\n");
-  }, [activePalette.label, activePreset.label, form.note, previewMode, sectionLabels]);
+  }, [
+    activeDensity.label,
+    activeLayout.label,
+    activePalette.label,
+    activePreset.label,
+    activeShape.label,
+    activeSurface.label,
+    form.note,
+    previewMode,
+    sectionLabels,
+  ]);
 
   const applyPreset = (preset) => {
     const nextSections = instantiateSections(preset.sections);
     const nextPalette = PALETTES.find((palette) => palette.key === preset.defaultPalette) ?? PALETTES[0];
+    const nextThemeSettings = preset.themeSettings ?? defaultThemeSettings;
     setPresetKey(preset.key);
     setPaletteKey(nextPalette.key);
+    setLayoutKey(nextThemeSettings.layout);
+    setShapeKey(nextThemeSettings.shape);
+    setSurfaceKey(nextThemeSettings.surface);
+    setDensityKey(nextThemeSettings.density);
     setCustomColors(paletteToCustomColors(nextPalette));
     setSections(nextSections);
     setSelectedSectionId(nextSections[0]?.id ?? "");
@@ -1110,6 +1534,33 @@ function Templates({ content, language }) {
     setCustomColors(paletteToCustomColors(activePresetPalette));
   };
 
+  const updateSectionStyle = (sectionId, field, value) => {
+    setSections((currentSections) => currentSections.map((section) => (
+      section.id === sectionId
+        ? {
+          ...section,
+          [field]: value,
+        }
+        : section
+    )));
+  };
+
+  const resetSelectedSectionStyle = () => {
+    if (!selectedSection) {
+      return;
+    }
+
+    const defaults = getDefaultSectionOptions(selectedSection.type);
+    setSections((currentSections) => currentSections.map((section) => (
+      section.id === selectedSection.id
+        ? {
+          ...section,
+          ...defaults,
+        }
+        : section
+    )));
+  };
+
   const updateForm = (field, value) => {
     setSent(false);
     setForm((currentForm) => ({
@@ -1125,6 +1576,10 @@ function Templates({ content, language }) {
       palette: activePalette,
       sections: sectionLabels,
       previewMode,
+      layoutProfile: activeLayout,
+      shapeProfile: activeShape,
+      surfaceProfile: activeSurface,
+      densityProfile: activeDensity,
     });
     setSnapshotPreview(png);
     return png;
@@ -1150,7 +1605,14 @@ function Templates({ content, language }) {
       projectType: page.builderLabel,
       brief: designBrief,
       goals: sectionLabels.map((section) => section.label),
-      deliverables: [activePalette.label, page.controls[previewMode]],
+      deliverables: [
+        activePalette.label,
+        activeLayout.label,
+        activeShape.label,
+        activeSurface.label,
+        activeDensity.label,
+        page.controls[previewMode],
+      ],
       designPreviewPng: png,
       templateDesign: {
         language,
@@ -1158,6 +1620,14 @@ function Templates({ content, language }) {
         presetLabel: activePreset.label,
         paletteKey: activePalette.key,
         paletteLabel: activePalette.label,
+        layoutKey: activeLayout.key,
+        layoutLabel: activeLayout.label,
+        shapeKey: activeShape.key,
+        shapeLabel: activeShape.label,
+        surfaceKey: activeSurface.key,
+        surfaceLabel: activeSurface.label,
+        densityKey: activeDensity.key,
+        densityLabel: activeDensity.label,
         previewMode,
         sections: sectionLabels,
       },
@@ -1171,6 +1641,28 @@ function Templates({ content, language }) {
     const nextSection = createSection(type, sections.length);
     setSections((currentSections) => [...currentSections, nextSection]);
     setSelectedSectionId(nextSection.id);
+  };
+
+  const duplicateSection = (id) => {
+    const sourceSection = sections.find((section) => section.id === id);
+    if (!sourceSection) {
+      return;
+    }
+
+    const sourceIndex = sections.findIndex((section) => section.id === id);
+    const duplicate = createSection(sourceSection.type, sections.length, {
+      width: sourceSection.width,
+      emphasis: sourceSection.emphasis,
+      columns: sourceSection.columns,
+      alignment: sourceSection.alignment,
+    });
+
+    setSections((currentSections) => {
+      const nextSections = [...currentSections];
+      nextSections.splice(sourceIndex + 1, 0, duplicate);
+      return nextSections;
+    });
+    setSelectedSectionId(duplicate.id);
   };
 
   const removeSection = (id) => {
@@ -1192,7 +1684,7 @@ function Templates({ content, language }) {
       return;
     }
 
-    setSections(moveItem(sections, index, targetIndex));
+    setSections((currentSections) => moveItem(currentSections, index, targetIndex));
   };
 
   return (
@@ -1208,6 +1700,8 @@ function Templates({ content, language }) {
               <div className="theme-lab-chip-row reveal">
                 <span className="tag">Shopify-style structure</span>
                 <span className="tag">Section control</span>
+                <span className="tag">Layout modes</span>
+                <span className="tag">Shape language</span>
                 <span className="tag">Palette switching</span>
                 <span className="tag">Live storefront preview</span>
               </div>
@@ -1264,6 +1758,46 @@ function Templates({ content, language }) {
                       <span className="theme-preset-badge">{preset.badge}</span>
                       <strong>{preset.label}</strong>
                       <small>{preset.copy}</small>
+                    </button>
+                  ))}
+                </div>
+              </section>
+
+              <section className="theme-panel-section">
+                <div className="theme-panel-title-row">
+                  <strong>{page.controls.layouts ?? "Layout direction"}</strong>
+                  <span>{activeLayout.badge}</span>
+                </div>
+
+                <div className="theme-profile-grid">
+                  {LAYOUT_PRESETS.map((layout) => (
+                    <button
+                      key={layout.key}
+                      className={`theme-preset-card ${layout.key === activeLayout.key ? "is-active" : ""}`}
+                      type="button"
+                      onClick={() => setLayoutKey(layout.key)}
+                    >
+                      <span className="theme-preset-badge">{layout.badge}</span>
+                      <strong>{layout.label}</strong>
+                      <small>{layout.copy}</small>
+                    </button>
+                  ))}
+                </div>
+
+                <div className="theme-panel-title-row">
+                  <strong>{page.controls.density ?? "Content density"}</strong>
+                  <span>{activeDensity.badge}</span>
+                </div>
+
+                <div className="theme-utility-grid">
+                  {DENSITY_PRESETS.map((density) => (
+                    <button
+                      key={density.key}
+                      className={`theme-utility-button ${density.key === activeDensity.key ? "is-active" : ""}`}
+                      type="button"
+                      onClick={() => setDensityKey(density.key)}
+                    >
+                      {density.label}
                     </button>
                   ))}
                 </div>
@@ -1347,6 +1881,48 @@ function Templates({ content, language }) {
 
               <section className="theme-panel-section">
                 <div className="theme-panel-title-row">
+                  <strong>{page.controls.shapes ?? "Shape language"}</strong>
+                  <span>{activeShape.badge}</span>
+                </div>
+
+                <div className="theme-profile-grid">
+                  {SHAPE_PRESETS.map((shape) => (
+                    <button
+                      key={shape.key}
+                      className={`theme-preset-card ${shape.key === activeShape.key ? "is-active" : ""}`}
+                      type="button"
+                      onClick={() => setShapeKey(shape.key)}
+                    >
+                      <span className="theme-preset-badge">{shape.badge}</span>
+                      <strong>{shape.label}</strong>
+                      <small>{shape.copy}</small>
+                    </button>
+                  ))}
+                </div>
+
+                <div className="theme-panel-title-row">
+                  <strong>{page.controls.surfaces ?? "Surface treatment"}</strong>
+                  <span>{activeSurface.badge}</span>
+                </div>
+
+                <div className="theme-profile-grid">
+                  {SURFACE_PRESETS.map((surface) => (
+                    <button
+                      key={surface.key}
+                      className={`theme-preset-card ${surface.key === activeSurface.key ? "is-active" : ""}`}
+                      type="button"
+                      onClick={() => setSurfaceKey(surface.key)}
+                    >
+                      <span className="theme-preset-badge">{surface.badge}</span>
+                      <strong>{surface.label}</strong>
+                      <small>{surface.copy}</small>
+                    </button>
+                  ))}
+                </div>
+              </section>
+
+              <section className="theme-panel-section">
+                <div className="theme-panel-title-row">
                   <strong>{page.controls.activeSections}</strong>
                   <span>{sections.length} {page.controls.inFlow}</span>
                 </div>
@@ -1372,6 +1948,7 @@ function Templates({ content, language }) {
                           <div>
                             <strong>{definition.label}</strong>
                             <small>{definition.description}</small>
+                            <span className="theme-section-meta">{formatSectionSetting(section)}</span>
                           </div>
                         </button>
 
@@ -1391,6 +1968,13 @@ function Templates({ content, language }) {
                             aria-label={`Move ${definition.label} down`}
                           >
                             {page.controls.down}
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => duplicateSection(section.id)}
+                            aria-label={`Duplicate ${definition.label}`}
+                          >
+                            {page.controls.duplicate ?? "Copy"}
                           </button>
                           <button
                             type="button"
@@ -1446,6 +2030,96 @@ function Templates({ content, language }) {
                     <span className="tag">{activePalette.label}</span>
                     <span className="tag">{selectedDefinition?.group ?? page.controls.overview}</span>
                   </div>
+
+                  {selectedSection ? (
+                    <div className="theme-inspector-controls">
+                      <div className="theme-inspector-group">
+                        <span>{page.controls.width ?? "Section width"}</span>
+                        <div className="theme-utility-grid">
+                          {[
+                            { key: "contained", label: page.controls.contained ?? "Contained" },
+                            { key: "wide", label: page.controls.wide ?? "Wide" },
+                            { key: "full", label: page.controls.full ?? "Full" },
+                          ].map((option) => (
+                            <button
+                              key={option.key}
+                              className={`theme-utility-button ${selectedSection.width === option.key ? "is-active" : ""}`}
+                              type="button"
+                              onClick={() => updateSectionStyle(selectedSection.id, "width", option.key)}
+                            >
+                              {option.label}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div className="theme-inspector-group">
+                        <span>{page.controls.emphasis ?? "Section emphasis"}</span>
+                        <div className="theme-utility-grid">
+                          {[
+                            { key: "quiet", label: page.controls.quiet ?? "Quiet" },
+                            { key: "balanced", label: page.controls.balanced ?? "Balanced" },
+                            { key: "spotlight", label: page.controls.spotlight ?? "Spotlight" },
+                          ].map((option) => (
+                            <button
+                              key={option.key}
+                              className={`theme-utility-button ${selectedSection.emphasis === option.key ? "is-active" : ""}`}
+                              type="button"
+                              onClick={() => updateSectionStyle(selectedSection.id, "emphasis", option.key)}
+                            >
+                              {option.label}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div className="theme-inspector-group">
+                        <span>{page.controls.columns ?? "Grid density"}</span>
+                        <div className="theme-utility-grid">
+                          {[
+                            { key: "auto", label: page.controls.auto ?? "Auto" },
+                            { key: "2", label: page.controls.twoColumns ?? "2-up" },
+                            { key: "3", label: page.controls.threeColumns ?? "3-up" },
+                            { key: "4", label: page.controls.fourColumns ?? "4-up" },
+                          ].map((option) => (
+                            <button
+                              key={option.key}
+                              className={`theme-utility-button ${selectedSection.columns === option.key ? "is-active" : ""}`}
+                              type="button"
+                              onClick={() => updateSectionStyle(selectedSection.id, "columns", option.key)}
+                            >
+                              {option.label}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div className="theme-inspector-group">
+                        <span>{page.controls.alignment ?? "Content alignment"}</span>
+                        <div className="theme-utility-grid">
+                          {[
+                            { key: "auto", label: page.controls.auto ?? "Auto" },
+                            { key: "start", label: page.controls.start ?? "Start" },
+                            { key: "center", label: page.controls.center ?? "Center" },
+                            { key: "split", label: page.controls.split ?? "Split" },
+                          ].map((option) => (
+                            <button
+                              key={option.key}
+                              className={`theme-utility-button ${selectedSection.alignment === option.key ? "is-active" : ""}`}
+                              type="button"
+                              onClick={() => updateSectionStyle(selectedSection.id, "alignment", option.key)}
+                            >
+                              {option.label}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+
+                      <button className="theme-utility-button" type="button" onClick={resetSelectedSectionStyle}>
+                        {page.controls.resetSection ?? "Reset section styling"}
+                      </button>
+                    </div>
+                  ) : null}
                 </article>
               </section>
             </aside>
@@ -1476,11 +2150,18 @@ function Templates({ content, language }) {
                         {item}
                       </span>
                     ))}
+                    <span className="tag">{activeLayout.label}</span>
+                    <span className="tag">{activeShape.label}</span>
+                    <span className="tag">{activeSurface.label}</span>
+                    <span className="tag">{activeDensity.label}</span>
                   </div>
                 </div>
               </article>
 
-              <article className="theme-browser-shell reveal" style={themeStyle}>
+              <article
+                className={`theme-browser-shell reveal theme-shape-${shapeKey} theme-surface-${surfaceKey}`}
+                style={themeStyle}
+              >
                 <div className="theme-browser-bar">
                   <div className="theme-browser-dots" aria-hidden="true">
                     <span />
@@ -1491,7 +2172,9 @@ function Templates({ content, language }) {
                 </div>
 
                 <div className={`theme-browser-canvas is-${previewMode}`}>
-                  <div className={`theme-store-preview is-${previewMode}`}>
+                  <div
+                    className={`theme-store-preview is-${previewMode} layout-${layoutKey} density-${densityKey} surface-${surfaceKey}`}
+                  >
                     <header className="theme-store-nav">
                       <strong>{page.preview.brand}</strong>
                       <nav>
@@ -1549,6 +2232,14 @@ function Templates({ content, language }) {
                   <div className="theme-summary-card">
                     <strong>{activePalette.label}</strong>
                     <span>{page.summary.colorDirection}</span>
+                  </div>
+                  <div className="theme-summary-card">
+                    <strong>{activeLayout.label}</strong>
+                    <span>{page.summary.layoutDirection ?? "Layout direction"}</span>
+                  </div>
+                  <div className="theme-summary-card">
+                    <strong>{activeShape.label}</strong>
+                    <span>{page.summary.shapeLanguage ?? "Shape language"}</span>
                   </div>
                   <div className="theme-summary-card">
                     <strong>{selectedDefinition?.label ?? page.controls.overview}</strong>

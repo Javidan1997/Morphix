@@ -140,6 +140,26 @@ function AdminInquiries() {
                         <strong>Palette:</strong> {inquiry.templateDesign.paletteLabel}
                       </p>
                     ) : null}
+                    {inquiry.templateDesign?.layoutLabel ? (
+                      <p>
+                        <strong>Layout:</strong> {inquiry.templateDesign.layoutLabel}
+                      </p>
+                    ) : null}
+                    {inquiry.templateDesign?.shapeLabel ? (
+                      <p>
+                        <strong>Shape:</strong> {inquiry.templateDesign.shapeLabel}
+                      </p>
+                    ) : null}
+                    {inquiry.templateDesign?.surfaceLabel ? (
+                      <p>
+                        <strong>Surface:</strong> {inquiry.templateDesign.surfaceLabel}
+                      </p>
+                    ) : null}
+                    {inquiry.templateDesign?.densityLabel ? (
+                      <p>
+                        <strong>Density:</strong> {inquiry.templateDesign.densityLabel}
+                      </p>
+                    ) : null}
                     {inquiry.templateDesign?.previewMode ? (
                       <p>
                         <strong>Preview:</strong> {inquiry.templateDesign.previewMode}
@@ -148,7 +168,9 @@ function AdminInquiries() {
                     {Array.isArray(inquiry.templateDesign?.sections) && inquiry.templateDesign.sections.length ? (
                       <p>
                         <strong>Sections:</strong>{" "}
-                        {inquiry.templateDesign.sections.map((section) => section.label).join(", ")}
+                        {inquiry.templateDesign.sections.map((section) => (
+                          `${section.label}${section.width ? ` (${section.width} · ${section.emphasis} · ${section.columns} · ${section.alignment})` : ""}`
+                        )).join(", ")}
                       </p>
                     ) : null}
                   </div>
