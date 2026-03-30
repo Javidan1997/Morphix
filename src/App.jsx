@@ -17,6 +17,7 @@ import Pricing from "./pages/Pricing";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Playground from "./pages/Playground";
+import Templates from "./pages/Templates";
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
 import AdminContentEditor from "./pages/AdminContentEditor";
@@ -92,6 +93,7 @@ function App() {
           <Route path="/work" element={<Work content={content} />} />
           <Route path="/pricing" element={<Pricing content={content} />} />
           <Route path="/playground" element={<Playground content={content} />} />
+          <Route path="/templates" element={<Templates content={content} language={language} />} />
           <Route path="/about" element={<About content={content} />} />
           <Route path="/contact" element={<Contact content={content} />} />
           <Route path="/admin/login" element={<AdminLogin />} />

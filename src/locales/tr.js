@@ -19,6 +19,7 @@ const tr = {
     home: "Ana Sayfa",
     services: "Hizmetler",
     playground: "Playground",
+    templates: "Sablonlar",
     work: "Çalışmalar",
     pricing: "Fiyatlandırma",
     about: "Hakkımızda",

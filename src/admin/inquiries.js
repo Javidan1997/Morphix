@@ -58,6 +58,12 @@ export function createInquiry(payload) {
     deliverables: Array.isArray(payload.deliverables) ? payload.deliverables : [],
     timeline: payload.timeline ?? "",
     budget: payload.budget ?? "",
+    designPreviewPng: payload.designPreviewPng ?? "",
+    templateDesign:
+      payload.templateDesign && typeof payload.templateDesign === "object"
+        ? payload.templateDesign
+        : null,
+    language: payload.language ?? "",
   };
 
   return persistInquiries([nextInquiry, ...readInquiries()])[0];

@@ -119,6 +119,42 @@ function AdminInquiries() {
 
               {inquiry.brief ? <p className="admin-inquiry-brief">{inquiry.brief}</p> : null}
 
+              {inquiry.designPreviewPng || inquiry.templateDesign ? (
+                <div className="admin-inquiry-design">
+                  {inquiry.designPreviewPng ? (
+                    <img
+                      className="admin-inquiry-thumb"
+                      src={inquiry.designPreviewPng}
+                      alt={inquiry.templateDesign?.presetLabel ?? "Template preview"}
+                    />
+                  ) : null}
+
+                  <div className="admin-inquiry-design-meta">
+                    {inquiry.templateDesign?.presetLabel ? (
+                      <p>
+                        <strong>Preset:</strong> {inquiry.templateDesign.presetLabel}
+                      </p>
+                    ) : null}
+                    {inquiry.templateDesign?.paletteLabel ? (
+                      <p>
+                        <strong>Palette:</strong> {inquiry.templateDesign.paletteLabel}
+                      </p>
+                    ) : null}
+                    {inquiry.templateDesign?.previewMode ? (
+                      <p>
+                        <strong>Preview:</strong> {inquiry.templateDesign.previewMode}
+                      </p>
+                    ) : null}
+                    {Array.isArray(inquiry.templateDesign?.sections) && inquiry.templateDesign.sections.length ? (
+                      <p>
+                        <strong>Sections:</strong>{" "}
+                        {inquiry.templateDesign.sections.map((section) => section.label).join(", ")}
+                      </p>
+                    ) : null}
+                  </div>
+                </div>
+              ) : null}
+
               {(inquiry.goals.length || inquiry.deliverables.length || inquiry.projectType || inquiry.productStage) ? (
                 <div className="admin-chip-row">
                   {inquiry.projectType ? <span className="chip">{inquiry.projectType}</span> : null}

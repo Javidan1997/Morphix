@@ -51,6 +51,7 @@ function Header({ language, setLanguage }) {
     { to: "/", label: content.nav.home },
     { to: "/services", label: content.nav.services },
     { to: "/playground", label: content.nav.playground },
+    { to: "/templates", label: content.nav.templates ?? "Templates" },
     { to: "/work", label: content.nav.work },
     { to: "/pricing", label: content.nav.pricing },
     { to: "/about", label: content.nav.about },

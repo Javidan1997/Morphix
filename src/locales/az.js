@@ -19,6 +19,7 @@ const az = {
     home: "Ana səhifə",
     services: "Xidmətlər",
     playground: "Playground",
+    templates: "Şablonlar",
     work: "İşlər",
     pricing: "Qiymətlər",
     about: "Haqqımızda",

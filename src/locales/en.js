@@ -19,6 +19,7 @@ const en = {
     home: "Home",
     services: "Services",
     playground: "Playground",
+    templates: "Templates",
     work: "Work",
     pricing: "Pricing",
     about: "About",

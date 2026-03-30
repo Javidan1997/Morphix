@@ -1,40 +1,113 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" width="96" height="96">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" width="160" height="160">
   <defs>
-    <linearGradient id="tileGrad" x1="12%" y1="10%" x2="88%" y2="90%">
-      <stop offset="0%" stop-color="#132844"/>
-      <stop offset="52%" stop-color="#123A67"/>
-      <stop offset="100%" stop-color="#11589A"/>
+    <linearGradient id="glassTop" x1="10%" y1="0%" x2="90%" y2="100%">
+      <stop offset="0%" stop-color="#F7FCFF" stop-opacity="0.96"/>
+      <stop offset="100%" stop-color="#9FDEFF" stop-opacity="0.9"/>
     </linearGradient>
-    <linearGradient id="markTop" x1="18%" y1="18%" x2="90%" y2="90%">
-      <stop offset="0%" stop-color="#E8FDFF"/>
-      <stop offset="100%" stop-color="#7EDBFF"/>
+    <linearGradient id="glassLeft" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#85E1FF" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#34BAFF" stop-opacity="0.72"/>
     </linearGradient>
-    <linearGradient id="markSide" x1="12%" y1="12%" x2="88%" y2="100%">
-      <stop offset="0%" stop-color="#69EDFF"/>
-      <stop offset="100%" stop-color="#2493F2"/>
+    <linearGradient id="glassRight" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#41C9FF" stop-opacity="0.94"/>
+      <stop offset="100%" stop-color="#1595F4" stop-opacity="0.82"/>
     </linearGradient>
-    <linearGradient id="markBottom" x1="0%" y1="20%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#76F3D7"/>
-      <stop offset="100%" stop-color="#33A6FF"/>
+
+    <linearGradient id="blueTop" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#47B8FF"/>
+      <stop offset="100%" stop-color="#1B78F2"/>
     </linearGradient>
-    <filter id="tileShadow" x="-25%" y="-25%" width="150%" height="160%">
-      <feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#06101F" flood-opacity="0.22"/>
+    <linearGradient id="blueFront" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1979F6"/>
+      <stop offset="100%" stop-color="#0A4DBC"/>
+    </linearGradient>
+    <linearGradient id="blueSide" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2E98FF"/>
+      <stop offset="100%" stop-color="#1464D5"/>
+    </linearGradient>
+
+    <linearGradient id="orangeTop" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFC843"/>
+      <stop offset="100%" stop-color="#FF8A00"/>
+    </linearGradient>
+    <linearGradient id="orangeFront" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF990A"/>
+      <stop offset="100%" stop-color="#FF7600"/>
+    </linearGradient>
+    <linearGradient id="orangeSide" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFB31F"/>
+      <stop offset="100%" stop-color="#FF8A00"/>
+    </linearGradient>
+
+    <linearGradient id="purpleTop" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#5B2D96"/>
+      <stop offset="100%" stop-color="#3A1B66"/>
+    </linearGradient>
+    <linearGradient id="purpleFront" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF55E6"/>
+      <stop offset="100%" stop-color="#9627D6"/>
+    </linearGradient>
+    <linearGradient id="purpleSide" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7C36D8"/>
+      <stop offset="100%" stop-color="#421678"/>
+    </linearGradient>
+
+    <linearGradient id="slateTop" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#5D617E"/>
+      <stop offset="100%" stop-color="#2C3049"/>
+    </linearGradient>
+    <linearGradient id="slateFront" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#252944"/>
+      <stop offset="100%" stop-color="#161A2E"/>
+    </linearGradient>
+    <linearGradient id="slateSide" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6B7090"/>
+      <stop offset="100%" stop-color="#30354F"/>
+    </linearGradient>
+
+    <filter id="glowTop" x="-120%" y="-120%" width="340%" height="340%">
+      <feDropShadow dx="0" dy="0" stdDeviation="10" flood-color="#54C9FF" flood-opacity="0.92"/>
+      <feDropShadow dx="0" dy="0" stdDeviation="22" flood-color="#BDEEFF" flood-opacity="0.62"/>
+    </filter>
+    <filter id="stackShadow" x="-30%" y="-30%" width="170%" height="200%">
+      <feDropShadow dx="0" dy="12" stdDeviation="10" flood-color="#07111E" flood-opacity="0.32"/>
     </filter>
   </defs>
 
-  <g filter="url(#tileShadow)">
-    <rect x="8" y="8" width="80" height="80" rx="24" fill="url(#tileGrad)"/>
-    <rect x="8.5" y="8.5" width="79" height="79" rx="23.5" fill="none" stroke="rgba(255,255,255,0.14)"/>
+  <ellipse cx="80" cy="129" rx="50" ry="12" fill="#07111E" fill-opacity="0.18"/>
 
-    <polygon points="30,26 57,26 69,32 56,39 29,39 18,33" fill="url(#markTop)"/>
-    <polygon points="18,33 29,39 29,57 18,63 12,59 12,38" fill="url(#markSide)"/>
-    <polygon points="29,57 56,57 69,63 57,70 30,70 18,63" fill="url(#markBottom)"/>
+  <g filter="url(#stackShadow)">
+    <polygon points="34,98 78,84 124,100 80,114" fill="url(#purpleTop)"/>
+    <polygon points="34,98 34,120 80,138 80,114" fill="url(#slateFront)"/>
+    <polygon points="80,114 124,100 124,122 80,138" fill="url(#purpleSide)"/>
 
-    <polygon points="55,41 69,48 55,55 41,48" fill="#FFFFFF"/>
+    <polygon points="18,84 38,78 58,86 38,92" fill="url(#slateTop)"/>
+    <polygon points="18,84 18,107 38,115 38,92" fill="url(#slateFront)"/>
+    <polygon points="38,92 58,86 58,109 38,115" fill="url(#slateSide)"/>
 
-    <line x1="18" y1="33" x2="29" y2="39" stroke="rgba(255,255,255,0.18)" stroke-width="1"/>
-    <line x1="18" y1="63" x2="29" y2="57" stroke="rgba(255,255,255,0.16)" stroke-width="1"/>
-    <line x1="29" y1="39" x2="29" y2="57" stroke="rgba(255,255,255,0.14)" stroke-width="1"/>
+    <polygon points="34,56 56,49 80,58 58,66" fill="url(#blueTop)"/>
+    <polygon points="34,56 34,82 58,91 58,66" fill="url(#blueFront)"/>
+    <polygon points="58,66 80,58 80,84 58,91" fill="url(#blueSide)"/>
+
+    <polygon points="72,56 96,48 120,57 96,65" fill="url(#orangeTop)"/>
+    <polygon points="72,56 72,82 96,92 96,65" fill="url(#orangeFront)"/>
+    <polygon points="96,65 120,57 120,83 96,92" fill="url(#orangeSide)"/>
+  </g>
+
+  <g filter="url(#glowTop)">
+    <polygon points="59,24 82,16 106,24 82,33" fill="url(#glassTop)"/>
+    <polygon points="59,24 59,57 82,68 82,33" fill="url(#glassLeft)"/>
+    <polygon points="82,33 106,24 106,57 82,68" fill="url(#glassRight)"/>
+    <polyline points="59,24 82,33 106,24" fill="none" stroke="#F2FBFF" stroke-opacity="0.86" stroke-width="1.8"/>
+    <line x1="82" y1="16" x2="82" y2="68" stroke="#F2FBFF" stroke-opacity="0.82" stroke-width="1.8"/>
+    <polyline points="59,57 82,68 106,57" fill="none" stroke="#86DEFF" stroke-opacity="0.56" stroke-width="1.4"/>
+  </g>
+
+  <g fill="none" stroke="#FFFFFF" stroke-opacity="0.72" stroke-width="1.5">
+    <polyline points="34,56 58,66 58,91"/>
+    <polyline points="72,56 96,65 96,92"/>
+    <polyline points="34,98 80,114 124,100"/>
+    <polyline points="18,84 38,92 38,115"/>
   </g>
 </svg>

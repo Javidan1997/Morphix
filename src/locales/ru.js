@@ -19,6 +19,7 @@ const ru = {
     home: "Главная",
     services: "Услуги",
     playground: "Playground",
+    templates: "Шаблоны",
     work: "Работы",
     pricing: "Цены",
     about: "О нас",

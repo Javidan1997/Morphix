@@ -42,6 +42,7 @@ export const STATUS_OPTIONS = [
 export const SOURCE_LABELS = {
   "home-form": "Quick enquiry",
   "contact-wizard": "Project intake",
+  "templates-studio": "Templates studio",
   website: "Website form",
 };
 
