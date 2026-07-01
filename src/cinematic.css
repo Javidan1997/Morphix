@@ -87,6 +87,7 @@ body { background: #08090c; }
 .page-shell .mobile-nav-toggle span { background: var(--text); }
 /* Logo is dark artwork — render it light on the dark theme */
 .page-shell .brand-lockup img { filter: brightness(0) invert(1); }
+.page-shell .footer-logo img { filter: none; }
 
 /* ---- Buttons ---- */
 .page-shell .primary-button,

@@ -360,7 +360,7 @@ const en = {
   workPage: {
     eyebrow: "Work",
     headline: "Real projects we've designed, built, and shipped.",
-    copy: "A selection of work across software, automation, and visualization, from apps and 3D configurators to product launches and CRM systems. Click any project to open the full gallery.",
+    copy: "A selection of work across software, automation, and visualization: web apps, mobile/POS workflows, CRM systems, AI automations, 3D configurators, product launches, and render packages.",
     projects: [
       {
         name: "Pergola Configurator System",

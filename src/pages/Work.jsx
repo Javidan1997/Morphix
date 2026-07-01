@@ -49,19 +49,27 @@ function Work({ content }) {
           <div className="work-projects">
             {visibleProjects.map((project, i) => (
               <article
-                className="work-project reveal"
+                className={`work-project reveal${project.kind === "digital" ? " is-digital" : ""}`}
                 key={project.slug}
                 style={{ transitionDelay: `${(i % 3) * 0.08}s` }}
               >
-                <button
-                  type="button"
-                  className="work-project-cover"
-                  onClick={() => openLightbox(project.images, 0)}
-                  aria-label={`Open ${project.name} gallery`}
-                >
-                  <img src={project.images[0].src} alt={project.images[0].alt} loading="lazy" />
-                  <span className="work-project-zoom" aria-hidden="true">View gallery</span>
-                </button>
+                {project.kind === "digital" ? (
+                  <div className="work-digital-card" aria-hidden="true">
+                    <span>{project.category === "automation" ? "Automation" : "Software"}</span>
+                    <strong>{project.name}</strong>
+                    <p>{project.platform}</p>
+                  </div>
+                ) : (
+                  <button
+                    type="button"
+                    className="work-project-cover"
+                    onClick={() => openLightbox(project.images, 0)}
+                    aria-label={`Open ${project.name} gallery`}
+                  >
+                    <img src={project.images[0].src} alt={project.images[0].alt} loading="lazy" />
+                    <span className="work-project-zoom" aria-hidden="true">View gallery</span>
+                  </button>
+                )}
 
                 <div className="work-project-meta">
                   <div className="work-project-head">
@@ -75,7 +83,13 @@ function Work({ content }) {
                       <span className="tag" key={tag}>{tag}</span>
                     ))}
                   </div>
-                  {project.images.length > 1 ? (
+                  {project.kind === "digital" ? (
+                    <div className="work-project-details">
+                      <p><strong>Platform:</strong> {project.platform}</p>
+                      <p><strong>Result:</strong> {project.outcome}</p>
+                    </div>
+                  ) : null}
+                  {project.images?.length > 1 ? (
                     <div className="work-project-thumbs">
                       {project.images.slice(1).map((image, idx) => (
                         <button

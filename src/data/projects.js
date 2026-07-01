@@ -14,6 +14,8 @@ const jimg = (slug, n, alt) => ({
 
 export const projectCategories = [
   { id: "all", label: "All work" },
+  { id: "software", label: "Web, Mobile & POS" },
+  { id: "automation", label: "CRM & AI Automation" },
   { id: "residential", label: "Residential" },
   { id: "hospitality", label: "Hospitality & Retail" },
   { id: "urban", label: "Urban & Mixed-Use" },
@@ -23,7 +25,7 @@ export const projectCategories = [
 export const projects = [
   {
     slug: "pergolade",
-    name: "Pergolade — Louvered Pergola System",
+    name: "Pergolade-Louvered Pergola System",
     category: "product",
     type: "Product · 3D Configurator & Renders",
     summary:
@@ -38,6 +40,84 @@ export const projects = [
       jimg("pergolade", 5, "Pergolade pergola with sofa and side tables under lit aluminium louvers"),
       jimg("pergolade", 6, "White Pergolade pergola with privacy screens attached to a suburban home"),
     ],
+  },
+  {
+    slug: "glass-group-operations",
+    name: "Glass Group Operations Portal",
+    category: "software",
+    kind: "digital",
+    type: "Web App - Quoting & Operations",
+    summary:
+      "A practical operations build for a glass and installation team: enquiry capture, quote preparation, project stages, and handoff notes in one place so jobs do not live across WhatsApp, spreadsheets, and memory.",
+    scope: ["Client intake", "Quote workflow", "Job status board", "Team handoff"],
+    platform: "React, Supabase-ready data model, CRM handoff",
+    outcome: "Cleaner lead-to-quote flow and fewer missed follow-ups between sales and operations.",
+    year: "2025",
+  },
+  {
+    slug: "pergolast-sales-system",
+    name: "Pergolast Sales & CRM Automation",
+    category: "automation",
+    kind: "digital",
+    type: "CRM Automation - Outdoor Products",
+    summary:
+      "A lead-routing and follow-up system for an outdoor product business, connecting website enquiries, product interest, sales stages, and reminder sequences so every request receives a consistent next step.",
+    scope: ["Lead routing", "Pipeline setup", "Follow-up sequences", "Reporting views"],
+    platform: "GoHighLevel / Zoho-style workflow, forms, automations",
+    outcome: "A repeatable sales process for product enquiries, dealer requests, and installation conversations.",
+    year: "2025",
+  },
+  {
+    slug: "railbuild-custom-platform",
+    name: "RailBuild Custom Platform",
+    category: "software",
+    kind: "digital",
+    type: "Custom Web Platform - Construction",
+    summary:
+      "A construction-focused platform concept for RailBuild-style teams: project intake, document collection, quote stages, supplier notes, and client updates built around the way trade teams actually work.",
+    scope: ["Project dashboard", "Document flow", "Client updates", "Admin controls"],
+    platform: "Custom web app, role-based views, automation hooks",
+    outcome: "A single source of truth for projects that would otherwise be split across email threads and files.",
+    year: "2025",
+  },
+  {
+    slug: "meze-pos-app",
+    name: "Meze POS & Restaurant Workflow",
+    category: "software",
+    kind: "digital",
+    type: "POS App - Hospitality",
+    summary:
+      "A restaurant workflow build shaped around real service pressure: table flow, menu items, modifiers, kitchen notes, payment state, and simple manager visibility without unnecessary enterprise clutter.",
+    scope: ["POS interface", "Menu management", "Kitchen notes", "Daily reporting"],
+    platform: "Web/mobile POS interface, responsive admin, automation-ready exports",
+    outcome: "Faster order handling and a cleaner bridge between front-of-house, kitchen, and management.",
+    year: "2025",
+  },
+  {
+    slug: "ai-client-automation-suite",
+    name: "AI Client Automation Suite",
+    category: "automation",
+    kind: "digital",
+    type: "AI Automation - Multi-Platform",
+    summary:
+      "Custom automation for teams that want AI to support the business without turning it into a gimmick: lead summaries, reply drafts, CRM updates, internal task creation, and handoff notes that match how the client wants to work.",
+    scope: ["AI summaries", "CRM updates", "Task creation", "Custom prompts"],
+    platform: "OpenAI workflows, Zapier/Make-style automations, CRM integrations",
+    outcome: "Less manual admin after every call, form submission, or customer conversation.",
+    year: "2026",
+  },
+  {
+    slug: "education-demo-platform",
+    name: "Live Demo Learning Platform",
+    category: "software",
+    kind: "digital",
+    type: "Educational Demo - Interactive Web",
+    summary:
+      "A live demo section designed for educational content: interactive product scenes, guided explanations, saved examples, and simple calls to action that let people learn before they book a project.",
+    scope: ["Live demo UX", "Interactive lessons", "Lead capture", "Content structure"],
+    platform: "React, WebGL demos, SEO-prerendered articles",
+    outcome: "More useful interactions from visitors who want to understand configurators before they buy one.",
+    year: "2026",
   },
   {
     slug: "building",
@@ -209,5 +289,5 @@ export const featuredProjects = projects.filter((p) =>
 );
 
 export const allProjectImages = projects.flatMap((p) =>
-  p.images.map((image) => ({ ...image, project: p.name, slug: p.slug })),
+  (p.images ?? []).map((image) => ({ ...image, project: p.name, slug: p.slug })),
 );

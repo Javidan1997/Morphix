@@ -22,9 +22,9 @@ export const pageSeo = {
     "/work": {
       title: "Work — Apps, Configurators & 3D Visualization Projects | Configuro",
       description:
-        "Selected work across software, automation and visualization — 3D configurators, product launches, CRM systems, and photoreal architectural and product renders.",
+        "Selected work across web apps, mobile and POS workflows, CRM automation, AI systems, 3D configurators, product launches, and photoreal architectural and product renders.",
       keywords:
-        "3D configurator examples, product website portfolio, architectural visualization, CRM automation case study",
+        "web app portfolio, mobile app portfolio, POS app development, CRM automation case study, AI automation, 3D configurator examples, product website portfolio, architectural visualization",
     },
     "/pricing": {
       title: "Pricing — Project, Retainer & Custom Engagements | Configuro",
@@ -59,8 +59,8 @@ export const pageSeo = {
     "/insights": {
       title: "Insights — App, CRM Automation & 3D Guides | Configuro",
       description:
-        "Practical guides on 3D configurators, CRM automation with Zoho, GoHighLevel and HubSpot, app development, and product visualization.",
-      keywords: "3D configurator guide, CRM automation guide, app development blog",
+        "Practical guides on 3D configurators, live demos, CRM automation with Zoho, GoHighLevel and HubSpot, POS apps, app development, AI automation, and product visualization.",
+      keywords: "3D configurator guide, CRM automation guide, app development blog, POS app development, AI automation, live product demo SEO",
     },
     "/portal": {
       title: "Client Portal | Configuro",
