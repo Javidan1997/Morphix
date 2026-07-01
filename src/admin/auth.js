@@ -27,6 +27,10 @@ function writeSessionTo(storageKey, storageType, session) {
   storage.setItem(storageKey, JSON.stringify(session));
 }
 
+export function clearStoredAdminSession() {
+  clearAdminSession();
+}
+
 export function getAdminCredentialConfig() {
   const hasCustomCredentials = Boolean(
     import.meta.env.VITE_ADMIN_EMAIL && import.meta.env.VITE_ADMIN_PASSWORD,

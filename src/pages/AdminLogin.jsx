@@ -13,6 +13,7 @@ function AdminLogin() {
     remember: true,
   });
   const [error, setError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const redirectPath = location.state?.from || "/admin/forms";
 
@@ -25,10 +26,12 @@ function AdminLogin() {
     setForm((current) => ({ ...current, [field]: value }));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    setIsSubmitting(true);
 
-    const result = login(form);
+    const result = await login(form);
+    setIsSubmitting(false);
     if (!result.ok) {
       setError(result.error);
       return;
@@ -111,16 +114,16 @@ function AdminLogin() {
 
             {error ? <p className="admin-form-error">{error}</p> : null}
 
-            <button className="primary-button admin-login-submit" type="submit">
-              Open admin panel
+            <button className="primary-button admin-login-submit" type="submit" disabled={isSubmitting}>
+              {isSubmitting ? "Signing in..." : "Open admin panel"}
             </button>
           </form>
 
           <div className="admin-login-note">
             <strong>Setup note</strong>
             <p>
-              This version uses client-side credentials and browser storage for local management.
-              Set <code>VITE_ADMIN_EMAIL</code> and <code>VITE_ADMIN_PASSWORD</code> before deployment.
+              Production uses Supabase Auth when Supabase variables are configured. Local fallback
+              credentials are only for development.
             </p>
           </div>
         </section>

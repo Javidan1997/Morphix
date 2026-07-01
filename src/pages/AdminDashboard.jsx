@@ -1,15 +1,18 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AdminShell from "../components/AdminShell";
+import { useAdminAuth } from "../admin/AdminAuthContext";
 import {
   SOURCE_LABELS,
   STATUS_OPTIONS,
   formatDate,
 } from "../admin/adminConfig";
 import {
-  createInquiry,
+  createInquiryAsync,
   readInquiries,
+  readInquiriesAsync,
   updateInquiryStatus,
+  updateInquiryStatusAsync,
 } from "../admin/inquiries";
 
 const VIEW_COPY = {
@@ -55,10 +58,13 @@ function getInquiryDate(value) {
 function AdminDashboard({ view = "forms" }) {
   const activeView = VIEW_COPY[view] ? view : "forms";
   const navigate = useNavigate();
+  const { session } = useAdminAuth();
   const [filter, setFilter] = useState("all");
   const [inquiries, setInquiries] = useState(() => readInquiries());
   const [manualLead, setManualLead] = useState(INITIAL_MANUAL_LEAD);
   const [formMessage, setFormMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(Boolean(session?.accessToken));
+  const [adminError, setAdminError] = useState("");
 
   const now = Date.now();
   const weekAgo = now - (7 * 24 * 60 * 60 * 1000);
@@ -113,12 +119,29 @@ function AdminDashboard({ view = "forms" }) {
     setManualLead(INITIAL_MANUAL_LEAD);
   };
 
+  const refreshInquiries = async () => {
+    setIsLoading(true);
+    setAdminError("");
+    try {
+      const nextInquiries = await readInquiriesAsync(session);
+      setInquiries(nextInquiries);
+    } catch (error) {
+      setAdminError(error instanceof Error ? error.message : "Could not load inquiries.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    refreshInquiries();
+  }, [session?.accessToken]);
+
   const updateManualLead = (field, value) => {
     setFormMessage("");
     setManualLead((current) => ({ ...current, [field]: value }));
   };
 
-  const handleManualLeadSubmit = (event) => {
+  const handleManualLeadSubmit = async (event) => {
     event.preventDefault();
 
     if (!manualLead.fullName.trim() || !manualLead.email.trim()) {
@@ -126,20 +149,41 @@ function AdminDashboard({ view = "forms" }) {
       return;
     }
 
-    createInquiry({
-      ...manualLead,
-      source: "manual-entry",
-      goals: [],
-      deliverables: [],
-    });
+    try {
+      await createInquiryAsync({
+        ...manualLead,
+        source: "manual-entry",
+        goals: [],
+        deliverables: [],
+      }, session);
 
-    setInquiries(readInquiries());
-    resetManualLead();
-    setFormMessage("Lead added to the form inbox.");
+      await refreshInquiries();
+      resetManualLead();
+      setFormMessage("Lead added to the form inbox.");
+    } catch (error) {
+      setFormMessage(error instanceof Error ? error.message : "Could not add lead.");
+    }
   };
 
-  const handleStatusChange = (inquiryId, status) => {
-    setInquiries(updateInquiryStatus(inquiryId, status));
+  const handleStatusChange = async (inquiryId, status) => {
+    const previousInquiries = inquiries;
+    setInquiries((current) => current.map((inquiry) => (
+      inquiry.id === inquiryId ? { ...inquiry, status } : inquiry
+    )));
+
+    try {
+      const updatedInquiry = await updateInquiryStatusAsync(inquiryId, status, session);
+      if (updatedInquiry) {
+        setInquiries((current) => current.map((inquiry) => (
+          inquiry.id === inquiryId ? updatedInquiry : inquiry
+        )));
+      } else if (!session?.accessToken) {
+        setInquiries(updateInquiryStatus(inquiryId, status));
+      }
+    } catch (error) {
+      setInquiries(previousInquiries);
+      setAdminError(error instanceof Error ? error.message : "Could not update status.");
+    }
   };
 
   return (
@@ -153,6 +197,7 @@ function AdminDashboard({ view = "forms" }) {
       ]}
     >
       <section className="admin-section">
+        {adminError ? <p className="admin-form-error">{adminError}</p> : null}
         <div className="admin-focus-tabs" aria-label="Admin sections">
           {VIEW_TABS.map((tab) => (
             <button
@@ -175,6 +220,7 @@ function AdminDashboard({ view = "forms" }) {
             </article>
           ))}
         </div>
+        {isLoading ? <p className="admin-form-feedback">Loading latest inquiries...</p> : null}
       </section>
 
       {activeView === "forms" ? (

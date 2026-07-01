@@ -1,5 +1,10 @@
 import { syncInquiryToErpNext } from './erpnextSync';
-import { insertSupabaseInquiry } from './supabaseInquiries';
+import {
+  insertSupabaseInquiry,
+  isSupabaseConfigured,
+  readSupabaseInquiries,
+  updateSupabaseInquiryStatus,
+} from './supabaseInquiries';
 
 const INQUIRIES_STORAGE_KEY = "morphix.admin.inquiries.v1";
 
@@ -43,7 +48,7 @@ export function readInquiries() {
   }
 }
 
-export function createInquiry(payload) {
+function createSavedInquiry(payload) {
   const nextInquiry = {
     id: createInquiryId(),
     status: "new",
@@ -69,7 +74,42 @@ export function createInquiry(payload) {
     language: payload.language ?? "",
   };
 
-  const savedInquiry = persistInquiries([nextInquiry, ...readInquiries()])[0];
+  return persistInquiries([nextInquiry, ...readInquiries()])[0];
+}
+
+export function createInquiry(payload) {
+  const savedInquiry = createSavedInquiry(payload);
+
+  insertSupabaseInquiry(savedInquiry).catch((error) => {
+    console.warn("Configuro inquiry saved locally but Supabase sync failed.", error);
+  });
+
+  syncInquiryToErpNext(savedInquiry).catch((error) => {
+    console.warn("Configuro inquiry saved locally but ERPNext sync failed.", error);
+  });
+
+  return savedInquiry;
+}
+
+export async function readInquiriesAsync(session) {
+  if (isSupabaseConfigured() && session?.accessToken) {
+    return readSupabaseInquiries(session);
+  }
+
+  return readInquiries();
+}
+
+export async function createInquiryAsync(payload, session) {
+  const savedInquiry = createSavedInquiry(payload);
+
+  if (isSupabaseConfigured() && session?.accessToken) {
+    const result = await insertSupabaseInquiry(savedInquiry, session);
+    const inquiry = result.inquiry || savedInquiry;
+    syncInquiryToErpNext(inquiry).catch((error) => {
+      console.warn("Configuro inquiry saved but ERPNext sync failed.", error);
+    });
+    return inquiry;
+  }
 
   insertSupabaseInquiry(savedInquiry).catch((error) => {
     console.warn("Configuro inquiry saved locally but Supabase sync failed.", error);
@@ -94,4 +134,13 @@ export function updateInquiryStatus(inquiryId, status) {
   ));
 
   return persistInquiries(nextInquiries);
+}
+
+export async function updateInquiryStatusAsync(inquiryId, status, session) {
+  if (isSupabaseConfigured() && session?.accessToken) {
+    const updatedInquiry = await updateSupabaseInquiryStatus(inquiryId, status, session);
+    return updatedInquiry;
+  }
+
+  return updateInquiryStatus(inquiryId, status).find((inquiry) => inquiry.id === inquiryId) || null;
 }

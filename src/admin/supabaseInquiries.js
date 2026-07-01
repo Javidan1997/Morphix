@@ -1,20 +1,13 @@
-const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL?.replace(/\/$/, "");
-const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
+import {
+  getSupabaseRows,
+  isSupabaseConfigured,
+  patchSupabaseRow,
+  postSupabaseRow,
+} from "./supabaseClient";
 
-export function isSupabaseConfigured() {
-  return Boolean(SUPABASE_URL && SUPABASE_ANON_KEY);
-}
+export { isSupabaseConfigured };
 
-function buildHeaders() {
-  return {
-    apikey: SUPABASE_ANON_KEY,
-    Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
-    "Content-Type": "application/json",
-    Prefer: "return=minimal",
-  };
-}
-
-function toSupabaseInquiry(inquiry) {
+export function toSupabaseInquiry(inquiry) {
   return {
     created_at: inquiry.receivedAt,
     status: inquiry.status || "new",
@@ -40,19 +33,69 @@ function toSupabaseInquiry(inquiry) {
   };
 }
 
-export async function insertSupabaseInquiry(inquiry) {
+export function fromSupabaseInquiry(row) {
+  const metadata = row?.metadata || {};
+
+  return {
+    id: row.id,
+    status: row.status || "new",
+    receivedAt: row.created_at,
+    statusUpdatedAt: row.updated_at,
+    source: row.source || "website",
+    fullName: row.full_name || "",
+    email: row.email || "",
+    company: row.company || "",
+    website: row.website || "",
+    productName: row.product_name || "",
+    brief: row.brief || "",
+    projectType: metadata.projectType || "",
+    productStage: metadata.productStage || "",
+    goals: Array.isArray(metadata.goals) ? metadata.goals : [],
+    deliverables: Array.isArray(metadata.deliverables) ? metadata.deliverables : [],
+    timeline: row.timeline || "",
+    budget: row.budget || "",
+    designPreviewPng: metadata.designPreviewPng || "",
+    templateDesign: metadata.templateDesign || null,
+    language: metadata.language || "",
+  };
+}
+
+export async function insertSupabaseInquiry(inquiry, session) {
   if (!isSupabaseConfigured()) return { ok: false, skipped: true };
+  const returnRepresentation = Boolean(session?.accessToken);
 
-  const response = await fetch(`${SUPABASE_URL}/rest/v1/configuro_inquiries`, {
-    method: "POST",
-    headers: buildHeaders(),
-    body: JSON.stringify(toSupabaseInquiry(inquiry)),
-  });
+  const row = await postSupabaseRow(
+    "/rest/v1/configuro_inquiries",
+    toSupabaseInquiry(inquiry),
+    session,
+    { returnRepresentation },
+  );
 
-  if (!response.ok) {
-    const message = await response.text();
-    throw new Error(message || "Supabase inquiry insert failed.");
+  return { ok: true, inquiry: row ? fromSupabaseInquiry(row) : inquiry };
+}
+
+export async function readSupabaseInquiries(session) {
+  if (!isSupabaseConfigured() || !session?.accessToken) return [];
+
+  const rows = await getSupabaseRows(
+    "/rest/v1/configuro_inquiries?select=*&order=created_at.desc",
+    session,
+  );
+
+  return Array.isArray(rows) ? rows.map(fromSupabaseInquiry) : [];
+}
+
+export async function updateSupabaseInquiryStatus(inquiryId, status, session) {
+  if (!isSupabaseConfigured() || !session?.accessToken) {
+    return null;
   }
 
-  return { ok: true };
+  const encodedId = encodeURIComponent(inquiryId);
+  const row = await patchSupabaseRow(
+    `/rest/v1/configuro_inquiries?id=eq.${encodedId}&select=*`,
+    { status },
+    session,
+  );
+
+  return row ? fromSupabaseInquiry(row) : null;
 }
