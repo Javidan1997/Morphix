@@ -3,16 +3,33 @@ import { Link } from "react-router-dom";
 import Lightbox from "../components/Lightbox";
 import { projects, projectCategories } from "../data/projects";
 
+function interleaveWorkItems(items) {
+  const design = items.filter((project) => project.kind !== "digital");
+  const digital = items.filter((project) => project.kind === "digital");
+  const mixed = [];
+  const rounds = Math.max(design.length, digital.length);
+
+  for (let i = 0; i < rounds; i += 1) {
+    if (design[i]) mixed.push(design[i]);
+    if (digital[i]) mixed.push(digital[i]);
+  }
+
+  return mixed;
+}
+
 function Work({ content }) {
   const { workPage, nav } = content;
   const [activeCategory, setActiveCategory] = useState("all");
   const [lightbox, setLightbox] = useState({ images: [], index: null });
 
   const visibleProjects = useMemo(
-    () =>
-      activeCategory === "all"
-        ? projects
-        : projects.filter((project) => project.category === activeCategory),
+    () => {
+      if (activeCategory === "all") {
+        return interleaveWorkItems(projects);
+      }
+
+      return projects.filter((project) => project.category === activeCategory);
+    },
     [activeCategory],
   );
 
@@ -54,7 +71,15 @@ function Work({ content }) {
                 style={{ transitionDelay: `${(i % 3) * 0.08}s` }}
               >
                 {project.kind === "digital" ? (
-                  <div className="work-digital-card" aria-hidden="true">
+                  <div
+                    className="work-digital-card"
+                    style={
+                      project.coverImage
+                        ? { "--work-card-image": `url(${project.coverImage})` }
+                        : undefined
+                    }
+                    aria-hidden="true"
+                  >
                     <span>{project.category === "automation" ? "Automation" : "Software"}</span>
                     <strong>{project.name}</strong>
                     <p>{project.platform}</p>
@@ -83,6 +108,13 @@ function Work({ content }) {
                       <span className="tag" key={tag}>{tag}</span>
                     ))}
                   </div>
+                  {project.stack?.length ? (
+                    <div className="work-project-stack" aria-label="Project technology stack">
+                      {project.stack.map((item) => (
+                        <span className="stack-tag" key={item}>{item}</span>
+                      ))}
+                    </div>
+                  ) : null}
                   {project.kind === "digital" ? (
                     <div className="work-project-details">
                       <p><strong>Platform:</strong> {project.platform}</p>

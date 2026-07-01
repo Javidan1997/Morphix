@@ -31,6 +31,7 @@ export const projects = [
     summary:
       "Studio-grade product renders and a real-time 3D configurator for Pergolade's aluminium louvered pergola range, so buyers can explore finishes, sizes, and lighting before they order.",
     scope: ["Product renders", "3D configurator", "Finish & lighting options", "Lifestyle staging"],
+    stack: ["Blender", "Three.js", "React", "Photoshop"],
     year: "2025",
     images: [
       jimg("pergolade", 1, "Two Pergolade louvered pergolas in black and white with integrated LED lighting, studio render"),
@@ -50,7 +51,9 @@ export const projects = [
     summary:
       "A practical operations build for a glass and installation team: enquiry capture, quote preparation, project stages, and handoff notes in one place so jobs do not live across WhatsApp, spreadsheets, and memory.",
     scope: ["Client intake", "Quote workflow", "Job status board", "Team handoff"],
+    stack: ["React", "Supabase", "PostgreSQL", "Vite", "Tailwind CSS"],
     platform: "React, Supabase-ready data model, CRM handoff",
+    coverImage: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1600&q=80",
     outcome: "Cleaner lead-to-quote flow and fewer missed follow-ups between sales and operations.",
     year: "2025",
   },
@@ -63,7 +66,9 @@ export const projects = [
     summary:
       "A lead-routing and follow-up system for an outdoor product business, connecting website enquiries, product interest, sales stages, and reminder sequences so every request receives a consistent next step.",
     scope: ["Lead routing", "Pipeline setup", "Follow-up sequences", "Reporting views"],
+    stack: ["GoHighLevel", "Zoho CRM", "Make", "Zapier", "Meta Lead Ads"],
     platform: "GoHighLevel / Zoho-style workflow, forms, automations",
+    coverImage: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1600&q=80",
     outcome: "A repeatable sales process for product enquiries, dealer requests, and installation conversations.",
     year: "2025",
   },
@@ -76,7 +81,9 @@ export const projects = [
     summary:
       "A construction-focused platform concept for RailBuild-style teams: project intake, document collection, quote stages, supplier notes, and client updates built around the way trade teams actually work.",
     scope: ["Project dashboard", "Document flow", "Client updates", "Admin controls"],
+    stack: ["React", "Node.js", "PostgreSQL", "Role-based access", "Cloud Storage"],
     platform: "Custom web app, role-based views, automation hooks",
+    coverImage: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1600&q=80",
     outcome: "A single source of truth for projects that would otherwise be split across email threads and files.",
     year: "2025",
   },
@@ -89,7 +96,9 @@ export const projects = [
     summary:
       "A restaurant workflow build shaped around real service pressure: table flow, menu items, modifiers, kitchen notes, payment state, and simple manager visibility without unnecessary enterprise clutter.",
     scope: ["POS interface", "Menu management", "Kitchen notes", "Daily reporting"],
+    stack: ["React", "PWA", "REST API", "Stripe Terminal", "Cloud Sync"],
     platform: "Web/mobile POS interface, responsive admin, automation-ready exports",
+    coverImage: "https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=1600&q=80",
     outcome: "Faster order handling and a cleaner bridge between front-of-house, kitchen, and management.",
     year: "2025",
   },
@@ -102,7 +111,9 @@ export const projects = [
     summary:
       "Custom automation for teams that want AI to support the business without turning it into a gimmick: lead summaries, reply drafts, CRM updates, internal task creation, and handoff notes that match how the client wants to work.",
     scope: ["AI summaries", "CRM updates", "Task creation", "Custom prompts"],
+    stack: ["OpenAI API", "Make", "Zapier", "HubSpot", "Slack"],
     platform: "OpenAI workflows, Zapier/Make-style automations, CRM integrations",
+    coverImage: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1600&q=80",
     outcome: "Less manual admin after every call, form submission, or customer conversation.",
     year: "2026",
   },
@@ -115,8 +126,85 @@ export const projects = [
     summary:
       "A live demo section designed for educational content: interactive product scenes, guided explanations, saved examples, and simple calls to action that let people learn before they book a project.",
     scope: ["Live demo UX", "Interactive lessons", "Lead capture", "Content structure"],
+    stack: ["React", "Three.js", "GSAP", "MDX", "Vercel"],
     platform: "React, WebGL demos, SEO-prerendered articles",
+    coverImage: "https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&w=1600&q=80",
     outcome: "More useful interactions from visitors who want to understand configurators before they buy one.",
+    year: "2026",
+  },
+  {
+    slug: "atlas-quote-studio",
+    name: "Atlas Quote Studio",
+    category: "software",
+    kind: "digital",
+    type: "Web App - Config-to-Quote",
+    summary:
+      "A guided quote application for configurable products where sales teams can generate accurate proposals from approved options in minutes instead of building quotes manually.",
+    scope: ["Config-to-quote engine", "Rules validation", "PDF proposal output", "Approval workflow"],
+    stack: ["React", "TypeScript", "Node.js", "PostgreSQL", "PDF generation"],
+    platform: "React + API backend + quote document generator",
+    coverImage: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1600&q=80",
+    outcome: "Faster quote turnaround and fewer pricing mistakes on complex product requests.",
+    year: "2026",
+  },
+  {
+    slug: "nova-catalog-cms",
+    name: "Nova Catalog CMS",
+    category: "software",
+    kind: "digital",
+    type: "Headless CMS - Product Content",
+    summary:
+      "A modular content system that lets marketing teams publish product pages, option matrices, and campaign landing pages without waiting on developer releases.",
+    scope: ["Headless CMS schema", "Reusable content blocks", "Localization workflow", "Publishing QA"],
+    stack: ["Next.js", "Sanity", "TypeScript", "Cloudinary", "Vercel"],
+    platform: "Headless CMS with component-driven frontend",
+    coverImage: "https://images.unsplash.com/photo-1487014679447-9f8336841d58?auto=format&fit=crop&w=1600&q=80",
+    outcome: "Quicker campaign publishing and cleaner governance over product content changes.",
+    year: "2026",
+  },
+  {
+    slug: "fieldflow-mobile-suite",
+    name: "FieldFlow Mobile Suite",
+    category: "software",
+    kind: "digital",
+    type: "Mobile App - Site Operations",
+    summary:
+      "A field team app for installers and supervisors to capture measurements, photos, checklists, and progress updates in one workflow synced with office operations.",
+    scope: ["Offline mobile capture", "Photo evidence", "Checklist logic", "Ops sync"],
+    stack: ["React Native", "Expo", "Supabase", "PostgreSQL", "Storage buckets"],
+    platform: "Mobile suite with offline-first data sync",
+    coverImage: "https://images.unsplash.com/photo-1580894908361-967195033215?auto=format&fit=crop&w=1600&q=80",
+    outcome: "More reliable field reporting and faster handoff between site teams and office staff.",
+    year: "2026",
+  },
+  {
+    slug: "signal-lead-orchestrator",
+    name: "Signal Lead Orchestrator",
+    category: "automation",
+    kind: "digital",
+    type: "CRM Automation - Multi-Channel",
+    summary:
+      "An automation layer that normalizes leads from forms, ads, and chat, then routes each enquiry to the right pipeline, rep, and follow-up sequence automatically.",
+    scope: ["Lead normalization", "Routing rules", "Channel attribution", "Follow-up automation"],
+    stack: ["HubSpot", "Make", "Zapier", "Webhook services", "Slack alerts"],
+    platform: "CRM-centric orchestration across inbound channels",
+    coverImage: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1600&q=80",
+    outcome: "Higher response speed and consistent follow-up behavior across every lead source.",
+    year: "2026",
+  },
+  {
+    slug: "summit-client-portal",
+    name: "Summit Client Portal",
+    category: "software",
+    kind: "digital",
+    type: "Web Portal - Client Collaboration",
+    summary:
+      "A secure portal where clients can review milestones, comment on deliverables, approve revisions, and track status without relying on long email threads.",
+    scope: ["Client dashboard", "Review workflows", "Approval logs", "Notification system"],
+    stack: ["React", "TypeScript", "Node.js", "PostgreSQL", "Role-based auth"],
+    platform: "Collaborative web portal with staged approvals",
+    coverImage: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1600&q=80",
+    outcome: "Faster feedback loops and clearer accountability across delivery stages.",
     year: "2026",
   },
   {
@@ -127,6 +215,7 @@ export const projects = [
     summary:
       "Exterior visualization of a boutique multi-family building, shown with landscaping, street life, and mixed stone and timber facade materials for marketing and approvals.",
     scope: ["Exterior renders", "Material study", "Streetscape staging", "Context views"],
+    stack: ["3ds Max", "Corona Renderer", "Photoshop"],
     year: "2024",
     images: [
       jimg("building", 1, "Modern four-storey apartment building with stone, render, and timber facade at a landscaped corner"),
@@ -143,6 +232,7 @@ export const projects = [
     summary:
       "A curved-balcony luxury hotel and its arrival plaza, visualized from concept massing through to a photoreal street-level hero.",
     scope: ["Exterior renders", "Daylight study", "Streetscape staging"],
+    stack: ["3ds Max", "V-Ray", "Photoshop", "Lightroom"],
     year: "2024",
     images: [
       img("beverly-hills-hotel", 1, "Luxury hotel tower with curved glass balconies and arrival plaza"),
@@ -160,6 +250,7 @@ export const projects = [
     summary:
       "A full interior and exterior package for a private home — living spaces, entertainment room, and the facade tied together in one consistent look.",
     scope: ["Interior renders", "Exterior render", "Material styling"],
+    stack: ["3ds Max", "Corona Renderer", "Photoshop"],
     year: "2024",
     images: [
       img("private-residence", 1, "Modern private residence exterior at dusk"),
@@ -177,6 +268,7 @@ export const projects = [
     summary:
       "A contemporary villa with pergola, pool, and landscaping, shown across multiple angles to support marketing and approvals.",
     scope: ["Exterior renders", "Landscape integration", "Pergola system"],
+    stack: ["Blender", "Cycles", "Photoshop"],
     year: "2023",
     images: [
       img("hillside-villa", 1, "Contemporary hillside villa with pergola and pool"),
@@ -193,6 +285,7 @@ export const projects = [
     summary:
       "A minimalist poolside pavilion and glazed lounge, rendered to show how a single outdoor structure changes the feel of a whole property.",
     scope: ["Exterior renders", "Outdoor living", "Daylight study"],
+    stack: ["Blender", "Cycles", "DaVinci Resolve"],
     year: "2023",
     images: [
       img("poolside-pavilion", 1, "White poolside pavilion with glazed lounge and pergola"),
@@ -209,6 +302,7 @@ export const projects = [
     summary:
       "A mid-rise residential block presented with people, parking, and planting so buyers and stakeholders can picture everyday life on site.",
     scope: ["Exterior renders", "Context staging", "Material palette"],
+    stack: ["3ds Max", "Corona Renderer", "Photoshop"],
     year: "2024",
     images: [
       img("urban-residences", 1, "Mid-rise residential building with mixed-material facade"),
@@ -226,6 +320,7 @@ export const projects = [
     summary:
       "A retail and dining corner within a larger district, visualized from an elevated angle to read both the architecture and the public realm.",
     scope: ["Aerial render", "Street-level views", "Signage staging"],
+    stack: ["3ds Max", "V-Ray", "Photoshop"],
     year: "2023",
     images: [
       img("silver-diner-district", 1, "Aerial view of retail and dining district corner"),
@@ -242,6 +337,7 @@ export const projects = [
     summary:
       "A dusk and night lighting study for a downtown infill block, showing how glass, brick, and street lighting read after sunset.",
     scope: ["Night renders", "Lighting study", "Streetscape"],
+    stack: ["3ds Max", "Corona Renderer", "Photoshop"],
     year: "2024",
     images: [
       img("nights-mixed-use", 1, "Downtown glass building at dusk with reflective wet street"),
@@ -258,6 +354,7 @@ export const projects = [
     summary:
       "A walkable retail and hospitality quarter with restaurants and storefronts, staged to sell the atmosphere of the place, not just the buildings.",
     scope: ["Aerial render", "Street views", "Public realm"],
+    stack: ["3ds Max", "V-Ray", "Photoshop"],
     year: "2023",
     images: [
       img("portobello-quarter", 1, "Aerial view of walkable retail and hospitality quarter"),
@@ -274,6 +371,7 @@ export const projects = [
     summary:
       "Product-style visuals for pergolas, decks, and roof systems — the kind of clean, configurable outdoor pieces that suit a configurator or catalogue.",
     scope: ["Product renders", "Configurable options", "Lifestyle staging"],
+    stack: ["Blender", "Cycles", "Substance 3D Painter", "Photoshop"],
     year: "2023",
     images: [
       img("outdoor-living", 1, "Pergola and pool deck outdoor living system"),

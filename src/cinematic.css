@@ -90,10 +90,14 @@ body { background: #08090c; }
 .page-shell .footer-logo img { filter: none; }
 
 /* ---- Buttons ---- */
-.page-shell .primary-button,
+.page-shell .primary-button, .services-header-point, .services-header-point span,
+
 .page-shell .nav-cta {
   background: var(--text);
-  color: #08090c;
+  color: #08090c !important;
+}
+.playground-preview-block strong, .playground-preview-block p {
+  color: #08090c !important;
 }
 .page-shell .primary-button:hover,
 .page-shell .nav-cta:hover {
@@ -124,11 +128,36 @@ body { background: #08090c; }
 .page-shell .template-card,
 .page-shell .media-slot,
 .page-shell .media-card {
-  background: rgba(255, 255, 255, 0.045) !important;
-  border: 1px solid var(--border) !important;
+  background: rgba(8, 10, 14, 0.72) !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
   backdrop-filter: blur(14px);
   color: var(--text);
-  box-shadow: none;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.34);
+}
+
+/* Global readability for text inside glass cards over bright frames */
+.page-shell .glass-card p,
+.page-shell .glass-card li,
+.page-shell .pricing-card p,
+.page-shell .pricing-card li,
+.page-shell .wizard-form p,
+.page-shell .wizard-nav-step p,
+.page-shell .wizard-option,
+.page-shell .work-project-summary,
+.page-shell .work-project-details p,
+.page-shell .insight-card-body p,
+.page-shell .media-card p {
+  color: #d9deea !important;
+}
+
+.page-shell .glass-card h2,
+.page-shell .glass-card h3,
+.page-shell .glass-card strong,
+.page-shell .pricing-tier,
+.page-shell .wizard-step-label,
+.page-shell .wizard-group-head strong,
+.page-shell .wizard-nav-step strong {
+  color: #f3f6fd !important;
 }
 
 /* ---- Forms (contact wizard, inputs) ---- */
@@ -221,6 +250,7 @@ body { background: #08090c; }
   transition: opacity 0.3s ease; pointer-events: none; z-index: 1;
   background: conic-gradient(from var(--mx,0deg), transparent, rgba(91,120,255,0.6), transparent 40%);
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor; mask-composite: exclude;
 }
 .page-shell .cin-card:hover::before { opacity: 1; }
@@ -410,6 +440,18 @@ html { scroll-padding-top: 84px; }
   background: rgba(9, 11, 15, 0.9) !important;
   border-top: 1px solid rgba(255, 255, 255, 0.12);
 }
+.page-shell .footer-shell {
+  background: rgba(8, 10, 14, 0.94) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.55) !important;
+}
+.page-shell .footer-top {
+  background: transparent;
+}
+.page-shell .footer-bottom {
+  background: rgba(255, 255, 255, 0.03);
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+}
 .page-shell .site-footer h3 { color: #eef0f4; }
 .page-shell .footer-brand p { color: #c2c7d0; }
 .page-shell .site-footer a,
@@ -418,7 +460,132 @@ html { scroll-padding-top: 84px; }
 .page-shell .footer-links a { color: #b4bac6; }
 .page-shell .site-footer a:hover,
 .page-shell .footer-links a:hover { color: #ffffff; }
+.page-shell .footer-column h3,
+.page-shell .footer-brand p,
+.page-shell .footer-column li,
+.page-shell .footer-column a,
+.page-shell .footer-bottom span,
+.page-shell .footer-links a {
+  opacity: 1;
+}
+.page-shell .footer-column a,
+.page-shell .footer-links a {
+  color: #ced4df;
+}
+.page-shell .footer-column a:hover,
+.page-shell .footer-links a:hover {
+  color: #ffffff;
+}
+.page-shell .footer-logo img {
+  filter: brightness(0) invert(1);
+  opacity: 0.96;
+}
+
+/* Work page readability over bright frames */
+.page-shell .work-filter-pill {
+  background: rgba(11, 13, 18, 0.72);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #d5dae4;
+}
+.page-shell .work-filter-pill:hover {
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.35);
+}
+.page-shell .work-project-meta h2 {
+  color: #f3f5fa;
+  text-shadow: 0 1px 16px rgba(0, 0, 0, 0.45);
+}
+.page-shell .work-project-summary {
+  color: #d4d8e2;
+  text-shadow: 0 1px 14px rgba(0, 0, 0, 0.4);
+}
+.page-shell .work-project-year {
+  color: #c9d5ff;
+}
+.page-shell .work-project-details {
+  background: rgba(9, 12, 18, 0.72);
+  border-color: rgba(255, 255, 255, 0.14);
+}
+.page-shell .work-project-details p {
+  color: #d2d7e2;
+}
+.page-shell .work-project-details strong {
+  color: #eef1f8;
+}
+.page-shell .stack-tag {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #e2e7f2;
+}
+.page-shell .site-footer .footer-column h3,
+.page-shell .site-footer .footer-brand p,
+.page-shell .site-footer .footer-column li,
+.page-shell .site-footer .footer-column a,
+.page-shell .site-footer .footer-bottom span,
+.page-shell .site-footer .footer-links a {
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.4);
+}
 
 /* Home enquiry heading + copy sit over video; keep them bright. */
 .page-shell .home-contact-copy h2 { color: #f4f5f8; }
 .page-shell .home-contact-copy p { color: #d4d7dd; }
+
+/* Contact wizard: enforce dark glass surfaces and readable controls */
+.page-shell .page-contact .contact-fact {
+  color: #eef2fa;
+}
+
+.page-shell .page-contact .wizard-nav-step {
+  background: rgba(9, 11, 16, 0.78) !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+.page-shell .page-contact .wizard-nav-step.is-active {
+  background: rgba(13, 17, 24, 0.9) !important;
+  border-color: rgba(255, 255, 255, 0.38) !important;
+}
+
+.page-shell .page-contact .wizard-nav-step strong {
+  color: #f5f7fc !important;
+}
+
+.page-shell .page-contact .wizard-nav-step p {
+  color: #d4daE6 !important;
+}
+
+.page-shell .page-contact .wizard-nav-number {
+  background: rgba(255, 255, 255, 0.12);
+  color: #eef2fb;
+}
+
+.page-shell .page-contact .wizard-nav-step.is-active .wizard-nav-number {
+  background: #ffffff;
+  color: #0a0c10;
+}
+
+.page-shell .page-contact .wizard-form {
+  background: rgba(9, 11, 16, 0.86) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+.page-shell .page-contact .wizard-header p,
+.page-shell .page-contact .wizard-group-head p {
+  color: #d3d9e5 !important;
+}
+
+.page-shell .page-contact .wizard-option {
+  background: rgba(8, 10, 14, 0.82) !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+  color: #e6ebf6 !important;
+}
+
+.page-shell .page-contact .wizard-option:hover {
+  border-color: rgba(255, 255, 255, 0.36) !important;
+  color: #ffffff !important;
+}
+
+.page-shell .page-contact .wizard-option.is-active {
+  background: rgba(91, 120, 255, 0.28) !important;
+  border-color: rgba(138, 160, 255, 0.82) !important;
+  color: #f7f9ff !important;
+}

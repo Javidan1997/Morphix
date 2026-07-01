@@ -1,26 +1,27 @@
 import { useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
-import assemblyCamera from "../assets/assembly-camera.mp4";
-import droneReveal from "../assets/drone-reveal.mp4";
-import configuroBg from "../assets/configuro-bg.mp4";
+import pexelsHome from "../assets/pexels-home-optimized.mp4";
+import pexelsServices from "../assets/pexels-services-optimized.mp4";
+import pexelsWork from "../assets/pexels-work-optimized.mp4";
+import pexelsAbout from "../assets/pexels-about-optimized.mp4";
+import pexelsContact from "../assets/pexels-contact-optimized.mp4";
 
-// Background video is atmosphere, not subject: routes that sell across multiple
-// service pillars use the brand-neutral loop so a specific product (a watch, a
-// car) never narrows how the company reads. Swap in dedicated abstract loops later.
+// Each route uses a different optimized cut from the long Pexels source so the
+// site feels varied without shipping the full 129 MB original as a background.
 const ROUTE_VIDEO = {
-  "/": configuroBg,
-  "/services": assemblyCamera,
-  "/templates": assemblyCamera,
-  "/playground": assemblyCamera,
-  "/work": configuroBg,
-  "/pricing": configuroBg,
-  "/contact": configuroBg,
-  "/about": droneReveal,
+  "/": pexelsHome,
+  "/services": pexelsServices,
+  "/templates": pexelsServices,
+  "/playground": pexelsServices,
+  "/work": pexelsWork,
+  "/pricing": pexelsContact,
+  "/contact": pexelsContact,
+  "/about": pexelsAbout,
 };
 
 function VideoBackground() {
   const location = useLocation();
-  const src = ROUTE_VIDEO[location.pathname] || configuroBg;
+  const src = ROUTE_VIDEO[location.pathname] || pexelsHome;
   const ref = useRef(null);
 
   useEffect(() => {
@@ -28,44 +29,26 @@ function VideoBackground() {
     if (!video) return undefined;
 
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    let duration = 4;
-    let isReady = false;
-    let frameId = 0;
+    let isMounted = true;
 
     video.muted = true;
     video.playsInline = true;
     video.loop = true;
-    video.autoplay = false;
+    video.autoplay = !prefersReducedMotion;
 
-    const scrollProgress = () => {
-      const root = document.documentElement;
-      const maxScroll = root.scrollHeight - window.innerHeight;
-      if (maxScroll <= 0) return 0;
-      return Math.min(1, Math.max(0, (window.scrollY || root.scrollTop || 0) / maxScroll));
-    };
-
-    const syncToScroll = () => {
-      frameId = 0;
-      if (!isReady || prefersReducedMotion || document.hidden) return;
-
-      const targetTime = scrollProgress() * Math.max(0, duration - 0.05);
-      try {
-        video.currentTime = targetTime;
-      } catch (error) {
-        // Some browsers reject frame seeking until enough data is buffered.
+    const playVideo = () => {
+      if (!isMounted || prefersReducedMotion || document.hidden) {
+        video.pause();
+        return;
       }
-      video.pause();
-    };
 
-    const requestSync = () => {
-      if (frameId) return;
-      frameId = window.requestAnimationFrame(syncToScroll);
-    };
-
-    const handleMetadata = () => {
-      duration = video.duration || 4;
-      isReady = true;
-      syncToScroll();
+      const playPromise = video.play();
+      if (playPromise?.catch) {
+        playPromise.catch(() => {
+          // Browsers can defer autoplay until media is ready; canplay/visibility
+          // will retry without surfacing a console error to users.
+        });
+      }
     };
 
     const handleVisibilityChange = () => {
@@ -73,22 +56,21 @@ function VideoBackground() {
         video.pause();
         return;
       }
-      requestSync();
+      playVideo();
     };
 
-    video.addEventListener("loadedmetadata", handleMetadata);
-    window.addEventListener("scroll", requestSync, { passive: true });
-    window.addEventListener("resize", requestSync);
+    video.addEventListener("loadedmetadata", playVideo);
+    video.addEventListener("canplay", playVideo);
     video.load();
-    video.pause();
+    playVideo();
     document.addEventListener("visibilitychange", handleVisibilityChange);
 
     return () => {
-      window.cancelAnimationFrame(frameId);
-      video.removeEventListener("loadedmetadata", handleMetadata);
-      window.removeEventListener("scroll", requestSync);
-      window.removeEventListener("resize", requestSync);
+      isMounted = false;
+      video.removeEventListener("loadedmetadata", playVideo);
+      video.removeEventListener("canplay", playVideo);
       document.removeEventListener("visibilitychange", handleVisibilityChange);
+      video.pause();
     };
   }, [src]);
 

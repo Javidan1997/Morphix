@@ -1,4 +1,5 @@
-import { insertSupabaseInquiry } from "./supabaseInquiries";
+import { syncInquiryToErpNext } from './erpnextSync';
+import { insertSupabaseInquiry } from './supabaseInquiries';
 
 const INQUIRIES_STORAGE_KEY = "morphix.admin.inquiries.v1";
 
@@ -72,6 +73,10 @@ export function createInquiry(payload) {
 
   insertSupabaseInquiry(savedInquiry).catch((error) => {
     console.warn("Configuro inquiry saved locally but Supabase sync failed.", error);
+  });
+
+  syncInquiryToErpNext(savedInquiry).catch((error) => {
+    console.warn("Configuro inquiry saved locally but ERPNext sync failed.", error);
   });
 
   return savedInquiry;
