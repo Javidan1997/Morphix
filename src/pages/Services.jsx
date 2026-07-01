@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import MediaSlotsSection from "../components/MediaSlotsSection";
 
 const FALLBACK_SERVICES_INTRO = {
   eyebrow: "Where we help most",
@@ -29,41 +28,6 @@ const FALLBACK_SERVICES_STORY = {
   ],
   note:
     "We are especially useful when the product has multiple options, technical detail, or a premium price that needs stronger explanation.",
-};
-
-const FALLBACK_MEDIA_SHOWCASE = {
-  eyebrow: "Content slots",
-  title: "Room for the proof your Services page still needs.",
-  copy:
-    "We added dedicated image and video areas so this page can carry real launch material, demos, and case-study assets without another redesign.",
-  items: [
-    {
-      type: "video",
-      label: "Video slot",
-      title: "Hero reveal or walkthrough",
-      copy: "Use this space for a short launch film, interface capture, or narrated overview of the product.",
-    },
-    {
-      type: "image",
-      label: "Image slot",
-      title: "Product detail or finish close-up",
-      copy: "Perfect for material textures, manufacturing detail, premium stills, or side-by-side finish comparisons.",
-    },
-    {
-      type: "video",
-      label: "Video slot",
-      title: "Configurator or UX capture",
-      copy: "Show the interaction itself, from camera movement to option switching and mobile behavior.",
-    },
-    {
-      type: "image",
-      label: "Image slot",
-      title: "Case-study or comparison visual",
-      copy: "Reserve space for before and after layouts, annotated visuals, client proof, or performance snapshots.",
-    },
-  ],
-  note:
-    "These are intentional placeholder slots, so you can drop in final assets later without rebuilding the page structure.",
 };
 
 const FALLBACK_PLAYGROUND_REDIRECT = {
@@ -117,7 +81,6 @@ function Services({ content }) {
   const { servicesPage, nav } = content;
   const servicesIntro = servicesPage.servicesIntro ?? FALLBACK_SERVICES_INTRO;
   const servicesStory = servicesPage.story ?? FALLBACK_SERVICES_STORY;
-  const mediaShowcase = servicesPage.mediaShowcase ?? FALLBACK_MEDIA_SHOWCASE;
   const playgroundRedirect = servicesPage.playgroundRedirect ?? FALLBACK_PLAYGROUND_REDIRECT;
   const bottomCta = servicesPage.bottomCta ?? FALLBACK_BOTTOM_CTA;
 
@@ -178,8 +141,6 @@ function Services({ content }) {
           </div>
         </div>
       </section>
-
-      <MediaSlotsSection copy={mediaShowcase} className="services-media-section" />
 
       <section className="section-block services-playground-section">
         <div className="container">

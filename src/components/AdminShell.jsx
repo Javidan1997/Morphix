@@ -23,7 +23,7 @@ function AdminShell({
               <span className="chip">Admin</span>
             </div>
             <h1>Configuro admin</h1>
-            <p>Cleaner, smaller pages for content, templates, media, and inquiries.</p>
+            <p>Forms, statistics, and interactions in one simple operating panel.</p>
           </div>
 
           <nav className="admin-sidebar-nav" aria-label="Admin navigation">
@@ -49,9 +49,6 @@ function AdminShell({
           <div className="admin-sidebar-actions">
             <Link className="secondary-button" to="/">
               View website
-            </Link>
-            <Link className="secondary-button" to="/playground">
-              Open Playground
             </Link>
             <button className="primary-button" type="button" onClick={logout}>
               Log out

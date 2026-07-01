@@ -1,8 +1,7 @@
 import { Link } from "react-router-dom";
-import MediaSlotsSection from "../components/MediaSlotsSection";
 
 function About({ content }) {
-  const { aboutPage, nav, aboutMediaGallery } = content;
+  const { aboutPage, nav } = content;
 
   return (
     <main className="page-about">
@@ -26,8 +25,6 @@ function About({ content }) {
           </div>
         </div>
       </section>
-
-      <MediaSlotsSection copy={aboutMediaGallery} />
 
       <section className="section-block story-section">
         <div className="container container-narrow">

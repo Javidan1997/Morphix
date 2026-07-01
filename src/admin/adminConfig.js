@@ -1,33 +1,18 @@
 export const ADMIN_NAV_ITEMS = [
   {
-    to: "/admin/overview",
-    label: "Overview",
-    helper: "Start here and choose the next task.",
+    to: "/admin/forms",
+    label: "Forms",
+    helper: "Review and add project enquiries.",
   },
   {
-    to: "/admin/content",
-    label: "Content",
-    helper: "Edit one section at a time by page and locale.",
+    to: "/admin/statistics",
+    label: "Statistics",
+    helper: "See lead volume and status counts.",
   },
   {
-    to: "/admin/templates",
-    label: "Templates",
-    helper: "Download or upload Excel-friendly batch CSV files.",
-  },
-  {
-    to: "/admin/media",
-    label: "Media",
-    helper: "Upload full images and render videos for slots.",
-  },
-  {
-    to: "/admin/inquiries",
-    label: "Inquiries",
-    helper: "Review and update incoming project leads.",
-  },
-  {
-    to: "/admin/access",
-    label: "Access",
-    helper: "Check session, credentials, and site coverage.",
+    to: "/admin/interactions",
+    label: "Interactions",
+    helper: "Move leads through the pipeline.",
   },
 ];
 
@@ -43,6 +28,7 @@ export const SOURCE_LABELS = {
   "home-form": "Quick enquiry",
   "contact-wizard": "Project intake",
   "templates-studio": "Templates studio",
+  "manual-entry": "Manual entry",
   website: "Website form",
 };
 

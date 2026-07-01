@@ -3,8 +3,6 @@ export const LANGUAGE_STORAGE_KEY = "morphix-language";
 export const localeOptions = [
   { code: "en", label: "English", flag: "🇬🇧" },
   { code: "az", label: "Azərbaycan", flag: "🇦🇿" },
-  { code: "ru", label: "Русский", flag: "🇷🇺" },
-  { code: "tr", label: "Türkçe", flag: "🇹🇷" },
 ];
 
 export const fallbackLanguage = "en";

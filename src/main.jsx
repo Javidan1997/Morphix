@@ -5,6 +5,7 @@ import App from "./App";
 import { AdminAuthProvider } from "./admin/AdminAuthContext";
 import { ContentAdminProvider } from "./admin/ContentAdminContext";
 import "./styles.css";
+import "./cinematic.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>

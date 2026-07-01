@@ -47,13 +47,14 @@ function Header({ language, setLanguage }) {
     };
   }, [mobileMenuOpen]);
 
+  // Trimmed primary nav for clarity (Templates moved to footer-only access).
   const navLinks = [
     { to: "/", label: content.nav.home },
+    { to: "/work", label: content.nav.work },
     { to: "/services", label: content.nav.services },
     { to: "/playground", label: content.nav.playground },
-    { to: "/templates", label: content.nav.templates ?? "Templates" },
-    { to: "/work", label: content.nav.work },
     { to: "/pricing", label: content.nav.pricing },
+    { to: "/insights", label: content.nav.insights },
     { to: "/about", label: content.nav.about },
   ];
 

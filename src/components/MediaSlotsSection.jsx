@@ -30,7 +30,7 @@ const FALLBACK_MEDIA_SLOTS = {
     "These placements are designed to be swapped with final assets later without restructuring the page.",
 };
 
-function MediaSlotsSection({ copy, className = "" }) {
+function MediaSlotsSection({ copy, className = "", fallbackImages = [] }) {
   const section = copy ?? FALLBACK_MEDIA_SLOTS;
   const layout = section.layout ?? "showcase";
   const sectionClassName = ["section-block", "media-slots-section", `is-${layout}`, className]
@@ -39,6 +39,16 @@ function MediaSlotsSection({ copy, className = "" }) {
   const items = Array.isArray(section.items) ? section.items : [];
   const highlights = Array.isArray(section.highlights) ? section.highlights : [];
   const [assetMap, setAssetMap] = useState({});
+
+  // Fill any slot that has no admin-uploaded asset with a real render,
+  // so visitors see actual work instead of "Image area" placeholders.
+  let fallbackCursor = 0;
+  const resolvedItems = items.map((item) => {
+    if (item.assetId || item.src) return { ...item, fallback: null };
+    const fallback = fallbackImages[fallbackCursor] ?? null;
+    if (fallback) fallbackCursor += 1;
+    return { ...item, fallback };
+  });
 
   useEffect(() => {
     let isMounted = true;
@@ -102,54 +112,62 @@ function MediaSlotsSection({ copy, className = "" }) {
         ) : null}
 
         <div className={`services-media-grid is-${layout}`}>
-          {items.map((item, index) => (
-            <article
-              className={`glass-card services-media-card reveal is-${item.size ?? "standard"}`}
-              key={item.title}
-              style={{ transitionDelay: `${index * 0.07}s` }}
-            >
-              <div className={`services-media-frame is-${item.type} is-${item.size ?? "standard"}`} aria-hidden="true">
-                <div className="services-media-frame-head">
-                  <span className="services-media-badge">{item.label}</span>
-                  {item.meta ? <span className="services-media-meta">{item.meta}</span> : null}
-                </div>
-                {item.assetId && assetMap[item.assetId] ? (
-                  <div className={`services-media-preview is-${assetMap[item.assetId].kind}`}>
-                    {assetMap[item.assetId].kind === "video" ? (
-                      <video
-                        className="services-media-video"
-                        src={assetMap[item.assetId].url}
-                        controls
-                        muted
-                        playsInline
-                      />
-                    ) : (
-                      <img
-                        className="services-media-image"
-                        src={assetMap[item.assetId].url}
-                        alt={item.title}
-                      />
-                    )}
-                  </div>
-                ) : (
-                  <div className={`services-media-placeholder is-${item.type} is-${item.size ?? "standard"}`}>
-                    <div className={`services-media-placeholder-surface is-${item.type}`}>
-                      {item.type === "video" ? <span className="services-media-play" /> : null}
-                      <span className="services-media-placeholder-label">
-                        {item.type === "video" ? "Video area" : "Image area"}
-                      </span>
-                    </div>
-                  </div>
-                )}
-              </div>
+          {resolvedItems.map((item, index) => {
+            const asset = item.assetId ? assetMap[item.assetId] : null;
+            const directImage = item.src ? { url: item.src, alt: item.title } : null;
+            const fallbackImage = item.fallback
+              ? { url: item.fallback.src, alt: item.fallback.alt, project: item.fallback.project }
+              : null;
+            const stillImage = directImage ?? fallbackImage;
+            const hasRealImage = Boolean(stillImage);
+            const caption = fallbackImage?.project ?? null;
 
-              <div className="services-media-body">
-                {item.meta ? <span className="services-media-body-meta">{item.meta}</span> : null}
-                <h3>{item.title}</h3>
-                <p>{item.copy}</p>
-              </div>
-            </article>
-          ))}
+            return (
+              <article
+                className={`glass-card services-media-card reveal is-${item.size ?? "standard"}`}
+                key={item.title}
+                style={{ transitionDelay: `${index * 0.07}s` }}
+              >
+                <div className={`services-media-frame is-${item.type} is-${item.size ?? "standard"}`}>
+                  <div className="services-media-frame-head">
+                    <span className="services-media-badge">{item.label}</span>
+                    {item.meta ? <span className="services-media-meta">{item.meta}</span> : null}
+                  </div>
+                  {asset ? (
+                    <div className={`services-media-preview is-${asset.kind}`}>
+                      {asset.kind === "video" ? (
+                        <video className="services-media-video" src={asset.url} controls muted playsInline />
+                      ) : (
+                        <img className="services-media-image" src={asset.url} alt={item.title} />
+                      )}
+                    </div>
+                  ) : hasRealImage ? (
+                    <div className="services-media-preview is-image">
+                      <img className="services-media-image" src={stillImage.url} alt={stillImage.alt} loading="lazy" />
+                    </div>
+                  ) : (
+                    <div className={`services-media-placeholder is-${item.type} is-${item.size ?? "standard"}`} aria-hidden="true">
+                      <div className={`services-media-placeholder-surface is-${item.type}`}>
+                        {item.type === "video" ? <span className="services-media-play" /> : null}
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                <div className="services-media-body">
+                  {item.meta ? <span className="services-media-body-meta">{item.meta}</span> : null}
+                  {hasRealImage && !asset ? (
+                    <h3>{caption ?? stillImage.alt}</h3>
+                  ) : (
+                    <>
+                      <h3>{item.title}</h3>
+                      <p>{item.copy}</p>
+                    </>
+                  )}
+                </div>
+              </article>
+            );
+          })}
         </div>
 
         <p className="services-media-note reveal">{section.note}</p>

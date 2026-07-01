@@ -1,10 +1,8 @@
-import { pageMediaSections } from "./pageMedia";
-
 const az = {
   meta: {
-    title: "Configuro | Rəqəmsal Məhsul Studiyası",
+    title: "Configuro | Dizayn, Qurma və Avtomatlaşdırma — Tətbiqlər, Sistemlər və 3D",
     description:
-      "Configuro 3D məhsul saytları, interaktiv konfiquratorlar və immersiv veb təcrübələr üzrə ixtisaslaşmış rəqəmsal məhsul studiyasıdır.",
+      "Configuro dizayn və mühəndislik tərəfdaşıdır. Veb və mobil tətbiqlər, 3D konfiquratorlar və məhsul saytları qururuq, CRM-inizi avtomatlaşdırırıq (Zoho, GoHighLevel, HubSpot) və premium 3D renderlər, video və görüntülər istehsal edirik — baştan-sona.",
   },
   common: {
     brandName: "Configuro",
@@ -24,13 +22,15 @@ const az = {
     pricing: "Qiymətlər",
     about: "Haqqımızda",
     contact: "Əlaqə",
+    insights: "Məqalələr",
+    portal: "Müştəri portalı",
     cta: "Layihəyə başla",
   },
   // ── ANA SƏHİFƏ ──
   hero: {
-    headline: "İnsanların həqiqətən kəşf etmək istədiyi məhsullar yaradırıq.",
+    headline: "Dizayn edir, qurur və avtomatlaşdırırıq — baştan-sona.",
     subline:
-      "Configuro rəqəmsal məhsul studiyasıdır. Unudulmaz olmaqdan imtina edən brendlər üçün 3D saytlar, interaktiv konfiquratorlar və buraxılış təcrübələri dizayn edir və inkişaf etdiririk.",
+      "Configuro premium məhsul və brendlərin arxasındakı proqram təminatı, sistemlər və vizuallar üçün vahid komandadır. Veb və mobil tətbiqlər, interaktiv 3D konfiquratorlar və məhsul saytları qururuq — satış mühərrikinizi Zoho, GoHighLevel və HubSpot üzərində avtomatlaşdırırıq — və studiya səviyyəli 3D, render və film istehsal edirik. İlk ideyadan canlı buraxılışa qədər.",
     primaryCta: "Layihəyə başla",
     secondaryCta: "İşlərimizə baxın",
   },
@@ -38,26 +38,29 @@ const az = {
     eyebrow: "Niyə Configuro",
     items: [
       {
-        title: "İnteraktiv, dekorativ deyil",
-        copy: "Hər 3D element alıcıya xidmət edir. Konfiqurasiya, müqayisə, kəşf — sadəcə göz ziyafəti deyil.",
+        title: "Bir tərəfdaş, baştan-sona",
+        copy: "Dizayn, proqram təminatı, avtomatlaşdırma və 3D bir dam altında. Agentlik, frilanser və təhvil boşluqlarını birləşdirməyə ehtiyac yoxdur.",
       },
       {
         title: "İstehsal üçün mühəndislik edilib",
-        copy: "Three.js, optimallaşdırılmış resurslar, responsiv tərtibat. Sürətli yüklənir, rahat işləyir, təmiz miqyaslanır.",
+        copy: "Veb, iOS, Android, WebGL və CRM avtomatlaşdırması — sürətli buraxılış, rahat işləmə və təmiz miqyaslanma üçün qurulub.",
       },
       {
-        title: "Tam həcmli təhvil",
-        copy: "Strategiya, dizayn, 3D, front-end, buraxılış. Bir komanda, bir proses, heç bir boşluq.",
+        title: "Yalnız gözəl görünmək üçün deyil, satmaq üçün qurulub",
+        copy: "Hər ekran, sistem və render alıcınızın anlamasına, güvənməsinə və qərar verməsinə kömək etməyə yönəlib.",
       },
     ],
   },
   servicesPreview: {
     eyebrow: "Nə edirik",
-    title: "Konseptdən buraxılışa qədər hər şeyi biz həll edirik.",
+    title: "Dizayn, qurma və avtomatlaşdırma — hamısı bir komandada.",
     items: [
-      { title: "3D Konfiquratorlar", copy: "Müştərilərinizə öz məhsullarını yaratmağa imkan verin." },
-      { title: "Məhsul Saytları", copy: "Sadəcə təsir etməyən, həm də satışa çevirən hekayə." },
-      { title: "Buraxılış Təcrübələri", copy: "Məhsul təqdimatları və kampaniyalar üçün immersiv səhifələr." },
+      { title: "Veb və Mobil Tətbiqlər", copy: "Veb platformalar və native iOS/Android tətbiqləri, MVP-dən istehsala qədər." },
+      { title: "3D Konfiquratorlar", copy: "Alıcıların real vaxtda fərdiləşdirdiyi interaktiv məhsul konfiquratorları." },
+      { title: "Məhsul və Buraxılış Saytları", copy: "Yüksək konversiyalı məhsul saytları və immersiv buraxılış təcrübələri." },
+      { title: "CRM Avtomatlaşdırma", copy: "Zoho, GoHighLevel və HubSpot üzərində tam quraşdırma və avtomatlaşdırma." },
+      { title: "3D və Məhsul Renderləri", copy: "Fotoreal arxitektura və məhsul vizuallaşdırması." },
+      { title: "Video və Şəkil İstehsalı", copy: "Kinematik buraxılış filmləri, turntable-lar və studiya səviyyəli görüntülər." },
     ],
     cta: "Bütün xidmətlər",
   },
@@ -79,11 +82,11 @@ const az = {
     cta: "Bütün işlərə baxın",
   },
   trust: {
-    eyebrow: "Nəticələr",
+    eyebrow: "Bir komandada nə əldə edirsiniz",
     items: [
-      { metric: "3×", label: "səhifədə qalma müddətində orta artım" },
-      { metric: "50%", label: "daha az satışöncəsi dəstək sualı" },
-      { metric: "40%", label: "məhsul səhifələrində daha yüksək konversiya" },
+      { metric: "Qur", label: "veb və mobil tətbiqlər, konfiquratorlar və məhsul saytları" },
+      { metric: "Avtomatlaşdır", label: "Zoho, GoHighLevel və HubSpot üzərində CRM quraşdırma və avtomatlaşdırma" },
+      { metric: "Vizuallaşdır", label: "fotoreal 3D, məhsul renderləri, video və görüntülər" },
     ],
   },
   homeContact: {
@@ -100,11 +103,10 @@ const az = {
     successCopy: "Tezliklə sizinlə əlaqə saxlayacağıq.",
   },
   homeCta: {
-    headline: "Məhsulunuzu unudulmaz etməyə hazırsınız?",
-    copy: "Nə qurduğunuzu bizə deyin. Mümkün olanları sizə göstərək.",
+    headline: "Yadda qalacaq bir şey qurmağa hazırsınız?",
+    copy: "Nə qurduğunuzu bizə deyin — tətbiq, sistem, buraxılış. Mümkün olanları sizə göstərək.",
     button: "Əlaqə saxlayın",
   },
-  ...pageMediaSections.az,
   mediaSlotsShared: {
     eyebrow: "Media sahələri",
     title: "Şəkillər və render videoları üçün ayrılmış yer.",
@@ -128,63 +130,88 @@ const az = {
   // ── XİDMƏTLƏR SƏHİFƏSİ ──
   servicesPage: {
     eyebrow: "Xidmətlər",
-    headline: "İnsanların yadda saxlayacağı məhsul buraxmaq üçün lazım olan hər şey.",
-    copy: "Biz strategiyanı, dizaynı, 3D mühəndisliyi və front-end inkişafını bir fokuslanmış əməkdaşlıqda birləşdiririk. Parça-parça podratçılar yox, təhvil xaosu yox.",
+    headline: "Məhsulunuzu dizayn edən, quran və avtomatlaşdıran vahid komanda.",
+    copy: "İdeyaları, məhsulları və əl işi ilə görülən əməliyyatları həqiqətən işləyən rəqəmsal təcrübələrə və sistemlərə çeviririk. Bu veb və ya mobil tətbiq, interaktiv 3D konfiqurator, buraxılış saytı, avtomatlaşdırılmış CRM və ya hamısını birləşdirən vizual istehsal ola bilər.",
     servicesIntro: {
       eyebrow: "Nə qura bilərik",
-      title: "Məhsulunuzun satılma üsuluna uyğun dəstək.",
-      copy: "Bəzi layihələrə tək, güclü bir nəticə lazımdır. Bəzilərinə isə bütöv buraxılış sistemi. Biz aydınlığın, vizual keyfiyyətin və interaktivliyin ən vacib olduğu yerdə qoşuluruq.",
+      title: "Bütün məhsul həyat dövrü boyunca dəstək.",
+      copy: "Bəzi layihələrə tək fokuslanmış nəticə lazımdır. Bəzilərinə isə tam sistem — tətbiq, avtomatlaşdırma və resurslar birlikdə. Aydınlığın, mühəndisliyin və sənətkarlığın ən vacib olduğu yerdə qoşuluruq.",
     },
     story: {
       panelLabel: "Müştərilərin adətən ehtiyac duyduğu",
-      title: "Məhsulu düşünə bilən və işi həqiqətən qura bilən tərəfdaş.",
-      copy: "Çox komanda bizə ideal brief ilə gəlmir. Onların əlində güclü məhsul, yarımçıq resurslar, buraxılış təzyiqi və mövcud təqdimatın görülən işi tam göstərmədiyi hissi olur.",
+      title: "Məhsulu düşünə bilən və bütün işi qura bilən tərəfdaş.",
+      copy: "Çox komanda bizə ideal brief ilə gəlmir. Güclü ideya, yarımçıq resurslar, əl işi ilə saxlanan satış prosesi və buraxılış təzyiqi ilə gəlirlər.",
       points: [
         {
-          title: "Gözəl görüntüdən əvvəl aydın düşüncə",
-          copy: "Təcrübəni dizayn etməzdən əvvəl alıcının nəyi görməli, nəyi müqayisə etməli və nəyə güvənməli olduğunu anlayırıq.",
+          title: "Koddan və ya piksellərdən əvvəl aydın düşüncə",
+          copy: "Dizayn edib qurmadan əvvəl alıcılarınızın və komandanızın həqiqətən nəyə ehtiyacı olduğunu anlayırıq.",
         },
         {
-          title: "Dizayn və qurma eyni axında",
-          copy: "Mətn, düzən, hərəkət, 3D və front-end birlikdə formalaşır; buna görə nəticə sonradan yığılmış yox, bütöv görünür.",
+          title: "Dizayn, qurma və avtomatlaşdırma eyni otaqda",
+          copy: "Mətn, UI, 3D, front-end, back-end və CRM avtomatlaşdırması birlikdə formalaşır, buna görə heç nə sonradan yığılmış görünmür.",
         },
         {
-          title: "Buraxılışdan sonra da faydalı",
-          copy: "Təhvil verilənlər yalnız ilk kampaniya üçün deyil, satış, marketinq və məhsul komandalarının sonradan istifadəsi üçün də yararlı olur.",
+          title: "Buraxılışdan çox sonra da faydalı",
+          copy: "Tətbiqlər, sistemlər və resurslar komandanızın işlətməyə, yeniləməyə və genişləndirməyə davam etməsi üçün qurulur.",
         },
       ],
-      note: "Xüsusilə seçimli, texniki detallı və ya dəyərini anlatmaq üçün daha güclü hekayə tələb edən məhsullarda yaxşı nəticə veririk.",
+      note: "Xüsusilə məhsulun seçimləri, texniki dərinliyi, real proqram ehtiyacı və ya əl işi əvəzinə avtomatlaşdırılmalı satış prosesi olduqda faydalıyıq.",
     },
     services: [
       {
+        title: "Veb Tətbiqlər və Platformalar",
+        copy: "Xüsusi veb tətbiqlər, idarə panelləri, portallar və SaaS interfeysləri — baştan-sona dizayn və mühəndislik edilir, onları işlədən API və back-end ilə birlikdə. Miqyaslanma üçün qurulub və komandanızın saxlaması asandır.",
+        tags: ["Qur", "Veb / API", "Miqyaslanan"],
+      },
+      {
+        title: "iOS və Android Tətbiqləri",
+        copy: "Native və cross-platform mobil tətbiqlər, MVP-dən istehsala qədər. İdeyanı dizayn, qurma, test və mağaza buraxılışından keçiririk — və buraxılışdan sonra da təkmilləşdiririk.",
+        tags: ["Qur", "Mobil", "Native / Cross-platform"],
+      },
+      {
         title: "3D Məhsul Konfiquratorları",
-        copy: "Müştərilərin ani vizual əks-əlaqə ilə ölçü, örtük, rəng, aksesuarlar və mühiti dəyişdirdiyi sayta inteqrasiya olunmuş konfiquratorlar. Three.js ilə işləyir, konversiya üçün dizayn edilib.",
-        tags: ["Three.js", "Məhsul Məntiqi", "Ticarətə Hazır"],
+        copy: "Müştərilərin real vaxtda material, ölçü, seçim və təqdimat vəziyyətlərini dəyişdiyi interaktiv məhsul təcrübələri. Alış qərarı məhsulun uyğunlaşmasını görməkdən asılı olanda faydalıdır.",
+        tags: ["Qur", "Three.js", "Ticarətə Hazır"],
       },
       {
-        title: "Məhsul Buraxılış Saytları",
-        copy: "Məhsul hekayəsini, sübutu və konversiya strukturunu vahid aydın səyahətdə birləşdirən yüksək təsirli səhifələr. Məhsulunuzun dünya ilə tanışdığı an üçün qurulub.",
-        tags: ["Buraxılış", "Hekayə", "Konversiya"],
-      },
-      {
-        title: "3D Resurs İstehsalı",
-        copy: "Optimallaşdırılmış 3D modellər, studiya renderləri, məhsul kəsikləri və konfiqurasiyaya hazır resurs dəstləri. Saytınızın, kampaniyalarınızın və satış materiallarınızın ehtiyac duyduğu hər şey.",
-        tags: ["Modellər", "Renderlər", "WebGL Resursları"],
-      },
-      {
-        title: "İnteraktiv Məhsul Demoları",
-        copy: "Müştərilərin zəng etmədən əvvəl imkanları anlamalarına kömək edən idarə olunan 3D və hərəkət əsaslı icmallar. Təzyiqlə deyil, aydınlıqla satın.",
-        tags: ["Demo", "Təhsil", "Özünəxidmət"],
-      },
-      {
-        title: "Texniki İzahedicilər",
-        copy: "Təkcə mətnlə izah oluna bilməyən məhsullar üçün. Mürəkkəbi anlaşılan edən animasiyalı parçalanmalar, komponent görünüşləri və iş axını vizuallaşdırmaları.",
-        tags: ["Animasiya", "İzahedici", "Mürəkkəb Məhsullar"],
+        title: "Məhsul və Buraxılış Saytları",
+        copy: "Sadəcə cilalı görünməkdən artıq iş görən buraxılış səhifələri və məhsul saytları. Hekayəni, sübutu və çağırışları elə qururuq ki, səhifə eyni anda həm izah etsin, həm də güvən yaratsın.",
+        tags: ["Qur", "Buraxılış", "Konversiya"],
       },
       {
         title: "Ticarətə Hazır Səhifələr",
-        copy: "Yüksək düşüncə tələb edən alışlar üçün dizayn edilmiş məhsul səhifələri. Müştəri ödənişə çatmadan qiyməti əsaslandıran aydın struktur, etibar siqnalları və vizual dərinlik.",
-        tags: ["E-ticarət", "Etibar", "Premium"],
+        copy: "Düşünülmüş alışlar üçün məhsul səhifələri. Daha güclü iyerarxiya, vizual sübut və interaksiya ilə qiymət səbət görünməmişdən əvvəl əsaslandırılır.",
+        tags: ["Qur", "E-ticarət", "Premium"],
+      },
+      {
+        title: "CRM Quraşdırma və Miqrasiya",
+        copy: "CRM-inizi Zoho, GoHighLevel və ya HubSpot üzərində quraşdırır, konfiqurasiya edir və köçürürük — təmiz pipeline-lar, xüsusi sahələr və komandanızın həqiqətən istifadə edəcəyi struktur. Cədvəllərdən və ya köhnə sistemdən keçirsiniz? Miqrasiyanı biz həll edirik.",
+        tags: ["Avtomatlaşdır", "Zoho · GHL · HubSpot", "Onboarding"],
+      },
+      {
+        title: "Satış və Marketinq Avtomatlaşdırması",
+        copy: "Avtomatlaşdırılmış iş axınları, lid yönləndirmə, izləmə ardıcıllıqları və email/SMS — heç bir lid itmir, komandanız əl işindən azad olur. Necə satdığınıza uyğun qurulmuş tam avtomatlaşdırma.",
+        tags: ["Avtomatlaşdır", "İş axınları", "Pipeline-lar"],
+      },
+      {
+        title: "İnteqrasiyalar və Verilənlər",
+        copy: "CRM-inizi saytınıza, formalara, ödənişlərə, təqvimlərə və texnologiya yığınınızın qalan hissəsinə birləşdirin — verilənlər avtomatik axsın və hər şey sinxron qalsın.",
+        tags: ["Avtomatlaşdır", "API-lər", "İnteqrasiyalar"],
+      },
+      {
+        title: "3D Resurs İstehsalı",
+        copy: "Optimallaşdırılmış modellər, təmiz materiallar, statik renderlər, kəsiklər və vebə hazır resurs dəstləri — sayt, təqdimatlar, ödənişli kampaniyalar və konfiquratorun özündə işləyir.",
+        tags: ["Vizuallaşdır", "Modellər", "WebGL Resursları"],
+      },
+      {
+        title: "Məhsul Renderləri, Şəkillər və Film",
+        copy: "Studiya səviyyəli məhsul renderləri, lifestyle görüntülər, turntable-lar və kinematik buraxılış filmləri — bu saytın arxasında hərəkət edən eyni keyfiyyət. Saytınız, reklamlarınız, marketpleys elanları və təqdimatlar üçün hazır təhvil verilir.",
+        tags: ["Vizuallaşdır", "Fotoreal Renderlər", "Veb və Reklama Hazır"],
+      },
+      {
+        title: "Texniki İzahedicilər və Demolar",
+        copy: "İdarə olunan demolar, animasiyalı komponent parçalanmaları və hərəkət əsaslı icmallar — mürəkkəb məhsulları hər kəs satışla danışmadan əvvəl anlaşılan edir, təkrar sualları azaldır.",
+        tags: ["Vizuallaşdır", "Animasiya", "Mürəkkəb Məhsullar"],
       },
     ],
     mediaShowcase: {
@@ -327,15 +354,15 @@ const az = {
       ],
     },
     bottomCta: {
-      title: "Daha yaxşı rəqəmsal hekayəyə ehtiyacı olan məhsulunuz var?",
-      copy: "Mürəkkəb olanı daha aydın, daha güclü və satması daha asan olan təcrübəyə çevirək.",
+      title: "Daha yaxşı işləməli məhsulunuz, tətbiqiniz və ya prosesiniz var?",
+      copy: "Onu dizayn etməyə, qurmağa, avtomatlaşdırmağa və layiqincə göstərməyə kömək edə bilərik.",
     },
   },
   // ── İŞLƏR SƏHİFƏSİ ──
   workPage: {
     eyebrow: "İşlər",
-    headline: "Buraxılışına kömək etdiyimiz məhsullar.",
-    copy: "Müxtəlif sahələrdən layihə seçmələri. Hər biri daha yaxşı hekayəyə ehtiyacı olan məhsulla başladı.",
+    headline: "Dizayn etdiyimiz, qurduğumuz və buraxdığımız real layihələr.",
+    copy: "Proqram təminatı, avtomatlaşdırma və vizuallaşdırma üzrə iş seçmələri — tətbiqlər və 3D konfiquratorlardan məhsul buraxılışlarına və CRM sistemlərinə qədər. Tam qalereyanı açmaq üçün istənilən layihəyə klikləyin.",
     projects: [
       {
         name: "Perqola Konfiqurator Sistemi",
@@ -372,87 +399,87 @@ const az = {
   // ── QİYMƏTLƏR SƏHİFƏSİ ──
   pricingPage: {
     eyebrow: "Qiymətlər",
-    headline: "Şəffaf qiymətlər. Sürpriz yoxdur.",
-    copy: "Başlanğıc nöqtəsi seçin. Hər əməkdaşlıq məhsulunuza, vaxt cədvəlinizə və məqsədlərinizə uyğun planlaşdırılır.",
+    headline: "Sadə əməkdaşlıqlar. Məqsədlərinizə uyğun.",
+    copy: "Sizə uyğun iş formasını seçin. Hər layihə məhsulunuza, vaxt cədvəlinizə və məqsədlərinizə uyğun planlaşdırılır — sərt şablon yox, qeyri-müəyyən saatlıq təxmin yox.",
     badge: "Ən populyar",
-    cta: "Başlayın",
+    cta: "Layihəyə başla",
     tiers: [
       {
-        tier: "Əsas",
-        price: "$4,900",
-        subtitle: "Bir fokuslanmış məhsul səhifəsi və ya buraxılış təcrübəsi.",
+        tier: "Layihə",
+        price: "Sabit həcm",
+        subtitle: "Aydın başlanğıc və sonu olan müəyyən qurma.",
         features: [
-          "Kəşf seminarı və səhifə strategiyası",
-          "Bir yüksək təsirli məhsul səhifəsi",
-          "Bir əsas 3D və ya hərəkət ardıcıllığı",
-          "Responsiv QA və təmiz təhvil",
+          "Kəşf və həcm seminarı",
+          "Bir məhsul: tətbiq, sayt və ya konfiqurator",
+          "Dizayn, qurma və QA",
+          "Təmiz təhvil və sənədləşmə",
         ],
       },
       {
-        tier: "İnkişaf",
-        price: "$14,900",
-        subtitle: "Daha dərin müştəri səyahətləri ilə çoxsəhifəli məhsul saytı.",
+        tier: "Abunə",
+        price: "Aylıq",
+        subtitle: "Davamlı qurma, avtomatlaşdırma və təkmilləşdirmə.",
         features: [
-          "Çoxbölməli məhsul saytı",
-          "Xüsusi səhnə keçidləri və hərəkət",
-          "CMS və ya API-yə hazır məzmun strukturu",
-          "Buraxılış dəstəyi və optimallaşdırma mərhələsi",
+          "Davamlı dizayn və inkişaf",
+          "CRM avtomatlaşdırma və inteqrasiyalar",
+          "Tələb əsasında renderlər, məzmun və yeniləmələr",
+          "Məhsulunuzu tanıyan xüsusi komanda",
         ],
         featured: true,
       },
       {
         tier: "Xüsusi",
         price: "Danışaq",
-        subtitle: "Konfiquratorlar, mürəkkəb sistemlər və davamlı tərəfdaşlıqlar.",
+        subtitle: "Mürəkkəb platformalar, çoxxidmətli işlər və tərəfdaşlıqlar.",
         features: [
-          "Verilənlərə əsaslanan 3D məhsul səhnələri",
-          "Ticarət, CRM və ya CMS inteqrasiyaları",
-          "Təkrar istifadə edilə bilən komponent və hərəkət kitabxanası",
-          "Davamlı optimallaşdırma və dəstək",
+          "Veb və mobil tətbiq platformaları",
+          "Baştan-sona CRM avtomatlaşdırması",
+          "3D konfiquratorlar və vizual istehsal",
+          "Uzunmüddətli yol xəritəsi və dəstək",
         ],
       },
     ],
     faq: [
       {
-        q: "Hər tarif planına nə daxildir?",
-        a: "Kəşf, dizayn, inkişaf, QA və yerləşdirmə. Əsas şeylər üçün əlavə ödəniş tələb etmirik.",
+        q: "Layihəni necə qiymətləndirirsiniz?",
+        a: "Hər əməkdaşlıq həqiqətən nəyə ehtiyacınız olduğuna görə planlaşdırılır — platforma, mürəkkəblik və vaxt cədvəli. Aydın sabit qiymət və ya aylıq abunə alırsınız, qeyri-müəyyən saatlıq təxmin yox.",
       },
       {
-        q: "Sonradan yüksəldə bilərəm?",
-        a: "Mütləq. Əsas layihələr nəticələr gəldikcə tez-tez İnkişaf və ya Xüsusi əməkdaşlıqlara çevrilir.",
+        q: "Kiçikdən başlayıb böyüyə bilərik?",
+        a: "Bəli. Çox müştəri bir layihə ilə başlayır və iş — və nəticələr — artdıqca abunəyə keçir.",
       },
       {
         q: "Tipik layihə nə qədər vaxt aparır?",
-        a: "Əsas: 2–3 həftə. İnkişaf: 4–8 həftə. Xüsusi: mürəkkəbliyə əsasən birlikdə planlaşdırılır.",
+        a: "Fokuslanmış sayt və ya konfiqurator adətən bir neçə həftə çəkir. Tətbiqlər və tam CRM avtomatlaşdırması mürəkkəbliyə əsasən birlikdə planlaşdırılır.",
       },
       {
-        q: "Mövcud dizaynlarla işləyirsiniz?",
-        a: "Bəli. Brend sisteminizlə işləyə və ya sıfırdan dizayn edə bilərik — layihə üçün nə uyğundursa.",
+        q: "Mövcud alətlərimiz və dizaynlarımızla işləyirsiniz?",
+        a: "Bəli. Brendiniz, texnologiya yığınınız və CRM-inizlə — Zoho, GoHighLevel və ya HubSpot — işləyirik və ya sıfırdan qururuq.",
       },
     ],
   },
   // ── HAQQIMIZDA SƏHİFƏSİ ──
   aboutPage: {
     eyebrow: "Haqqımızda",
-    headline: "Məhsul komandaları üçün qurulmuş studiya.",
-    copy: "Configuro mövcuddur, çünki məhsul buraxılışları şablon saytlardan və hazır renderlərdən daha yaxşısına layiqdir. Biz dizaynı, mühəndisliyi və 3D sənətkarlığını bir praktikada birləşdirən kiçik, fokuslanmış komandayıq.",
+    headline: "Dizayn etmək, qurmaq və avtomatlaşdırmaq üçün qurulmuş komanda.",
+    copy: "Configuro mövcuddur, çünki əla məhsullar şablon saytlardan, əl işi əməliyyatlardan və hazır renderlərdən daha yaxşısına layiqdir. Biz dizaynı, proqram mühəndisliyini, CRM avtomatlaşdırmasını və 3D sənətkarlığını bir praktikada birləşdirən kiçik, fokuslanmış komandayıq.",
     principles: [
       {
         title: "Şoua deyil, aydınlığa üstünlük",
-        copy: "Hərəkət və 3D-ni izah etmək üçün istifadə edirik, bəzəmək üçün deyil. Alıcıya anlamağa kömək etmirsə, buraxılmır.",
+        copy: "Dizaynı, kodu və 3D-ni işləri daha aydın və istifadəsi daha asan etmək üçün istifadə edirik — sadəcə bəzəmək üçün deyil. Kömək etmirsə, buraxılmır.",
       },
       {
         title: "Real komandalar üçün qurulub",
-        copy: "Təhvil verdiyimiz hər şey məzmun yeniləmələri, responsiv QA və uzunmüddətli texniki xidmət üçün strukturlaşdırılıb. Birdəfəlik qurmalar yox.",
+        copy: "Təhvil verdiyimiz hər şey — tətbiqlər, avtomatlaşdırmalar, saytlar, resurslar — yeniləmələr, QA və uzunmüddətli sahiblik üçün strukturlaşdırılıb. Birdəfəlik qurmalar yox.",
       },
       {
         title: "Bir komanda, bir proses",
-        copy: "Strategiya, dizayn, 3D və kod bir dam altındadır. Daha az təhvil — daha az itki.",
+        copy: "Strategiya, dizayn, mühəndislik, avtomatlaşdırma və 3D bir dam altındadır. Daha az təhvil — daha az itki.",
       },
     ],
     story: {
       title: "Necə işləyirik",
-      copy: "Biz mürəkkəb, konfiqurasiya edilə bilən və ya premium məhsullar satan şirkətlərdəki məhsul, marketinq və inkişaf komandaları ilə tərəfdaşlıq edirik. Bizim işimiz məhsulu daha asan anlaşılan və daha çətin unudulan etməkdir — sayt təcrübəsinin özü vasitəsilə.",
+      copy: "Biz mürəkkəb, konfiqurasiya edilə bilən və ya premium məhsullar satan məhsul, marketinq və əməliyyat komandaları ilə tərəfdaşlıq edirik. İşimiz məhsulu qurmağı, satmağı və idarə etməyi daha asan etməkdir — proqram təminatı, sistemlər və təcrübənin özü vasitəsilə.",
     },
   },
   // ── ƏLAQƏ SƏHİFƏSİ (çoxaddımlı sehrbaz) ──
@@ -496,9 +523,12 @@ const az = {
         description: "Əsas əməkdaşlıq növünü seçin.",
         multi: false,
         options: [
+          { value: "web-app", label: "Veb Tətbiq / Platforma" },
+          { value: "mobile-app", label: "Mobil Tətbiq (iOS / Android)" },
           { value: "configurator", label: "3D Konfiqurator" },
           { value: "product-site", label: "Məhsul Saytı" },
           { value: "launch-site", label: "Buraxılış Təcrübəsi" },
+          { value: "crm-automation", label: "CRM və Avtomatlaşdırma" },
           { value: "interactive-demo", label: "İnteraktiv Demo" },
           { value: "redesign", label: "Saytın Yenidən Dizaynı" },
         ],
@@ -533,10 +563,27 @@ const az = {
         options: [
           { value: "strategy", label: "Strategiya və mesajlaşma" },
           { value: "design-build", label: "UI dizayn və front-end" },
+          { value: "backend", label: "Backend və API-lər" },
+          { value: "mobile", label: "Mobil inkişaf" },
+          { value: "crm", label: "CRM avtomatlaşdırma" },
+          { value: "integrations", label: "İnteqrasiyalar" },
           { value: "threejs", label: "Three.js / WebGL" },
           { value: "models", label: "3D model istehsalı" },
           { value: "renders", label: "Renderlər və hərəkət" },
           { value: "cms", label: "CMS inteqrasiyası" },
+        ],
+      },
+      platforms: {
+        label: "Hansı platformalar və ya alətlər?",
+        description: "Uyğun olanları seçin — düzgün komandanı seçməyə kömək edir.",
+        multi: true,
+        options: [
+          { value: "zoho", label: "Zoho" },
+          { value: "gohighlevel", label: "GoHighLevel" },
+          { value: "hubspot", label: "HubSpot" },
+          { value: "ios", label: "iOS" },
+          { value: "android", label: "Android" },
+          { value: "web", label: "Veb" },
         ],
       },
       timeline: {
@@ -565,7 +612,7 @@ const az = {
     stepLayout: [
       { fieldKeys: ["fullName", "email", "company", "website"] },
       { fieldKeys: ["productName"], groupKeys: ["projectType", "productStage"] },
-      { groupKeys: ["goals", "deliverables"] },
+      { groupKeys: ["goals", "deliverables", "platforms"] },
       { fieldKeys: ["brief"], groupKeys: ["timeline", "budget"] },
     ],
   },
@@ -760,14 +807,15 @@ const az = {
     },
   ],
   footer: {
-    copy: "3D saytlar, konfiquratorlar və buraxılış təcrübələri üzrə ixtisaslaşmış rəqəmsal məhsul studiyası.",
+    copy: "Dizayn və mühəndislik tərəfdaşı. Veb və mobil tətbiqlər, konfiquratorlar və məhsul saytları qururuq, CRM-inizi avtomatlaşdırırıq və premium 3D, render və film işi istehsal edirik.",
     cta: "Layihəyə başla",
     servicesTitle: "Xidmətlər",
     services: [
+      "Veb və Mobil Tətbiqlər",
       "3D Konfiquratorlar",
-      "Məhsul Saytları",
-      "Buraxılış Təcrübələri",
-      "Resurs İstehsalı",
+      "Məhsul və Buraxılış Saytları",
+      "CRM Avtomatlaşdırma",
+      "3D Renderlər və Film",
     ],
     companyTitle: "Şirkət",
     company: ["Haqqımızda", "İşlər", "Qiymətlər", "Əlaqə"],
