@@ -6,7 +6,9 @@ import {
   fallbackLanguage,
 } from "./locales";
 import { locales } from "./locales";
-import SceneCanvas from "./components/SceneCanvas";
+import { pageSeo, buildJsonLd } from "./locales/seo";
+import VideoBackground from "./components/VideoBackground";
+import { initCinematicEffects, initGlobalEffects } from "./cinematicEffects";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import AdminRoute from "./components/AdminRoute";
@@ -18,13 +20,11 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Playground from "./pages/Playground";
 import Templates from "./pages/Templates";
+import Insights from "./pages/Insights";
+import InsightArticle from "./pages/InsightArticle";
+import Portal from "./pages/Portal";
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
-import AdminContentEditor from "./pages/AdminContentEditor";
-import AdminTemplates from "./pages/AdminTemplates";
-import AdminMediaLibrary from "./pages/AdminMediaLibrary";
-import AdminInquiries from "./pages/AdminInquiries";
-import AdminAccess from "./pages/AdminAccess";
 import { useContentAdmin } from "./admin/ContentAdminContext";
 
 function ScrollToTop() {
@@ -45,17 +45,63 @@ function App() {
   useEffect(() => {
     window.localStorage.setItem(LANGUAGE_STORAGE_KEY, language);
     document.documentElement.lang = language;
-    document.title = isAdminRoute ? "Configuro Admin" : content.meta.title;
-    const description = document.querySelector('meta[name="description"]');
-    if (description) {
-      description.setAttribute(
-        "content",
-        isAdminRoute
-          ? "Configuro admin panel for site operations, inquiries, and content readiness."
-          : content.meta.description,
-      );
+
+    // Individual insight articles own their own SEO tags + Article JSON-LD.
+    if (/^\/insights\/.+/.test(location.pathname)) return;
+
+    const origin = "https://configuro.studio";
+    const path = location.pathname;
+    const url = `${origin}${path === "/" ? "/" : path}`;
+    const seo = (pageSeo[language] || pageSeo.en)[path];
+
+    const title = isAdminRoute
+      ? "Configuro Admin"
+      : (seo?.title ?? content.meta.title);
+    const description = isAdminRoute
+      ? "Configuro admin panel for site operations, inquiries, and content readiness."
+      : (seo?.description ?? content.meta.description);
+    const noindex = isAdminRoute || seo?.noindex;
+
+    document.title = title;
+
+    const setMeta = (selector, attr, value) => {
+      const el = document.querySelector(selector);
+      if (el) el.setAttribute(attr, value);
+    };
+    const setMetaByName = (name, value) => {
+      let el = document.head.querySelector(`meta[name="${name}"]`);
+      if (!el) {
+        el = document.createElement("meta");
+        el.setAttribute("name", name);
+        document.head.appendChild(el);
+      }
+      el.setAttribute("content", value);
+    };
+
+    setMeta('meta[name="description"]', "content", description);
+    if (seo?.keywords) setMetaByName("keywords", seo.keywords);
+    setMeta('meta[property="og:title"]', "content", title);
+    setMeta('meta[name="twitter:title"]', "content", title);
+    setMeta('meta[property="og:description"]', "content", description);
+    setMeta('meta[name="twitter:description"]', "content", description);
+    setMeta('meta[property="og:url"]', "content", url);
+    setMeta('link[rel="canonical"]', "href", url);
+    setMeta('meta[name="robots"]', "content", noindex ? "noindex, nofollow" : "index, follow");
+
+    // Per-page structured data (JSON-LD).
+    let ld = document.getElementById("page-jsonld");
+    if (!isAdminRoute && seo) {
+      if (!ld) {
+        ld = document.createElement("script");
+        ld.type = "application/ld+json";
+        ld.id = "page-jsonld";
+        document.head.appendChild(ld);
+      }
+      ld.textContent = JSON.stringify(buildJsonLd(path, seo));
+    } else if (ld) {
+      ld.remove();
     }
-  }, [content.meta.description, content.meta.title, isAdminRoute, language]);
+  }, [content.meta.description, content.meta.title, isAdminRoute, language, location.pathname]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -81,12 +127,30 @@ function App() {
     };
   }, []);
 
+  useEffect(() => {
+    if (isAdminRoute) return undefined;
+    let cleanup = () => {};
+    const id = window.setTimeout(() => {
+      cleanup = initCinematicEffects(document);
+    }, 80);
+    return () => {
+      window.clearTimeout(id);
+      cleanup();
+    };
+  }, [isAdminRoute, location.pathname]);
+
+  useEffect(() => {
+    if (isAdminRoute) return undefined;
+    return initGlobalEffects();
+  }, [isAdminRoute]);
+
   return (
     <>
-      {!isAdminRoute ? <SceneCanvas /> : null}
+      {!isAdminRoute ? <VideoBackground /> : null}
       <div className={isAdminRoute ? "admin-shell" : "page-shell"}>
         <ScrollToTop />
         {!isAdminRoute ? <Header language={language} setLanguage={setLanguage} /> : null}
+        <div className="route-fade" key={location.pathname}>
         <Routes>
           <Route path="/" element={<Home content={content} />} />
           <Route path="/services" element={<Services content={content} />} />
@@ -96,12 +160,15 @@ function App() {
           <Route path="/templates" element={<Templates content={content} language={language} />} />
           <Route path="/about" element={<About content={content} />} />
           <Route path="/contact" element={<Contact content={content} />} />
+          <Route path="/insights" element={<Insights content={content} />} />
+          <Route path="/insights/:slug" element={<InsightArticle content={content} />} />
+          <Route path="/portal" element={<Portal />} />
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route
             path="/admin"
             element={(
               <AdminRoute>
-                <Navigate replace to="/admin/overview" />
+                <Navigate replace to="/admin/forms" />
               </AdminRoute>
             )}
           />
@@ -109,7 +176,31 @@ function App() {
             path="/admin/overview"
             element={(
               <AdminRoute>
-                <AdminDashboard />
+                <Navigate replace to="/admin/forms" />
+              </AdminRoute>
+            )}
+          />
+          <Route
+            path="/admin/forms"
+            element={(
+              <AdminRoute>
+                <AdminDashboard view="forms" />
+              </AdminRoute>
+            )}
+          />
+          <Route
+            path="/admin/statistics"
+            element={(
+              <AdminRoute>
+                <AdminDashboard view="statistics" />
+              </AdminRoute>
+            )}
+          />
+          <Route
+            path="/admin/interactions"
+            element={(
+              <AdminRoute>
+                <AdminDashboard view="interactions" />
               </AdminRoute>
             )}
           />
@@ -117,7 +208,7 @@ function App() {
             path="/admin/content"
             element={(
               <AdminRoute>
-                <AdminContentEditor />
+                <Navigate replace to="/admin/forms" />
               </AdminRoute>
             )}
           />
@@ -125,7 +216,7 @@ function App() {
             path="/admin/templates"
             element={(
               <AdminRoute>
-                <AdminTemplates />
+                <Navigate replace to="/admin/forms" />
               </AdminRoute>
             )}
           />
@@ -133,7 +224,7 @@ function App() {
             path="/admin/media"
             element={(
               <AdminRoute>
-                <AdminMediaLibrary />
+                <Navigate replace to="/admin/forms" />
               </AdminRoute>
             )}
           />
@@ -141,7 +232,7 @@ function App() {
             path="/admin/inquiries"
             element={(
               <AdminRoute>
-                <AdminInquiries />
+                <Navigate replace to="/admin/interactions" />
               </AdminRoute>
             )}
           />
@@ -149,11 +240,12 @@ function App() {
             path="/admin/access"
             element={(
               <AdminRoute>
-                <AdminAccess />
+                <Navigate replace to="/admin/statistics" />
               </AdminRoute>
             )}
           />
         </Routes>
+        </div>
         {!isAdminRoute ? <Footer language={language} /> : null}
       </div>
     </>

@@ -1,3 +1,5 @@
+import { insertSupabaseInquiry } from "./supabaseInquiries";
+
 const INQUIRIES_STORAGE_KEY = "morphix.admin.inquiries.v1";
 
 function getStorage() {
@@ -66,7 +68,13 @@ export function createInquiry(payload) {
     language: payload.language ?? "",
   };
 
-  return persistInquiries([nextInquiry, ...readInquiries()])[0];
+  const savedInquiry = persistInquiries([nextInquiry, ...readInquiries()])[0];
+
+  insertSupabaseInquiry(savedInquiry).catch((error) => {
+    console.warn("Configuro inquiry saved locally but Supabase sync failed.", error);
+  });
+
+  return savedInquiry;
 }
 
 export function updateInquiryStatus(inquiryId, status) {

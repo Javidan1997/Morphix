@@ -60,7 +60,9 @@ function Footer({ language }) {
             <Link to="/playground">{content.nav.playground}</Link>
             <Link to="/work">{content.nav.work}</Link>
             <Link to="/pricing">{content.nav.pricing}</Link>
+            <Link to="/insights">{content.nav.insights}</Link>
             <Link to="/contact">{content.nav.contact}</Link>
+            <Link to="/portal">{content.nav.portal}</Link>
           </div>
         </div>
       </div>

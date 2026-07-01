@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 160" width="760" height="160">
+  <defs>
+    <linearGradient id="cubeTop" x1="10%" y1="0%" x2="90%" y2="100%">
+      <stop offset="0%" stop-color="#F4FBFF" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#9DDCFF" stop-opacity="0.88"/>
+    </linearGradient>
+    <linearGradient id="cubeLeft" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7FE0FF" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#33B7FF" stop-opacity="0.74"/>
+    </linearGradient>
+    <linearGradient id="cubeRight" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3FC7FF" stop-opacity="0.92"/>
+      <stop offset="100%" stop-color="#1491F1" stop-opacity="0.82"/>
+    </linearGradient>
+    <linearGradient id="accentLine" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1296FF"/>
+      <stop offset="47%" stop-color="#8B2DFF"/>
+      <stop offset="76%" stop-color="#FF4B2B"/>
+      <stop offset="100%" stop-color="#FFA400"/>
+    </linearGradient>
+    <filter id="cubeGlow" x="-120%" y="-120%" width="340%" height="340%">
+      <feDropShadow dx="0" dy="0" stdDeviation="10" flood-color="#53C6FF" flood-opacity="0.9"/>
+      <feDropShadow dx="0" dy="0" stdDeviation="22" flood-color="#A7E8FF" flood-opacity="0.58"/>
+    </filter>
+    <filter id="softShadow" x="-30%" y="-40%" width="180%" height="220%">
+      <feDropShadow dx="0" dy="12" stdDeviation="14" flood-color="#07111E" flood-opacity="0.24"/>
+    </filter>
+  </defs>
+
+  <g transform="translate(26 26)" filter="url(#cubeGlow)">
+    <g filter="url(#softShadow)">
+      <polygon points="34,34 72,22 110,34 72,47" fill="url(#cubeTop)"/>
+      <polygon points="34,34 34,76 72,92 72,47" fill="url(#cubeLeft)"/>
+      <polygon points="72,47 110,34 110,76 72,92" fill="url(#cubeRight)"/>
+      <polyline points="34,34 72,47 110,34" fill="none" stroke="#EAF9FF" stroke-opacity="0.8" stroke-width="1.8"/>
+      <line x1="72" y1="22" x2="72" y2="92" stroke="#EAF9FF" stroke-opacity="0.8" stroke-width="1.8"/>
+      <polyline points="34,76 72,92 110,76" fill="none" stroke="#88DFFF" stroke-opacity="0.55" stroke-width="1.4"/>
+    </g>
+  </g>
+
+  <line x1="152" y1="112" x2="374" y2="112" stroke="url(#accentLine)" stroke-width="5" stroke-linecap="round"/>
+
+  <text
+    x="152"
+    y="85"
+    fill="#0A1020"
+    font-family="Sora, Manrope, 'Avenir Next', Arial, sans-serif"
+    font-size="62"
+    font-weight="800"
+    letter-spacing="-1.8"
+  >CONFIGURO</text>
+
+  <text
+    x="383"
+    y="121"
+    fill="#0A1020"
+    font-family="Manrope, 'Avenir Next', Arial, sans-serif"
+    font-size="28"
+    font-weight="700"
+    letter-spacing="-0.6"
+  >.studio</text>
+</svg>

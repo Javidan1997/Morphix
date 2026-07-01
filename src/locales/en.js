@@ -1,10 +1,8 @@
-import { pageMediaSections } from "./pageMedia";
-
 const en = {
   meta: {
-    title: "Configuro | Digital Product Studio",
+    title: "Configuro | Design, Build & Automate — Apps, Systems & 3D",
     description:
-      "Configuro is a digital product studio specializing in 3D product websites, interactive configurators, and immersive web experiences.",
+      "Configuro is a small design and engineering team. We build web and mobile apps, 3D configurators, and product sites, automate your CRM (Zoho, GoHighLevel, HubSpot), and produce premium 3D renders, video, and imagery.",
   },
   common: {
     brandName: "Configuro",
@@ -18,19 +16,21 @@ const en = {
   nav: {
     home: "Home",
     services: "Services",
-    playground: "Playground",
+    playground: "Live demo",
     templates: "Templates",
     work: "Work",
     pricing: "Pricing",
     about: "About",
     contact: "Contact",
+    insights: "Insights",
+    portal: "Client portal",
     cta: "Start a project",
   },
   // ── HOME PAGE ──
   hero: {
-    headline: "We build products people actually want to explore.",
+    headline: "We build what your product needs, then automate what slows it down.",
     subline:
-      "Configuro is a digital product studio. We design and engineer 3D websites, interactive configurators, and launch experiences for brands that refuse to be forgettable.",
+      "Configuro is a small, senior team. We build web and mobile apps and interactive 3D configurators, set up and automate your CRM on Zoho, GoHighLevel or HubSpot, and produce the 3D renders and film that make premium products look the part. One partner for the whole job, instead of juggling five.",
     primaryCta: "Start a project",
     secondaryCta: "See our work",
   },
@@ -38,32 +38,35 @@ const en = {
     eyebrow: "Why Configuro",
     items: [
       {
-        title: "Interactive, not decorative",
-        copy: "Every 3D element serves the buyer. Configuration, comparison, exploration — not just eye candy.",
+        title: "One team, not five vendors",
+        copy: "No stitching together an agency, a dev shop, a CRM consultant and a 3D studio. We do all of it in-house, and the people doing it actually talk to each other.",
       },
       {
-        title: "Engineered for production",
-        copy: "Three.js, optimized assets, responsive layouts. Ships fast, runs smooth, scales cleanly.",
+        title: "Production work, not prototypes",
+        copy: "Web, iOS, Android, WebGL, CRM automation. We ship things that run fast, hold up in the real world, and are easy for your team to take over.",
       },
       {
-        title: "Full-stack delivery",
-        copy: "Strategy, design, 3D, front-end, launch. One team, one process, no handoff gaps.",
+        title: "Built to earn its keep",
+        copy: "The design and the 3D are there to help people understand your product and buy it. If something doesn't help, we leave it out.",
       },
     ],
   },
   servicesPreview: {
     eyebrow: "What we do",
-    title: "From concept to launch, we handle everything.",
+    title: "Whatever your product needs, we can build it.",
     items: [
-      { title: "3D Configurators", copy: "Let your customers build their own product." },
-      { title: "Product Websites", copy: "Storytelling that converts, not just impresses." },
-      { title: "Launch Experiences", copy: "Immersive pages for product drops and campaigns." },
+      { title: "Web & Mobile Apps", copy: "Web platforms and native iOS and Android apps, from MVP to production." },
+      { title: "3D Configurators", copy: "Interactive product configurators buyers can customize in real time." },
+      { title: "Product & Launch Sites", copy: "High-converting product websites and immersive launch experiences." },
+      { title: "CRM Automation", copy: "Full setup and automation on Zoho, GoHighLevel, and HubSpot." },
+      { title: "3D & Product Renders", copy: "Photoreal architectural and product visualization." },
+      { title: "Video & Image Production", copy: "Cinematic launch films, turntables, and studio-grade imagery." },
     ],
     cta: "All services",
   },
   portfolioPreview: {
     eyebrow: "Selected work",
-    title: "Products we've brought to life.",
+    title: "Spaces and products we've brought to life.",
     projects: [
       {
         name: "Outdoor Living Configurator",
@@ -79,11 +82,11 @@ const en = {
     cta: "View all work",
   },
   trust: {
-    eyebrow: "Results",
+    eyebrow: "What one team covers",
     items: [
-      { metric: "3×", label: "average increase in time on page" },
-      { metric: "50%", label: "fewer pre-sales support questions" },
-      { metric: "40%", label: "higher conversion on product pages" },
+      { metric: "Build", label: "web & mobile apps, configurators, and product sites" },
+      { metric: "Automate", label: "CRM setup and automation on Zoho, GoHighLevel, and HubSpot" },
+      { metric: "Visualize", label: "photoreal 3D, product renders, video, and imagery" },
     ],
   },
   homeContact: {
@@ -100,11 +103,10 @@ const en = {
     successCopy: "We'll be in touch soon.",
   },
   homeCta: {
-    headline: "Ready to make your product unforgettable?",
-    copy: "Tell us what you're building. We'll show you what's possible.",
+    headline: "Tell us what you're building.",
+    copy: "An app, a CRM setup, or a full launch. Send it over and we'll tell you how we'd approach it.",
     button: "Get in touch",
   },
-  ...pageMediaSections.en,
   mediaSlotsShared: {
     eyebrow: "Media slots",
     title: "Reserved space for images and render video.",
@@ -129,73 +131,103 @@ const en = {
   // ── SERVICES PAGE ──
   servicesPage: {
     eyebrow: "Services",
-    headline: "Services for products that need more than a pretty landing page.",
+    headline: "If it can be designed or built, we can do it.",
     copy:
-      "We help teams turn complex, configurable, or premium products into digital experiences people can actually understand. That can mean strategy, sharper copy, 3D assets, a launch site, or the interactive layer that ties it all together.",
+      "Most of our work falls into three areas: software, automation, and visuals. You might need one of them or all three. Here's what each one looks like in practice.",
     servicesIntro: {
       eyebrow: "What we can build",
-      title: "Support that fits the way your product is sold.",
+      title: "Pick one piece, or hand us the whole thing.",
       copy:
-        "Some projects need one focused deliverable. Others need the whole launch system. We step in where clarity, visuals, and interaction matter most.",
+        "Some clients want a single deliverable. Others give us the whole product to run: the app, the automation, and the assets. We're comfortable either way.",
     },
     story: {
       panelLabel: "What clients usually need",
-      title: "A partner who can think about the product and make the thing.",
+      title: "A partner who can think about the product and build the whole thing.",
       copy:
-        "Most teams do not come to us with a tidy brief. They come with a strong product, half-finished assets, internal pressure to launch, and a sense that the current presentation is underselling the work.",
+        "Most teams do not come to us with a tidy brief. They come with a strong idea, half-finished assets, a sales process held together by manual work, and pressure to launch.",
       points: [
         {
-          title: "Clear thinking before pretty output",
-          copy: "We start by understanding what buyers need to see, compare, and trust before we design the experience around it.",
+          title: "Clear thinking before code or pixels",
+          copy: "We start by understanding what your buyers and your team actually need before we design and build around it.",
         },
         {
-          title: "Design and build in the same room",
-          copy: "Copy, layout, motion, 3D, and front-end are shaped together, so the final result feels cohesive instead of stitched together.",
+          title: "Design, build, and automation in one room",
+          copy: "Copy, UI, 3D, front-end, back-end, and CRM automation are shaped together, so nothing feels stitched together.",
         },
         {
-          title: "Useful after launch too",
-          copy: "The deliverables are meant to help sales, marketing, and product teams keep using the work after the first campaign goes live.",
+          title: "Useful long after launch",
+          copy: "Apps, systems, and assets are built for your team to keep running, updating, and extending after go-live.",
         },
       ],
       note:
-        "We are especially helpful when the product has options, technical detail, or a price point that asks customers to spend time understanding what makes it worth it.",
+        "We are especially helpful when the product has options, technical depth, a real software need, or a sales process that should be automated instead of manual.",
     },
     services: [
       {
-        title: "3D Product Configurators",
+        title: "Web Applications & Platforms",
         copy:
-          "Interactive product experiences where customers can change materials, dimensions, options, and presentation states without losing the thread. Useful when the buying decision depends on seeing the product adapt in real time.",
-        tags: ["Three.js", "Product Logic", "Commerce-Ready"],
+          "Custom web apps, dashboards, portals, and SaaS front-ends, with the APIs and back-end to run them. We build the whole thing so it scales and stays easy for your team to maintain.",
+        tags: ["Build", "Web / APIs", "Scalable"],
       },
       {
-        title: "Product Launch Websites",
+        title: "iOS & Android Apps",
         copy:
-          "Launch pages and microsites that do more than look polished. We structure the story, proof, and calls to action so the page explains the product and builds confidence at the same time.",
-        tags: ["Launch", "Storytelling", "Conversion"],
+          "Native and cross-platform mobile apps, from MVP to production. We take an idea through design, build, testing, and store release, then keep improving it after launch.",
+        tags: ["Build", "Mobile", "Native / Cross-platform"],
+      },
+      {
+        title: "3D Product Configurators",
+        copy:
+          "Interactive product experiences where customers can change materials, dimensions, options, and presentation states in real time. Useful when the buying decision depends on seeing the product adapt.",
+        tags: ["Build", "Three.js", "Commerce-Ready"],
+      },
+      {
+        title: "Product & Launch Websites",
+        copy:
+          "Launch pages and product sites that do more than look polished. We structure the story, proof, and calls to action so the page explains the product and builds confidence at the same time.",
+        tags: ["Build", "Launch", "Conversion"],
+      },
+      {
+        title: "Commerce-Ready Pages",
+        copy:
+          "Product pages for considered purchases, where people need reassurance before checkout. Stronger hierarchy, visual proof, and interaction so the price makes sense before the cart appears.",
+        tags: ["Build", "E-commerce", "Premium"],
+      },
+      {
+        title: "CRM Setup & Migration",
+        copy:
+          "We set up, configure, and migrate your CRM on Zoho, GoHighLevel, or HubSpot. That means clean pipelines, custom fields, and a structure your team will actually use. Moving off spreadsheets or an old system? We handle the migration.",
+        tags: ["Automate", "Zoho · GHL · HubSpot", "Onboarding"],
+      },
+      {
+        title: "Sales & Marketing Automation",
+        copy:
+          "Automated workflows, lead routing, follow-up sequences, and email/SMS so no lead slips and your team stops doing manual busywork. Full automation, built around how you actually sell.",
+        tags: ["Automate", "Workflows", "Pipelines"],
+      },
+      {
+        title: "Integrations & Data",
+        copy:
+          "Connect your CRM to your site, forms, payments, calendars, and the rest of your stack, so data flows automatically and everything stays in sync.",
+        tags: ["Automate", "APIs", "Integrations"],
       },
       {
         title: "3D Asset Production",
         copy:
           "Optimized models, clean materials, still renders, cutaways, and web-ready asset sets that work across the site, presentations, paid campaigns, and the configurator itself.",
-        tags: ["Models", "Renders", "WebGL Assets"],
+        tags: ["Visualize", "Models", "WebGL Assets"],
       },
       {
-        title: "Interactive Product Demos",
+        title: "Product Renders, Images & Film",
         copy:
-          "Guided demos and motion-led walkthroughs that help people understand how the product works before they ever talk to sales. Great for reducing repetitive questions and making technical products feel approachable.",
-        tags: ["Demo", "Education", "Self-Serve"],
+          "Studio-grade product renders, lifestyle imagery, turntables, and cinematic launch films, the same quality you see moving behind this site. Everything arrives ready for your website, ads, marketplace listings, and pitch decks.",
+        tags: ["Visualize", "Photoreal Renders", "Web & Ad Ready"],
       },
       {
-        title: "Technical Explainers",
+        title: "Technical Explainers & Demos",
         copy:
-          "For products that break the moment you try to explain them in plain paragraphs. We turn mechanisms, systems, and workflows into visuals people can follow without a technical background.",
-        tags: ["Animation", "Explainer", "Complex Products"],
-      },
-      {
-        title: "Commerce-Ready Pages",
-        copy:
-          "Product pages for considered purchases, where people need reassurance before checkout. We combine stronger hierarchy, visual proof, and better interaction so the price makes more sense before the cart appears.",
-        tags: ["E-commerce", "Trust", "Premium"],
+          "Guided demos, animated component breakdowns, and motion-led walkthroughs that make complex products understandable before anyone talks to sales — great for reducing repetitive questions.",
+        tags: ["Visualize", "Animation", "Complex Products"],
       },
     ],
     mediaShowcase: {
@@ -320,15 +352,15 @@ const en = {
       ],
     },
     bottomCta: {
-      title: "Have a product that needs a better digital story?",
-      copy: "We can help you turn the complexity into something clearer, sharper, and easier to sell.",
+      title: "Got something that needs building or fixing?",
+      copy: "Tell us the problem and we'll show you how we'd solve it.",
     },
   },
   // ── WORK PAGE ──
   workPage: {
     eyebrow: "Work",
-    headline: "Products we've helped launch.",
-    copy: "A selection of projects across industries. Each one started with a product that needed a better story.",
+    headline: "Real projects we've designed, built, and shipped.",
+    copy: "A selection of work across software, automation, and visualization, from apps and 3D configurators to product launches and CRM systems. Click any project to open the full gallery.",
     projects: [
       {
         name: "Pergola Configurator System",
@@ -365,87 +397,87 @@ const en = {
   // ── PRICING PAGE ──
   pricingPage: {
     eyebrow: "Pricing",
-    headline: "Transparent pricing. No surprises.",
-    copy: "Choose a starting point. Every engagement is scoped to your product, timeline, and goals.",
+    headline: "Simple engagements. Scoped to your goals.",
+    copy: "Pick the way of working that fits. Every project is scoped to your product, timeline, and goals. No rigid templates, no vague hourly guesswork.",
     badge: "Most popular",
-    cta: "Get started",
+    cta: "Start a project",
     tiers: [
       {
-        tier: "Foundation",
-        price: "$4,900",
-        subtitle: "One focused product page or launch experience.",
+        tier: "Project",
+        price: "Fixed scope",
+        subtitle: "A defined build with a clear start and finish.",
         features: [
-          "Discovery workshop and page strategy",
-          "One high-impact product page",
-          "One primary 3D or motion sequence",
-          "Responsive QA and clean handoff",
+          "Discovery and scoping workshop",
+          "One product: app, site, or configurator",
+          "Design, build, and QA",
+          "Clean handoff and documentation",
         ],
       },
       {
-        tier: "Growth",
-        price: "$14,900",
-        subtitle: "Multi-page product site with deeper customer journeys.",
+        tier: "Retainer",
+        price: "Monthly",
+        subtitle: "Ongoing build, automation, and iteration.",
         features: [
-          "Multi-section product website",
-          "Custom scene transitions and motion",
-          "CMS or API-ready content structure",
-          "Launch support and optimization pass",
+          "Continuous design and development",
+          "CRM automation and integrations",
+          "Renders, content, and updates on demand",
+          "A dedicated team that knows your product",
         ],
         featured: true,
       },
       {
         tier: "Custom",
         price: "Let's talk",
-        subtitle: "Configurators, complex systems, and ongoing partnerships.",
+        subtitle: "Complex platforms, multi-service, and partnerships.",
         features: [
-          "Data-driven 3D product scenes",
-          "Commerce, CRM, or CMS integrations",
-          "Reusable component and motion library",
-          "Ongoing optimization and support",
+          "Web and mobile app platforms",
+          "End-to-end CRM automation",
+          "3D configurators and visual production",
+          "Long-term roadmap and support",
         ],
       },
     ],
     faq: [
       {
-        q: "What's included in every tier?",
-        a: "Discovery, design, development, QA, and deployment. We don't charge extra for basics.",
+        q: "How do you price a project?",
+        a: "Every engagement is scoped to what you actually need: the platform, the complexity, and the timeline. You get a clear fixed quote or a monthly retainer, never a vague hourly estimate.",
       },
       {
-        q: "Can I upgrade later?",
-        a: "Absolutely. Foundation projects often grow into Growth or Custom engagements as results come in.",
+        q: "Can we start small and grow?",
+        a: "Yes. Most clients start with one project and move into a retainer as the work and the results add up.",
       },
       {
         q: "How long does a typical project take?",
-        a: "Foundation: 2–3 weeks. Growth: 4–8 weeks. Custom: scoped together based on complexity.",
+        a: "A focused website or configurator is usually a few weeks. Apps and full CRM automation are scoped together based on complexity.",
       },
       {
-        q: "Do you work with existing designs?",
-        a: "Yes. We can work from your brand system or design from scratch — whatever makes sense for the project.",
+        q: "Do you work with our existing tools and designs?",
+        a: "Yes. We work with your brand, your stack, and your CRM, whether that's Zoho, GoHighLevel, or HubSpot. If you don't have them yet, we set them up from scratch.",
       },
     ],
   },
   // ── ABOUT PAGE ──
   aboutPage: {
     eyebrow: "About",
-    headline: "A studio built for product teams.",
-    copy: "Configuro exists because product launches deserve better than template sites and stock renders. We're a small, focused team that combines design, engineering, and 3D craft into one practice.",
+    headline: "A small team that does the whole job.",
+    copy: "Configuro started because good products keep getting let down by template sites, manual admin, and stock renders. We're a small group of designers, engineers, automation people and 3D artists who would rather own the whole thing than pass it between vendors.",
     principles: [
       {
         title: "Clarity over spectacle",
-        copy: "We use motion and 3D to explain, not to decorate. If it doesn't help the buyer understand, it doesn't ship.",
+        copy: "We use design, code, and 3D to make things clearer and easier to use, not to decorate. If it doesn't help the user, it doesn't ship.",
       },
       {
         title: "Built for real teams",
-        copy: "Everything we deliver is structured for content updates, responsive QA, and long-term maintenance. No throwaway builds.",
+        copy: "Everything we ship, whether it's an app, an automation, a site or a set of assets, is structured for updates, QA, and long-term ownership. No throwaway builds.",
       },
       {
         title: "One team, one process",
-        copy: "Strategy, design, 3D, and code live under one roof. Fewer handoffs means fewer things lost in translation.",
+        copy: "Strategy, design, engineering, automation, and 3D live under one roof. Fewer handoffs means fewer things lost in translation.",
       },
     ],
     story: {
       title: "How we work",
-      copy: "We partner with product, marketing, and growth teams at companies selling complex, configurable, or premium products. Our job is to make the product easier to understand and harder to forget — through the website experience itself.",
+      copy: "We work with product, marketing, and operations teams selling complex, configurable, or premium products. Our job is to make the product easier to build, sell, and run: better software, less manual work, and an experience that does some of the explaining for you.",
     },
   },
   // ── CONTACT PAGE (multi-step wizard) ──
@@ -489,9 +521,12 @@ const en = {
         description: "Choose the primary engagement type.",
         multi: false,
         options: [
+          { value: "web-app", label: "Web App / Platform" },
+          { value: "mobile-app", label: "Mobile App (iOS / Android)" },
           { value: "configurator", label: "3D Configurator" },
           { value: "product-site", label: "Product Website" },
           { value: "launch-site", label: "Launch Experience" },
+          { value: "crm-automation", label: "CRM & Automation" },
           { value: "interactive-demo", label: "Interactive Demo" },
           { value: "redesign", label: "Site Redesign" },
         ],
@@ -526,10 +561,27 @@ const en = {
         options: [
           { value: "strategy", label: "Strategy & messaging" },
           { value: "design-build", label: "UI design & front-end" },
+          { value: "backend", label: "Backend & APIs" },
+          { value: "mobile", label: "Mobile development" },
+          { value: "crm", label: "CRM automation" },
+          { value: "integrations", label: "Integrations" },
           { value: "threejs", label: "Three.js / WebGL" },
           { value: "models", label: "3D model production" },
           { value: "renders", label: "Renders & motion" },
           { value: "cms", label: "CMS integration" },
+        ],
+      },
+      platforms: {
+        label: "Which platforms or tools?",
+        description: "Select any that apply. It helps us match the right team.",
+        multi: true,
+        options: [
+          { value: "zoho", label: "Zoho" },
+          { value: "gohighlevel", label: "GoHighLevel" },
+          { value: "hubspot", label: "HubSpot" },
+          { value: "ios", label: "iOS" },
+          { value: "android", label: "Android" },
+          { value: "web", label: "Web" },
         ],
       },
       timeline: {
@@ -558,7 +610,7 @@ const en = {
     stepLayout: [
       { fieldKeys: ["fullName", "email", "company", "website"] },
       { fieldKeys: ["productName"], groupKeys: ["projectType", "productStage"] },
-      { groupKeys: ["goals", "deliverables"] },
+      { groupKeys: ["goals", "deliverables", "platforms"] },
       { fieldKeys: ["brief"], groupKeys: ["timeline", "budget"] },
     ],
   },
@@ -566,11 +618,11 @@ const en = {
   configuratorDemo: {
     eyebrow: "Live Demo",
     title: "Try it yourself.",
-    copy: "Switch between products, change finishes, adjust scale, and orbit freely. This is a real WebGL configurator — the same technology we ship to clients.",
+    copy: "Switch between products, change finishes, adjust scale, and orbit freely. This is a real WebGL configurator, the same technology we ship to clients.",
     sidebar: {
       label: "What this proves",
       title: "One interface. Multiple product types.",
-      copy: "The same configurator architecture supports furniture, consumer tech, and XR hardware — all performant enough for a premium website.",
+      copy: "The same configurator architecture supports furniture, consumer tech, and XR hardware, all fast enough for a premium website.",
       points: [
         "Real GLB models",
         "Finish and scale presets",
@@ -753,14 +805,15 @@ const en = {
     },
   ],
   footer: {
-    copy: "Digital product studio specializing in 3D websites, configurators, and launch experiences.",
+    copy: "A small team building apps, configurators and product sites, automating CRMs on Zoho, GoHighLevel and HubSpot, and producing high-end 3D and film.",
     cta: "Start a project",
     servicesTitle: "Services",
     services: [
+      "Web & Mobile Apps",
       "3D Configurators",
-      "Product Websites",
-      "Launch Experiences",
-      "Asset Production",
+      "Product & Launch Sites",
+      "CRM Automation",
+      "3D Renders & Film",
     ],
     companyTitle: "Company",
     company: ["About", "Work", "Pricing", "Contact"],

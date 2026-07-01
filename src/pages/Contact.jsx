@@ -1,5 +1,4 @@
 import { useState } from "react";
-import MediaSlotsSection from "../components/MediaSlotsSection";
 import { createInquiry } from "../admin/inquiries";
 
 const defaultIntake = {
@@ -13,12 +12,13 @@ const defaultIntake = {
   productStage: "",
   goals: [],
   deliverables: [],
+  platforms: [],
   timeline: "",
   budget: "",
 };
 
 function Contact({ content }) {
-  const { contactPage, contactMediaGallery } = content;
+  const { contactPage } = content;
   const { wizard, fields, groups, stepLayout } = contactPage;
   const [step, setStep] = useState(0);
   const [intake, setIntake] = useState(defaultIntake);
@@ -232,8 +232,6 @@ function Contact({ content }) {
           </div>
         </div>
       </section>
-
-      <MediaSlotsSection copy={contactMediaGallery} />
     </main>
   );
 }

@@ -14,10 +14,10 @@ function AdminLogin() {
   });
   const [error, setError] = useState("");
 
-  const redirectPath = location.state?.from || "/admin/overview";
+  const redirectPath = location.state?.from || "/admin/forms";
 
   if (session) {
-    return <Navigate to="/admin/overview" replace />;
+    return <Navigate to="/admin/forms" replace />;
   }
 
   const updateField = (field, value) => {
@@ -47,26 +47,25 @@ function AdminLogin() {
           </div>
 
           <div className="admin-login-copy">
-            <h1>Professional control for inquiries, content flow, and site readiness.</h1>
+            <h1>Simple control for forms, stats, and follow-up.</h1>
             <p>
-              This admin panel gives your team one place to review incoming leads,
-              track which pages are media-ready, and manage access without mixing it
-              into the public website experience.
+              This admin panel keeps Configuro focused on the work that matters after launch:
+              reviewing incoming forms, reading the numbers, and moving each lead to the next step.
             </p>
           </div>
 
           <div className="admin-login-points">
             <article className="admin-login-point">
-              <strong>Protected entry</strong>
-              <span>Dedicated sign-in, separate shell, and persistent admin session handling.</span>
+              <strong>Form inbox</strong>
+              <span>Website submissions and manual leads are kept in one compact view.</span>
             </article>
             <article className="admin-login-point">
-              <strong>Live inquiry review</strong>
-              <span>New submissions from the public site appear in the dashboard and can be triaged by status.</span>
+              <strong>Statistics</strong>
+              <span>See new leads, active conversations, weekly activity, and source counts quickly.</span>
             </article>
             <article className="admin-login-point">
-              <strong>Media planning visibility</strong>
-              <span>Track which public pages already have image and render-video placeholders ready for production assets.</span>
+              <strong>Interactions</strong>
+              <span>Update lead statuses as conversations move from new to reviewing, scheduled, or archived.</span>
             </article>
           </div>
         </section>
@@ -75,7 +74,7 @@ function AdminLogin() {
           <div className="admin-login-card-head">
             <span className="metric-label">Sign in</span>
             <h2>Admin panel login</h2>
-            <p>Use the configured admin credentials to open the Configuro control room.</p>
+            <p>Use the configured admin credentials to open the simplified Configuro panel.</p>
           </div>
 
           <form className="admin-login-form" onSubmit={handleSubmit}>

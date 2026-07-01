@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import MediaSlotsSection from "../components/MediaSlotsSection";
 import { createInquiry } from "../admin/inquiries";
+import { featuredProjects } from "../data/projects";
 
 function Home({ content }) {
   const {
@@ -12,8 +12,13 @@ function Home({ content }) {
     trust,
     homeContact,
     homeCta,
-    homeMediaGallery,
   } = content;
+  const marqueeBase = [
+    ...servicesPreview.items.map((i) => i.title),
+    "Quote Builders",
+    "Renders, Images & Film",
+  ].join("   ·   ");
+  const marqueeText = `${marqueeBase}   ·   ${marqueeBase}   ·   `;
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [sent, setSent] = useState(false);
 
@@ -39,6 +44,11 @@ function Home({ content }) {
           </div>
         </div>
       </section>
+
+      {/* Marquee */}
+      <div className="cin-marquee" data-parallax="30" aria-hidden="true">
+        <span>{marqueeText}</span>
+      </div>
 
       {/* Value Props */}
       <section className="section-block value-section">
@@ -87,12 +97,22 @@ function Home({ content }) {
             <h2>{portfolioPreview.title}</h2>
           </div>
           <div className="portfolio-preview-grid">
-            {portfolioPreview.projects.map((project, i) => (
-              <article className="portfolio-preview-card reveal" key={project.name} style={{ transitionDelay: `${i * 0.1}s` }}>
-                <span className="portfolio-type">{project.type}</span>
-                <h3>{project.name}</h3>
-                <p>{project.result}</p>
-              </article>
+            {featuredProjects.map((project, i) => (
+              <Link
+                className="portfolio-preview-card reveal"
+                to="/work"
+                key={project.slug}
+                style={{ transitionDelay: `${i * 0.1}s` }}
+              >
+                <div className="portfolio-preview-media">
+                  <img src={project.images[0].src} alt={project.images[0].alt} loading="lazy" />
+                </div>
+                <div className="portfolio-preview-body">
+                  <span className="portfolio-type">{project.type}</span>
+                  <h3>{project.name}</h3>
+                  <p>{project.summary}</p>
+                </div>
+              </Link>
             ))}
           </div>
           <div className="section-cta reveal">
@@ -102,8 +122,6 @@ function Home({ content }) {
           </div>
         </div>
       </section>
-
-      <MediaSlotsSection copy={homeMediaGallery} />
 
       {/* Trust / Metrics */}
       <section className="section-block trust-section">
