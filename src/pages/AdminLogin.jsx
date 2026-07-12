@@ -8,7 +8,7 @@ function AdminLogin() {
   const location = useLocation();
   const { session, login, credentialConfig } = useAdminAuth();
   const [form, setForm] = useState({
-    email: credentialConfig.usingFallbackCredentials ? credentialConfig.email : "",
+    username: credentialConfig.username,
     password: "",
     remember: true,
   });
@@ -77,18 +77,20 @@ function AdminLogin() {
           <div className="admin-login-card-head">
             <span className="metric-label">Sign in</span>
             <h2>Admin panel login</h2>
-            <p>Use the configured admin credentials to open the simplified Configuro panel.</p>
+            <p>Enter the admin username and password to continue.</p>
           </div>
 
           <form className="admin-login-form" onSubmit={handleSubmit}>
             <label className="form-field">
-              Email
+              Username
               <input
-                type="email"
-                value={form.email}
-                placeholder="admin@configuro.studio"
-                onChange={(event) => updateField("email", event.target.value)}
+                type="text"
+                value={form.username}
+                placeholder="Enter username"
+                onChange={(event) => updateField("username", event.target.value)}
                 autoComplete="username"
+                autoFocus
+                required
               />
             </label>
 
@@ -100,6 +102,7 @@ function AdminLogin() {
                 placeholder="Enter password"
                 onChange={(event) => updateField("password", event.target.value)}
                 autoComplete="current-password"
+                required
               />
             </label>
 
@@ -120,11 +123,8 @@ function AdminLogin() {
           </form>
 
           <div className="admin-login-note">
-            <strong>Setup note</strong>
-            <p>
-              Production uses Supabase Auth when Supabase variables are configured. Local fallback
-              credentials are only for development.
-            </p>
+            <strong>Direct admin access</strong>
+            <p>This login uses the fixed admin credentials configured for this site.</p>
           </div>
         </section>
       </div>

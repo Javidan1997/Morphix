@@ -1,27 +1,27 @@
 import { useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
-import pexelsHome from "../assets/pexels-home-optimized.mp4";
-import pexelsServices from "../assets/pexels-services-optimized.mp4";
-import pexelsWork from "../assets/pexels-work-optimized.mp4";
+import automationIndigo from "../assets/automation-indigo.mp4";
+import automationSlate from "../assets/automation-slate.mp4";
 import pexelsAbout from "../assets/pexels-about-optimized.mp4";
-import pexelsContact from "../assets/pexels-contact-optimized.mp4";
 
-// Each route uses a different optimized cut from the long Pexels source so the
-// site feels varied without shipping the full 129 MB original as a background.
+// Two renders of the "automation network" scene (brand indigo and a calmer
+// slate) alternate across routes. The clips are rendered from bg-render/ and
+// scrubbed by scroll: the network assembles and powers up as the user reads
+// down the page — design, build, automate told visually.
 const ROUTE_VIDEO = {
-  "/": pexelsHome,
-  "/services": pexelsServices,
-  "/templates": pexelsServices,
-  "/playground": pexelsServices,
-  "/work": pexelsWork,
-  "/pricing": pexelsContact,
-  "/contact": pexelsContact,
+  "/": automationIndigo,
+  "/services": automationIndigo,
+  "/templates": automationSlate,
+  "/playground": automationIndigo,
+  "/work": automationSlate,
+  "/pricing": automationSlate,
+  "/contact": automationIndigo,
   "/about": pexelsAbout,
 };
 
 function VideoBackground() {
   const location = useLocation();
-  const src = ROUTE_VIDEO[location.pathname] || pexelsHome;
+  const src = ROUTE_VIDEO[location.pathname] || automationSlate;
   const ref = useRef(null);
 
   useEffect(() => {
@@ -29,26 +29,54 @@ function VideoBackground() {
     if (!video) return undefined;
 
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    let isMounted = true;
+    let duration = 4;
+    let isReady = false;
+    let frameId = 0;
 
     video.muted = true;
     video.playsInline = true;
     video.loop = true;
-    video.autoplay = !prefersReducedMotion;
+    video.autoplay = false;
 
-    const playVideo = () => {
-      if (!isMounted || prefersReducedMotion || document.hidden) {
-        video.pause();
-        return;
-      }
+    const scrollProgress = () => {
+      const root = document.documentElement;
+      const maxScroll = root.scrollHeight - window.innerHeight;
+      if (maxScroll <= 0) return 0;
+      return Math.min(1, Math.max(0, (window.scrollY || root.scrollTop || 0) / maxScroll));
+    };
 
-      const playPromise = video.play();
-      if (playPromise?.catch) {
-        playPromise.catch(() => {
-          // Browsers can defer autoplay until media is ready; canplay/visibility
-          // will retry without surfacing a console error to users.
-        });
+    // Ease the displayed time toward the scroll target instead of jumping.
+    // The clips are all-intra encoded, so each small seek decodes one frame.
+    const FRAME = 1 / 30;
+    let shownTime = 0;
+
+    const syncToScroll = () => {
+      frameId = 0;
+      if (!isReady || prefersReducedMotion || document.hidden) return;
+
+      const targetTime = scrollProgress() * Math.max(0, duration - 0.05);
+      const delta = targetTime - shownTime;
+      if (Math.abs(delta) < FRAME) return;
+
+      shownTime += Math.abs(delta) < FRAME * 2 ? delta : delta * 0.3;
+      try {
+        video.currentTime = shownTime;
+      } catch (error) {
+        // Some browsers reject frame seeking until enough data is buffered.
       }
+      video.pause();
+      frameId = window.requestAnimationFrame(syncToScroll);
+    };
+
+    const requestSync = () => {
+      if (frameId) return;
+      frameId = window.requestAnimationFrame(syncToScroll);
+    };
+
+    const handleMetadata = () => {
+      duration = video.duration || 4;
+      isReady = true;
+      syncToScroll();
     };
 
     const handleVisibilityChange = () => {
@@ -56,21 +84,22 @@ function VideoBackground() {
         video.pause();
         return;
       }
-      playVideo();
+      requestSync();
     };
 
-    video.addEventListener("loadedmetadata", playVideo);
-    video.addEventListener("canplay", playVideo);
+    video.addEventListener("loadedmetadata", handleMetadata);
+    window.addEventListener("scroll", requestSync, { passive: true });
+    window.addEventListener("resize", requestSync);
     video.load();
-    playVideo();
+    video.pause();
     document.addEventListener("visibilitychange", handleVisibilityChange);
 
     return () => {
-      isMounted = false;
-      video.removeEventListener("loadedmetadata", playVideo);
-      video.removeEventListener("canplay", playVideo);
+      window.cancelAnimationFrame(frameId);
+      video.removeEventListener("loadedmetadata", handleMetadata);
+      window.removeEventListener("scroll", requestSync);
+      window.removeEventListener("resize", requestSync);
       document.removeEventListener("visibilitychange", handleVisibilityChange);
-      video.pause();
     };
   }, [src]);
 

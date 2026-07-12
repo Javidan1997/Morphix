@@ -1,7 +1,7 @@
-const ADMIN_LOCAL_SESSION_KEY = "morphix.admin.session.local";
-const ADMIN_TEMP_SESSION_KEY = "morphix.admin.session.temp";
-const DEFAULT_ADMIN_EMAIL = "admin@configuro.studio";
-const DEFAULT_ADMIN_PASSWORD = "MorphixAdmin2026!";
+const ADMIN_LOCAL_SESSION_KEY = "morphix.admin.session.local.v2";
+const ADMIN_TEMP_SESSION_KEY = "morphix.admin.session.temp.v2";
+const ADMIN_USERNAME = "javidan";
+const ADMIN_PASSWORD = "Cavidan1997@";
 
 function getStorage(type) {
   if (typeof window === "undefined") return null;
@@ -32,14 +32,8 @@ export function clearStoredAdminSession() {
 }
 
 export function getAdminCredentialConfig() {
-  const hasCustomCredentials = Boolean(
-    import.meta.env.VITE_ADMIN_EMAIL && import.meta.env.VITE_ADMIN_PASSWORD,
-  );
-
   return {
-    email: hasCustomCredentials ? import.meta.env.VITE_ADMIN_EMAIL.trim() : DEFAULT_ADMIN_EMAIL,
-    password: hasCustomCredentials ? import.meta.env.VITE_ADMIN_PASSWORD : DEFAULT_ADMIN_PASSWORD,
-    usingFallbackCredentials: !hasCustomCredentials,
+    username: ADMIN_USERNAME,
   };
 }
 
@@ -68,10 +62,9 @@ export function persistAdminSession(session, remember) {
   );
 }
 
-export function validateAdminCredentials(email, password) {
-  const credentials = getAdminCredentialConfig();
+export function validateAdminCredentials(username, password) {
   return (
-    email.trim().toLowerCase() === credentials.email.trim().toLowerCase()
-    && password === credentials.password
+    username.trim().toLowerCase() === ADMIN_USERNAME.toLowerCase()
+    && password === ADMIN_PASSWORD
   );
 }
