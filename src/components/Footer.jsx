@@ -62,6 +62,8 @@ function Footer({ language }) {
             <Link to="/pricing">{content.nav.pricing}</Link>
             <Link to="/insights">{content.nav.insights}</Link>
             <Link to="/contact">{content.nav.contact}</Link>
+            <Link to="/freelance">Freelance platforms</Link>
+            <Link to="/shopify">Shopify</Link>
             <Link to="/portal">{content.nav.portal}</Link>
           </div>
         </div>

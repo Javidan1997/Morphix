@@ -22,6 +22,7 @@ const fps = Number(args.fps || 30);
 const width = Number(args.width || 1920);
 const height = Number(args.height || 1080);
 const out = args.out || `src/assets/automation-${palette}.mp4`;
+const crf = args.crf || "24";
 const port = Number(args.port || 5199);
 const workdir = args.workdir || path.join(tmpdir(), `configuro-bg-${palette}`);
 
@@ -119,7 +120,7 @@ const encode = spawnSync(
     "-i", path.join(workdir, "f%05d.png"),
     "-c:v", "libx264",
     "-preset", "slow",
-    "-crf", "26",
+    "-crf", crf,
     "-g", "1",
     "-bf", "0",
     "-tune", "fastdecode",

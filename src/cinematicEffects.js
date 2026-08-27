@@ -235,3 +235,54 @@ export function initCinematicEffects(root = document) {
 
   return () => cleanups.forEach((fn) => fn());
 }
+
+/* ======================= LIGHT PLATFORM ROUTES ======================= */
+export function initPlatformEffects(root = document) {
+  const page = root.querySelector(".platform-page");
+  if (!page) return () => {};
+
+  const cleanups = [];
+  const reduce = reducedMotion();
+  page.classList.add("platform-motion-ready");
+
+  const items = [...page.querySelectorAll(
+    ".platform-process-step, .platform-fit-list article, .platform-services-list article, .platform-work-item, .platform-faq-list details, .migration-flow span, .platform-hub-link",
+  )];
+  items.forEach((item, index) => {
+    item.classList.add("platform-motion-item");
+    item.style.setProperty("--motion-order", String(index % 4));
+  });
+
+  if (reduce) {
+    items.forEach((item) => item.classList.add("is-inview"));
+  } else {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-inview");
+        observer.unobserve(entry.target);
+      });
+    }, { rootMargin: "0px 0px -8%", threshold: 0.08 });
+    items.forEach((item) => observer.observe(item));
+    cleanups.push(() => observer.disconnect());
+
+    page.querySelectorAll(".platform-primary, .platform-secondary, .platform-submit").forEach((button) => {
+      const onMove = rafThrottle((event) => {
+        const rect = button.getBoundingClientRect();
+        button.style.setProperty("--button-x", `${event.clientX - rect.left}px`);
+        button.style.setProperty("--button-y", `${event.clientY - rect.top}px`);
+      });
+      button.addEventListener("pointermove", onMove);
+      cleanups.push(() => button.removeEventListener("pointermove", onMove));
+    });
+  }
+
+  return () => {
+    cleanups.forEach((cleanup) => cleanup());
+    items.forEach((item) => {
+      item.classList.remove("platform-motion-item", "is-inview");
+      item.style.removeProperty("--motion-order");
+    });
+    page.classList.remove("platform-motion-ready");
+  };
+}

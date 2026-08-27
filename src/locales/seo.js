@@ -68,6 +68,54 @@ export const pageSeo = {
       keywords: "client portal",
       noindex: true,
     },
+    "/freelance": {
+      title: "Hire Configuro Through Freelance Platforms | Upwork, Fiverr & More",
+      description:
+        "Start a Configuro project through Upwork, Freelancer.com, Fiverr, or a direct senior-studio engagement. Compare platform-specific scope, milestones, reviews, and delivery.",
+      keywords:
+        "hire software development studio, Upwork agency alternative, Freelancer developer, Fiverr custom software, senior freelance development team",
+      serviceName: "Freelance platform design and development services",
+    },
+    "/upwork": {
+      title: "Upwork Web App, 3D & Automation Studio | Configuro",
+      description:
+        "Hiring on Upwork? Get a clear scope, 3–5 reviewable milestones, weekly demos, and documented handoff for web apps, mobile workflows, 3D configurators, CRM automation, and Shopify.",
+      keywords:
+        "Upwork web developer, Upwork agency, hire Upwork React developer, Upwork 3D configurator, Upwork CRM automation expert",
+      serviceName: "Upwork project design and development",
+    },
+    "/freelancer": {
+      title: "Freelancer.com Web Development & Automation Studio | Configuro",
+      description:
+        "Turn your Freelancer.com project post into a dependable build with an itemized scope, proposed milestones, visible risks, staged reviews, and organized source-file handoff.",
+      keywords:
+        "Freelancer.com web developer, hire Freelancer developer, Freelancer milestone project, custom web app Freelancer",
+      serviceName: "Freelancer.com project design and development",
+    },
+    "/fiverr": {
+      title: "Fiverr Custom Web, 3D & Automation Offers | Configuro",
+      description:
+        "Need more than a standard Fiverr Gig? Configuro scopes custom offers for UX, React development, 3D product work, and CRM automation with clear deliverables and revisions.",
+      keywords:
+        "Fiverr web developer, Fiverr custom offer, Fiverr React developer, Fiverr 3D product rendering, Fiverr automation expert",
+      serviceName: "Fiverr custom digital production services",
+    },
+    "/toptal": {
+      title: "Senior Product Design & Engineering Studio | Toptal Alternative | Configuro",
+      description:
+        "A compact senior product studio for teams comparing elite talent options. Add cross-functional product engineering, UX, automation, and interactive 3D without a long ramp-up.",
+      keywords:
+        "Toptal alternative, senior product engineering team, hire senior React developers, fractional product team",
+      serviceName: "Senior product design and engineering team",
+    },
+    "/shopify": {
+      title: "Shopify Development, Themes, Apps & Migration | Configuro",
+      description:
+        "Shopify store builds, redesigns, custom Liquid theme sections, apps, integrations, migration, CRO, and performance engineering—with a practical merchant handoff.",
+      keywords:
+        "Shopify developer, Shopify development agency, custom Shopify theme, Shopify app development, Shopify migration service, Shopify speed optimization",
+      serviceName: "Shopify development and migration services",
+    },
   },
   az: {
     "/": {
@@ -145,6 +193,12 @@ export const breadcrumbLabels = {
   "/templates": "Templates",
   "/insights": "Insights",
   "/portal": "Client portal",
+  "/freelance": "Freelance platforms",
+  "/upwork": "Upwork services",
+  "/freelancer": "Freelancer.com services",
+  "/fiverr": "Fiverr services",
+  "/toptal": "Senior product team",
+  "/shopify": "Shopify development",
 };
 
 const ORIGIN = "https://configuro.studio";
@@ -178,6 +232,18 @@ export function buildJsonLd(pathname, seo) {
         },
       ],
     });
+    if (seo.serviceName) {
+      graph.push({
+        "@type": "Service",
+        "@id": `${url}#service`,
+        name: seo.serviceName,
+        description: seo.description,
+        url,
+        provider: { "@id": `${ORIGIN}/#organization` },
+        areaServed: "Worldwide",
+        serviceType: seo.serviceName,
+      });
+    }
   } else {
     graph.push({
       "@type": ["Organization", "ProfessionalService"],

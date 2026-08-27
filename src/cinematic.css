@@ -4,39 +4,41 @@
    completely untouched. Layered on top of styles.css.
    ============================================================ */
 
-/* ---- Full-bleed scroll-scrubbed video background ---- */
+/* ---- Full-bleed procedural background (WebGL soft light field) ---- */
 .cinematic-bg {
   position: fixed;
   inset: 0;
   z-index: 0;
   overflow: hidden;
-  background: #06070a;
+  /* Also the no-WebGL fallback: matches the shader's base gradient, so the
+     page looks finished even if the canvas never mounts. */
+  background: linear-gradient(180deg, #14161a 0%, #0b0c0f 100%);
   pointer-events: none;
 }
-.cinematic-bg video {
+.cinematic-bg canvas {
   position: absolute;
   inset: 0;
+  display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: center;
-  transform: translate3d(0, 0, 0) scale(1.01);
-  backface-visibility: hidden;
-  filter: brightness(1.04) contrast(1.08) saturate(1.08);
-  will-change: transform;
 }
 .cinematic-vig {
   position: absolute;
   inset: 0;
-  /* lighter veil so the films are more revealing; keep just enough at top/bottom for nav + footer legibility */
-  background:
-    radial-gradient(135% 100% at 50% 40%, transparent 60%, rgba(6, 7, 10, 0.24) 100%),
-    linear-gradient(180deg, rgba(6, 7, 10, 0.32) 0%, transparent 20%, transparent 82%, rgba(6, 7, 10, 0.58) 100%);
+  /* The field is already low-contrast, so this is only a light hold at the
+     very top and bottom for nav + footer legibility. */
+  background: linear-gradient(
+    180deg,
+    rgba(6, 7, 10, 0.34) 0%,
+    transparent 18%,
+    transparent 84%,
+    rgba(6, 7, 10, 0.5) 100%
+  );
 }
 
-/* Dark page base so there's no light flash behind the video.
+/* Dark page base so there's no light flash before the canvas paints.
    Admin paints its own full-height background over this. */
-body { background: #08090c; }
+body { background: #0b0c0f; }
 
 /* ---- Dark token overrides, scoped to the public shell ---- */
 .page-shell {
@@ -588,4 +590,228 @@ html { scroll-padding-top: 84px; }
   background: rgba(91, 120, 255, 0.28) !important;
   border-color: rgba(138, 160, 255, 0.82) !important;
   color: #f7f9ff !important;
+}
+
+/* Platform acquisition routes intentionally use a light editorial system.
+   Isolate them from the public site's cinematic/video theme. */
+.page-shell.platform-page-shell {
+  --bg: #ffffff;
+  --text: #081329;
+  --muted: #647084;
+  --border: #dfe4ec;
+  --panel: #ffffff;
+  --panel-strong: #ffffff;
+  --shadow: 0 18px 45px rgba(8, 19, 41, 0.08);
+  color: #081329;
+  background: #ffffff;
+}
+
+.page-shell.platform-page-shell .site-nav {
+  background: rgba(255, 255, 255, 0.94);
+  border-color: #dfe4ec;
+  backdrop-filter: blur(18px) saturate(1.1);
+}
+
+.page-shell.platform-page-shell .brand-lockup img { filter: none; }
+.page-shell.platform-page-shell .nav-links a { color: #647084; }
+.page-shell.platform-page-shell .nav-links a:hover,
+.page-shell.platform-page-shell .nav-links a.is-active { color: #081329; }
+.page-shell.platform-page-shell .lang-trigger { color: #081329; border-color: #d7dde6; background: #ffffff; }
+.page-shell.platform-page-shell .lang-menu { color: #081329; border-color: #d7dde6; background: #ffffff; }
+.page-shell.platform-page-shell .lang-option { color: #081329; }
+.page-shell.platform-page-shell .lang-option:hover,
+.page-shell.platform-page-shell .lang-option.is-active { background: #eef3ff; }
+.page-shell.platform-page-shell .nav-cta { color: #ffffff !important; background: #081329; }
+.page-shell.platform-page-shell .nav-cta:hover { color: #ffffff !important; background: #24314a; box-shadow: none; }
+.page-shell.platform-page-shell .mobile-nav-panel { color: #081329; background: rgba(255,255,255,.98); }
+.page-shell.platform-page-shell .mobile-nav-toggle { color: #081329; background: #ffffff; }
+
+.page-shell.platform-page-shell main.platform-page { color: #081329; background: #ffffff !important; }
+.page-shell.platform-page-shell .platform-page h1,
+.page-shell.platform-page-shell .platform-page h2,
+.page-shell.platform-page-shell .platform-page h3,
+.page-shell.platform-page-shell .platform-page h4 { color: #081329; }
+.page-shell.platform-page-shell .platform-page p { color: #647084; }
+
+.page-shell.platform-page-shell .platform-hero { background: linear-gradient(rgba(43, 74, 138, 0.045) 1px, transparent 1px), linear-gradient(90deg, rgba(43, 74, 138, 0.045) 1px, transparent 1px), #ffffff !important; background-size: 44px 44px !important; }
+.page-shell.platform-page-shell .platform-proof,
+.page-shell.platform-page-shell .platform-process,
+.page-shell.platform-page-shell .platform-work,
+.page-shell.platform-page-shell .platform-faq { background: #ffffff !important; }
+.page-shell.platform-page-shell .platform-services,
+.page-shell.platform-page-shell .platform-related { background: #f7f9fc !important; }
+.page-shell.platform-page-shell .platform-fit,
+.page-shell.platform-page-shell .platform-brief { background: #081329 !important; }
+.page-shell.platform-page-shell .platform-migration { background: var(--platform-accent) !important; }
+.page-shell.platform-page-shell .platform-hub-hero { background: linear-gradient(rgba(49,92,255,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(49,92,255,.04) 1px, transparent 1px), #ffffff !important; background-size: 44px 44px !important; }
+.page-shell.platform-page-shell .platform-hub-directory { background: #ffffff !important; }
+.page-shell.platform-page-shell .platform-hub-shopify { background: #0d7d52 !important; }
+
+.page-shell.platform-page-shell .platform-fit h2,
+.page-shell.platform-page-shell .platform-fit h3,
+.page-shell.platform-page-shell .platform-brief h2,
+.page-shell.platform-page-shell .platform-migration h2,
+.page-shell.platform-page-shell .platform-hub-shopify h2 { color: #ffffff; }
+.page-shell.platform-page-shell .platform-fit p,
+.page-shell.platform-page-shell .platform-brief p { color: #aeb8ca; }
+.page-shell.platform-page-shell .platform-migration p,
+.page-shell.platform-page-shell .platform-hub-shopify p { color: rgba(255,255,255,.78); }
+
+.page-shell.platform-page-shell .platform-brief-form input,
+.page-shell.platform-page-shell .platform-brief-form select,
+.page-shell.platform-page-shell .platform-brief-form textarea { color: #ffffff; border-color: #44516a; background: #101d34; }
+.page-shell.platform-page-shell .platform-brief-form input::placeholder,
+.page-shell.platform-page-shell .platform-brief-form textarea::placeholder { color: #7e8aa0; }
+
+.page-shell.platform-page-shell .site-footer { background: #081329; border-color: rgba(255,255,255,.12); }
+.page-shell.platform-page-shell .site-footer h3 { color: #eef0f4; }
+.page-shell.platform-page-shell .site-footer a,
+.page-shell.platform-page-shell .site-footer li,
+.page-shell.platform-page-shell .footer-brand p,
+.page-shell.platform-page-shell .footer-bottom span { color: #b4bac6; }
+.page-shell.platform-page-shell .footer-logo img { filter: brightness(0) invert(1); }
+
+.page-shell.platform-page-shell .platform-page .reveal {
+  opacity: 1 !important;
+  transform: none !important;
+  filter: none !important;
+}
+
+/* Refined controls for the acquisition experience. */
+.page-shell.platform-page-shell .platform-primary,
+.page-shell.platform-page-shell .platform-secondary,
+.page-shell.platform-page-shell .platform-submit {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  border-radius: 0.45rem;
+  box-shadow: 0 8px 22px rgba(8, 19, 41, 0.08);
+}
+
+.page-shell.platform-page-shell .platform-primary::before,
+.page-shell.platform-page-shell .platform-secondary::before,
+.page-shell.platform-page-shell .platform-submit::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: var(--button-x, 50%);
+  top: var(--button-y, 50%);
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.17);
+  transform: translate(-50%, -50%);
+  transition: width .45s ease, height .45s ease;
+}
+
+.page-shell.platform-page-shell .platform-primary:hover::before,
+.page-shell.platform-page-shell .platform-submit:hover::before { width: 260px; height: 260px; }
+.page-shell.platform-page-shell .platform-secondary::before { background: var(--platform-soft); }
+.page-shell.platform-page-shell .platform-secondary:hover::before { width: 260px; height: 260px; }
+.page-shell.platform-page-shell .platform-primary:active,
+.page-shell.platform-page-shell .platform-secondary:active,
+.page-shell.platform-page-shell .platform-submit:active { transform: translateY(0) scale(.985); }
+
+.page-shell.platform-page-shell .platform-brief-form label {
+  position: relative;
+  color: #d5dbea;
+  font-size: .7rem;
+  letter-spacing: .055em;
+  text-transform: uppercase;
+}
+
+.page-shell.platform-page-shell .platform-brief-form input,
+.page-shell.platform-page-shell .platform-brief-form select,
+.page-shell.platform-page-shell .platform-brief-form textarea {
+  border-radius: .45rem;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.035);
+  transition: border-color .2s ease, background .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+
+.page-shell.platform-page-shell .platform-brief-form input:hover,
+.page-shell.platform-page-shell .platform-brief-form select:hover,
+.page-shell.platform-page-shell .platform-brief-form textarea:hover { border-color: #66738c; background: #13213a; }
+.page-shell.platform-page-shell .platform-brief-form input:focus,
+.page-shell.platform-page-shell .platform-brief-form select:focus,
+.page-shell.platform-page-shell .platform-brief-form textarea:focus {
+  border-color: color-mix(in srgb, var(--platform-accent) 70%, white);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--platform-accent) 22%, transparent);
+  transform: translateY(-1px);
+}
+
+.page-shell.platform-page-shell .platform-brief-form select {
+  appearance: none;
+  padding-right: 2.6rem;
+  background-image: linear-gradient(45deg, transparent 50%, #9aa6ba 50%), linear-gradient(135deg, #9aa6ba 50%, transparent 50%);
+  background-position: calc(100% - 18px) 50%, calc(100% - 13px) 50%;
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+.page-shell.platform-page-shell .lang-trigger {
+  min-height: 2.55rem;
+  padding: .55rem .8rem;
+  border-radius: .55rem;
+  box-shadow: 0 5px 18px rgba(8,19,41,.05);
+}
+.page-shell.platform-page-shell .lang-trigger:hover { border-color: #9eabc0; background: #f7f9fc; }
+.page-shell.platform-page-shell .lang-menu { padding: .45rem; border-radius: .7rem; box-shadow: 0 18px 45px rgba(8,19,41,.13); }
+.page-shell.platform-page-shell .lang-option { min-height: 2.6rem; border-radius: .45rem; }
+
+.page-shell.platform-page-shell .platform-faq-list details[open] {
+  background: linear-gradient(90deg, var(--platform-soft), transparent 78%);
+}
+.page-shell.platform-page-shell .platform-faq-list details p { animation: platformAnswerIn .25s ease both; }
+
+/* Flat, aligned footer for the white acquisition pages. */
+.page-shell.platform-page-shell .site-footer {
+  padding: 4.5rem 0 0;
+  background: #070d19 !important;
+}
+.page-shell.platform-page-shell .footer-shell {
+  border: 0 !important;
+  border-radius: 0;
+  background: transparent !important;
+  box-shadow: none !important;
+  overflow: visible;
+}
+.page-shell.platform-page-shell .footer-top { padding: 0 0 3.5rem; }
+.page-shell.platform-page-shell .footer-bottom { padding: 1.35rem 0 1.6rem; border-color: rgba(255,255,255,.13); background: transparent !important; }
+.page-shell.platform-page-shell .footer-brand p { color: #aeb8ca; }
+.page-shell.platform-page-shell .footer-cta {
+  color: #081329 !important;
+  background: #ffffff;
+  box-shadow: none;
+}
+.page-shell.platform-page-shell .footer-cta:hover { color: #081329 !important; background: #dfe7ff; }
+.page-shell.platform-page-shell .footer-links { flex-wrap: wrap; justify-content: flex-end; }
+
+/* Platform-safe motion: no text splitting and no hidden content without JS. */
+.platform-motion-ready .platform-hero-copy > h1 { animation: platformHeroIn .72s cubic-bezier(.22,1,.36,1) both; }
+.platform-motion-ready .platform-hero-copy > p { animation: platformHeroIn .72s .08s cubic-bezier(.22,1,.36,1) both; }
+.platform-motion-ready .platform-actions { animation: platformHeroIn .72s .16s cubic-bezier(.22,1,.36,1) both; }
+.platform-motion-ready .platform-diagram,
+.platform-motion-ready .platform-storefront { animation: platformVisualIn .9s .12s cubic-bezier(.22,1,.36,1) both; }
+.platform-motion-ready .platform-motion-item { opacity: 0; transform: translateY(22px); transition: opacity .65s cubic-bezier(.22,1,.36,1), transform .65s cubic-bezier(.22,1,.36,1); transition-delay: calc(var(--motion-order, 0) * 55ms); }
+.platform-motion-ready .platform-motion-item.is-inview { opacity: 1; transform: none; }
+
+@keyframes platformHeroIn { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+@keyframes platformVisualIn { from { opacity: 0; transform: translateX(28px) scale(.985); } to { opacity: 1; transform: none; } }
+@keyframes platformAnswerIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: none; } }
+
+@media (max-width: 720px) {
+  .page-shell.platform-page-shell .site-footer { padding-top: 3rem; }
+  .page-shell.platform-page-shell .footer-top { padding: 0 0 2.4rem; }
+  .page-shell.platform-page-shell .footer-bottom { align-items: flex-start; padding-bottom: 1.4rem; }
+  .page-shell.platform-page-shell .footer-links { justify-content: flex-start; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .platform-motion-ready .platform-hero-copy > h1,
+  .platform-motion-ready .platform-hero-copy > p,
+  .platform-motion-ready .platform-actions,
+  .platform-motion-ready .platform-diagram,
+  .platform-motion-ready .platform-storefront { animation: none; }
+  .platform-motion-ready .platform-motion-item { opacity: 1; transform: none; transition: none; }
 }

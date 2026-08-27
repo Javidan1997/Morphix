@@ -7,8 +7,8 @@ import {
 } from "./locales";
 import { locales } from "./locales";
 import { pageSeo, buildJsonLd } from "./locales/seo";
-import VideoBackground from "./components/VideoBackground";
-import { initCinematicEffects, initGlobalEffects } from "./cinematicEffects";
+import AmbientBackground from "./components/AmbientBackground";
+import { initCinematicEffects, initGlobalEffects, initPlatformEffects } from "./cinematicEffects";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import AdminRoute from "./components/AdminRoute";
@@ -23,6 +23,8 @@ import Templates from "./pages/Templates";
 import Insights from "./pages/Insights";
 import InsightArticle from "./pages/InsightArticle";
 import Portal from "./pages/Portal";
+import PlatformLanding from "./pages/PlatformLanding";
+import FreelanceHub from "./pages/FreelanceHub";
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
 import { useContentAdmin } from "./admin/ContentAdminContext";
@@ -41,6 +43,7 @@ function App() {
   const { mergedLocales } = useContentAdmin();
   const content = mergedLocales[language] ?? mergedLocales[fallbackLanguage];
   const isAdminRoute = location.pathname.startsWith("/admin");
+  const isPlatformRoute = ["/freelance", "/upwork", "/freelancer", "/fiverr", "/toptal", "/shopify"].includes(location.pathname);
 
   useEffect(() => {
     window.localStorage.setItem(LANGUAGE_STORAGE_KEY, language);
@@ -52,7 +55,7 @@ function App() {
     const origin = "https://configuro.studio";
     const path = location.pathname;
     const url = `${origin}${path === "/" ? "/" : path}`;
-    const seo = (pageSeo[language] || pageSeo.en)[path];
+    const seo = (pageSeo[language] || pageSeo.en)[path] ?? pageSeo.en[path];
 
     const title = isAdminRoute
       ? "Configuro Admin"
@@ -128,7 +131,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (isAdminRoute) return undefined;
+    if (isAdminRoute || isPlatformRoute) return undefined;
     let cleanup = () => {};
     const id = window.setTimeout(() => {
       cleanup = initCinematicEffects(document);
@@ -137,17 +140,23 @@ function App() {
       window.clearTimeout(id);
       cleanup();
     };
-  }, [isAdminRoute, location.pathname]);
+  }, [isAdminRoute, isPlatformRoute, location.pathname]);
 
   useEffect(() => {
-    if (isAdminRoute) return undefined;
+    if (isAdminRoute || isPlatformRoute) return undefined;
     return initGlobalEffects();
-  }, [isAdminRoute]);
+  }, [isAdminRoute, isPlatformRoute]);
+
+  useEffect(() => {
+    if (!isPlatformRoute) return undefined;
+    const cleanup = initPlatformEffects(document);
+    return cleanup;
+  }, [isPlatformRoute, location.pathname]);
 
   return (
     <>
-      {!isAdminRoute ? <VideoBackground /> : null}
-      <div className={isAdminRoute ? "admin-shell" : "page-shell"}>
+      {!isAdminRoute && !isPlatformRoute ? <AmbientBackground /> : null}
+      <div className={isAdminRoute ? "admin-shell" : `page-shell${isPlatformRoute ? " platform-page-shell" : ""}`}>
         <ScrollToTop />
         {!isAdminRoute ? <Header language={language} setLanguage={setLanguage} /> : null}
         <div className="route-fade" key={location.pathname}>
@@ -163,6 +172,12 @@ function App() {
           <Route path="/insights" element={<Insights content={content} />} />
           <Route path="/insights/:slug" element={<InsightArticle content={content} />} />
           <Route path="/portal" element={<Portal />} />
+          <Route path="/freelance" element={<FreelanceHub />} />
+          <Route path="/upwork" element={<PlatformLanding platform="upwork" />} />
+          <Route path="/freelancer" element={<PlatformLanding platform="freelancer" />} />
+          <Route path="/fiverr" element={<PlatformLanding platform="fiverr" />} />
+          <Route path="/toptal" element={<PlatformLanding platform="toptal" />} />
+          <Route path="/shopify" element={<PlatformLanding platform="shopify" />} />
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route
             path="/admin"
