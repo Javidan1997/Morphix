@@ -58,6 +58,7 @@ function Footer({ language }) {
           <div className="footer-links">
             <Link to="/services">{content.nav.services}</Link>
             <Link to="/playground">{content.nav.playground}</Link>
+            <Link to={`/pergola-configurators?lang=${language === 'az' ? 'az' : 'en'}`}>{language === 'az' ? 'Perqola konfiquratorlarını sınayın' : 'Try pergola configurators'}</Link>
             <Link to="/work">{content.nav.work}</Link>
             <Link to="/pricing">{content.nav.pricing}</Link>
             <Link to="/insights">{content.nav.insights}</Link>

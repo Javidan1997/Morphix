@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import {
   getInitialLanguage,
@@ -29,6 +29,8 @@ import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
 import { useContentAdmin } from "./admin/ContentAdminContext";
 
+const PergolaConfigurators = lazy(() => import('./pages/PergolaConfigurators'));
+
 function ScrollToTop() {
   const { pathname } = useLocation();
   useEffect(() => {
@@ -43,9 +45,11 @@ function App() {
   const { mergedLocales } = useContentAdmin();
   const content = mergedLocales[language] ?? mergedLocales[fallbackLanguage];
   const isAdminRoute = location.pathname.startsWith("/admin");
+  const isPergolaRoute = location.pathname === '/pergola-configurators';
   const isPlatformRoute = ["/freelance", "/upwork", "/freelancer", "/fiverr", "/toptal", "/shopify"].includes(location.pathname);
 
   useEffect(() => {
+    if (isPergolaRoute) return;
     window.localStorage.setItem(LANGUAGE_STORAGE_KEY, language);
     document.documentElement.lang = language;
 
@@ -104,7 +108,7 @@ function App() {
     } else if (ld) {
       ld.remove();
     }
-  }, [content.meta.description, content.meta.title, isAdminRoute, language, location.pathname]);
+  }, [content.meta.description, content.meta.title, isAdminRoute, isPergolaRoute, language, location.pathname]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -131,7 +135,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (isAdminRoute || isPlatformRoute) return undefined;
+    if (isAdminRoute || isPlatformRoute || isPergolaRoute) return undefined;
     let cleanup = () => {};
     const id = window.setTimeout(() => {
       cleanup = initCinematicEffects(document);
@@ -140,18 +144,20 @@ function App() {
       window.clearTimeout(id);
       cleanup();
     };
-  }, [isAdminRoute, isPlatformRoute, location.pathname]);
+  }, [isAdminRoute, isPlatformRoute, isPergolaRoute, location.pathname]);
 
   useEffect(() => {
-    if (isAdminRoute || isPlatformRoute) return undefined;
+    if (isAdminRoute || isPlatformRoute || isPergolaRoute) return undefined;
     return initGlobalEffects();
-  }, [isAdminRoute, isPlatformRoute]);
+  }, [isAdminRoute, isPlatformRoute, isPergolaRoute]);
 
   useEffect(() => {
     if (!isPlatformRoute) return undefined;
     const cleanup = initPlatformEffects(document);
     return cleanup;
   }, [isPlatformRoute, location.pathname]);
+
+  if (isPergolaRoute) return <Suspense fallback={<main style={{padding:40,background:'#fff'}}>Configuro · Loading configurators…</main>}><PergolaConfigurators /></Suspense>;
 
   return (
     <>

@@ -5,6 +5,11 @@
 
 export const pageSeo = {
   en: {
+    "/pergola-configurators": {
+      title: "Try Pergola Configurator Packages | Configuro",
+      description: "Try Essential, Custom and Commerce 3D pergola configurators. Design and development from $2,000 USD for simple projects. Explore dimensions, finishes and accessories.",
+      keywords: "pergola configurator packages, interactive 3D pergola demo, custom pergola software",
+    },
     "/": {
       title: "Configuro | Design, Build & Automate — Apps, 3D Configurators & CRM",
       description:
