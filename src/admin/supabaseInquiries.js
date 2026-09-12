@@ -29,6 +29,9 @@ export function toSupabaseInquiry(inquiry) {
       designPreviewPng: inquiry.designPreviewPng || "",
       templateDesign: inquiry.templateDesign || null,
       language: inquiry.language || "",
+      meetingSlots: Array.isArray(inquiry.meetingSlots) ? inquiry.meetingSlots : [],
+      timezone: inquiry.timezone || "",
+      configuration: inquiry.configuration || null,
     },
   };
 }
@@ -57,6 +60,9 @@ export function fromSupabaseInquiry(row) {
     designPreviewPng: metadata.designPreviewPng || "",
     templateDesign: metadata.templateDesign || null,
     language: metadata.language || "",
+    meetingSlots: Array.isArray(metadata.meetingSlots) ? metadata.meetingSlots : [],
+    timezone: metadata.timezone || "",
+    configuration: metadata.configuration || null,
   };
 }
 

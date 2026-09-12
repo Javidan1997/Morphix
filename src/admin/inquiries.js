@@ -72,6 +72,14 @@ function createSavedInquiry(payload) {
         ? payload.templateDesign
         : null,
     language: payload.language ?? "",
+    // Visitor-proposed meeting times as ISO strings, plus the IANA zone they
+    // were entered in, so the admin view can show them unambiguously.
+    meetingSlots: Array.isArray(payload.meetingSlots) ? payload.meetingSlots : [],
+    timezone: payload.timezone ?? "",
+    configuration:
+      payload.configuration && typeof payload.configuration === "object"
+        ? payload.configuration
+        : null,
   };
 
   return persistInquiries([nextInquiry, ...readInquiries()])[0];

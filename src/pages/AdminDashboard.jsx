@@ -15,6 +15,16 @@ import {
   updateInquiryStatusAsync,
 } from "../admin/inquiries";
 
+// Meeting times arrive as ISO strings; render them in the admin's own zone and
+// name the zone the visitor picked them in, so there is no ambiguity.
+function formatMeetingSlot(iso) {
+  const date = new Date(iso);
+  if (Number.isNaN(date.getTime())) return iso;
+  return date.toLocaleString(undefined, {
+    weekday: "short", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit",
+  });
+}
+
 const VIEW_COPY = {
   forms: {
     eyebrow: "Forms",
@@ -477,6 +487,30 @@ function AdminDashboard({ view = "forms" }) {
                 </div>
 
                 {inquiry.brief ? <p className="admin-inquiry-brief">{inquiry.brief}</p> : null}
+
+                {inquiry.meetingSlots?.length ? (
+                  <div className="admin-inquiry-slots">
+                    <strong>Proposed meeting times</strong>
+                    <ul>
+                      {inquiry.meetingSlots.map((slot) => (
+                        <li key={slot}><time dateTime={slot}>{formatMeetingSlot(slot)}</time></li>
+                      ))}
+                    </ul>
+                    {inquiry.timezone ? <small>Chosen in {inquiry.timezone}</small> : null}
+                  </div>
+                ) : null}
+
+                {inquiry.configuration ? (
+                  <div className="admin-chip-row">
+                    {Object.entries(inquiry.configuration)
+                      .filter(([, value]) => value !== "" && value !== null && value !== undefined)
+                      .map(([key, value]) => (
+                        <span className="chip" key={key}>
+                          {key}: {typeof value === "number" ? Math.round(value * 100) / 100 : String(value)}
+                        </span>
+                      ))}
+                  </div>
+                ) : null}
               </article>
             )) : (
               <div className="glass-card admin-empty-state">

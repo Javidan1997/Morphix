@@ -29,6 +29,7 @@ export const SOURCE_LABELS = {
   "contact-wizard": "Project intake",
   "templates-studio": "Templates studio",
   "manual-entry": "Manual entry",
+  "pergola-configurators": "Pergola configurator",
   website: "Website form",
 };
 
