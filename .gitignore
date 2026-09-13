@@ -19,3 +19,6 @@ supabase/.temp
 
 # Local scratch
 tmp/
+
+# MCP config carries per-user secrets in the server URL
+.mcp.json

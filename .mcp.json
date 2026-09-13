@@ -1,9 +1,0 @@
-{
-  "mcpServers": {
-    "framer": {
-      "type": "http",
-      "url": "https://mcp.unframer.co/mcp",
-      "description": "Community Framer MCP (Tommy D. Rossi). Requires the 'MCP: AI Plugin' installed and OPEN in the Framer project you want to edit. Design data is tunnelled through a third-party Cloudflare Worker."
-    }
-  }
-}

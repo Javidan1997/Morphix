@@ -76,6 +76,37 @@ Both of these would be a few lines if Framer exposed them. If that changes,
 
 ---
 
+## If you do want the MCP server as well
+
+There is no official Framer MCP. The community one is **"MCP: AI Plugin"** by
+Tommy D. Rossi on the Framer Marketplace: a Framer plugin, a Cloudflare Worker
+at `mcp.unframer.co`, and a WebSocket tunnel.
+
+1. Install the plugin from the Framer Marketplace and **open it** in the project
+   you want to edit — it only works while the plugin is open
+2. The plugin gives you a URL containing your own `id` and `secret`. The bare
+   endpoint returns `401 Missing id and secret query parameters`, so the full
+   URL it generates is the one you need
+3. Register it locally — **not** in a committed file, because that URL contains
+   a secret:
+
+```bash
+claude mcp add --scope local --transport http framer "https://mcp.unframer.co/mcp?id=YOUR_ID&secret=YOUR_SECRET"
+```
+
+`--scope local` keeps it in your machine-level Claude config instead of
+`.mcp.json` in the repo. `.mcp.json` is gitignored here for exactly that reason.
+
+For ChatGPT: Settings → Apps & Connectors → Advanced → **Developer Mode** on,
+then **Create** and paste the same full URL. Needs a paid plan — Free accounts
+cannot add custom MCP connectors.
+
+Worth knowing before relying on it: your design data is tunnelled through a
+third party's worker, and the server drives the same plugin API described above,
+so it hits the same two limits.
+
+---
+
 ## Why this and not an MCP server
 
 An MCP server for Framer is a remote wrapper around this same plugin API — it
