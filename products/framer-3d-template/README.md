@@ -17,7 +17,14 @@ page — hero, sections, typography — is assembled in Framer itself (see
 3. Paste the contents of `Configurator3D.tsx` and save
 4. Drag the component onto the canvas from Assets → Code
 
-Framer resolves the `three` import automatically the first time it compiles.
+Three.js loads itself at runtime from esm.sh, so there is nothing to install.
+The first render fetches it (about 600 KB, cached afterwards); every
+configurator on the page shares one copy.
+
+> **If you see `Module three is not a valid npm package`** — you are on an
+> older copy of this file. Framer only resolves a curated set of npm packages,
+> so a static `import * as THREE from "three"` fails. This version loads three
+> through a runtime dynamic import instead. Re-paste `Configurator3D.tsx`.
 
 ## Using it
 

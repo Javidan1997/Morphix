@@ -1,10 +1,5 @@
 import { useEffect, useRef, useState } from "react"
 import { addPropertyControls, ControlType, RenderTarget } from "framer"
-import * as THREE from "three"
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js"
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js"
-import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js"
-import { RoomEnvironment } from "three/examples/jsm/environments/RoomEnvironment.js"
 
 /**
  * Configurator 3D
@@ -12,11 +7,50 @@ import { RoomEnvironment } from "three/examples/jsm/environments/RoomEnvironment
  * A real-time 3D product viewer with colour options, for Framer.
  * Drop it on a frame, upload a .glb, and add swatches in the properties panel.
  *
+ * Three.js is loaded at runtime from esm.sh rather than imported at the top of
+ * the file. Framer only resolves a curated set of npm packages, so a static
+ * `import * as THREE from "three"` fails with "Module three is not a valid npm
+ * package". The URL is built from variables so Framer's bundler leaves it
+ * alone and the browser fetches it — the standard workaround.
+ *
+ * Entry and add-ons both resolve to the same internal build on esm.sh, so
+ * three is downloaded once and every module shares one instance. If you change
+ * THREE_VERSION, change it for all of them (they are built from one constant
+ * below, so just edit that).
+ *
  * @framerSupportedLayoutWidth any
  * @framerSupportedLayoutHeight any
  * @framerIntrinsicWidth 600
  * @framerIntrinsicHeight 600
  */
+
+const CDN = "https://esm.sh"
+const THREE_VERSION = "0.169.0"
+const DRACO_DECODER = "https://www.gstatic.com/draco/versioned/decoders/1.5.6/"
+
+// Cached across every instance on the page, so three is fetched once even if
+// you place several configurators.
+let modulesPromise: Promise<any> | null = null
+
+function loadThree() {
+    if (modulesPromise) return modulesPromise
+    const base = `${CDN}/three@${THREE_VERSION}`
+    modulesPromise = Promise.all([
+        import(/* webpackIgnore: true */ /* @vite-ignore */ `${base}`),
+        import(/* webpackIgnore: true */ /* @vite-ignore */ `${base}/examples/jsm/controls/OrbitControls.js`),
+        import(/* webpackIgnore: true */ /* @vite-ignore */ `${base}/examples/jsm/loaders/GLTFLoader.js`),
+        import(/* webpackIgnore: true */ /* @vite-ignore */ `${base}/examples/jsm/loaders/DRACOLoader.js`),
+        import(/* webpackIgnore: true */ /* @vite-ignore */ `${base}/examples/jsm/environments/RoomEnvironment.js`),
+    ]).then(([THREE, orbit, gltf, draco, room]) => ({
+        THREE,
+        OrbitControls: orbit.OrbitControls,
+        GLTFLoader: gltf.GLTFLoader,
+        DRACOLoader: draco.DRACOLoader,
+        RoomEnvironment: room.RoomEnvironment,
+    }))
+    return modulesPromise
+}
+
 export default function Configurator3D(props) {
     const {
         model,
@@ -40,12 +74,12 @@ export default function Configurator3D(props) {
     const hostRef = useRef<HTMLDivElement>(null)
     const apiRef = useRef<any>(null)
     const [status, setStatus] = useState<"idle" | "loading" | "ready" | "error">("idle")
+    const [message, setMessage] = useState("")
     const [progress, setProgress] = useState(0)
     const [active, setActive] = useState(0)
 
-    // On the Framer canvas we keep the scene still, so designing does not
-    // fight a spinning model or burn battery. Preview and the published
-    // site behave normally.
+    // On the Framer canvas we keep the scene still, so designing does not fight
+    // a spinning model. Preview and the published site behave normally.
     const onCanvas = RenderTarget.current() === RenderTarget.canvas
 
     useEffect(() => {
@@ -57,230 +91,210 @@ export default function Configurator3D(props) {
         }
 
         let disposed = false
-        let frame = 0
-        let running = false
-        let idleAt = performance.now() + 3000
-        let last = performance.now()
+        let cleanup: (() => void) | null = null
 
         setStatus("loading")
         setProgress(0)
 
-        const scene = new THREE.Scene()
-        if (!transparent) scene.background = new THREE.Color(background)
-
-        const renderer = new THREE.WebGLRenderer({
-            antialias: true,
-            alpha: transparent,
-        })
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-        renderer.toneMapping = THREE.ACESFilmicToneMapping
-        renderer.toneMappingExposure = exposure
-        renderer.shadowMap.enabled = shadows
-        renderer.shadowMap.type = THREE.PCFSoftShadowMap
-        renderer.domElement.style.cssText =
-            "width:100%;height:100%;display:block;touch-action:none"
-        host.appendChild(renderer.domElement)
-
-        const camera = new THREE.PerspectiveCamera(35, 1, 0.01, 1000)
-        const controls = new OrbitControls(camera, renderer.domElement)
-        controls.enableDamping = true
-        controls.dampingFactor = 0.08
-        controls.enablePan = false
-        controls.enableZoom = allowZoom
-        controls.maxPolarAngle = Math.PI / 2 - 0.02
-
-        const key = new THREE.DirectionalLight(0xfff6ea, 2.4)
-        key.position.set(-3, 6, 4)
-        key.castShadow = shadows
-        key.shadow.mapSize.set(2048, 2048)
-        key.shadow.normalBias = 0.02
-        scene.add(key, new THREE.HemisphereLight(0xffffff, 0xb9bfc7, 0.9))
-
-        const pmrem = new THREE.PMREMGenerator(renderer)
-        const room = new RoomEnvironment()
-        const envTarget = pmrem.fromScene(room, 0.04)
-        scene.environment = envTarget.texture
-        scene.environmentIntensity =
-            environmentPreset === "bright" ? 1 : environmentPreset === "soft" ? 0.5 : 0.75
-        room.dispose()
-
-        let ground: THREE.Mesh | null = null
-        if (shadows) {
-            ground = new THREE.Mesh(
-                new THREE.PlaneGeometry(200, 200),
-                new THREE.ShadowMaterial({ opacity: 0.22 })
-            )
-            ground.rotation.x = -Math.PI / 2
-            ground.receiveShadow = true
-            scene.add(ground)
-        }
-
-        const loader = new GLTFLoader()
-        const draco = new DRACOLoader()
-        // Draco-compressed models are the norm for web-sized products.
-        draco.setDecoderPath("https://www.gstatic.com/draco/versioned/decoders/1.5.6/")
-        loader.setDRACOLoader(draco)
-
-        let product: THREE.Object3D | null = null
-
-        const render = () => renderer.render(scene, camera)
-
-        const step = () => {
-            if (disposed) {
-                running = false
-                return
-            }
-            const now = performance.now()
-            const delta = Math.min(50, now - last)
-            last = now
-            let busy = false
-
-            if (autoRotate && !onCanvas && now > idleAt) {
-                const offset = camera.position.clone().sub(controls.target)
-                offset.applyAxisAngle(
-                    new THREE.Vector3(0, 1, 0),
-                    0.00022 * rotateSpeed * delta
-                )
-                camera.position.copy(controls.target).add(offset)
-                busy = true
-            }
-            if (controls.update()) busy = true
-            render()
-            if (busy) frame = requestAnimationFrame(step)
-            else running = false
-        }
-        const wake = () => {
-            if (disposed || running) return
-            running = true
-            last = performance.now()
-            frame = requestAnimationFrame(step)
-        }
-
-        controls.addEventListener("start", () => {
-            idleAt = Infinity
-        })
-        controls.addEventListener("end", () => {
-            idleAt = performance.now() + 3000
-            wake()
-        })
-        controls.addEventListener("change", wake)
-
-        const resize = () => {
-            const { width, height } = host.getBoundingClientRect()
-            if (!width || !height) return
-            renderer.setSize(width, height, false)
-            camera.aspect = width / height
-            camera.updateProjectionMatrix()
-            wake()
-        }
-        const observer = new ResizeObserver(resize)
-        observer.observe(host)
-
-        loader.load(
-            model,
-            (gltf) => {
+        loadThree()
+            .then(({ THREE, OrbitControls, GLTFLoader, DRACOLoader, RoomEnvironment }) => {
                 if (disposed) return
-                product = gltf.scene
-                product.traverse((node: any) => {
-                    if (!node.isMesh) return
-                    node.castShadow = shadows
-                    node.receiveShadow = shadows
-                    node.material = Array.isArray(node.material)
-                        ? node.material.map((m: any) => m.clone())
-                        : node.material.clone()
-                })
 
-                const bounds = new THREE.Box3().setFromObject(product)
-                const size = bounds.getSize(new THREE.Vector3())
-                const center = bounds.getCenter(new THREE.Vector3())
-                product.position.sub(
-                    new THREE.Vector3(center.x, bounds.min.y, center.z)
-                )
-                scene.add(product)
+                let frame = 0
+                let running = false
+                let idleAt = performance.now() + 3000
+                let last = performance.now()
 
-                const radius = Math.max(size.x, size.y, size.z)
-                const distance =
-                    (radius / 2 / Math.tan((35 * Math.PI) / 360)) * 1.6 * (1 / zoom)
-                controls.target.set(0, size.y * 0.45, 0)
-                camera.position.set(
-                    distance * 0.62,
-                    size.y * cameraHeight,
-                    distance * 0.78
-                )
-                controls.minDistance = radius * 0.6
-                controls.maxDistance = distance * 2.4
-                controls.update()
+                const scene = new THREE.Scene()
+                if (!transparent) scene.background = new THREE.Color(background)
 
-                apiRef.current = {
-                    applySwatch(swatch: any) {
-                        if (!product || !swatch) return
-                        const names = String(swatch.target || "")
-                            .split(",")
-                            .map((s) => s.trim())
-                            .filter(Boolean)
+                const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: transparent })
+                renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+                renderer.toneMapping = THREE.ACESFilmicToneMapping
+                renderer.toneMappingExposure = exposure
+                renderer.shadowMap.enabled = shadows
+                renderer.shadowMap.type = THREE.PCFSoftShadowMap
+                renderer.domElement.style.cssText =
+                    "width:100%;height:100%;display:block;touch-action:none"
+                host.appendChild(renderer.domElement)
+
+                const camera = new THREE.PerspectiveCamera(35, 1, 0.01, 1000)
+                const controls = new OrbitControls(camera, renderer.domElement)
+                controls.enableDamping = true
+                controls.dampingFactor = 0.08
+                controls.enablePan = false
+                controls.enableZoom = allowZoom
+                controls.maxPolarAngle = Math.PI / 2 - 0.02
+
+                const key = new THREE.DirectionalLight(0xfff6ea, 2.4)
+                key.position.set(-3, 6, 4)
+                key.castShadow = shadows
+                key.shadow.mapSize.set(2048, 2048)
+                key.shadow.normalBias = 0.02
+                scene.add(key, new THREE.HemisphereLight(0xffffff, 0xb9bfc7, 0.9))
+
+                const pmrem = new THREE.PMREMGenerator(renderer)
+                const room = new RoomEnvironment()
+                const envTarget = pmrem.fromScene(room, 0.04)
+                scene.environment = envTarget.texture
+                scene.environmentIntensity =
+                    environmentPreset === "bright" ? 1 : environmentPreset === "soft" ? 0.5 : 0.75
+                room.dispose()
+
+                let ground: any = null
+                if (shadows) {
+                    ground = new THREE.Mesh(
+                        new THREE.PlaneGeometry(200, 200),
+                        new THREE.ShadowMaterial({ opacity: 0.22 })
+                    )
+                    ground.rotation.x = -Math.PI / 2
+                    ground.receiveShadow = true
+                    scene.add(ground)
+                }
+
+                const step = () => {
+                    if (disposed) { running = false; return }
+                    const now = performance.now()
+                    const delta = Math.min(50, now - last)
+                    last = now
+                    let busy = false
+                    if (autoRotate && !onCanvas && now > idleAt) {
+                        const offset = camera.position.clone().sub(controls.target)
+                        offset.applyAxisAngle(new THREE.Vector3(0, 1, 0), 0.00022 * rotateSpeed * delta)
+                        camera.position.copy(controls.target).add(offset)
+                        busy = true
+                    }
+                    if (controls.update()) busy = true
+                    renderer.render(scene, camera)
+                    if (busy) frame = requestAnimationFrame(step)
+                    else running = false
+                }
+                const wake = () => {
+                    if (disposed || running) return
+                    running = true
+                    last = performance.now()
+                    frame = requestAnimationFrame(step)
+                }
+
+                controls.addEventListener("start", () => { idleAt = Infinity })
+                controls.addEventListener("end", () => { idleAt = performance.now() + 3000; wake() })
+                controls.addEventListener("change", wake)
+
+                const resize = () => {
+                    const { width, height } = host.getBoundingClientRect()
+                    if (!width || !height) return
+                    renderer.setSize(width, height, false)
+                    camera.aspect = width / height
+                    camera.updateProjectionMatrix()
+                    wake()
+                }
+                const observer = new ResizeObserver(resize)
+                observer.observe(host)
+
+                const loader = new GLTFLoader()
+                const draco = new DRACOLoader()
+                draco.setDecoderPath(DRACO_DECODER)
+                loader.setDRACOLoader(draco)
+
+                let product: any = null
+
+                loader.load(
+                    model,
+                    (gltf: any) => {
+                        if (disposed) return
+                        product = gltf.scene
                         product.traverse((node: any) => {
                             if (!node.isMesh) return
-                            const mats = Array.isArray(node.material)
-                                ? node.material
-                                : [node.material]
-                            for (const mat of mats) {
-                                const hit =
-                                    names.length === 0 ||
-                                    names.includes(mat.name) ||
-                                    names.includes(node.name)
-                                if (hit && mat.color) {
-                                    mat.color.set(swatch.color)
-                                    mat.needsUpdate = true
-                                }
-                            }
+                            node.castShadow = shadows
+                            node.receiveShadow = shadows
+                            node.material = Array.isArray(node.material)
+                                ? node.material.map((m: any) => m.clone())
+                                : node.material.clone()
                         })
+
+                        const bounds = new THREE.Box3().setFromObject(product)
+                        const size = bounds.getSize(new THREE.Vector3())
+                        const center = bounds.getCenter(new THREE.Vector3())
+                        product.position.sub(new THREE.Vector3(center.x, bounds.min.y, center.z))
+                        scene.add(product)
+
+                        const radius = Math.max(size.x, size.y, size.z)
+                        const distance = (radius / 2 / Math.tan((35 * Math.PI) / 360)) * 1.6 * (1 / zoom)
+                        controls.target.set(0, size.y * 0.45, 0)
+                        camera.position.set(distance * 0.62, size.y * cameraHeight, distance * 0.78)
+                        controls.minDistance = radius * 0.6
+                        controls.maxDistance = distance * 2.4
+                        controls.update()
+
+                        apiRef.current = {
+                            applySwatch(swatch: any) {
+                                if (!product || !swatch) return
+                                const names = String(swatch.target || "")
+                                    .split(",")
+                                    .map((s) => s.trim())
+                                    .filter(Boolean)
+                                product.traverse((node: any) => {
+                                    if (!node.isMesh) return
+                                    const mats = Array.isArray(node.material) ? node.material : [node.material]
+                                    for (const mat of mats) {
+                                        const hit =
+                                            names.length === 0 ||
+                                            names.includes(mat.name) ||
+                                            names.includes(node.name)
+                                        if (hit && mat.color) {
+                                            mat.color.set(swatch.color)
+                                            mat.needsUpdate = true
+                                        }
+                                    }
+                                })
+                                wake()
+                            },
+                        }
+                        if (swatches?.length) apiRef.current.applySwatch(swatches[0])
+
+                        setStatus("ready")
+                        resize()
                         wake()
                     },
-                }
-                if (swatches?.length) apiRef.current.applySwatch(swatches[0])
+                    (event: any) => { if (event.total) setProgress(event.loaded / event.total) },
+                    () => {
+                        if (disposed) return
+                        setMessage("Could not load that model.")
+                        setStatus("error")
+                    }
+                )
 
-                setStatus("ready")
-                resize()
-                wake()
-            },
-            (event) => {
-                if (event.total) setProgress(event.loaded / event.total)
-            },
-            () => {
-                if (!disposed) setStatus("error")
-            }
-        )
+                cleanup = () => {
+                    cancelAnimationFrame(frame)
+                    observer.disconnect()
+                    controls.dispose()
+                    scene.traverse((node: any) => {
+                        if (!node.isMesh) return
+                        node.geometry?.dispose()
+                        const mats = Array.isArray(node.material) ? node.material : [node.material]
+                        for (const m of mats) m?.dispose()
+                    })
+                    envTarget.dispose()
+                    pmrem.dispose()
+                    renderer.dispose()
+                    renderer.domElement.remove()
+                    apiRef.current = null
+                }
+            })
+            .catch((error) => {
+                if (disposed) return
+                console.error("[Configurator3D] could not load three.js", error)
+                setMessage("Could not load the 3D library. Check your connection.")
+                setStatus("error")
+            })
 
         return () => {
             disposed = true
-            cancelAnimationFrame(frame)
-            observer.disconnect()
-            controls.dispose()
-            scene.traverse((node: any) => {
-                if (!node.isMesh) return
-                node.geometry?.dispose()
-                const mats = Array.isArray(node.material) ? node.material : [node.material]
-                for (const m of mats) m?.dispose()
-            })
-            envTarget.dispose()
-            pmrem.dispose()
-            renderer.dispose()
-            renderer.domElement.remove()
-            apiRef.current = null
+            cleanup?.()
         }
     }, [
-        model,
-        background,
-        transparent,
-        environmentPreset,
-        exposure,
-        shadows,
-        autoRotate,
-        rotateSpeed,
-        cameraHeight,
-        zoom,
-        allowZoom,
-        onCanvas,
+        model, background, transparent, environmentPreset, exposure, shadows,
+        autoRotate, rotateSpeed, cameraHeight, zoom, allowZoom, onCanvas,
     ])
 
     // Re-apply the active swatch when the list is edited in the panel.
@@ -327,7 +341,7 @@ export default function Configurator3D(props) {
                     {status === "idle" && <span>Upload a .glb model in the properties panel →</span>}
                     {status === "loading" && (
                         <>
-                            <span>Loading model… {Math.round(progress * 100)}%</span>
+                            <span>Loading… {Math.round(progress * 100)}%</span>
                             <div style={{ width: 140, height: 2, background: "#00000014", borderRadius: 2 }}>
                                 <div
                                     style={{
@@ -341,7 +355,7 @@ export default function Configurator3D(props) {
                             </div>
                         </>
                     )}
-                    {status === "error" && <span style={{ color: "#b3261e" }}>Could not load that model.</span>}
+                    {status === "error" && <span style={{ color: "#b3261e" }}>{message}</span>}
                 </div>
             )}
 
