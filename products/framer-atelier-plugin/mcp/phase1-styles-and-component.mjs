@@ -72,15 +72,24 @@ const text = [
   ['Body L', 'p', '18px', '1.6em', '-0.005em', 400],
   ['Body', 'p', '16px', '1.65em', '0em', 400],
   ['Caption', 'p', '13px', '1.5em', '0.02em', 500, 'uppercase'],
+  // Colour can only reach a Text node through a text style, so each tone needs its own.
+  ['Body L Muted', 'p', '18px', '1.6em', '-0.005em', 400, null, '/Atelier/Muted'],
+  ['Body Muted', 'p', '16px', '1.65em', '0em', 400, null, '/Atelier/Muted'],
+  ['Caption Muted', 'p', '13px', '1.5em', '0.02em', 500, 'uppercase', '/Atelier/Muted'],
+  ['H2 White', 'h2', '40px', '1.1em', '-0.025em', 700, null, '/Atelier/Surface'],
+  ['Body White', 'p', '16px', '1.65em', '0em', 400, null, '/Atelier/Surface'],
+  ['Button', 'p', '14px', '1.2em', '-0.005em', 600, null, '/Atelier/Surface'],
+  ['Button Ink', 'p', '14px', '1.2em', '-0.005em', 600],
+  ['Wordmark', 'p', '20px', '1.2em', '-0.03em', 700],
 ];
 ok = 0; bad = 0;
-for (const [name, tag, fontSize, lineHeight, letterSpacing, weight, transform] of text) {
-  const properties = { tag, fontSize, lineHeight, letterSpacing, color: '/Atelier/Ink' };
+for (const [name, tag, fontSize, lineHeight, letterSpacing, weight, transform, color = '/Atelier/Ink'] of text) {
+  const properties = { tag, fontSize, lineHeight, letterSpacing, color };
   if (fonts[weight]) properties.font = fonts[weight];
   if (transform) properties.transform = transform;
   let r = await upsert('manageTextStyle', `/Atelier/${name}`, properties);
   // Retry without the colour reference if the server wants a literal colour.
-  if (!r.ok && /color/i.test(r.text)) { properties.color = '#14181D'; r = await upsert('manageTextStyle', `/Atelier/${name}`, properties); }
+  if (!r.ok && /color/i.test(r.text)) { properties.color = { '/Atelier/Muted': '#6B7480', '/Atelier/Surface': '#FFFFFF' }[color] || '#14181D'; r = await upsert('manageTextStyle', `/Atelier/${name}`, properties); }
   r.ok ? ok++ : (bad++, console.log(`  text ${name} failed: ${r.text.slice(0, 160)}`));
 }
 console.log(`text styles: ${ok} ok, ${bad} failed`);

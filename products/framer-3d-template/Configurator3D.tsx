@@ -51,23 +51,32 @@ function loadThree() {
     return modulesPromise
 }
 
+const DEFAULT_SWATCHES = [
+    { label: "Sand", color: "#c7bfb1", target: "" },
+    { label: "Olive", color: "#6f7358", target: "" },
+    { label: "Ink", color: "#2d3239", target: "" },
+]
+
+// Defaults live on the property controls (Framer's rule: never defaultProps).
+// They are repeated in the destructuring below because ControlType.File has no
+// defaultValue, and so the component also renders correctly on the server.
 export default function Configurator3D(props) {
     const {
-        model,
-        background,
-        transparent,
-        environmentPreset,
-        exposure,
-        shadows,
-        autoRotate,
-        rotateSpeed,
-        cameraHeight,
-        zoom,
-        allowZoom,
-        swatches,
-        showSwatches,
-        swatchPosition,
-        accent,
+        model = "",
+        background = "#eceef1",
+        transparent = false,
+        environmentPreset = "neutral",
+        exposure = 1,
+        shadows = true,
+        autoRotate = true,
+        rotateSpeed = 1,
+        cameraHeight = 0.85,
+        zoom = 1,
+        allowZoom = true,
+        swatches = DEFAULT_SWATCHES,
+        showSwatches = true,
+        swatchPosition = "bottom",
+        accent = "#111418",
         style,
     } = props
 
@@ -386,68 +395,81 @@ export default function Configurator3D(props) {
     )
 }
 
-Configurator3D.defaultProps = {
-    background: "#eceef1",
-    transparent: false,
-    environmentPreset: "neutral",
-    exposure: 1,
-    shadows: true,
-    autoRotate: true,
-    rotateSpeed: 1,
-    cameraHeight: 0.85,
-    zoom: 1,
-    allowZoom: true,
-    showSwatches: true,
-    swatchPosition: "bottom",
-    accent: "#111418",
-    swatches: [
-        { label: "Sand", color: "#c7bfb1", target: "" },
-        { label: "Olive", color: "#6f7358", target: "" },
-        { label: "Ink", color: "#2d3239", target: "" },
-    ],
-}
-
 addPropertyControls(Configurator3D, {
+    // ControlType.File has no defaultValue — its default is set in the
+    // destructuring at the top of the component.
     model: {
         type: ControlType.File,
         title: "Model",
         allowedFileTypes: ["glb", "gltf"],
         description: "A .glb under 2 MB. Compress with gltf-transform first.",
     },
-    background: { type: ControlType.Color, title: "Background", hidden: (p) => p.transparent },
-    transparent: { type: ControlType.Boolean, title: "Transparent" },
+    background: {
+        type: ControlType.Color,
+        title: "Background",
+        defaultValue: "#eceef1",
+        hidden: (p) => p.transparent,
+    },
+    transparent: { type: ControlType.Boolean, title: "Transparent", defaultValue: false },
     environmentPreset: {
         type: ControlType.Enum,
         title: "Lighting",
+        defaultValue: "neutral",
         options: ["soft", "neutral", "bright"],
         optionTitles: ["Soft", "Neutral", "Bright"],
         displaySegmentedControl: true,
     },
-    exposure: { type: ControlType.Number, title: "Exposure", min: 0.2, max: 2, step: 0.05 },
-    shadows: { type: ControlType.Boolean, title: "Shadow" },
-    autoRotate: { type: ControlType.Boolean, title: "Auto-rotate" },
+    exposure: {
+        type: ControlType.Number,
+        title: "Exposure",
+        defaultValue: 1,
+        min: 0.2,
+        max: 2,
+        step: 0.05,
+    },
+    shadows: { type: ControlType.Boolean, title: "Shadow", defaultValue: true },
+    autoRotate: { type: ControlType.Boolean, title: "Auto-rotate", defaultValue: true },
     rotateSpeed: {
         type: ControlType.Number,
         title: "Speed",
-        min: 0.2, max: 3, step: 0.1,
+        defaultValue: 1,
+        min: 0.2,
+        max: 3,
+        step: 0.1,
         hidden: (p) => !p.autoRotate,
     },
-    zoom: { type: ControlType.Number, title: "Zoom", min: 0.4, max: 2, step: 0.05 },
-    cameraHeight: { type: ControlType.Number, title: "Camera height", min: 0.1, max: 2, step: 0.05 },
-    allowZoom: { type: ControlType.Boolean, title: "Visitor zoom" },
-    showSwatches: { type: ControlType.Boolean, title: "Show swatches" },
+    zoom: {
+        type: ControlType.Number,
+        title: "Zoom",
+        defaultValue: 1,
+        min: 0.4,
+        max: 2,
+        step: 0.05,
+    },
+    cameraHeight: {
+        type: ControlType.Number,
+        title: "Camera height",
+        defaultValue: 0.85,
+        min: 0.1,
+        max: 2,
+        step: 0.05,
+    },
+    allowZoom: { type: ControlType.Boolean, title: "Visitor zoom", defaultValue: true },
+    showSwatches: { type: ControlType.Boolean, title: "Show swatches", defaultValue: true },
     swatchPosition: {
         type: ControlType.Enum,
         title: "Position",
+        defaultValue: "bottom",
         options: ["bottom", "top"],
         optionTitles: ["Bottom", "Top"],
         displaySegmentedControl: true,
         hidden: (p) => !p.showSwatches,
     },
-    accent: { type: ControlType.Color, title: "Accent" },
+    accent: { type: ControlType.Color, title: "Accent", defaultValue: "#111418" },
     swatches: {
         type: ControlType.Array,
         title: "Colour options",
+        defaultValue: DEFAULT_SWATCHES,
         control: {
             type: ControlType.Object,
             controls: {
@@ -456,6 +478,7 @@ addPropertyControls(Configurator3D, {
                 target: {
                     type: ControlType.String,
                     title: "Applies to",
+                    defaultValue: "",
                     placeholder: "Leave empty for all",
                     description: "Material or node names, comma separated.",
                 },
@@ -463,3 +486,5 @@ addPropertyControls(Configurator3D, {
         },
     },
 })
+
+Configurator3D.displayName = "Configurator 3D"
