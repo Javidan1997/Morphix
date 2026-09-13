@@ -19,15 +19,32 @@ npm run dev
 
 Then in Framer: **menu → Plugins → Open Development Plugin**.
 
-> **If `npm run dev` fails with "Cannot find native binding"** — that is a
-> [known npm bug](https://github.com/npm/cli/issues/4828) with optional
-> dependencies, not this plugin. Fix:
+Two setup problems you may hit, both from the upstream toolchain rather than
+this plugin — each has a one-line fix.
+
+> **"403 rate limit exceeded" from `vite-plugin-mkcert`.** Framer serves
+> development plugins over HTTPS, so the plugin needs a local certificate, and
+> by default it asks the GitHub *API* where to download `mkcert` from. That API
+> is rate-limited per IP, so on a shared or busy network the dev server will not
+> start at all. Fetch the binary once (a direct release download, not the
+> rate-limited API):
+> ```bash
+> npm run mkcert:fetch
+> ```
+> `vite.config.ts` picks up `.tools/mkcert.exe` automatically and stops touching
+> the API. On macOS, swap the URL in that script for the
+> `mkcert-v1.4.4-darwin-arm64` release asset.
+
+> **"Cannot find native binding".** A [known npm bug](https://github.com/npm/cli/issues/4828)
+> with optional dependencies, hit by Vite 8's rolldown:
 > ```bash
 > rm -rf node_modules package-lock.json && npm install
 > ```
-> If it persists on Windows, install the binding directly:
-> `npm i --no-save @rolldown/binding-win32-x64-msvc`
-> (on Apple silicon, `@rolldown/binding-darwin-arm64`).
+> If it persists on Windows: `npm i --no-save @rolldown/binding-win32-x64-msvc`
+> (Apple silicon: `@rolldown/binding-darwin-arm64`).
+
+Vite 8 also wants Node **20.19+ or 22.12+**. It runs on 22.11 with a warning,
+but upgrading removes the noise.
 
 Ad-blockers and Brave can block Framer from reaching localhost. Allowlist
 `framer.com` if the plugin will not open.

@@ -8,7 +8,8 @@
     "build": "vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "pack": "npx framer-plugin-tools@latest pack"
+    "pack": "npx framer-plugin-tools@latest pack",
+    "mkcert:fetch": "node -e \"require('fs').mkdirSync('.tools',{recursive:true})\" && curl -sL -o .tools/mkcert.exe https://github.com/FiloSottile/mkcert/releases/download/v1.4.4/mkcert-v1.4.4-windows-amd64.exe"
   },
   "dependencies": {
     "@framer/plugin": "^4",
