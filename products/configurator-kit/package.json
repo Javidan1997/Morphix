@@ -1,0 +1,22 @@
+{
+  "name": "configurator-kit",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "A schema-driven 3D product configurator for the web. Bring a .glb, describe your options, ship.",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "demo:model": "node tools/make-demo-model.mjs"
+  },
+  "dependencies": {
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "three": "^0.183.2"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.7.0",
+    "vite": "^6.4.1"
+  }
+}

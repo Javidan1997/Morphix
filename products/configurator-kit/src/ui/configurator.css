@@ -1,0 +1,140 @@
+/* Configurator styles.
+   Everything is tokenised — override these on .cfg to match your brand and
+   you should not need to touch any other rule. */
+.cfg {
+  --cfg-accent: #111418;
+  --cfg-ink: #14181d;
+  --cfg-muted: #6b7480;
+  --cfg-line: #e3e7ec;
+  --cfg-surface: #fff;
+  --cfg-stage: #eceef1;
+  --cfg-radius: 12px;
+  --cfg-font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 20px;
+  font-family: var(--cfg-font);
+  color: var(--cfg-ink);
+  -webkit-font-smoothing: antialiased;
+}
+.cfg *, .cfg *::before, .cfg *::after { box-sizing: border-box; }
+.cfg button { font: inherit; color: inherit; cursor: pointer; }
+.cfg :focus-visible { outline: 2px solid var(--cfg-accent); outline-offset: 3px; }
+
+.cfg-stage {
+  position: relative;
+  min-height: 520px;
+  border-radius: var(--cfg-radius);
+  overflow: hidden;
+  background: var(--cfg-stage);
+}
+.cfg-canvas { position: absolute; inset: 0; }
+
+.cfg-overlay {
+  position: absolute; inset: 0; z-index: 2;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
+  padding: 24px; text-align: center; color: var(--cfg-muted);
+  background: var(--cfg-stage);
+}
+.cfg-overlay-error { color: #b3261e; }
+.cfg-overlay small { display: block; margin-top: 6px; opacity: .8; }
+.cfg-spinner {
+  width: 26px; height: 26px; border-radius: 50%;
+  border: 2px solid #00000018; border-top-color: var(--cfg-accent);
+  animation: cfg-spin .8s linear infinite;
+}
+@keyframes cfg-spin { to { transform: rotate(360deg); } }
+.cfg-progress { width: 160px; height: 2px; background: #00000014; border-radius: 2px; overflow: hidden; }
+.cfg-progress > span { display: block; height: 100%; background: var(--cfg-accent); transform-origin: left; transition: transform .25s ease; }
+
+.cfg-views {
+  position: absolute; z-index: 3; top: 14px; left: 14px;
+  display: flex; gap: 3px; padding: 3px;
+  background: #ffffffe6; backdrop-filter: blur(10px);
+  border: 1px solid var(--cfg-line); border-radius: 9px;
+}
+.cfg-views button {
+  border: 0; background: none; border-radius: 6px;
+  padding: 6px 11px; font-size: 12px; text-transform: capitalize;
+}
+.cfg-views button:hover { background: #0000000a; }
+
+.cfg-tools { position: absolute; z-index: 3; top: 14px; right: 14px; display: flex; flex-direction: column; gap: 7px; }
+.cfg-tools button {
+  display: flex; align-items: center; justify-content: center;
+  width: 34px; height: 34px; border-radius: 50%;
+  border: 1px solid var(--cfg-line); background: #ffffffe6; backdrop-filter: blur(10px);
+  transition: transform .18s ease, color .18s ease;
+}
+.cfg-tools button:hover { transform: scale(1.06); }
+.cfg-tools button[aria-pressed='true'] { background: var(--cfg-accent); border-color: var(--cfg-accent); color: #fff; }
+
+.cfg-panel {
+  background: var(--cfg-surface);
+  border: 1px solid var(--cfg-line);
+  border-radius: var(--cfg-radius);
+  padding: 20px;
+  align-self: start;
+}
+.cfg-controls { display: grid; gap: 20px; }
+.cfg-field { min-width: 0; }
+.cfg-help { margin: 6px 0 0; font-size: 12px; line-height: 1.5; color: var(--cfg-muted); }
+
+.cfg fieldset { border: 0; padding: 0; margin: 0; min-width: 0; }
+.cfg legend { padding: 0; margin-bottom: 9px; font-size: 13px; font-weight: 600; }
+
+.cfg-swatches > div { display: flex; flex-wrap: wrap; gap: 14px; }
+.cfg-swatches button {
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  border: 0; background: none; padding: 0; min-width: 46px;
+}
+.cfg-swatches button > span {
+  display: block; width: 38px; height: 38px; border-radius: 50%;
+  border: 1px solid #00000015; transition: outline-offset .15s ease;
+}
+.cfg-swatches button[aria-pressed='true'] > span { outline: 2px solid var(--cfg-accent); outline-offset: 3px; }
+.cfg-swatches small { font-size: 11px; color: var(--cfg-muted); }
+
+.cfg-segmented > div { display: grid; grid-auto-flow: column; gap: 6px; }
+.cfg-segmented button {
+  border: 1px solid var(--cfg-line); background: var(--cfg-surface);
+  border-radius: 8px; padding: 9px 8px; font-size: 12px; min-height: 40px;
+  transition: border-color .18s ease, background .18s ease;
+}
+.cfg-segmented button[aria-pressed='true'] { border-color: var(--cfg-accent); background: #0000000a; font-weight: 600; }
+
+.cfg-toggle { display: flex; align-items: center; gap: 12px; min-height: 40px; cursor: pointer; font-size: 13px; font-weight: 600; }
+.cfg-toggle input { position: absolute; opacity: 0; width: 0; height: 0; }
+.cfg-toggle > span:first-child { flex: 1; }
+.cfg-switch { width: 38px; height: 22px; border-radius: 22px; background: #c9cfd6; padding: 3px; transition: background .2s ease; }
+.cfg-switch::before { content: ''; display: block; width: 16px; height: 16px; border-radius: 50%; background: #fff; transition: transform .2s ease; }
+.cfg-toggle input:checked + .cfg-switch { background: var(--cfg-accent); }
+.cfg-toggle input:checked + .cfg-switch::before { transform: translateX(16px); }
+.cfg-toggle input:focus-visible + .cfg-switch { outline: 2px solid var(--cfg-accent); outline-offset: 3px; }
+
+.cfg-range { display: block; }
+.cfg-range > span { display: flex; justify-content: space-between; align-items: center; gap: 10px; font-size: 13px; font-weight: 600; }
+.cfg-range output { font-variant-numeric: tabular-nums; font-weight: 500; color: var(--cfg-muted); }
+.cfg-range input { width: 100%; margin-top: 10px; accent-color: var(--cfg-accent); cursor: pointer; }
+
+.cfg-price {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
+  margin-top: 22px; padding-top: 16px; border-top: 1px solid var(--cfg-line);
+}
+.cfg-price span { font-size: 13px; color: var(--cfg-muted); }
+.cfg-price strong { font-size: 26px; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+
+.cfg-sr {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+@media (max-width: 860px) {
+  .cfg { grid-template-columns: 1fr; }
+  .cfg-stage { min-height: 380px; }
+  .cfg-panel { padding: 18px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cfg *, .cfg *::before { transition: none !important; animation: none !important; }
+}
