@@ -5,10 +5,13 @@
 
 export const pageSeo = {
   en: {
-    "/pergola-configurators": {
-      title: "Try Pergola Configurator Packages | Configuro",
-      description: "Try Essential, Custom and Commerce 3D pergola configurators. Design and development from $2,000 USD for simple projects. Explore dimensions, finishes and accessories.",
-      keywords: "pergola configurator packages, interactive 3D pergola demo, custom pergola software",
+    // Standalone page: scripts/prerender.mjs renders its body and JSON-LD.
+    "/pergola-configurator": {
+      title: "3D Pergola Configurator Software for Manufacturers | Configuro",
+      description: "Try a live 3D pergola configurator: size, louvers, sliding glass, ZIP screens and lighting with real product rules. Built for your website from $2,000.",
+      keywords: "pergola configurator, 3D pergola configurator, louvered pergola configurator software, pergola 3D visualizer for manufacturers",
+      serviceName: "3D Pergola Configurator Development",
+      standalone: true,
     },
     "/": {
       title: "Configuro | Design, Build & Automate — Apps, 3D Configurators & CRM",

@@ -6,7 +6,7 @@ import { useAdminAuth } from "../admin/AdminAuthContext";
 function AdminLogin() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { session, login, credentialConfig } = useAdminAuth();
+  const { session, login, credentialConfig, usesSupabase } = useAdminAuth();
   const [form, setForm] = useState({
     username: credentialConfig.username,
     password: "",
@@ -77,18 +77,19 @@ function AdminLogin() {
           <div className="admin-login-card-head">
             <span className="metric-label">Sign in</span>
             <h2>Admin panel login</h2>
-            <p>Enter the admin username and password to continue.</p>
+            <p>{usesSupabase ? "Sign in with the Supabase admin account for this project." : "Local development login."}</p>
           </div>
 
           <form className="admin-login-form" onSubmit={handleSubmit}>
             <label className="form-field">
-              Username
+              Email
               <input
-                type="text"
+                type="email"
                 value={form.username}
-                placeholder="Enter username"
+                placeholder="admin@configuro.studio"
                 onChange={(event) => updateField("username", event.target.value)}
                 autoComplete="username"
+                spellCheck={false}
                 autoFocus
                 required
               />
@@ -124,7 +125,7 @@ function AdminLogin() {
 
           <div className="admin-login-note">
             <strong>Direct admin access</strong>
-            <p>This login uses the fixed admin credentials configured for this site.</p>
+            <p>Leads are stored in Supabase. Only accounts listed as Configuro admins can read them. Forgot the password? Reset it in the Supabase dashboard under Authentication.</p>
           </div>
         </section>
       </div>

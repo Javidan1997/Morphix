@@ -68,7 +68,7 @@ function getInquiryDate(value) {
 function AdminDashboard({ view = "forms" }) {
   const activeView = VIEW_COPY[view] ? view : "forms";
   const navigate = useNavigate();
-  const { session } = useAdminAuth();
+  const { session, expire } = useAdminAuth();
   const [filter, setFilter] = useState("all");
   const [inquiries, setInquiries] = useState(() => readInquiries());
   const [manualLead, setManualLead] = useState(INITIAL_MANUAL_LEAD);
@@ -136,7 +136,10 @@ function AdminDashboard({ view = "forms" }) {
       const nextInquiries = await readInquiriesAsync(session);
       setInquiries(nextInquiries);
     } catch (error) {
-      setAdminError(error instanceof Error ? error.message : "Could not load inquiries.");
+      const message = error instanceof Error ? error.message : "Could not load inquiries.";
+      // An expired or revoked token: send the admin back to sign in.
+      if (/jwt|token|expired/i.test(message)) expire();
+      setAdminError(message);
     } finally {
       setIsLoading(false);
     }
@@ -500,7 +503,27 @@ function AdminDashboard({ view = "forms" }) {
                   </div>
                 ) : null}
 
-                {inquiry.configuration ? (
+                {inquiry.source === "pergola-configurator" ? (
+                  <div className="admin-chip-row">
+                    {inquiry.interest ? <span className="chip">Interest: {inquiry.interest}</span> : null}
+                    {inquiry.projectType ? <span className="chip">Business: {inquiry.projectType}</span> : null}
+                    {inquiry.language ? <span className="chip">Language: {inquiry.language}</span> : null}
+                    {inquiry.configuration?.url ? <a className="chip" href={inquiry.configuration.url} target="_blank" rel="noreferrer">Open design {inquiry.configuration.code}</a> : null}
+                    {inquiry.configuration?.estimate?.total ? <span className="chip">Illustrative estimate: ${inquiry.configuration.estimate.total.toLocaleString("en-US")}</span> : null}
+                    {(() => {
+                      const touch = inquiry.attribution?.lastTouch || inquiry.attribution?.firstTouch;
+                      if (!touch) return null;
+                      const campaign = [touch.utm_source, touch.utm_medium, touch.utm_campaign].filter(Boolean).join(" / ");
+                      const click = ["gclid", "gbraid", "wbraid", "fbclid", "msclkid"].find((key) => touch[key]);
+                      return (
+                        <>
+                          <span className="chip">{campaign ? `Campaign: ${campaign}` : touch.referrer ? `Referrer: ${touch.referrer}` : "Direct visit"}</span>
+                          {click ? <span className="chip">{click} captured</span> : null}
+                        </>
+                      );
+                    })()}
+                  </div>
+                ) : inquiry.configuration ? (
                   <div className="admin-chip-row">
                     {Object.entries(inquiry.configuration)
                       .filter(([, value]) => value !== "" && value !== null && value !== undefined)

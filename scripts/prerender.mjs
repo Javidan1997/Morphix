@@ -5,8 +5,8 @@
 //
 // Usage: node scripts/prerender.mjs   (wired into `npm run build`)
 
-import { readFileSync, writeFileSync, mkdirSync, existsSync } from "node:fs";
-import { fileURLToPath } from "node:url";
+import { readFileSync, writeFileSync, mkdirSync, existsSync, rmSync } from "node:fs";
+import { fileURLToPath, pathToFileURL } from "node:url";
 import { dirname, join } from "node:path";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -90,9 +90,10 @@ function write(path, html) {
 const en = pageSeo.en;
 let count = 0;
 
-// Static routes.
+// Static routes. Standalone pages (their own HTML entry) are rendered below.
 for (const path of Object.keys(en)) {
   const seo = en[path];
+  if (seo.standalone) continue;
   const jsonLd = buildJsonLd(path, seo);
   write(path, renderRoute(path, seo, jsonLd, stripBrand(seo.title)));
   count += 1;
@@ -128,15 +129,137 @@ for (const a of insights) {
   count += 1;
 }
 
+// ---- /pergola-configurator ---------------------------------------------------
+// Rendered from React at build time and hydrated on load, so the full page is
+// in the initial HTML. Written as dist/pergola-configurator.html: GitHub Pages
+// serves it at the extensionless URL with a 200 (a same-named directory would
+// force a trailing-slash redirect instead).
+{
+  const PATH = "/pergola-configurator";
+  const url = `${ORIGIN}${PATH}`;
+  const seo = en[PATH];
+  const { render, copy } = await import(pathToFileURL(join(root, "dist-ssr", "entry-server.js")).href);
+  const shell = readFileSync(join(dist, "pergola.html"), "utf8");
+  const image = `${ORIGIN}/pergola-configurators/v2/img/og-pergola-configurator.jpg`;
+  const heroSet = [640, 960, 1280, 1920].map((w) => `/pergola-configurators/v2/img/hero-${w}.avif ${w}w`).join(", ");
+
+  const faq = copy.faqs.map(([name, text]) => ({ "@type": "Question", name, acceptedAnswer: { "@type": "Answer", text } }));
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": ["Organization", "ProfessionalService"],
+        "@id": `${ORIGIN}/#organization`,
+        name: "Configuro",
+        url: `${ORIGIN}/`,
+        email: "hello@configuro.studio",
+        logo: `${ORIGIN}/morphix-logo.svg`,
+      },
+      {
+        "@type": "WebPage",
+        "@id": `${url}#webpage`,
+        url,
+        name: seo.title,
+        description: seo.description,
+        inLanguage: "en",
+        isPartOf: { "@id": `${ORIGIN}/#website` },
+        primaryImageOfPage: { "@type": "ImageObject", url: image, width: 1200, height: 630 },
+        breadcrumb: { "@id": `${url}#breadcrumb` },
+        about: { "@id": `${url}#service` },
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${url}#breadcrumb`,
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: `${ORIGIN}/` },
+          { "@type": "ListItem", position: 2, name: "Pergola configurator", item: url },
+        ],
+      },
+      {
+        "@type": "Service",
+        "@id": `${url}#service`,
+        name: seo.serviceName,
+        serviceType: "3D product configurator design and development",
+        description: seo.description,
+        url,
+        provider: { "@id": `${ORIGIN}/#organization` },
+        areaServed: "Worldwide",
+        audience: { "@type": "BusinessAudience", audienceType: "Pergola manufacturers, dealers and installers" },
+        offers: copy.services.map(([name, price, description]) => ({
+          "@type": "Offer",
+          name,
+          description,
+          priceSpecification: { "@type": "PriceSpecification", minPrice: Number(price.replace(/[^0-9.]/g, "")), priceCurrency: "USD" },
+        })),
+      },
+      { "@type": "FAQPage", "@id": `${url}#faq`, mainEntity: faq },
+    ],
+  };
+
+  const head = [
+    `<title>${esc(seo.title)}</title>`,
+    `<meta name="description" content="${esc(seo.description)}" />`,
+    `<link rel="canonical" href="${url}" />`,
+    `<meta name="robots" content="index, follow, max-image-preview:large" />`,
+    `<meta property="og:type" content="website" />`,
+    `<meta property="og:site_name" content="Configuro" />`,
+    `<meta property="og:locale" content="en_US" />`,
+    `<meta property="og:title" content="${esc(seo.title)}" />`,
+    `<meta property="og:description" content="${esc(seo.description)}" />`,
+    `<meta property="og:url" content="${url}" />`,
+    `<meta property="og:image" content="${image}" />`,
+    `<meta property="og:image:width" content="1200" />`,
+    `<meta property="og:image:height" content="630" />`,
+    `<meta property="og:image:alt" content="${esc(copy.heroAlt)}" />`,
+    `<meta name="twitter:card" content="summary_large_image" />`,
+    `<meta name="twitter:title" content="${esc(seo.title)}" />`,
+    `<meta name="twitter:description" content="${esc(seo.description)}" />`,
+    `<meta name="twitter:image" content="${image}" />`,
+    `<link rel="preload" as="image" type="image/avif" imagesrcset="${heroSet}" imagesizes="(min-width: 1024px) 56vw, 100vw" fetchpriority="high" />`,
+    `<script type="application/ld+json">${JSON.stringify(jsonLd).replace(/</g, "\\u003c")}</script>`,
+  ].filter(Boolean).join("\n    ");
+
+  // Inline the page stylesheet: it is small (~7 KB gzipped) and removing the
+  // render-blocking request brings first paint and the hero image forward.
+  let page = shell.replace("<!--pc-head-->", head).replace("<!--pc-app-->", render());
+  page = page.replace(/<link rel="stylesheet" crossorigin href="(\/assets\/pergola-[^"]+\.css)">/, (tag, href) => `<style>${readFileSync(join(dist, href), "utf8").replace(/<\/style/gi, "<\\/style")}</style>`);
+  if (!page.includes("<style>")) throw new Error("Pergola prerender: stylesheet was not inlined");
+  if (!page.includes("<h1") || page.includes("<!--pc-")) throw new Error("Pergola prerender failed: placeholders not replaced");
+  writeFileSync(join(dist, "pergola-configurator.html"), page, "utf8");
+  rmSync(join(dist, "pergola.html"));
+
+  // Old plural URL. GitHub Pages cannot send a custom 301, so this page
+  // redirects instantly (script keeps the query and hash; meta refresh is the
+  // no-JS fallback) and points search engines at the new canonical URL. Its
+  // folder also holds the original 3D assets, which stay where they are.
+  const legacy = `<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Moved: Pergola configurator | Configuro</title>
+<link rel="canonical" href="${url}" />
+<script>location.replace("${PATH}" + location.search + location.hash);</script>
+<meta http-equiv="refresh" content="0; url=${PATH}" />
+</head>
+<body><p>This page has moved to <a href="${PATH}">${url}</a>.</p></body>
+</html>
+`;
+  mkdirSync(join(dist, "pergola-configurators"), { recursive: true });
+  writeFileSync(join(dist, "pergola-configurators", "index.html"), legacy, "utf8");
+  count += 1;
+}
+
 // SPA fallback for any unmatched route (GitHub Pages serves 404.html).
 writeFileSync(join(dist, "404.html"), template, "utf8");
 
 // Generate sitemap.xml from all indexable routes so new articles are always listed.
-const priority = { "/": "1.0", "/work": "0.9", "/services": "0.8", "/insights": "0.8" };
+const priority = { "/": "1.0", "/work": "0.9", "/pergola-configurator": "0.9", "/services": "0.8", "/insights": "0.8" };
+const buildDate = new Date().toISOString().slice(0, 10);
 const sitemapUrls = [];
 for (const path of Object.keys(en)) {
   if (en[path].noindex) continue;
-  sitemapUrls.push({ loc: `${ORIGIN}${path === "/" ? "/" : path}`, priority: priority[path] || "0.7", freq: "monthly" });
+  const lastmod = en[path].standalone ? buildDate : undefined;
+  sitemapUrls.push({ loc: `${ORIGIN}${path === "/" ? "/" : path}`, priority: priority[path] || "0.7", freq: "monthly", lastmod });
 }
 for (const a of insights) {
   sitemapUrls.push({ loc: `${ORIGIN}/insights/${a.slug}`, priority: "0.7", freq: "monthly", lastmod: a.date });

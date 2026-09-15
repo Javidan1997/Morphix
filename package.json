@@ -5,10 +5,14 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && node scripts/prerender.mjs",
+    "build": "vite build && vite build --ssr src/pergola/entry-server.jsx && node scripts/prerender.mjs",
+    "check:pergola": "node scripts/check-pergola-model.mjs",
+    "serve:pages": "node scripts/serve-pages.mjs",
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fontsource-variable/geist": "^5.3.0",
+    "@phosphor-icons/react": "^2.1.10",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "react-router-dom": "^7.13.2",

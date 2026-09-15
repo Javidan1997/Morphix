@@ -58,7 +58,8 @@ function Footer({ language }) {
           <div className="footer-links">
             <Link to="/services">{content.nav.services}</Link>
             <Link to="/playground">{content.nav.playground}</Link>
-            <Link to={`/pergola-configurators?lang=${language === 'az' ? 'az' : 'en'}`}>{language === 'az' ? 'Perqola konfiquratorlarını sınayın' : 'Try pergola configurators'}</Link>
+            {/* Full page load: the configurator is a standalone entry. */}
+            <a href={`/pergola-configurator${language === 'az' || language === 'tr' ? `?lang=${language}` : ''}`}>{language === 'az' ? 'Perqola konfiquratorunu sınayın' : language === 'tr' ? 'Pergola konfigüratörünü deneyin' : 'Try the pergola configurator'}</a>
             <Link to="/work">{content.nav.work}</Link>
             <Link to="/pricing">{content.nav.pricing}</Link>
             <Link to="/insights">{content.nav.insights}</Link>

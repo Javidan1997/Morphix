@@ -39,7 +39,17 @@ jobs:
           VITE_ERPNEXT_SYNC_URL: ${{ secrets.VITE_ERPNEXT_SYNC_URL }}
           VITE_ADMIN_EMAIL: ${{ secrets.VITE_ADMIN_EMAIL }}
           VITE_ADMIN_PASSWORD: ${{ secrets.VITE_ADMIN_PASSWORD }}
-        run: npm run build
+          VITE_GTM_ID: ${{ secrets.VITE_GTM_ID }}
+          VITE_GA4_ID: ${{ secrets.VITE_GA4_ID }}
+          VITE_GOOGLE_ADS_ID: ${{ secrets.VITE_GOOGLE_ADS_ID }}
+          VITE_GOOGLE_ADS_LEAD_LABEL: ${{ secrets.VITE_GOOGLE_ADS_LEAD_LABEL }}
+        # Unset secrets arrive as empty strings, which would override the
+        # public defaults in .env.production. Drop the empty ones first.
+        run: |
+          for name in VITE_SUPABASE_URL VITE_SUPABASE_ANON_KEY VITE_ERPNEXT_SYNC_URL VITE_ADMIN_EMAIL VITE_ADMIN_PASSWORD VITE_GTM_ID VITE_GA4_ID VITE_GOOGLE_ADS_ID VITE_GOOGLE_ADS_LEAD_LABEL; do
+            if [ -z "${!name}" ]; then unset "$name"; fi
+          done
+          npm run build
 
       - name: Setup Pages
         uses: actions/configure-pages@v5

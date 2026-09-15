@@ -32,6 +32,9 @@ export function toSupabaseInquiry(inquiry) {
       meetingSlots: Array.isArray(inquiry.meetingSlots) ? inquiry.meetingSlots : [],
       timezone: inquiry.timezone || "",
       configuration: inquiry.configuration || null,
+      // Campaign parameters and ad click IDs captured on the landing page.
+      attribution: inquiry.attribution || null,
+      interest: inquiry.interest || "",
     },
   };
 }
@@ -63,6 +66,8 @@ export function fromSupabaseInquiry(row) {
     meetingSlots: Array.isArray(metadata.meetingSlots) ? metadata.meetingSlots : [],
     timezone: metadata.timezone || "",
     configuration: metadata.configuration || null,
+    attribution: metadata.attribution || null,
+    interest: metadata.interest || "",
   };
 }
 

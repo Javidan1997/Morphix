@@ -29,7 +29,10 @@ import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
 import { useContentAdmin } from "./admin/ContentAdminContext";
 
-const PergolaConfigurators = lazy(() => import('./pages/PergolaConfigurators'));
+// Production serves /pergola-configurator as its own prerendered HTML entry
+// (pergola.html). This lazy route only covers client-side fallbacks.
+const PergolaPage = lazy(() => import("./pergola/entry-app.jsx"));
+const LEGACY_PERGOLA_PATHS = new Set(["/pergola-configurators", "/pergola-configurators/", "/pergola-configurator/"]);
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -45,7 +48,7 @@ function App() {
   const { mergedLocales } = useContentAdmin();
   const content = mergedLocales[language] ?? mergedLocales[fallbackLanguage];
   const isAdminRoute = location.pathname.startsWith("/admin");
-  const isPergolaRoute = location.pathname === '/pergola-configurators';
+  const isPergolaRoute = location.pathname === "/pergola-configurator" || LEGACY_PERGOLA_PATHS.has(location.pathname);
   const isPlatformRoute = ["/freelance", "/upwork", "/freelancer", "/fiverr", "/toptal", "/shopify"].includes(location.pathname);
 
   useEffect(() => {
@@ -157,7 +160,12 @@ function App() {
     return cleanup;
   }, [isPlatformRoute, location.pathname]);
 
-  if (isPergolaRoute) return <Suspense fallback={<main style={{padding:40,background:'#fff'}}>Configuro · Loading configurators…</main>}><PergolaConfigurators /></Suspense>;
+  if (LEGACY_PERGOLA_PATHS.has(location.pathname)) {
+    // The old plural page moved permanently; keep its query (design, campaign tags).
+    window.location.replace(`/pergola-configurator${location.search}${location.hash}`);
+    return null;
+  }
+  if (isPergolaRoute) return <Suspense fallback={null}><PergolaPage /></Suspense>;
 
   return (
     <>
