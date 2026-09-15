@@ -36,13 +36,17 @@ export function detectTier() {
   const coarse = matchMedia("(pointer: coarse)").matches;
   const memory = navigator.deviceMemory || 8;
   const cores = navigator.hardwareConcurrency || 8;
-  const low = memory <= 3 || (coarse && (cores <= 4 || memory <= 4));
+  // Phones have dense screens, and thin louvers alias badly without MSAA, so
+  // anti-aliasing stays on everywhere and resolution goes to 2x. Only genuinely
+  // weak devices start lower. Rendering is on demand and the pixel ratio
+  // adapts during motion (see tick), so a still image is always sharp.
+  const low = memory <= 2 || (cores <= 4 && memory <= 3);
   return {
     low,
     coarse,
-    maxPixelRatio: low ? 1.25 : coarse ? 1.75 : 2,
+    maxPixelRatio: low ? 1.5 : 2,
     shadowSize: low ? 1024 : 2048,
-    antialias: !low,
+    antialias: true,
   };
 }
 
@@ -71,7 +75,8 @@ export class PergolaViewer {
     this.view = "overview";
 
     const renderer = new THREE.WebGLRenderer({ antialias: this.tier.antialias, powerPreference: "high-performance", alpha: false });
-    this.pixelRatio = Math.min(window.devicePixelRatio || 1, this.tier.maxPixelRatio);
+    this.targetPixelRatio = Math.min(window.devicePixelRatio || 1, this.tier.maxPixelRatio);
+    this.pixelRatio = this.targetPixelRatio;
     renderer.setPixelRatio(this.pixelRatio);
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     renderer.toneMapping = THREE.NeutralToneMapping;
@@ -425,7 +430,13 @@ export class PergolaViewer {
   frameFor(view) {
     const { width: w, depth: d, height: h } = this.config;
     const radius = Math.sqrt(w * w + d * d + h * h) / 2;
-    const fit = radius / Math.sin(THREE.MathUtils.degToRad(this.camera.fov / 2)) * (this.camera.aspect < 1 ? 1.25 / this.camera.aspect ** 0.5 : 1.02);
+    // Fit the bounding sphere inside whichever field of view is narrower, so
+    // square and portrait phone stages frame the whole pergola, with extra
+    // room on small stages where camera chips and buttons overlay the edges.
+    const halfV = THREE.MathUtils.degToRad(this.camera.fov / 2);
+    const halfH = Math.atan(Math.tan(halfV) * this.camera.aspect);
+    const compact = this.host.clientWidth < 640;
+    const fit = (radius / Math.sin(Math.min(halfV, halfH))) * (compact ? 1.16 : 1.04);
     const target = new THREE.Vector3(0, h * 0.42, 0);
     const outdoor = this.config.environment !== "studio" ? 1.1 : 1;
     if (view === "detail") {
@@ -541,13 +552,21 @@ export class PergolaViewer {
 
     // Sustained slow frames while animating: step the pixel ratio down.
     if (busy && dt > 0.034) this.slowFrames += 1; else this.slowFrames = Math.max(0, this.slowFrames - 1);
-    if (this.slowFrames > 24 && this.pixelRatio > 1) {
+    if (this.slowFrames > 12 && this.pixelRatio > 1) {
       this.pixelRatio = Math.max(1, this.pixelRatio - 0.25);
       this.renderer.setPixelRatio(this.pixelRatio);
       this.resize();
       this.slowFrames = 0;
     }
-    if (busy) this.requestRender();
+    if (busy) {
+      this.lastBusy = now;
+      this.requestRender();
+    } else if (this.pixelRatio < this.targetPixelRatio) {
+      // Motion has stopped: restore full resolution for a sharp still frame.
+      this.pixelRatio = this.targetPixelRatio;
+      this.renderer.setPixelRatio(this.pixelRatio);
+      this.resize();
+    }
   }
 
   resize() {

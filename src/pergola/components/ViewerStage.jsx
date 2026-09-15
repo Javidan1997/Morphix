@@ -7,6 +7,8 @@ const VIEWS = ["overview", "front", "side", "top", "inside", "detail"];
 export const DEMO_EVENT = "configuro:guided-demo";
 const POSTER = "/pergola-configurators/v2/img/poster";
 export const ACTIVATE_EVENT = "configuro:viewer-activate";
+// Read once at load: the page rewrites its own query string after hydration.
+const DEBUG_3D = typeof window !== "undefined" && new URLSearchParams(window.location.search).has("debug3d");
 
 /** Starts loading the 3D engine early, e.g. when a CTA is hovered. */
 export function preloadViewer() {
@@ -25,6 +27,8 @@ const ViewerStage = forwardRef(function ViewerStage({ config, t, onInteract, onK
   const [attempt, setAttempt] = useState(0);
   const [touch, setTouch] = useState(false);
   const [manual, setManual] = useState(false);
+  // The rotate hint only helps before the first touch; afterwards it is clutter.
+  const [interacted, setInteracted] = useState(false);
   const [pendingDemo, setPendingDemo] = useState(false);
   const demo = useGuidedDemo({ viewerRef, configRef, onKeep: onKeepDemo });
 
@@ -77,7 +81,7 @@ const ViewerStage = forwardRef(function ViewerStage({ config, t, onInteract, onK
           onSceneStatus: (next) => { if (!cancelled) setSceneStatus(next); },
         });
         // QA hook: ?debug3d exposes the viewer for browser inspection.
-        if (new URLSearchParams(window.location.search).has("debug3d")) window.__pergolaViewer = viewerRef.current;
+        if (DEBUG_3D) window.__pergolaViewer = viewerRef.current;
       } catch (error) {
         console.warn("Pergola viewer could not start", error);
         setStatus("error");
@@ -160,7 +164,7 @@ const ViewerStage = forwardRef(function ViewerStage({ config, t, onInteract, onK
         aria-label={t.viewerLabel}
         aria-describedby="pc-viewer-keys"
         onKeyDown={onKeyDown}
-        onPointerDown={() => { interrupt(); onInteract?.(); track("configurator_rotate", {}, { once: true }); }}
+        onPointerDown={() => { interrupt(); setInteracted(true); onInteract?.(); track("configurator_rotate", {}, { once: true }); }}
         onWheel={interrupt}
       />
       <p id="pc-viewer-keys" className="pc-sr">{t.viewerKeys}</p>
@@ -179,8 +183,8 @@ const ViewerStage = forwardRef(function ViewerStage({ config, t, onInteract, onK
           </div>
           {!demo.active && (
             <div className="pc-stage-demo">
-              <button type="button" className="pc-chip pc-demo-btn" onClick={() => demo.start()}><Play size={14} weight="fill" aria-hidden="true" />{t.demoPlay}</button>
-              <p className="pc-stage-hint" aria-hidden="true">{touch ? t.viewerHintTouch : t.viewerHintPointer}</p>
+              <button type="button" className="pc-chip pc-demo-btn" aria-label={t.demoPlay} onClick={() => demo.start()}><Play size={14} weight="fill" aria-hidden="true" /><span className="pc-demo-long">{t.demoPlay}</span><span className="pc-demo-short" aria-hidden="true">{t.demoLabel}</span></button>
+              {!interacted && <p className="pc-stage-hint" aria-hidden="true">{touch ? t.viewerHintTouch : t.viewerHintPointer}</p>}
             </div>
           )}
         </>

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { ArrowRight, Camera, FileArrowDown, LinkSimple, ShareNetwork, ArrowCounterClockwise } from "@phosphor-icons/react/dist/ssr";
+import { ArrowRight, Camera, FileArrowDown, LinkSimple, List, ShareNetwork, ArrowCounterClockwise, X } from "@phosphor-icons/react/dist/ssr";
 import { COPY, LANGUAGES, format } from "./copy.js";
 import { DEFAULT_CONFIG, MAX_BAY_DEPTH, MAX_BAY_WIDTH, configFromSearch, encodeConfig, formatLength, illustrativeEstimate, normalizeConfig } from "./configModel.js";
 import { designText, downloadBlob, estimateRows, shareUrl, specSheetHtml, summaryRows } from "./design.js";
@@ -39,6 +39,17 @@ export default function PergolaPage() {
   const [notice, setNotice] = useState("");
   const [toast, setToast] = useState(null);
   const [interest, setInterest] = useState("");
+  const [mobileBar, setMobileBar] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const menuButton = useRef(null);
+
+  // Small-screen menu: Escape or choosing a link closes it.
+  useEffect(() => {
+    if (!menuOpen) return undefined;
+    const onKey = (event) => { if (event.key === "Escape") { setMenuOpen(false); menuButton.current?.focus(); } };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [menuOpen]);
   const [shareFallback, setShareFallback] = useState("");
   const [canShare, setCanShare] = useState(false);
   const [hydrated, setHydrated] = useState(false);
@@ -92,6 +103,18 @@ export default function PergolaPage() {
     const timer = setTimeout(() => setNotice(""), 5000);
     return () => clearTimeout(timer);
   }, [notice]);
+
+  // Mobile action bar: shown while the configurator is on screen and the
+  // quote form is not, so the next step is always one tap away.
+  useEffect(() => {
+    const seen = { configurator: false, quote: false };
+    const observer = new IntersectionObserver((entries) => {
+      for (const entry of entries) seen[entry.target.id] = entry.isIntersecting;
+      setMobileBar(seen.configurator && !seen.quote);
+    }, { rootMargin: "-30% 0px -10% 0px" });
+    ["configurator", "quote"].forEach((id) => { const node = document.getElementById(id); if (node) observer.observe(node); });
+    return () => observer.disconnect();
+  }, []);
 
   // Header condenses once the hero top scrolls away (no scroll listener).
   useEffect(() => {
@@ -246,7 +269,19 @@ export default function PergolaPage() {
             </select>
           </label>
           <button type="button" className="pc-btn pc-btn-primary pc-header-cta" onClick={() => requestQuote("header")}>{t.ctaQuote}</button>
+          <button type="button" ref={menuButton} className="pc-icon-btn pc-menu-btn" aria-expanded={menuOpen} aria-controls="pc-menu" aria-label={t.nav.menu}
+            onClick={() => setMenuOpen((open) => !open)}>
+            {menuOpen ? <X size={20} aria-hidden="true" /> : <List size={20} aria-hidden="true" />}
+          </button>
         </div>
+        <nav id="pc-menu" className="pc-menu" aria-label={t.nav.menu} hidden={!menuOpen}>
+          <div className="pc-wrap">
+            {[["configurator", t.nav.configurator], ["settings", t.galleryTitle], ["in-action", t.storyTitle], ["pricing", t.nav.pricing], ["faq", t.nav.faq]].map(([id, label]) => (
+              <a key={id} href={`#${id}`} onClick={() => setMenuOpen(false)}>{label}</a>
+            ))}
+            <button type="button" className="pc-btn pc-btn-primary" onClick={() => { setMenuOpen(false); requestQuote("menu"); }}>{t.ctaQuote}</button>
+          </div>
+        </nav>
       </header>
 
       <main id="main">
@@ -430,6 +465,11 @@ export default function PergolaPage() {
         </div>
       </footer>
       {hydrated && <ConsentBanner t={t} />}
+      <div className="pc-mobile-bar" data-visible={mobileBar ? "" : undefined} aria-hidden={mobileBar ? undefined : "true"} inert={mobileBar ? undefined : true}>
+        <div className="pc-mobile-bar-price"><span>{t.estimate}</span><strong>{estimate.total}</strong></div>
+        <button type="button" className="pc-icon-btn pc-mobile-share" aria-label={t.share} onClick={copyLink}>{canShare ? <ShareNetwork size={18} aria-hidden="true" /> : <LinkSimple size={18} aria-hidden="true" />}</button>
+        <button type="button" className="pc-btn pc-btn-primary" onClick={() => requestQuote("mobile_bar")}>{t.ctaQuote}</button>
+      </div>
       <Toast toast={toast} onClose={closeToast} />
     </div>
   );

@@ -2,6 +2,8 @@ import { StrictMode } from "react";
 import { createRoot, hydrateRoot } from "react-dom/client";
 import PergolaPage from "./PergolaPage.jsx";
 import "./pergola.css";
+// Loaded after the base sheet so mobile overrides win the cascade.
+import "./pergola-mobile.css";
 
 const root = document.getElementById("root");
 const app = (
