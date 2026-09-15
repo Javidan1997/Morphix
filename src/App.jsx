@@ -197,7 +197,7 @@ function App() {
             path="/admin"
             element={(
               <AdminRoute>
-                <Navigate replace to="/admin/forms" />
+                <Navigate replace to="/admin/interactions" />
               </AdminRoute>
             )}
           />

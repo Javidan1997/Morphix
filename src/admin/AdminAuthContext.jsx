@@ -6,7 +6,7 @@ import {
   persistAdminSession,
   validateDevCredentials,
 } from "./auth";
-import { isSupabaseConfigured, refreshSupabaseSession, signInWithSupabase, signOutSupabase } from "./supabaseClient";
+import { getSupabaseRows, isSupabaseConfigured, refreshSupabaseSession, signInWithSupabase, signOutSupabase } from "./supabaseClient";
 
 const AdminAuthContext = createContext(null);
 const REFRESH_MARGIN = 60 * 1000;
@@ -43,6 +43,13 @@ export function AdminAuthProvider({ children }) {
       if (isSupabaseConfigured()) {
         try {
           const next = await signInWithSupabase({ email: username.trim(), password });
+          // A valid account that is not listed in configuro_admins would sign
+          // in to an empty dashboard (RLS hides every lead). Say so instead.
+          const membership = await getSupabaseRows("/rest/v1/configuro_admins?select=user_id", next).catch(() => []);
+          if (!Array.isArray(membership) || membership.length === 0) {
+            await signOutSupabase(next).catch(() => {});
+            return { ok: false, error: "This account signed in, but it is not a Configuro admin, so it cannot see leads. Add it to configuro_admins in Supabase." };
+          }
           store({ ...next, remember: Boolean(remember) });
           return { ok: true, session: next };
         } catch (error) {

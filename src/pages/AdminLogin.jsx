@@ -15,10 +15,10 @@ function AdminLogin() {
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const redirectPath = location.state?.from || "/admin/forms";
+  const redirectPath = location.state?.from || "/admin/interactions";
 
   if (session) {
-    return <Navigate to="/admin/forms" replace />;
+    return <Navigate to="/admin/interactions" replace />;
   }
 
   const updateField = (field, value) => {
