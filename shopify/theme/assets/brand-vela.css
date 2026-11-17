@@ -99,7 +99,7 @@
 .js .vela-ing:not(.is-in) .vela-ing__bar span { transform: scaleX(0); }
 .vela-ing__detail { padding: 0 0 22px 40px; color: var(--c-muted); display: grid; gap: 8px; max-width: 560px; }
 .vela-ing__source { font-size: 13px; font-weight: 600; color: var(--c-text); }
-@media (min-width: 990px) { .vela-ingredients__grid { grid-template-columns: 0.9fr 1fr; gap: 72px; } .vela-ingredients__media { position: sticky; top: 100px; aspect-ratio: 4 / 5; } }
+@media (min-width: 990px) { .vela-ingredients__grid { grid-template-columns: 0.9fr 1fr; gap: 72px; } .vela-ingredients__media { position: sticky; top: 100px; } }
 
 /* ------------------------------------------------------------- buy box */
 .vela-buy { background: var(--c-card); scroll-margin-top: 60px; }
