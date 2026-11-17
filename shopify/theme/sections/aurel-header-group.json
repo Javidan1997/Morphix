@@ -1,0 +1,17 @@
+{
+  "type": "header",
+  "name": "Aurel header",
+  "sections": {
+    "header": {
+      "type": "cfg-header",
+      "settings": { "logo_text": "Aurel", "announcement": "Drop 02 · 120 pieces · Complimentary engraving", "sticky": true },
+      "blocks": {
+        "l1": { "type": "link", "settings": { "label": "The Meridian", "url": "#meridian" } },
+        "l2": { "type": "link", "settings": { "label": "Sizing", "url": "#meridian" } },
+        "l3": { "type": "link", "settings": { "label": "Care", "url": "#faq" } }
+      },
+      "block_order": ["l1", "l2", "l3"]
+    }
+  },
+  "order": ["header"]
+}

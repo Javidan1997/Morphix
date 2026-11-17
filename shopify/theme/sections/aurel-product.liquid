@@ -1,0 +1,174 @@
+{%- comment -%}
+  Aurel — the drop's buy box.
+  • Metal × Size are real variant options.
+  • Engraving: line-item properties `Engraving` + `Engraving style`. The limit
+    comes from the product metafield custom.engraving_max (default 18); the
+    input enforces it with maxlength, so the cart can't receive more.
+  • Drop: custom.drop_at (date_time). Before it, the primary action is a
+    waitlist (native customer form, tagged with the drop); after it, the same
+    box adds to bag. aurel.js flips the state client-side at zero, and Liquid
+    renders the right state on every page load after the drop.
+{%- endcomment -%}
+{%- liquid
+  assign current = product.selected_or_first_available_variant
+  assign form_id = 'AurelForm-' | append: section.id
+  assign max_chars = product.metafields.custom.engraving_max.value | default: 18
+  assign drop_at = product.metafields.custom.drop_at.value
+  assign drop_ts = drop_at | date: '%s' | plus: 0
+  assign now_ts = 'now' | date: '%s' | plus: 0
+  assign is_live = true
+  if drop_ts > now_ts
+    assign is_live = false
+  endif
+  assign metals = product.options_with_values | where: 'name', 'Metal' | first
+  assign sizes = product.options_with_values | where: 'name', 'Size' | first
+-%}
+<section class="cfg-section au-product" id="meridian" aria-labelledby="AuProd-{{ section.id }}" data-au-product data-live="{{ is_live }}">
+  <div class="cfg-container au-product__grid">
+    <div class="au-gallery">
+      {%- for metal in metals.values -%}
+        {%- assign key = metal | split: ' ' | first | downcase -%}
+        {%- assign asset = 'aurel-ring-' | append: key -%}
+        <div class="au-gallery__main{% if forloop.first %} is-active{% endif %}" data-metal-image="{{ metal }}">
+          {%- render 'cfg-image', asset: asset, width: 1200, height: 1200, widths: '480,800,1200', alt: product.title, sizes: '(min-width: 990px) 50vw, 100vw' -%}
+        </div>
+      {%- endfor -%}
+      <div class="au-preview" aria-hidden="true">
+        <svg viewBox="0 0 240 240" class="au-preview__svg">
+          <defs>
+            <linearGradient id="AuGold-{{ section.id }}" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#f1d79b" data-g0/><stop offset=".5" stop-color="#c79a4f" data-g1/><stop offset="1" stop-color="#f4dfaa" data-g2/>
+            </linearGradient>
+            <path id="AuArc-{{ section.id }}" d="M 37 120 A 83 83 0 0 1 203 120"/>
+          </defs>
+          <circle cx="120" cy="120" r="88" fill="none" stroke="url(#AuGold-{{ section.id }})" stroke-width="22"/>
+          <circle cx="120" cy="120" r="77" fill="none" stroke="rgba(0,0,0,.12)" stroke-width="1"/>
+          <text class="au-preview__text" text-anchor="middle"><textPath href="#AuArc-{{ section.id }}" startOffset="50%" data-engrave-out></textPath></text>
+        </svg>
+        <p class="au-preview__label">Inside the band</p>
+      </div>
+    </div>
+
+    <div class="au-panel">
+      <p class="au-kicker">{{ section.settings.kicker }}</p>
+      <h2 id="AuProd-{{ section.id }}" class="au-panel__title">{{ product.title }}</h2>
+      <p class="au-panel__meta">{{ product.metafields.custom.materials.value }}</p>
+      <p class="au-panel__price" data-price>{{ current.price | money }}</p>
+
+      <cfg-product-form data-aurel-form>
+        <script type="application/json" data-cfg-product>{{ product | json }}</script>
+        {%- form 'product', product, id: form_id, class: 'au-form' -%}
+          <input type="hidden" name="id" value="{{ current.id }}" data-variant-input>
+          <input type="hidden" name="quantity" value="1">
+
+          <fieldset class="au-field">
+            <legend>Metal <span data-metal-label>{{ current.option1 }}</span></legend>
+            <div class="au-metals">
+              {%- for metal in metals.values -%}
+                <label class="au-metal">
+                  <input type="radio" name="metal" value="{{ metal }}" {% if metal == current.option1 %}checked{% endif %} data-option="1">
+                  <span class="au-metal__chip au-metal__chip--{{ metal | split: ' ' | first | downcase }}"></span>
+                  <span class="visually-hidden">{{ metal }}</span>
+                </label>
+              {%- endfor -%}
+            </div>
+          </fieldset>
+
+          <div class="au-field">
+            <div class="au-field__row">
+              <label for="Size-{{ section.id }}">Ring size (US)</label>
+              <button type="button" class="cfg-link au-guide-btn" data-dialog-open="SizeGuide-{{ section.id }}">Size guide</button>
+            </div>
+            <select id="Size-{{ section.id }}" class="cfg-input au-select" data-option="2">
+              {%- for size in sizes.values -%}<option value="{{ size }}"{% if size == current.option2 %} selected{% endif %}>{{ size }}</option>{%- endfor -%}
+            </select>
+          </div>
+
+          <div class="au-field">
+            <div class="au-field__row">
+              <label for="Engrave-{{ section.id }}">Engraving <span class="au-optional">optional, free</span></label>
+              <span class="au-count" data-engrave-count aria-live="polite">0 / {{ max_chars }}</span>
+            </div>
+            <input id="Engrave-{{ section.id }}" class="cfg-input au-engrave" name="properties[Engraving]" maxlength="{{ max_chars }}" autocomplete="off" spellcheck="false" placeholder="e.g. Always · 02.14.27" data-engrave aria-describedby="EngraveHelp-{{ section.id }}">
+            <p id="EngraveHelp-{{ section.id }}" class="au-help">Up to {{ max_chars }} characters. Letters, numbers, spaces and · & ♡ + . , -</p>
+            <div class="au-styles" role="radiogroup" aria-label="Engraving style">
+              <label><input type="radio" name="properties[Engraving style]" value="Serif" checked data-engrave-style><span class="au-style au-style--serif">Serif</span></label>
+              <label><input type="radio" name="properties[Engraving style]" value="Italic" data-engrave-style><span class="au-style au-style--italic">Italic</span></label>
+              <label><input type="radio" name="properties[Engraving style]" value="Block" data-engrave-style><span class="au-style au-style--block">BLOCK</span></label>
+            </div>
+          </div>
+
+          <div class="au-buy" data-buy{% unless is_live %} hidden{% endunless %}>
+            <button type="submit" class="cfg-btn cfg-btn--primary cfg-btn--block">{{ section.settings.button_label }}</button>
+            <p class="cfg-form-error" data-form-error role="alert" hidden></p>
+          </div>
+        {%- endform -%}
+      </cfg-product-form>
+
+      <div class="au-waitlist" data-waitlist data-cfg-form{% if is_live %} hidden{% endif %}>
+        <p class="au-waitlist__title">{{ section.settings.waitlist_heading }}</p>
+        <p class="au-waitlist__text">{{ section.settings.waitlist_text }}</p>
+        {%- form 'customer', id: 'AurelWaitlist', class: 'au-waitlist__form' -%}
+          <input type="hidden" name="contact[tags]" value="waitlist,{{ product.handle }},{{ section.settings.drop_tag }}">
+          <label for="Wait-{{ section.id }}" class="visually-hidden">{{ 'cfg.forms.email' | t }}</label>
+          <input id="Wait-{{ section.id }}" class="cfg-input" type="email" name="contact[email]" autocomplete="email" placeholder="Email address" required>
+          <button type="submit" class="cfg-btn cfg-btn--primary">{{ section.settings.waitlist_button }}</button>
+        {%- endform -%}
+        <p class="cfg-success au-success" data-form-success hidden role="status">{% render 'cfg-icon', name: 'check' %}<span>{{ section.settings.waitlist_success }}{% if settings.demo_mode %} {{ 'cfg.demo.form_success' | t }}{% endif %}</span></p>
+      </div>
+
+      <ul class="au-assure">
+        {%- for block in section.blocks -%}<li {{ block.shopify_attributes }}>{{ block.settings.text }}</li>{%- endfor -%}
+      </ul>
+    </div>
+  </div>
+
+  <dialog class="cfg-drawer au-guide" id="SizeGuide-{{ section.id }}" aria-labelledby="SizeGuideTitle-{{ section.id }}">
+    <div class="cfg-drawer__inner">
+      <header class="cfg-drawer__head">
+        <h2 class="cfg-drawer__title" id="SizeGuideTitle-{{ section.id }}">Ring size guide</h2>
+        <button type="button" class="cfg-icon-btn" data-close aria-label="{{ 'cfg.a11y.close' | t }}">{% render 'cfg-icon', name: 'close' %}</button>
+      </header>
+      <div class="cfg-drawer__body au-guide__body">
+        <p>Measure the inside diameter of a ring that fits the same finger, then match it below. Between sizes? Choose the larger one: the Meridian has a comfort-fit band.</p>
+        <div class="cfg-table-wrap">
+          <table class="au-guide__table">
+            <caption class="visually-hidden">Ring sizes by inside diameter</caption>
+            <thead><tr><th scope="col">US</th><th scope="col">UK</th><th scope="col">EU</th><th scope="col">Diameter</th></tr></thead>
+            <tbody>
+              {%- assign rows = section.settings.size_table | newline_to_br | split: '<br />' -%}
+              {%- for row in rows -%}
+                {%- assign c = row | strip | split: ',' -%}
+                {%- if c.size == 4 -%}<tr><th scope="row">{{ c[0] }}</th><td>{{ c[1] }}</td><td>{{ c[2] }}</td><td>{{ c[3] }} mm</td></tr>{%- endif -%}
+              {%- endfor -%}
+            </tbody>
+          </table>
+        </div>
+        <ol class="au-guide__steps">
+          <li><strong>Use a ring you own.</strong> Lay it on a ruler and read the inside edge to edge.</li>
+          <li><strong>Measure warm.</strong> Fingers are smallest in the morning and in the cold.</li>
+          <li><strong>Free resizing.</strong> One resize within 60 days, on us.</li>
+        </ol>
+      </div>
+    </div>
+  </dialog>
+</section>
+
+{% schema %}
+{
+  "name": "Aurel · Drop buy box",
+  "class": "au-product-section",
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "Drop 02 · Limited to 120 pieces" },
+    { "type": "text", "id": "button_label", "label": "Add to bag label", "default": "Add to bag" },
+    { "type": "text", "id": "drop_tag", "label": "Waitlist tag", "default": "drop-02" },
+    { "type": "text", "id": "waitlist_heading", "label": "Waitlist heading", "default": "Opens soon. Hold your place." },
+    { "type": "textarea", "id": "waitlist_text", "label": "Waitlist text" },
+    { "type": "text", "id": "waitlist_button", "label": "Waitlist button", "default": "Join the waitlist" },
+    { "type": "text", "id": "waitlist_success", "label": "Waitlist success", "default": "You're on the list. We'll email you 24 hours before the drop opens." },
+    { "type": "textarea", "id": "size_table", "label": "Size table", "info": "One row per line: US,UK,EU,diameter mm", "default": "5,J½,49,15.7\n6,L½,52,16.5\n7,N½,54,17.3\n8,P½,57,18.1\n9,R½,59,18.9" }
+  ],
+  "blocks": [{ "type": "assurance", "name": "Assurance", "settings": [{ "type": "text", "id": "text", "label": "Text" }] }],
+  "max_blocks": 4
+}
+{% endschema %}

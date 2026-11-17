@@ -1,0 +1,67 @@
+{
+  "sections": {
+    "hero": {
+      "type": "lc-hero",
+      "settings": {
+        "eyebrow": "Docks · Hubs · Display adapters",
+        "heading": "One cable to your whole desk.",
+        "text": "Monitors, Ethernet, charging and every peripheral through a single port. Not sure which one fits your laptop? Answer four questions and we'll tell you, caveats included.",
+        "button_label": "Check my setup",
+        "link_label": "Compare specs"
+      },
+      "blocks": {
+        "s1": { "type": "spec", "settings": { "label": "Displays", "value": "2 × 4K 60 Hz" } },
+        "s2": { "type": "spec", "settings": { "label": "Charging", "value": "96 W" } },
+        "s3": { "type": "spec", "settings": { "label": "Network", "value": "2.5 GbE" } }
+      },
+      "block_order": ["s1", "s2", "s3"]
+    },
+    "lineup": { "type": "lc-lineup", "settings": { "eyebrow": "Lineup", "heading": "Four ways to connect a desk." } },
+    "checker": {
+      "type": "lc-checker",
+      "settings": {
+        "eyebrow": "Compatibility",
+        "heading": "Will it work with my setup?",
+        "text": "Docks fail in boring ways: one screen instead of two, 30 Hz instead of 60, a laptop that charges slower than it drains. Pick your setup and we'll show the trade-offs before you buy."
+      },
+      "blocks": {
+        "mac_base": { "type": "computer", "settings": { "label": "MacBook Air / Pro (base M-series chip)", "port": "usb4", "max_external": 1, "mst": false, "charger_w": 70 } },
+        "mac_pro": { "type": "computer", "settings": { "label": "MacBook Pro (Pro or Max chip)", "port": "usb4", "max_external": 2, "mst": false, "charger_w": 96 } },
+        "win_tb4": { "type": "computer", "settings": { "label": "Windows laptop with Thunderbolt 4", "port": "tb4", "max_external": 4, "mst": true, "charger_w": 65 } },
+        "win_usbc": { "type": "computer", "settings": { "label": "Windows laptop with USB-C (DisplayPort)", "port": "usbc_dp", "max_external": 3, "mst": true, "charger_w": 65 } },
+        "chromebook": { "type": "computer", "settings": { "label": "Chromebook with USB-C", "port": "usbc_dp", "max_external": 2, "mst": false, "charger_w": 45 } },
+        "usbc_data": { "type": "computer", "settings": { "label": "Laptop with USB-C, no video (data only)", "port": "usbc_nodp", "max_external": 0, "mst": false, "charger_w": 45 } }
+      },
+      "block_order": ["mac_base", "mac_pro", "win_tb4", "win_usbc", "chromebook", "usbc_data"]
+    },
+    "compare": {
+      "type": "lc-compare",
+      "settings": { "eyebrow": "Compare", "heading": "Every spec, side by side.", "footnote": "Specs come from product metafields, synced from the supplier feed by the CSV importer." },
+      "blocks": {
+        "r1": { "type": "row", "settings": { "label": "Connects over", "key": "host_interface" } },
+        "r2": { "type": "row", "settings": { "label": "External displays", "key": "max_displays" } },
+        "r3": { "type": "row", "settings": { "label": "Max resolution", "key": "max_resolution" } },
+        "r4": { "type": "row", "settings": { "label": "Laptop charging", "key": "power_delivery_w", "unit": "W" } },
+        "r5": { "type": "row", "settings": { "label": "Ethernet", "key": "ethernet" } },
+        "r6": { "type": "row", "settings": { "label": "USB-A ports", "key": "usb_a" } },
+        "r7": { "type": "row", "settings": { "label": "Downstream USB-C", "key": "usb_c" } },
+        "r8": { "type": "row", "settings": { "label": "SD card reader", "key": "sd_card" } },
+        "r9": { "type": "row", "settings": { "label": "Driver needed", "key": "driver" } },
+        "r10": { "type": "row", "settings": { "label": "Warranty", "key": "warranty" } }
+      },
+      "block_order": ["r1", "r2", "r3", "r4", "r5", "r6", "r7", "r8", "r9", "r10"]
+    },
+    "faq": {
+      "type": "cfg-faq",
+      "settings": { "eyebrow": "FAQ", "heading": "Before you plug in", "text": "<p>Straight answers from people who test these on real desks.</p>" },
+      "blocks": {
+        "q1": { "type": "question", "settings": { "question": "Why does my Mac only show one external screen?", "answer": "<p>Base M1, M2 and M3 MacBooks support one external display natively. DisplayLink docks like DualLink DL get around this with a free driver.</p>" } },
+        "q2": { "type": "question", "settings": { "question": "Thunderbolt 4, USB4, USB-C: what's the difference?", "answer": "<p>They share the same connector. Thunderbolt 4 and USB4 carry two 4K displays plus fast data; plain USB-C may carry one display or none. Our checker accounts for this.</p>" } },
+        "q3": { "type": "question", "settings": { "question": "Will it charge my laptop?", "answer": "<p>Every Linkcore dock passes power through. If your laptop's charger is stronger than the dock's output, it still charges, just slower under heavy load.</p>" } },
+        "q4": { "type": "question", "settings": { "question": "What's the return policy?", "answer": "<p>30 days, no questions, including opened boxes. If our checker said it would work and it doesn't, we cover return shipping.</p>" } }
+      },
+      "block_order": ["q1", "q2", "q3", "q4"]
+    }
+  },
+  "order": ["hero", "lineup", "checker", "compare", "faq"]
+}

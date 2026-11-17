@@ -1,0 +1,17 @@
+{
+  "type": "footer",
+  "name": "Linkcore footer",
+  "sections": {
+    "footer": {
+      "type": "cfg-footer",
+      "settings": { "logo_text": "linkcore", "blurb": "<p>Docks, hubs and display adapters, tested on the laptops people actually own.</p>", "legal": "All trademarks belong to their owners." },
+      "blocks": {
+        "c1": { "type": "column", "settings": { "heading": "Products", "links": "Dock 12 | #lineup\nDock 8 | #lineup\nHub 7 | #lineup\nDualLink DL | #lineup" } },
+        "c2": { "type": "column", "settings": { "heading": "Help", "links": "Compatibility | #check\nDrivers | #faq\nReturns | #faq" } },
+        "c3": { "type": "column", "settings": { "heading": "Business", "links": "Volume pricing | #faq\nIT teams | #faq\nContact | #faq" } }
+      },
+      "block_order": ["c1", "c2", "c3"]
+    }
+  },
+  "order": ["footer"]
+}

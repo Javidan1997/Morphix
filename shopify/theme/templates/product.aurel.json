@@ -1,0 +1,57 @@
+{
+  "sections": {
+    "hero": {
+      "type": "aurel-hero",
+      "settings": {
+        "issue": "Drop 02",
+        "issue_note": "Winter · 120 pieces",
+        "heading": "The <em>Meridian</em>",
+        "text": "A single lab-grown diamond on a comfort-fit band of recycled 18k gold. Engraved inside, by hand, with up to eighteen characters of your own.",
+        "countdown_label": "The drop opens in",
+        "live_label": "The drop is open",
+        "button_label": "Join the waitlist",
+        "button_live": "Shop the Meridian",
+        "caption": "Meridian, yellow gold, 0.30 ct"
+      }
+    },
+    "editorial": {
+      "type": "aurel-editorial",
+      "settings": {
+        "kicker": "The piece",
+        "quote": "Made to be worn every day, <em>and kept for every one after.</em>",
+        "text": "<p>The band is 2.4 mm wide and domed inside so it slides on easily and sits close to the finger. The four-claw basket holds the stone low, so it doesn't catch on knitwear.</p><p>Each ring is cast in recycled gold, set by hand and engraved inside before it leaves the bench.</p>",
+        "caption": "Available in white, yellow and rose gold."
+      }
+    },
+    "product": {
+      "type": "aurel-product",
+      "settings": {
+        "kicker": "Drop 02 · Limited to 120 pieces",
+        "button_label": "Add to bag",
+        "drop_tag": "drop-02",
+        "waitlist_heading": "Opens soon. Hold your place.",
+        "waitlist_text": "Choose your metal, size and engraving now. Waitlist members get a private link 24 hours before the public opening.",
+        "waitlist_button": "Join the waitlist",
+        "waitlist_success": "You're on the list. We'll email you 24 hours before the drop opens."
+      },
+      "blocks": {
+        "a1": { "type": "assurance", "settings": { "text": "Complimentary engraving, cut by hand" } },
+        "a2": { "type": "assurance", "settings": { "text": "One free resize within 60 days" } },
+        "a3": { "type": "assurance", "settings": { "text": "Insured, signed-for delivery in a gift box" } }
+      },
+      "block_order": ["a1", "a2", "a3"]
+    },
+    "faq": {
+      "type": "cfg-faq",
+      "settings": { "eyebrow": "Client care", "heading": "Details & care", "text": "<p>Questions about sizing or engraving? Our client care team replies the same day.</p>" },
+      "blocks": {
+        "q1": { "type": "question", "settings": { "question": "Materials", "answer": "<p>Recycled 18k gold (750). A 0.30 ct round brilliant lab-grown diamond, F colour, VS1 clarity, with an IGI certificate.</p>" } },
+        "q2": { "type": "question", "settings": { "question": "Can I return an engraved ring?", "answer": "<p>Engraved rings are made for you, so they're final sale, but resizing is free within 60 days. Unengraved rings can be returned within 30 days.</p>" } },
+        "q3": { "type": "question", "settings": { "question": "How long does it take?", "answer": "<p>Engraving adds three working days. Orders from the drop ship in 7–10 working days, insured and signed for.</p>" } },
+        "q4": { "type": "question", "settings": { "question": "Caring for your ring", "answer": "<p>Take it off for the gym and the pool. Clean it with warm water, a drop of mild soap and a soft brush.</p>" } }
+      },
+      "block_order": ["q1", "q2", "q3", "q4"]
+    }
+  },
+  "order": ["hero", "editorial", "product", "faq"]
+}

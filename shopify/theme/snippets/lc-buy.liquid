@@ -1,0 +1,10 @@
+{%- comment -%} Compact add-to-cart for a Linkcore product card. Params: product, label {%- endcomment -%}
+<cfg-product-form class="lc-buy">
+  {%- form 'product', product -%}
+    <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+    <input type="hidden" name="quantity" value="1">
+    <button type="submit" class="cfg-btn cfg-btn--primary lc-buy__btn"{% unless product.available %} disabled{% endunless %}>
+      {%- if product.available -%}{{ label | default: 'Add to cart' }}<span class="visually-hidden"> {{ product.title }}</span>{%- else -%}{{ 'cfg.product.sold_out' | t }}{%- endif -%}
+    </button>
+  {%- endform -%}
+</cfg-product-form>

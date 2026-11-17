@@ -1,0 +1,90 @@
+{%- comment -%}
+  Linkcore — "Will it work with my setup?"
+  Computer profiles are section blocks (merchant-editable); each product's
+  rules come from its custom.compatibility metafield. linkcore-compat.js
+  evaluates every product against the answers and ranks them.
+{%- endcomment -%}
+{%- assign source = section.settings.collection | default: collection -%}
+<section class="cfg-section lc-checker" id="check" aria-labelledby="LcCheck-{{ section.id }}">
+  <div class="cfg-container lc-checker__grid">
+    <div class="lc-checker__form">
+      <p class="lc-tag">{{ section.settings.eyebrow }}</p>
+      <h2 id="LcCheck-{{ section.id }}" class="lc-h2">{{ section.settings.heading }}</h2>
+      <p class="lc-checker__lead">{{ section.settings.text }}</p>
+      <script type="application/json" data-profiles>
+        { {%- for block in section.blocks -%}{{ block.id | json }}: { "label": {{ block.settings.label | json }}, "port": {{ block.settings.port | json }}, "max_external": {{ block.settings.max_external }}, "mst": {{ block.settings.mst }}, "charger_w": {{ block.settings.charger_w }} }{% unless forloop.last %},{% endunless %}{%- endfor -%} }
+      </script>
+      <form class="lc-form" data-checker>
+        <div class="cfg-field">
+          <label for="lc-computer-{{ section.id }}">Your computer</label>
+          <select class="cfg-input lc-select" id="lc-computer-{{ section.id }}" name="computer">
+            {%- for block in section.blocks -%}<option value="{{ block.id }}" {{ block.shopify_attributes }}>{{ block.settings.label }}</option>{%- endfor -%}
+          </select>
+        </div>
+        <fieldset class="lc-seg">
+          <legend>External monitors</legend>
+          {%- for n in (0..3) -%}
+            <label><input type="radio" name="monitors" value="{{ n }}"{% if n == 2 %} checked{% endif %}><span>{{ n }}</span></label>
+          {%- endfor -%}
+        </fieldset>
+        <fieldset class="lc-seg">
+          <legend>Monitor resolution</legend>
+          {%- assign resolutions = '1080p,1440p,4K' | split: ',' -%}
+          {%- for r in resolutions -%}
+            <label><input type="radio" name="resolution" value="{{ r }}"{% if r == '4K' %} checked{% endif %}><span>{{ r }}</span></label>
+          {%- endfor -%}
+        </fieldset>
+        <div class="lc-checks">
+          <label class="lc-check"><input type="checkbox" name="ethernet" checked> <span>I need wired Ethernet</span></label>
+          <label class="lc-check"><input type="checkbox" name="charge" checked> <span>Charge my laptop through it</span></label>
+        </div>
+      </form>
+    </div>
+    <div class="lc-results" aria-live="polite" aria-atomic="false">
+      <p class="lc-results__summary" data-summary>Tell us your setup to see what works.</p>
+      <ol class="lc-results__list">
+        {%- for product in source.products -%}
+          <li class="lc-result" data-result data-price="{{ product.price }}" data-compat="{{ product.metafields.custom.compatibility.value | json | escape }}">
+            <div class="lc-result__img">{%- render 'cfg-image', image: product.featured_image, widths: '480', sizes: '80px', alt: '' -%}</div>
+            <div class="lc-result__body">
+              <p class="lc-result__status" data-status>—</p>
+              <h3 class="lc-result__title">{{ product.title }}</h3>
+              <ul class="lc-result__notes" data-notes></ul>
+            </div>
+            <div class="lc-result__buy">
+              <p class="lc-price">{{ product.price | money }}</p>
+              {%- render 'lc-buy', product: product, label: 'Add' -%}
+            </div>
+          </li>
+        {%- endfor -%}
+      </ol>
+    </div>
+  </div>
+</section>
+<script type="module" src="{{ 'linkcore.js' | asset_url }}"></script>
+
+{% schema %}
+{
+  "name": "Linkcore · Compatibility",
+  "settings": [
+    { "type": "collection", "id": "collection", "label": "Collection" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Compatibility" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Will it work with my setup?" },
+    { "type": "textarea", "id": "text", "label": "Text" }
+  ],
+  "blocks": [
+    {
+      "type": "computer",
+      "name": "Computer profile",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label" },
+        { "type": "select", "id": "port", "label": "Best port", "options": [{ "value": "tb4", "label": "Thunderbolt 4" }, { "value": "usb4", "label": "USB4 / Thunderbolt (Apple silicon)" }, { "value": "usbc_dp", "label": "USB-C with DP Alt Mode" }, { "value": "usbc_nodp", "label": "USB-C data only" }], "default": "usbc_dp" },
+        { "type": "range", "id": "max_external", "label": "Native external displays", "min": 0, "max": 4, "step": 1, "default": 2 },
+        { "type": "checkbox", "id": "mst", "label": "Supports MST (daisy-chained displays)", "default": true },
+        { "type": "range", "id": "charger_w", "label": "Stock charger", "min": 30, "max": 140, "step": 5, "unit": "W", "default": 65 }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Linkcore · Compatibility" }]
+}
+{% endschema %}

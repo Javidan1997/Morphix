@@ -1,0 +1,45 @@
+{%- comment -%} Aurel — editorial hero with the drop countdown. {%- endcomment -%}
+{%- assign drop_at = product.metafields.custom.drop_at.value -%}
+<section class="au-hero" aria-labelledby="AuHero-{{ section.id }}">
+  <div class="au-hero__grid">
+    <div class="au-hero__copy">
+      <p class="au-issue"><span>{{ section.settings.issue }}</span><span>{{ section.settings.issue_note }}</span></p>
+      <h1 id="AuHero-{{ section.id }}" class="au-hero__title">{{ section.settings.heading }}</h1>
+      <p class="au-hero__text">{{ section.settings.text }}</p>
+      {%- if drop_at != blank -%}
+        <au-countdown class="au-countdown" data-target="{{ drop_at }}" data-live-label="{{ section.settings.live_label | escape }}">
+          <p class="au-countdown__label">{{ section.settings.countdown_label }}</p>
+          <p class="au-countdown__time" role="timer" aria-live="off">
+            <span><b data-d>--</b><small>days</small></span><span><b data-h>--</b><small>hrs</small></span><span><b data-m>--</b><small>min</small></span><span><b data-s>--</b><small>sec</small></span>
+          </p>
+          <p class="au-countdown__date">{{ drop_at | date: '%A %-d %B, %H:%M UTC' }}</p>
+        </au-countdown>
+      {%- endif -%}
+      <a class="cfg-btn cfg-btn--primary au-hero__cta" href="#meridian" data-drop-cta data-live-text="{{ section.settings.button_live | escape }}">{{ section.settings.button_label }}</a>
+    </div>
+    <div class="au-hero__media">
+      {%- render 'cfg-image', image: section.settings.image, asset: 'aurel-hero', width: 1600, height: 2000, alt: 'The Meridian solitaire ring in yellow gold on a travertine plinth', sizes: '(min-width: 990px) 50vw, 100vw', loading: 'eager', priority: true -%}
+      <p class="au-hero__caption">{{ section.settings.caption }}</p>
+    </div>
+  </div>
+</section>
+<script type="module" src="{{ 'aurel.js' | asset_url }}"></script>
+
+{% schema %}
+{
+  "name": "Aurel · Hero",
+  "settings": [
+    { "type": "text", "id": "issue", "label": "Issue label", "default": "Drop 02" },
+    { "type": "text", "id": "issue_note", "label": "Issue note", "default": "Winter" },
+    { "type": "textarea", "id": "heading", "label": "Heading" },
+    { "type": "textarea", "id": "text", "label": "Text" },
+    { "type": "text", "id": "countdown_label", "label": "Countdown label", "default": "The drop opens in" },
+    { "type": "text", "id": "live_label", "label": "Label once live", "default": "The drop is open" },
+    { "type": "text", "id": "button_label", "label": "Button (before drop)", "default": "Join the waitlist" },
+    { "type": "text", "id": "button_live", "label": "Button (after drop)", "default": "Shop the Meridian" },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "caption", "label": "Caption" }
+  ],
+  "presets": [{ "name": "Aurel · Hero" }]
+}
+{% endschema %}

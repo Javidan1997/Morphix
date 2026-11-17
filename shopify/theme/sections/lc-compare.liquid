@@ -1,0 +1,72 @@
+{%- comment -%}
+  Linkcore — spec comparison. Each row block names a product metafield key
+  (namespace custom); the table reads it for every product in the collection,
+  so adding a spec is a metafield definition + one row block, no code.
+{%- endcomment -%}
+{%- assign source = section.settings.collection | default: collection -%}
+<section class="cfg-section lc-compare" id="compare" aria-labelledby="LcCompare-{{ section.id }}">
+  <div class="cfg-container">
+    <div class="lc-head lc-head--split">
+      <div>
+        <p class="lc-tag">{{ section.settings.eyebrow }}</p>
+        <h2 id="LcCompare-{{ section.id }}" class="lc-h2">{{ section.settings.heading }}</h2>
+      </div>
+      <label class="lc-toggle"><input type="checkbox" data-diff-toggle> <span>Highlight differences</span></label>
+    </div>
+    <div class="cfg-table-wrap lc-table-wrap">
+      <table class="lc-table" data-compare>
+        <caption class="visually-hidden">Specification comparison</caption>
+        <thead>
+          <tr>
+            <td></td>
+            {%- for product in source.products -%}
+              <th scope="col"><span class="lc-table__name">{{ product.title | remove: 'Linkcore ' }}</span><span class="lc-table__price">{{ product.price | money }}</span></th>
+            {%- endfor -%}
+          </tr>
+        </thead>
+        <tbody>
+          {%- for block in section.blocks -%}
+            {%- assign key = block.settings.key -%}
+            <tr {{ block.shopify_attributes }}>
+              <th scope="row">{{ block.settings.label }}</th>
+              {%- for product in source.products -%}
+                {%- assign value = product.metafields.custom[key].value -%}
+                <td data-value="{{ value | escape }}">
+                  {%- if value == true -%}<span class="lc-yes">{% render 'cfg-icon', name: 'check' %}<span class="visually-hidden">Yes</span></span>
+                  {%- elsif value == false or value == blank -%}<span class="lc-no" aria-label="No">—</span>
+                  {%- else -%}{{ value }}{% if block.settings.unit != blank %}<small> {{ block.settings.unit }}</small>{% endif %}
+                  {%- endif -%}
+                </td>
+              {%- endfor -%}
+            </tr>
+          {%- endfor -%}
+        </tbody>
+      </table>
+    </div>
+    <p class="lc-foot">{{ section.settings.footnote }}</p>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Linkcore · Spec compare",
+  "settings": [
+    { "type": "collection", "id": "collection", "label": "Collection" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Compare" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Every spec, side by side." },
+    { "type": "text", "id": "footnote", "label": "Footnote" }
+  ],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "Spec row",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label" },
+        { "type": "text", "id": "key", "label": "Metafield key (custom.*)", "info": "e.g. host_interface, max_displays, power_delivery_w" },
+        { "type": "text", "id": "unit", "label": "Unit" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Linkcore · Spec compare" }]
+}
+{% endschema %}

@@ -1,0 +1,44 @@
+{%- comment -%} Linkcore — product lineup from the collection. {%- endcomment -%}
+{%- assign source = section.settings.collection | default: collection -%}
+<section class="cfg-section lc-lineup" id="lineup" aria-labelledby="LcLineup-{{ section.id }}">
+  <div class="cfg-container">
+    <div class="lc-head">
+      <p class="lc-tag">{{ section.settings.eyebrow }}</p>
+      <h2 id="LcLineup-{{ section.id }}" class="lc-h2">{{ section.settings.heading }}</h2>
+    </div>
+    <ul class="lc-cards">
+      {%- for product in source.products -%}
+        <li class="lc-card" data-reveal>
+          <script type="application/json" data-cfg-product>{{ product | json }}</script>
+          <div class="lc-card__media">
+            {%- render 'cfg-image', image: product.featured_image, widths: '480,800', sizes: '(min-width: 1100px) 25vw, (min-width: 640px) 50vw, 100vw', alt: product.featured_image.alt -%}
+            {%- if product.metafields.custom.badge != blank -%}<span class="lc-card__badge">{{ product.metafields.custom.badge.value }}</span>{%- endif -%}
+          </div>
+          <div class="lc-card__body">
+            <h3 class="lc-card__title">{{ product.title }}</h3>
+            <p class="lc-card__tagline">{{ product.metafields.custom.tagline.value }}</p>
+            <ul class="lc-chips">
+              {%- for chip in product.metafields.custom.highlights.value -%}<li>{{ chip }}</li>{%- endfor -%}
+            </ul>
+            <div class="lc-card__foot">
+              <p class="lc-price">{{ product.price | money }}</p>
+              {%- render 'lc-buy', product: product -%}
+            </div>
+          </div>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Linkcore · Lineup",
+  "settings": [
+    { "type": "collection", "id": "collection", "label": "Collection", "info": "Defaults to the current collection." },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Lineup" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Four ways to connect a desk." }
+  ],
+  "presets": [{ "name": "Linkcore · Lineup" }]
+}
+{% endschema %}

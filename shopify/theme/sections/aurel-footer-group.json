@@ -1,0 +1,16 @@
+{
+  "type": "footer",
+  "name": "Aurel footer",
+  "sections": {
+    "footer": {
+      "type": "cfg-footer",
+      "settings": { "logo_text": "Aurel", "blurb": "<p>Small drops of fine jewellery in recycled gold and lab-grown stones, finished by hand.</p>", "legal": "Recycled 18k gold. Lab-grown diamonds, certified." },
+      "blocks": {
+        "c1": { "type": "column", "settings": { "heading": "Drop 02", "links": "The Meridian | #meridian\nEngraving | #meridian\nSize guide | #meridian" } },
+        "c2": { "type": "column", "settings": { "heading": "Client care", "links": "Shipping | #faq\nResizing | #faq\nCare | #faq" } }
+      },
+      "block_order": ["c1", "c2"]
+    }
+  },
+  "order": ["footer"]
+}
