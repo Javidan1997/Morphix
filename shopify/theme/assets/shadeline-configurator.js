@@ -1,7 +1,7 @@
 // Shadeline configurator: live price from metafield rules, band-variant
 // matching, line-item properties, add-on lines, poster swap and a lazily
-// loaded Three.js viewer (three.js is ~190 KB gzipped, so it only loads when
-// the configurator scrolls into view or the buyer asks for 3D).
+// loaded 3D viewer: Configuro's production pergola engine. three.js is
+// ~190 KB gzipped, so it only loads after scroll or when the buyer asks for 3D.
 import { formatMoney } from "cfg-core";
 import { quote, DEFAULT_RULES } from "./shadeline-pricing.js";
 
@@ -99,12 +99,20 @@ function init(root) {
   function load3D() {
     if (loading) return loading;
     loadBtn.setAttribute("aria-busy", "true");
+    // Configuro's production pergola engine (bundled in shadeline-viewer.js).
     loading = import("./shadeline-viewer.js")
       .then(({ mountViewer }) => {
-        viewer = mountViewer($("[data-viewer]"), state);
-        stage.classList.add("is-3d");
-        loadBtn.hidden = true;
-        $("[data-viewer-hint]").hidden = false;
+        viewer = mountViewer($("[data-viewer]"), state, {
+          onStatus: (status) => {
+            if (status === "ready") {
+              stage.classList.add("is-3d");
+              loadBtn.hidden = true;
+              $("[data-viewer-hint]").hidden = false;
+            } else if (status === "error") {
+              loadBtn.hidden = true;
+            }
+          },
+        });
       })
       .catch((error) => {
         console.warn("3D viewer unavailable, keeping posters", error);

@@ -115,6 +115,15 @@
     </div>
   </div>
 </section>
+{%- liquid
+  # The 3D engine loads its terrace environment, sky and heater models from here.
+  if settings.pergola_asset_base != blank
+    assign pergola_assets = settings.pergola_asset_base
+  else
+    assign pergola_assets = 'sky-1k.hdr' | asset_url | split: 'sky-1k.hdr' | first
+  endif
+-%}
+<script>window.CFG_PERGOLA_ASSETS = {{ pergola_assets | json }};</script>
 <script type="module" src="{{ 'shadeline-configurator.js' | asset_url }}"></script>
 
 {% schema %}

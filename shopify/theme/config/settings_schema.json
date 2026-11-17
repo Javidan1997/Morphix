@@ -16,16 +16,41 @@
         "label": "Default brand",
         "info": "Used when a template has no brand suffix (e.g. the home page). product.vela, page.northgate etc. pick their own brand from the template name.",
         "options": [
-          { "value": "vela", "label": "Vela (supplement)" },
-          { "value": "shadeline", "label": "Shadeline (pergolas)" },
-          { "value": "northgate", "label": "Northgate Supply (B2B)" },
-          { "value": "linkcore", "label": "Linkcore (IT hardware)" },
-          { "value": "aurel", "label": "Aurel (fine jewellery)" }
+          {
+            "value": "vela",
+            "label": "Vela (supplement)"
+          },
+          {
+            "value": "shadeline",
+            "label": "Shadeline (pergolas)"
+          },
+          {
+            "value": "northgate",
+            "label": "Northgate Supply (B2B)"
+          },
+          {
+            "value": "linkcore",
+            "label": "Linkcore (IT hardware)"
+          },
+          {
+            "value": "aurel",
+            "label": "Aurel (fine jewellery)"
+          }
         ],
         "default": "vela"
       },
-      { "type": "image_picker", "id": "favicon", "label": "Favicon", "info": "Falls back to the brand's SVG favicon." },
-      { "type": "image_picker", "id": "share_image", "label": "Social share image", "info": "1200 × 630. Falls back to the brand's Open Graph image." }
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon",
+        "info": "Falls back to the brand's SVG favicon."
+      },
+      {
+        "type": "image_picker",
+        "id": "share_image",
+        "label": "Social share image",
+        "info": "1200 \u00d7 630. Falls back to the brand's Open Graph image."
+      }
     ]
   },
   {
@@ -38,14 +63,40 @@
         "info": "Shows the 'Concept demo' bar and footer note. Cart, subscribe and forms work visually but nothing is sent and checkout is disabled.",
         "default": false
       },
-      { "type": "text", "id": "demo_back_url", "label": "Back to templates URL", "default": "https://configuro.studio/shopify-templates" }
+      {
+        "type": "text",
+        "id": "demo_back_url",
+        "label": "Back to templates URL",
+        "default": "https://configuro.studio/shopify-templates"
+      }
     ]
   },
   {
     "name": "Cart",
     "settings": [
-      { "type": "text", "id": "free_shipping_threshold", "label": "Free shipping threshold (in cents)", "default": "7500" },
-      { "type": "checkbox", "id": "cart_notes", "label": "Show order note in cart drawer", "default": false }
+      {
+        "type": "text",
+        "id": "free_shipping_threshold",
+        "label": "Free shipping threshold (in cents)",
+        "default": "7500"
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_notes",
+        "label": "Show order note in cart drawer",
+        "default": false
+      }
+    ]
+  },
+  {
+    "name": "3D configurator",
+    "settings": [
+      {
+        "type": "text",
+        "id": "pergola_asset_base",
+        "label": "3D asset folder URL",
+        "info": "Leave blank to load env-patio.glb, sky-1k.hdr and heater.glb from the theme. If your store rejects those file types in the theme, upload them to Settings > Files and paste the folder URL (ending in /)."
+      }
     ]
   }
 ]
