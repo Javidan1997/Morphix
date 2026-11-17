@@ -1,0 +1,21 @@
+{
+  "type": "footer",
+  "name": "Shadeline footer",
+  "sections": {
+    "footer": {
+      "type": "cfg-footer",
+      "settings": {
+        "logo_text": "Shadeline",
+        "blurb": "<p>Motorised louvred pergolas in powder-coated aluminium, made to measure and installed by certified crews.</p>",
+        "legal": "Prices include VAT where applicable."
+      },
+      "blocks": {
+        "c1": { "type": "column", "settings": { "heading": "Pergolas", "links": "Configure | #configure\nFinishes | #configure\nAdd-ons | #configure" } },
+        "c2": { "type": "column", "settings": { "heading": "Service", "links": "Delivery | #delivery\nInstallation | #delivery\nWarranty | #faq" } },
+        "c3": { "type": "column", "settings": { "heading": "Trade", "links": "Architects | #faq\nInstallers | #faq\nContact | #faq" } }
+      },
+      "block_order": ["c1", "c2", "c3"]
+    }
+  },
+  "order": ["footer"]
+}

@@ -1,0 +1,18 @@
+{
+  "type": "header",
+  "name": "Shadeline header",
+  "sections": {
+    "header": {
+      "type": "cfg-header",
+      "settings": { "logo_text": "Shadeline", "sticky": true },
+      "blocks": {
+        "l1": { "type": "link", "settings": { "label": "Configure", "url": "#configure" } },
+        "l2": { "type": "link", "settings": { "label": "Engineering", "url": "#engineering" } },
+        "l3": { "type": "link", "settings": { "label": "Delivery", "url": "#delivery" } },
+        "l4": { "type": "link", "settings": { "label": "FAQ", "url": "#faq" } }
+      },
+      "block_order": ["l1", "l2", "l3", "l4"]
+    }
+  },
+  "order": ["header"]
+}

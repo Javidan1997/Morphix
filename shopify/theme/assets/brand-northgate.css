@@ -1,0 +1,170 @@
+/* Northgate Supply — industrial, dense, honest. IBM Plex Sans + Mono. */
+@font-face { font-family: "Plex Fallback"; src: local("Arial"); size-adjust: 100%; ascent-override: 98%; descent-override: 26%; }
+
+.brand-northgate {
+  --c-bg: #f3f2ed;
+  --c-surface: #e8e6df;
+  --c-card: #ffffff;
+  --c-text: #111111;
+  --c-muted: #55554f;
+  --c-line: rgba(17, 17, 17, 0.14);
+  --c-accent: #ff5a1f;
+  --c-accent-ink: #111111;
+  --c-ok: #1e7a3c;
+  --f-display: "IBM Plex Sans", "Plex Fallback", Arial, sans-serif;
+  --f-body: "IBM Plex Sans", "Plex Fallback", Arial, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  --radius: 2px;
+  --radius-lg: 4px;
+  --btn-radius: 2px;
+  --container: 1280px;
+  --c-header-bg: #f3f2ed;
+  --c-footer-bg: #111111;
+  --c-footer-text: #f3f2ed;
+  --c-footer-muted: #a9a8a1;
+  --c-footer-line: rgba(255, 255, 255, 0.14);
+  --c-focus: #111;
+}
+.brand-northgate h1, .brand-northgate h2, .brand-northgate h3 { font-weight: 600; letter-spacing: -0.02em; }
+.brand-northgate .cfg-header { border-bottom: 2px solid #111; }
+.brand-northgate .cfg-logo-text { font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; font-size: 17px; }
+.brand-northgate .cfg-logo-mark { width: 14px; height: 14px; background: var(--c-accent); }
+.brand-northgate .cfg-header__nav a { color: #111; font-weight: 500; }
+.brand-northgate .cfg-header__nav a:hover { color: #111; text-decoration: underline; text-underline-offset: 6px; text-decoration-thickness: 2px; text-decoration-color: var(--c-accent); }
+.brand-northgate .cfg-header__account { border: 1.5px solid #111; border-radius: 2px; font-family: var(--f-mono); font-size: 13px; padding: 8px 12px; }
+.brand-northgate .cfg-announce { background: #111; color: #f3f2ed; font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.02em; }
+.brand-northgate .cfg-btn { font-weight: 600; letter-spacing: 0; }
+.brand-northgate .cfg-btn--primary { border: 1.5px solid #111; }
+.brand-northgate .cfg-btn--primary:hover { background: #ff7140; box-shadow: 3px 3px 0 #111; transform: translate(-1px, -1px); }
+.brand-northgate .cfg-btn--ghost { border: 1.5px solid #111; }
+.brand-northgate .cfg-btn:disabled { opacity: 0.45; cursor: not-allowed; box-shadow: none; transform: none; }
+.brand-northgate .cfg-input { border-color: rgba(17, 17, 17, 0.35); background: #fff; }
+.brand-northgate .cfg-input:focus { border-color: #111; box-shadow: 0 0 0 3px rgba(255, 90, 31, 0.3); }
+
+.ng-kicker { display: inline-flex; align-items: center; gap: 10px; font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; }
+.ng-kicker span { width: 10px; height: 10px; background: var(--c-accent); }
+.ng-h2 { font-size: clamp(30px, 4.2vw, 52px); margin-top: 14px; line-height: 1.04; }
+.ng-head { display: grid; gap: 20px; margin-bottom: 32px; align-items: end; }
+.ng-head__text { color: var(--c-muted); max-width: 480px; }
+@media (min-width: 990px) { .ng-head { grid-template-columns: 1fr auto; } }
+.ng-num { text-align: right; font-family: var(--f-mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+/* ---------------------------------------------------------------- hero */
+.ng-hero { padding: 40px 0 0; border-bottom: 2px solid #111; background-image: linear-gradient(rgba(17,17,17,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(17,17,17,.05) 1px, transparent 1px); background-size: 40px 40px; }
+.ng-hero__grid { display: grid; gap: 32px; align-items: center; }
+.ng-hero__title { font-size: clamp(40px, 7vw, 84px); line-height: 0.98; margin-top: 18px; max-width: 13ch; }
+.ng-hero__text { margin-top: 20px; font-size: 18px; color: var(--c-muted); max-width: 540px; }
+.ng-hero__actions { display: flex; flex-wrap: wrap; gap: 16px 24px; align-items: center; margin-top: 30px; }
+.ng-hero__login { font-size: 15px; }
+.ng-hero__login a { font-weight: 600; text-underline-offset: 4px; text-decoration-color: var(--c-accent); text-decoration-thickness: 2px; }
+.ng-hero__media { position: relative; border: 2px solid #111; background: #e7e5df; aspect-ratio: 4 / 3; }
+.ng-hero__media img { width: 100%; height: 100%; object-fit: cover; }
+.ng-hero__tag { position: absolute; left: -2px; bottom: -2px; padding: 8px 12px; background: #111; color: #f3f2ed; font-family: var(--f-mono); font-size: 12px; }
+.ng-hero__tag span { color: var(--c-accent); margin-right: 8px; }
+.ng-hero__facts { display: grid; grid-template-columns: repeat(2, 1fr); margin-top: 40px; border-top: 2px solid #111; }
+.ng-hero__facts li { display: grid; gap: 2px; padding: 18px 16px 20px 0; }
+.ng-hero__facts li + li { padding-left: 16px; border-left: 1px solid var(--c-line); }
+.ng-hero__facts li:nth-child(3) { border-left: 0; padding-left: 0; }
+.ng-hero__facts strong { font-family: var(--f-mono); font-size: 22px; font-weight: 500; }
+.ng-hero__facts span { font-size: 14px; color: var(--c-muted); }
+@media (min-width: 990px) {
+  .ng-hero { padding-top: 64px; }
+  .ng-hero__grid { grid-template-columns: 1.1fr 1fr; gap: 56px; }
+  .ng-hero__facts { grid-template-columns: repeat(4, 1fr); }
+  .ng-hero__facts li:nth-child(3) { border-left: 1px solid var(--c-line); padding-left: 16px; }
+}
+
+/* ---------------------------------------------------------------- tables */
+.ng-status { display: inline-flex; gap: 10px; align-items: center; padding: 10px 14px; border: 1.5px dashed rgba(17, 17, 17, 0.45); font-size: 14px; }
+.ng-status--ok { border: 1.5px solid var(--c-ok); color: var(--c-ok); background: #eaf4ec; }
+.ng-status--ok strong { color: #111; }
+.ng-table-wrap { border: 2px solid #111; background: #fff; }
+.ng-table { width: 100%; min-width: 760px; border-collapse: collapse; font-size: 14px; }
+.ng-table th, .ng-table td { padding: 12px 14px; border-bottom: 1px solid var(--c-line); text-align: left; vertical-align: middle; }
+.ng-table thead th { background: #111; color: #f3f2ed; font-family: var(--f-mono); font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.04em; }
+.ng-table thead th.ng-num { text-align: right; }
+.ng-table tbody tr:last-child > * { border-bottom: 0; }
+.ng-table tbody th { font-weight: 400; }
+.ng-tier-col { background: rgba(255, 90, 31, 0.06); }
+.ng-table thead .ng-tier-col { background: #2a2a28; }
+.ng-prod { display: flex; align-items: center; gap: 12px; }
+.ng-prod__img { flex: none; width: 56px; height: 56px; border: 1px solid var(--c-line); background: #ecebe6; overflow: hidden; }
+.ng-prod__img img { width: 100%; height: 100%; object-fit: cover; }
+.ng-prod > span:last-child { display: grid; }
+.ng-prod__title { font-weight: 600; }
+.ng-prod__sku { font-family: var(--f-mono); font-size: 12px; color: var(--c-muted); }
+.ng-locked { display: inline-grid; place-items: center; width: 28px; height: 28px; color: #77766f; }
+.ng-foot { margin-top: 14px; font-size: 13px; color: var(--c-muted); font-family: var(--f-mono); }
+
+/* ------------------------------------------------------------ quick order */
+.ng-quick { background: #fff; border-top: 2px solid #111; border-bottom: 2px solid #111; }
+.ng-quick__bar { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; margin-bottom: 16px; }
+.ng-search { flex: 1; min-width: 220px; max-width: 420px; }
+.ng-btn-sm { min-height: 50px; padding: 0 18px; font-size: 14px; }
+.ng-grid tr.is-active > * { background: #fff4ee; }
+.ng-stock { font-family: var(--f-mono); font-size: 12px; color: var(--c-ok); }
+.ng-stock::before { content: "●"; margin-right: 6px; }
+.ng-stock--out { color: #9a5b00; }
+.ng-qty { display: inline-flex; align-items: center; border: 1.5px solid #111; background: #fff; }
+.ng-qty button { width: 40px; height: 40px; display: grid; place-items: center; border: 0; background: none; }
+.ng-qty button:hover { background: var(--c-surface); }
+.ng-qty input { width: 56px; height: 40px; border: 0; border-left: 1px solid var(--c-line); border-right: 1px solid var(--c-line); text-align: center; font-family: var(--f-mono); font-size: 15px; -moz-appearance: textfield; }
+.ng-qty input::-webkit-outer-spin-button, .ng-qty input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.ng-summary { position: sticky; bottom: 0; z-index: 5; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px; margin-top: 16px; padding: 14px 16px; background: #111; color: #f3f2ed; font-family: var(--f-mono); font-size: 14px; }
+.ng-summary__total { display: flex; gap: 12px; align-items: baseline; margin-left: auto; }
+.ng-summary__total strong { font-size: 22px; }
+.ng-locked-grid { position: relative; border: 2px solid #111; overflow: hidden; }
+.ng-locked-grid__rows { padding: 8px 0; filter: blur(2px); opacity: 0.55; }
+.ng-ghost-row { display: grid; grid-template-columns: 56px 1fr 120px 120px; gap: 16px; align-items: center; padding: 10px 16px; border-bottom: 1px solid var(--c-line); font-size: 14px; }
+.ng-ghost-row__img { height: 40px; background: #ddd9cf; }
+.ng-ghost-bar, .ng-ghost-qty { height: 14px; background: #d8d5cc; }
+.ng-locked-grid__card { position: absolute; inset: 50% auto auto 50%; transform: translate(-50%, -50%); width: min(460px, calc(100% - 32px)); padding: 28px; background: #fff; border: 2px solid #111; box-shadow: 6px 6px 0 #111; text-align: center; display: grid; gap: 10px; justify-items: center; }
+.ng-locked-grid__icon { display: grid; place-items: center; width: 44px; height: 44px; background: var(--c-accent); }
+.ng-locked-grid__card h3 { font-size: 20px; }
+.ng-locked-grid__card p { color: var(--c-muted); font-size: 15px; }
+.ng-locked-grid__actions { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 6px; }
+@media (max-width: 640px) { .ng-ghost-row { grid-template-columns: 40px 1fr 60px; } .ng-ghost-qty { display: none; } .ng-locked-grid { min-height: 380px; } }
+
+/* ----------------------------------------------------------------- apply */
+.ng-apply__grid { display: grid; gap: 40px; }
+.ng-steps { margin-top: 32px; border-top: 2px solid #111; }
+.ng-steps li { display: grid; grid-template-columns: 48px 1fr; gap: 12px; padding: 18px 0; border-bottom: 1px solid var(--c-line); }
+.ng-steps__n { font-family: var(--f-mono); color: #b53a0b; font-weight: 500; }
+.ng-steps strong { display: block; margin-bottom: 2px; }
+.ng-steps li > span:last-child { color: var(--c-muted); }
+.ng-steps li > span:last-child strong { color: #111; }
+.ng-apply__card { padding: clamp(20px, 4vw, 36px); background: #fff; border: 2px solid #111; box-shadow: 8px 8px 0 #111; align-self: start; }
+.ng-form { display: grid; gap: 16px; }
+.ng-form__row { display: grid; gap: 16px; }
+.ng-form__legal { font-size: 13px; color: var(--c-muted); }
+.ng-success { background: #eaf4ec; border: 1.5px solid var(--c-ok); color: #111; }
+.ng-success .cfg-icon { color: var(--c-ok); flex: none; margin-top: 2px; }
+.ng-success p + p { margin-top: 6px; color: var(--c-muted); }
+.ng-success__demo { font-family: var(--f-mono); font-size: 12px; }
+@media (min-width: 640px) { .ng-form__row { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 990px) { .ng-apply__grid { grid-template-columns: 1fr 1.05fr; gap: 72px; } }
+
+/* ----------------------------------------------------------------- login */
+.ng-login { border: 2px solid #111 !important; border-radius: 4px !important; }
+.ng-login__inner { position: relative; padding: 32px; display: grid; gap: 14px; }
+.ng-login__close { position: absolute; top: 12px; right: 12px; }
+.ng-login__title { font-size: 28px; }
+.ng-login__text, .ng-login__note { color: var(--c-muted); font-size: 15px; }
+.ng-login__note { font-size: 13px; }
+.ng-login code { font-family: var(--f-mono); background: var(--c-surface); padding: 1px 5px; }
+
+/* ------------------------------------------------------------------ FAQ */
+.brand-northgate .cfg-faq__grid { display: grid; gap: 32px; }
+.brand-northgate .cfg-faq .cfg-eyebrow { font-family: var(--f-mono); color: #111; }
+.brand-northgate .cfg-faq__title { font-size: clamp(30px, 4.2vw, 48px); margin-top: 10px; }
+.brand-northgate .cfg-faq__text { margin-top: 12px; color: var(--c-muted); }
+.brand-northgate .cfg-faq__list { border-top: 2px solid #111; }
+.brand-northgate .cfg-faq__item { border-bottom: 1px solid var(--c-line); }
+.brand-northgate .cfg-faq__item summary { list-style: none; display: flex; justify-content: space-between; gap: 16px; padding: 18px 0; cursor: pointer; font-weight: 600; font-size: 17px; }
+.brand-northgate .cfg-faq__item summary::-webkit-details-marker { display: none; }
+.brand-northgate .cfg-faq__item[open] summary .cfg-icon { transform: rotate(45deg); }
+.brand-northgate .cfg-faq__answer { padding: 0 0 20px; color: var(--c-muted); max-width: 680px; }
+@media (min-width: 990px) { .brand-northgate .cfg-faq__grid { grid-template-columns: 0.8fr 1.2fr; gap: 80px; } }
+
+.brand-northgate .cfg-footer__logo { text-transform: uppercase; letter-spacing: 0.04em; font-size: 18px; }
+.brand-northgate .cfg-footer a { color: #f3f2ed; }

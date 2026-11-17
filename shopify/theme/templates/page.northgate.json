@@ -1,0 +1,73 @@
+{
+  "sections": {
+    "hero": {
+      "type": "ng-hero",
+      "settings": {
+        "eyebrow": "Wholesale packaging · Est. for trade",
+        "heading": "Packaging for teams that reorder every week.",
+        "text": "Boxes, tape, film and mailers by the case. Approved accounts get tier pricing, a one-screen reorder grid and Net-30 invoicing.",
+        "button_label": "Apply for a trade account",
+        "login_text": "Already approved?",
+        "login_label": "Log in for your prices"
+      },
+      "blocks": {
+        "f1": { "type": "fact", "settings": { "value": "1,200+", "label": "SKUs in stock" } },
+        "f2": { "type": "fact", "settings": { "value": "Next day", "label": "Dispatch before 3 pm" } },
+        "f3": { "type": "fact", "settings": { "value": "Net-30", "label": "Terms when approved" } },
+        "f4": { "type": "fact", "settings": { "value": "−30%", "label": "At pallet volume" } }
+      },
+      "block_order": ["f1", "f2", "f3", "f4"]
+    },
+    "pricing": {
+      "type": "ng-pricing",
+      "settings": {
+        "eyebrow": "Trade pricing",
+        "heading": "Case prices that drop as your volume grows.",
+        "collection": "trade-essentials",
+        "limit": 8,
+        "tier_labels": "1–9 cases, 10–49, 50+",
+        "guest_note": "List prices shown. Log in with an approved trade account to see tier prices."
+      }
+    },
+    "quick": {
+      "type": "ng-quick-order",
+      "settings": {
+        "eyebrow": "Quick order",
+        "heading": "Reorder in under a minute.",
+        "text": "Type quantities, watch tiers apply per line, add everything in one go. Or load your last order and adjust.",
+        "collection": "trade-essentials"
+      }
+    },
+    "apply": {
+      "type": "ng-apply",
+      "settings": {
+        "eyebrow": "Trade accounts",
+        "heading": "Apply once. Order on terms.",
+        "button_label": "Submit application",
+        "legal": "We check your business details and reply within one business day. No credit check for prepaid accounts.",
+        "success_heading": "Application received",
+        "success_text": "Our trade desk reviews new accounts within one business day. You'll get an email when your pricing is live."
+      },
+      "blocks": {
+        "s1": { "type": "step", "settings": { "title": "Apply in two minutes", "text": "Company, tax ID and rough monthly spend. That's it." } },
+        "s2": { "type": "step", "settings": { "title": "Reviewed by a human", "text": "Your application lands in our CRM; most are approved the same day." } },
+        "s3": { "type": "step", "settings": { "title": "Tier pricing unlocks", "text": "Log in and every price on the site switches to your trade rate." } },
+        "s4": { "type": "step", "settings": { "title": "Order on Net-30", "text": "Invoice payment terms after your first three orders." } }
+      },
+      "block_order": ["s1", "s2", "s3", "s4"]
+    },
+    "faq": {
+      "type": "cfg-faq",
+      "settings": { "eyebrow": "FAQ", "heading": "Trade questions", "text": "<p>Our trade desk answers by email within four business hours.</p>" },
+      "blocks": {
+        "q1": { "type": "question", "settings": { "question": "How do tier prices work?", "answer": "<p>Each SKU has case prices for 1–9, 10–49 and 50+ cases. The tier is set per line, per order, and applied automatically at checkout.</p>" } },
+        "q2": { "type": "question", "settings": { "question": "What do I need to apply?", "answer": "<p>A registered business, a tax ID where applicable and a delivery address. Hospitality groups can add multiple sites after approval.</p>" } },
+        "q3": { "type": "question", "settings": { "question": "When can I pay on Net-30?", "answer": "<p>After three paid orders we offer invoice terms up to a limit agreed with your account manager.</p>" } },
+        "q4": { "type": "question", "settings": { "question": "Do you deliver by pallet?", "answer": "<p>Orders over 40 cases ship on a pallet with a 1-hour delivery window. Smaller orders go by courier, next day.</p>" } }
+      },
+      "block_order": ["q1", "q2", "q3", "q4"]
+    },
+    "login": { "type": "ng-login", "settings": {} }
+  },
+  "order": ["hero", "pricing", "quick", "apply", "faq", "login"]
+}

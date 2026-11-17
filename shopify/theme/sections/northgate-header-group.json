@@ -1,0 +1,18 @@
+{
+  "type": "header",
+  "name": "Northgate header",
+  "sections": {
+    "header": {
+      "type": "cfg-header",
+      "settings": { "logo_text": "Northgate Supply", "announcement": "Next-day dispatch on orders before 3 pm · Net-30 terms for approved accounts", "account_label": "Trade login", "account_url": "/account/login", "sticky": true },
+      "blocks": {
+        "l1": { "type": "link", "settings": { "label": "Pricing", "url": "#pricing" } },
+        "l2": { "type": "link", "settings": { "label": "Quick order", "url": "#quick-order" } },
+        "l3": { "type": "link", "settings": { "label": "Open an account", "url": "#apply" } },
+        "l4": { "type": "link", "settings": { "label": "FAQ", "url": "#faq" } }
+      },
+      "block_order": ["l1", "l2", "l3", "l4"]
+    }
+  },
+  "order": ["header"]
+}

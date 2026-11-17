@@ -1,0 +1,89 @@
+{%- comment -%}
+  Northgate — tiered quantity pricing, gated by customer tag.
+  Tiers come from the product metafield custom.price_tiers (JSON):
+    [{ "min": 1, "price": 2490 }, { "min": 10, "price": 2240 }, { "min": 50, "price": 1980 }]
+  Guests see list prices only; the trade columns are never rendered for them
+  (not hidden with CSS), so prices can't be scraped from the page source.
+  Checkout enforcement: shopify/functions/northgate-tier-discount.
+{%- endcomment -%}
+{%- liquid
+  if customer and customer.tags contains 'trade-approved'
+    assign is_trade = true
+  else
+    assign is_trade = false
+  endif
+  assign source = section.settings.collection
+  assign tier_labels = section.settings.tier_labels | split: ','
+-%}
+<section class="cfg-section ng-pricing" id="pricing" aria-labelledby="NgPricing-{{ section.id }}">
+  <div class="cfg-container">
+    <div class="ng-head">
+      <div>
+        <p class="ng-kicker"><span></span>{{ section.settings.eyebrow }}</p>
+        <h2 id="NgPricing-{{ section.id }}" class="ng-h2">{{ section.settings.heading }}</h2>
+      </div>
+      {%- if is_trade -%}
+        <p class="ng-status ng-status--ok">{% render 'cfg-icon', name: 'check' %}<span>Trade pricing active for <strong>{{ customer.default_address.company | default: customer.name }}</strong></span></p>
+      {%- else -%}
+        <p class="ng-status">{% render 'cfg-icon', name: 'lock' %}<span>{{ section.settings.guest_note }}</span></p>
+      {%- endif -%}
+    </div>
+    <div class="cfg-table-wrap ng-table-wrap">
+      <table class="ng-table">
+        <caption class="visually-hidden">Price per case by order quantity</caption>
+        <thead>
+          <tr>
+            <th scope="col">Product</th>
+            <th scope="col">Pack</th>
+            <th scope="col" class="ng-num">List</th>
+            {%- for label in tier_labels -%}<th scope="col" class="ng-num ng-tier-col">{{ label | strip }}</th>{%- endfor -%}
+          </tr>
+        </thead>
+        <tbody>
+          {%- for product in source.products limit: section.settings.limit -%}
+            {%- assign v = product.selected_or_first_available_variant -%}
+            {%- assign tiers = product.metafields.custom.price_tiers.value -%}
+            <tr>
+              <th scope="row">
+                <span class="ng-prod">
+                  {%- assign thumb = product.featured_image -%}
+                  <span class="ng-prod__img">{%- render 'cfg-image', image: thumb, widths: '480', sizes: '56px', alt: '' -%}</span>
+                  <span><span class="ng-prod__title">{{ product.title }}</span><span class="ng-prod__sku">{{ v.sku }} · {{ product.metafields.custom.spec.value }}</span></span>
+                </span>
+              </th>
+              <td>{{ product.metafields.custom.pack.value }}</td>
+              <td class="ng-num">{% if is_trade %}<s aria-label="List price {{ v.price | money }}">{{ v.price | money }}</s>{% else %}{{ v.price | money }}{% endif %}</td>
+              {%- for label in tier_labels -%}
+                <td class="ng-num ng-tier-col">
+                  {%- if is_trade -%}
+                    {%- assign tier = tiers[forloop.index0] -%}
+                    <strong>{{ tier.price | money }}</strong>
+                  {%- else -%}
+                    <span class="ng-locked">{% render 'cfg-icon', name: 'lock' %}<span class="visually-hidden">Trade price, log in to view</span></span>
+                  {%- endif -%}
+                </td>
+              {%- endfor -%}
+            </tr>
+          {%- endfor -%}
+        </tbody>
+      </table>
+    </div>
+    <p class="ng-foot">{{ section.settings.footnote }}</p>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Northgate · Tier pricing",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Trade pricing" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Prices that drop as your volume grows." },
+    { "type": "collection", "id": "collection", "label": "Collection" },
+    { "type": "range", "id": "limit", "label": "Products", "min": 2, "max": 12, "step": 1, "default": 8 },
+    { "type": "text", "id": "tier_labels", "label": "Tier labels (comma separated, match metafield order)", "default": "1–9 cases, 10–49, 50+" },
+    { "type": "text", "id": "guest_note", "label": "Guest note", "default": "Log in with an approved trade account to see tier prices." },
+    { "type": "text", "id": "footnote", "label": "Footnote", "default": "Per-case prices excl. tax. Tiers apply per SKU per order." }
+  ],
+  "presets": [{ "name": "Northgate · Tier pricing" }]
+}
+{% endschema %}

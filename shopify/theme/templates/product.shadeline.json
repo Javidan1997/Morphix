@@ -1,0 +1,79 @@
+{
+  "sections": {
+    "hero": {
+      "type": "shadeline-hero",
+      "settings": {
+        "eyebrow": "Louvred aluminium pergolas",
+        "heading": "Shade, made to measure.",
+        "text": "Size it to the centimetre, pick a finish and see the price before anyone calls you back. Motorised louvres open to the sun and close against the rain.",
+        "button_label": "Configure yours",
+        "button_link": "#configure",
+        "price_note": "From $5,190 · installation available"
+      },
+      "blocks": {
+        "s1": { "type": "stat", "settings": { "value": "0–135°", "label": "Motorised louvres" } },
+        "s2": { "type": "stat", "settings": { "value": "12 Bft", "label": "Wind rating, closed" } },
+        "s3": { "type": "stat", "settings": { "value": "2.5–7 m", "label": "Free-standing span" } },
+        "s4": { "type": "stat", "settings": { "value": "10 yrs", "label": "Frame warranty" } }
+      },
+      "block_order": ["s1", "s2", "s3", "s4"]
+    },
+    "configurator": {
+      "type": "shadeline-configurator",
+      "settings": {
+        "eyebrow": "Configure",
+        "lead": "Enter the size of your terrace. We manufacture in standard frame bands and cut to your exact size, so the price you see is the price you pay.",
+        "addon_products": ["led-lighting", "zip-screen", "installation"],
+        "delivery_note": "Made to order in 3–4 weeks. Delivered on a pallet, installed in a day.",
+        "button_label": "Add configured pergola"
+      }
+    },
+    "specs": {
+      "type": "shadeline-specs",
+      "settings": {
+        "eyebrow": "Engineering",
+        "heading": "Built like architecture, not furniture.",
+        "text": "Extruded 6063-T6 aluminium, hidden gutters in every beam and a rain sensor that closes the roof before the first drop lands on your sofa."
+      },
+      "blocks": {
+        "a": { "type": "spec", "settings": { "label": "Profile", "value": "160 mm posts" } },
+        "b": { "type": "spec", "settings": { "label": "Louvre pitch", "value": "200 mm" } },
+        "c": { "type": "spec", "settings": { "label": "Snow load", "value": "150 kg/m²" } },
+        "d": { "type": "spec", "settings": { "label": "Drainage", "value": "Integrated" } },
+        "e": { "type": "spec", "settings": { "label": "Coating", "value": "Qualicoat class 2" } },
+        "f": { "type": "spec", "settings": { "label": "Control", "value": "Remote + app" } }
+      },
+      "block_order": ["a", "b", "c", "d", "e", "f"]
+    },
+    "delivery": {
+      "type": "shadeline-process",
+      "settings": {
+        "eyebrow": "Delivery & installation",
+        "heading": "From terrace to shade in five weeks.",
+        "text": "One coordinator from order to handover. You'll know the install date before production starts.",
+        "note_heading": "What we need from you",
+        "note": "<ul><li>A level, solid base: paving, decking on joists or a concrete pad.</li><li>A 230 V outdoor socket within 5 m of a post.</li><li>Clear access for two installers and a pallet.</li></ul>"
+      },
+      "blocks": {
+        "p1": { "type": "step", "settings": { "when": "Day 1", "title": "Order & deposit", "text": "Your exact size and finish are locked, with a 30% deposit." } },
+        "p2": { "type": "step", "settings": { "when": "Week 1", "title": "Site survey", "text": "A surveyor confirms the base, fixings and power, or sends you a 10-minute photo checklist." } },
+        "p3": { "type": "step", "settings": { "when": "Weeks 2–4", "title": "Made to order", "text": "Profiles are cut, powder-coated and pre-wired in our workshop." } },
+        "p4": { "type": "step", "settings": { "when": "Week 5", "title": "Installed in a day", "text": "Two certified installers fit, wire and commission it, then walk you through the controls." } }
+      },
+      "block_order": ["p1", "p2", "p3", "p4"]
+    },
+    "faq": {
+      "type": "cfg-faq",
+      "settings": { "eyebrow": "FAQ", "heading": "Before you order", "text": "<p>Planning questions, answered by the people who install them.</p>" },
+      "blocks": {
+        "q1": { "type": "question", "settings": { "question": "Why is my pergola priced at a larger size?", "answer": "<p>Frames are manufactured in standard bands (every metre) and cut to your exact size. You pay the band price; the exact size travels with your order.</p>" } },
+        "q2": { "type": "question", "settings": { "question": "Do I need planning permission?", "answer": "<p>In many areas a free-standing pergola under 3 m high is permitted development, but rules vary. We include a planning checklist with every quote.</p>" } },
+        "q3": { "type": "question", "settings": { "question": "Can I install it myself?", "answer": "<p>Yes, if you're comfortable with anchors and a 230 V connection. Untick installation and we'll ship it with a step-by-step guide and video call support.</p>" } },
+        "q4": { "type": "question", "settings": { "question": "What happens in heavy rain or snow?", "answer": "<p>The rain sensor closes the louvres automatically. Water runs through hidden gutters and down the posts. Closed, the roof carries 150 kg/m² of snow.</p>" } },
+        "q5": { "type": "question", "settings": { "question": "What does the warranty cover?", "answer": "<p>10 years on the frame and coating, 5 years on the motor and electronics, 2 years on fabric screens.</p>" } }
+      },
+      "block_order": ["q1", "q2", "q3", "q4", "q5"]
+    }
+  },
+  "order": ["hero", "configurator", "specs", "delivery", "faq"]
+}

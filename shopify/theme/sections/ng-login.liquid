@@ -1,0 +1,31 @@
+{%- comment -%}
+  Demo-only trade login. On a live store the "Log in" links go to
+  /account/login and Shopify's customer accounts handle it; this section
+  renders nothing unless settings.demo_mode is on.
+{%- endcomment -%}
+{%- if settings.demo_mode -%}
+<dialog class="cfg-modal ng-login" id="TradeLogin" aria-labelledby="TradeLoginTitle">
+  <div class="ng-login__inner">
+    <button type="button" class="cfg-icon-btn ng-login__close" data-close aria-label="{{ 'cfg.a11y.close' | t }}">{% render 'cfg-icon', name: 'close' %}</button>
+    <p class="ng-kicker"><span></span>Trade login</p>
+    <h2 id="TradeLoginTitle" class="ng-login__title">{{ section.settings.heading }}</h2>
+    <p class="ng-login__text">{{ section.settings.text }}</p>
+    {%- form 'customer_login', id: 'TradeLoginForm', class: 'ng-form', data-cfg-custom: 'true' -%}
+      <div class="cfg-field"><label for="tl-email">Email</label><input class="cfg-input" id="tl-email" type="email" name="customer[email]" value="buyer@acme-hospitality.example" autocomplete="off" readonly></div>
+      <div class="cfg-field"><label for="tl-pass">Password</label><input class="cfg-input" id="tl-pass" type="password" name="customer[password]" value="demo-password" autocomplete="off" readonly></div>
+      <button type="submit" class="cfg-btn cfg-btn--primary cfg-btn--block">Sign in as demo trade buyer</button>
+    {%- endform -%}
+    <p class="ng-login__note">Nothing is sent. The page swaps to the logged-in view that Liquid renders for a customer tagged <code>trade-approved</code>.</p>
+  </div>
+</dialog>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Northgate · Demo login",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Preview the trade portal" },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Sign in with the demo account to see tier pricing and the quick-order grid exactly as an approved buyer would." }
+  ]
+}
+{% endschema %}

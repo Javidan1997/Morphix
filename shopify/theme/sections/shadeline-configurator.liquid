@@ -1,0 +1,134 @@
+{%- comment -%}
+  Shadeline — pergola configurator (main product section).
+
+  Data model (see shopify/definitions):
+    product options   Width band / Depth band / Finish  → one variant per band × finish
+    custom.price_rules (json)  base, per-m², finish surcharge %, add-on unit prices
+    add-ons           separate products priced per unit (metre, m²); quantity = units
+
+  The buyer enters an exact size in cm. shadeline-configurator.js prices it with
+  the metafield rules (shadeline-pricing.js), snaps to the band variant that
+  will be cut to size, and sends the exact size as line-item properties.
+  Without JS the form still adds the default band variant.
+{%- endcomment -%}
+{%- liquid
+  assign current = product.selected_or_first_available_variant
+  assign form_id = 'ConfigForm-' | append: section.id
+  assign rules = product.metafields.custom.price_rules.value
+  assign finishes = product.options_with_values | where: 'name', 'Finish' | first
+-%}
+<section class="sl-config" id="configure" aria-labelledby="SlConfig-{{ section.id }}">
+  <div class="sl-config__grid">
+    <div class="sl-config__stage" data-stage>
+      <div class="sl-config__posters" aria-hidden="true">
+        {%- for value in finishes.values -%}
+          {%- assign key = value | handleize | split: '-' | last -%}
+          {%- assign poster = 'shadeline-poster-' | append: key -%}
+          <div class="sl-config__poster{% if forloop.first %} is-active{% endif %}" data-poster="{{ value }}">
+            {%- render 'cfg-image', asset: poster, width: 1600, height: 1200, alt: '', sizes: '(min-width: 1100px) 60vw, 100vw' -%}
+          </div>
+        {%- endfor -%}
+      </div>
+      <div class="sl-config__viewer" data-viewer></div>
+      <div class="sl-config__hud">
+        <p class="sl-config__dims"><span data-dims>4.20 × 3.40 m</span><span class="sl-config__band" data-band></span></p>
+        <button type="button" class="sl-config__load" data-load-3d>
+          {%- render 'cfg-icon', name: 'refresh' -%}<span data-load-label>{{ section.settings.load_label }}</span>
+        </button>
+      </div>
+      <p class="sl-config__hint" data-viewer-hint hidden>{{ section.settings.hint }}</p>
+    </div>
+
+    <div class="sl-config__panel">
+      <p class="sl-eyebrow sl-eyebrow--dark">{{ section.settings.eyebrow }}</p>
+      <h2 id="SlConfig-{{ section.id }}" class="sl-h2">{{ product.title }}</h2>
+      <p class="sl-config__lead">{{ section.settings.lead }}</p>
+
+      <script type="application/json" data-cfg-product>{{ product | json }}</script>
+      <script type="application/json" data-price-rules>{{ rules | json }}</script>
+      {%- for addon in section.settings.addon_products -%}
+        <script type="application/json" data-cfg-product data-addon="{{ addon.handle }}">{{ addon | json }}</script>
+      {%- endfor -%}
+
+      <cfg-product-form data-shadeline>
+        {%- form 'product', product, id: form_id, class: 'sl-form' -%}
+          <input type="hidden" name="id" value="{{ current.id }}" data-variant-input>
+          <input type="hidden" name="quantity" value="1">
+
+          <div class="sl-step">
+            <p class="sl-step__label"><span>01</span> Size</p>
+            <div class="sl-dim">
+              <label for="Width-{{ section.id }}">Width</label>
+              <input type="range" id="Width-{{ section.id }}" min="250" max="700" step="10" value="420" data-dim="width" aria-describedby="WidthOut-{{ section.id }}">
+              <span class="sl-dim__value"><input type="number" class="sl-num" min="250" max="700" step="10" value="420" name="properties[Width (cm)]" data-dim-number="width" aria-label="Width in centimetres"> cm</span>
+              <span id="WidthOut-{{ section.id }}" class="visually-hidden">250 to 700 centimetres</span>
+            </div>
+            <div class="sl-dim">
+              <label for="Depth-{{ section.id }}">Depth</label>
+              <input type="range" id="Depth-{{ section.id }}" min="250" max="500" step="10" value="340" data-dim="depth" aria-describedby="DepthOut-{{ section.id }}">
+              <span class="sl-dim__value"><input type="number" class="sl-num" min="250" max="500" step="10" value="340" name="properties[Depth (cm)]" data-dim-number="depth" aria-label="Depth in centimetres"> cm</span>
+              <span id="DepthOut-{{ section.id }}" class="visually-hidden">250 to 500 centimetres</span>
+            </div>
+          </div>
+
+          <fieldset class="sl-step">
+            <legend class="sl-step__label"><span>02</span> Frame finish</legend>
+            <div class="sl-swatches">
+              {%- for value in finishes.values -%}
+                <label class="sl-swatch">
+                  <input type="radio" name="finish" value="{{ value }}" {% if forloop.first %}checked{% endif %} data-finish>
+                  <span class="sl-swatch__chip sl-swatch__chip--{{ value | handleize }}" aria-hidden="true"></span>
+                  <span>{{ value }}</span>
+                </label>
+              {%- endfor -%}
+            </div>
+          </fieldset>
+
+          <fieldset class="sl-step">
+            <legend class="sl-step__label"><span>03</span> Add-ons</legend>
+            <label class="sl-addon"><input type="checkbox" data-addon-toggle="lighting"><span><strong>LED louvre lighting</strong><small data-addon-price="lighting"></small></span></label>
+            <div class="sl-addon sl-addon--select">
+              <label for="Screens-{{ section.id }}"><strong>ZIP side screens</strong><small data-addon-price="screens"></small></label>
+              <select id="Screens-{{ section.id }}" class="sl-select" data-addon-toggle="screens">
+                <option value="0">None</option><option value="1">1 side</option><option value="2">2 sides</option><option value="3">3 sides</option>
+              </select>
+            </div>
+            <label class="sl-addon"><input type="checkbox" data-addon-toggle="install" checked><span><strong>Professional installation</strong><small data-addon-price="install"></small></span></label>
+          </fieldset>
+
+          <input type="hidden" name="properties[Made in band]" value="" data-prop-band>
+          <input type="hidden" name="properties[_config_id]" value="" data-prop-config>
+          <input type="hidden" name="properties[_price_rules]" value="{{ rules.version }}">
+
+          <div class="sl-quote" aria-live="polite">
+            <div class="sl-quote__head">
+              <p>Your price</p>
+              <p class="sl-quote__total" data-total>{{ current.price | money }}</p>
+            </div>
+            <ul class="sl-quote__lines" data-lines></ul>
+            <p class="sl-quote__note">{% render 'cfg-icon', name: 'truck' %}<span>{{ section.settings.delivery_note }}</span></p>
+          </div>
+          <button type="submit" class="cfg-btn cfg-btn--primary cfg-btn--block sl-cta">{{ section.settings.button_label }}</button>
+          <p class="cfg-form-error" data-form-error role="alert" hidden></p>
+        {%- endform -%}
+      </cfg-product-form>
+    </div>
+  </div>
+</section>
+<script type="module" src="{{ 'shadeline-configurator.js' | asset_url }}"></script>
+
+{% schema %}
+{
+  "name": "Shadeline · Configurator",
+  "class": "sl-config-section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Configure" },
+    { "type": "textarea", "id": "lead", "label": "Lead" },
+    { "type": "text", "id": "load_label", "label": "3D button label", "default": "Rotate in 3D" },
+    { "type": "text", "id": "hint", "label": "Viewer hint", "default": "Drag to orbit · arrow keys rotate" },
+    { "type": "product_list", "id": "addon_products", "label": "Add-on products", "info": "Lighting (per metre), side screen (per metre), installation (per m²). Handles must be led-lighting, zip-screen, installation.", "limit": 3 },
+    { "type": "text", "id": "delivery_note", "label": "Delivery note", "default": "Made to order. Delivered in 4–5 weeks." },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Add configured pergola" }
+  ]
+}
+{% endschema %}

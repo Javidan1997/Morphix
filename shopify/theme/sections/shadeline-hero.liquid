@@ -1,0 +1,45 @@
+{%- comment -%} Shadeline — full-bleed architectural hero. {%- endcomment -%}
+<section class="sl-hero" aria-labelledby="SlHero-{{ section.id }}">
+  <div class="sl-hero__media">
+    {%- render 'cfg-image', image: section.settings.image, asset: 'shadeline-hero', widths: '640,960,1280,1600,2000', width: 2000, height: 1125, alt: section.settings.image_alt, sizes: '100vw', loading: 'eager', priority: true -%}
+  </div>
+  <div class="cfg-container sl-hero__inner">
+    <p class="sl-eyebrow">{{ section.settings.eyebrow }}</p>
+    <h1 id="SlHero-{{ section.id }}" class="sl-hero__title">{{ section.settings.heading }}</h1>
+    <p class="sl-hero__text">{{ section.settings.text }}</p>
+    <div class="sl-hero__actions">
+      <a class="cfg-btn cfg-btn--primary sl-btn-light" href="{{ section.settings.button_link | default: '#configure' }}">{{ section.settings.button_label }}{% render 'cfg-icon', name: 'arrow' %}</a>
+      <p class="sl-hero__price">{{ section.settings.price_note }}</p>
+    </div>
+  </div>
+  {%- if section.blocks.size > 0 -%}
+    <div class="sl-hero__stats">
+      <dl class="cfg-container">
+        {%- for block in section.blocks -%}
+          <div {{ block.shopify_attributes }}><dt>{{ block.settings.label }}</dt><dd>{{ block.settings.value }}</dd></div>
+        {%- endfor -%}
+      </dl>
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Shadeline · Hero",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Louvred aluminium pergolas" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Shade, made to measure." },
+    { "type": "textarea", "id": "text", "label": "Text" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Configure yours" },
+    { "type": "url", "id": "button_link", "label": "Button link" },
+    { "type": "text", "id": "price_note", "label": "Price note" },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "image_alt", "label": "Image alt", "default": "Sand-coloured louvred pergola over a stone terrace" }
+  ],
+  "blocks": [
+    { "type": "stat", "name": "Stat", "settings": [{ "type": "text", "id": "value", "label": "Value", "default": "12 Bft" }, { "type": "text", "id": "label", "label": "Label", "default": "Wind rating" }] }
+  ],
+  "max_blocks": 4,
+  "presets": [{ "name": "Shadeline · Hero" }]
+}
+{% endschema %}

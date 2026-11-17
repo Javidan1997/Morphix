@@ -1,0 +1,123 @@
+{%- comment -%}
+  Northgate — quick-order grid for repeat buyers.
+  • One row per variant in the collection, quantity in cases.
+  • Live tier price per row (custom.price_tiers), totals, one "add all" call
+    to /cart/add.js with an items[] array.
+  • "Load last order" pre-fills quantities from customer.orders.first.
+  Guests get a locked preview: no prices are rendered.
+{%- endcomment -%}
+{%- liquid
+  if customer and customer.tags contains 'trade-approved'
+    assign is_trade = true
+  else
+    assign is_trade = false
+  endif
+  assign source = section.settings.collection
+  assign last_order = customer.orders.first
+-%}
+<section class="cfg-section ng-quick" id="quick-order" aria-labelledby="NgQuick-{{ section.id }}">
+  <div class="cfg-container">
+    <div class="ng-head">
+      <div>
+        <p class="ng-kicker"><span></span>{{ section.settings.eyebrow }}</p>
+        <h2 id="NgQuick-{{ section.id }}" class="ng-h2">{{ section.settings.heading }}</h2>
+      </div>
+      <p class="ng-head__text">{{ section.settings.text }}</p>
+    </div>
+
+    {%- if is_trade -%}
+      <ng-quick-order class="ng-quick__app" data-ng-quick>
+        <div class="ng-quick__bar">
+          <label class="ng-search">
+            <span class="visually-hidden">Filter products</span>
+            <input type="search" class="cfg-input" placeholder="Filter by name or SKU" data-filter autocomplete="off">
+          </label>
+          {%- if last_order -%}
+            <script type="application/json" data-last-order>
+              { {%- for line in last_order.line_items -%}"{{ line.variant_id }}": {{ line.quantity }}{% unless forloop.last %},{% endunless %}{%- endfor -%} }
+            </script>
+            <button type="button" class="cfg-btn cfg-btn--ghost ng-btn-sm" data-load-last>{% render 'cfg-icon', name: 'refresh' %}Load last order {{ last_order.name }}</button>
+          {%- endif -%}
+        </div>
+        <div class="cfg-table-wrap ng-table-wrap">
+          <table class="ng-table ng-grid">
+            <caption class="visually-hidden">Quick order: enter cases per product</caption>
+            <thead>
+              <tr>
+                <th scope="col">Product</th>
+                <th scope="col">Stock</th>
+                <th scope="col" class="ng-num">Case price</th>
+                <th scope="col" class="ng-num">Cases</th>
+                <th scope="col" class="ng-num">Line total</th>
+              </tr>
+            </thead>
+            <tbody>
+              {%- for product in source.products -%}
+                <script type="application/json" data-cfg-product>{{ product | json }}</script>
+                {%- for variant in product.variants -%}
+                  <tr data-row data-variant="{{ variant.id }}" data-tiers="{{ product.metafields.custom.price_tiers.value | json | escape }}" data-search="{{ product.title | downcase | escape }} {{ variant.sku | downcase }}">
+                    <th scope="row">
+                      <span class="ng-prod">
+                        <span class="ng-prod__img">{%- render 'cfg-image', image: product.featured_image, widths: '480', sizes: '56px', alt: '' -%}</span>
+                        <span><span class="ng-prod__title">{{ product.title }}</span><span class="ng-prod__sku">{{ variant.sku }} · {{ product.metafields.custom.pack.value }}</span></span>
+                      </span>
+                    </th>
+                    <td>{%- if variant.available -%}<span class="ng-stock">In stock</span>{%- else -%}<span class="ng-stock ng-stock--out">Backorder</span>{%- endif -%}</td>
+                    <td class="ng-num" data-unit>{{ product.metafields.custom.price_tiers.value.first.price | money }}</td>
+                    <td class="ng-num">
+                      <div class="ng-qty" data-qty>
+                        <button type="button" data-qty-step="-1" aria-label="Fewer cases of {{ product.title | escape }}">{% render 'cfg-icon', name: 'minus' %}</button>
+                        <input type="number" inputmode="numeric" min="0" max="999" step="1" value="0" aria-label="Cases of {{ product.title | escape }}" data-cases>
+                        <button type="button" data-qty-step="1" aria-label="More cases of {{ product.title | escape }}">{% render 'cfg-icon', name: 'plus' %}</button>
+                      </div>
+                    </td>
+                    <td class="ng-num" data-line>—</td>
+                  </tr>
+                {%- endfor -%}
+              {%- endfor -%}
+            </tbody>
+          </table>
+        </div>
+        <div class="ng-summary" data-summary>
+          <p><strong data-sum-lines>0</strong> lines · <strong data-sum-cases>0</strong> cases</p>
+          <p class="ng-summary__total"><span>Subtotal</span><strong data-sum-total>$0.00</strong></p>
+          <button type="button" class="cfg-btn cfg-btn--primary" data-add-all disabled>Add to cart</button>
+        </div>
+        <p class="cfg-form-error" data-form-error role="alert" hidden></p>
+      </ng-quick-order>
+    {%- else -%}
+      <div class="ng-locked-grid">
+        <div class="ng-locked-grid__rows" aria-hidden="true">
+          {%- for product in source.products limit: 5 -%}
+            <div class="ng-ghost-row"><span class="ng-ghost-row__img"></span><span>{{ product.title }}</span><span class="ng-ghost-bar"></span><span class="ng-ghost-qty"></span></div>
+          {%- endfor -%}
+        </div>
+        <div class="ng-locked-grid__card">
+          <p class="ng-locked-grid__icon">{% render 'cfg-icon', name: 'lock' %}</p>
+          <h3>{{ section.settings.locked_heading }}</h3>
+          <p>{{ section.settings.locked_text }}</p>
+          <div class="ng-locked-grid__actions">
+            <a class="cfg-btn cfg-btn--primary" href="{{ routes.account_login_url }}" data-trade-login>Log in</a>
+            <a class="cfg-btn cfg-btn--ghost" href="#apply">Apply for trade</a>
+          </div>
+        </div>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+<script type="module" src="{{ 'northgate.js' | asset_url }}"></script>
+
+{% schema %}
+{
+  "name": "Northgate · Quick order",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Quick order" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Reorder in under a minute." },
+    { "type": "textarea", "id": "text", "label": "Text" },
+    { "type": "collection", "id": "collection", "label": "Collection" },
+    { "type": "text", "id": "locked_heading", "label": "Locked heading", "default": "The order grid is for approved trade accounts" },
+    { "type": "textarea", "id": "locked_text", "label": "Locked text", "default": "Log in to order by the case with your tier pricing, or apply in two minutes." }
+  ],
+  "presets": [{ "name": "Northgate · Quick order" }]
+}
+{% endschema %}

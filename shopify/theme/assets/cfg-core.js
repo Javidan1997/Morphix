@@ -114,6 +114,9 @@ const demoCart = {
         }
       }
       const properties = Object.fromEntries(Object.entries(item.properties || {}).filter(([, v]) => v !== "" && v != null));
+      // B2B tiers: on a live store the tier discount Function prices the line
+      // at checkout; the demo mirrors that with the informational _tier_price.
+      if (properties._tier_price) price = Number(properties._tier_price);
       const key = `${variant.id}:${item.selling_plan || ""}:${JSON.stringify(properties)}`;
       const existing = demoState.items.find((l) => l.key === key);
       if (existing) existing.quantity += Number(item.quantity || 1);

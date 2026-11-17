@@ -1,0 +1,17 @@
+{
+  "type": "footer",
+  "name": "Northgate footer",
+  "sections": {
+    "footer": {
+      "type": "cfg-footer",
+      "settings": { "logo_text": "Northgate Supply", "blurb": "<p>Wholesale shipping and warehouse supplies for brands, 3PLs and hospitality groups. Sold by the case, delivered by the pallet.</p>", "legal": "Trade prices exclude tax." },
+      "blocks": {
+        "c1": { "type": "column", "settings": { "heading": "Catalog", "links": "Boxes | #pricing\nTape & film | #pricing\nMailers | #pricing\nWarehouse | #pricing" } },
+        "c2": { "type": "column", "settings": { "heading": "Trade", "links": "Open an account | #apply\nQuick order | #quick-order\nNet-30 terms | #faq" } },
+        "c3": { "type": "column", "settings": { "heading": "Support", "links": "Delivery | #faq\nReturns | #faq\nContact | #faq" } }
+      },
+      "block_order": ["c1", "c2", "c3"]
+    }
+  },
+  "order": ["footer"]
+}

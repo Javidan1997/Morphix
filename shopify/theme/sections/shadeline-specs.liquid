@@ -1,0 +1,37 @@
+{%- comment -%} Shadeline — engineering specs on a dark band with an image. {%- endcomment -%}
+<section class="sl-specs" id="engineering" aria-labelledby="SlSpecs-{{ section.id }}">
+  <div class="cfg-container sl-specs__grid">
+    <div class="sl-specs__media" data-reveal>
+      {%- render 'cfg-image', image: section.settings.image, asset: section.settings.asset, width: 1200, height: 1200, widths: '480,800,1200', alt: section.settings.image_alt, sizes: '(min-width: 990px) 45vw, 100vw' -%}
+    </div>
+    <div>
+      <p class="sl-eyebrow">{{ section.settings.eyebrow }}</p>
+      <h2 id="SlSpecs-{{ section.id }}" class="sl-h2">{{ section.settings.heading }}</h2>
+      <p class="sl-specs__lead">{{ section.settings.text }}</p>
+      <dl class="sl-specs__list">
+        {%- for block in section.blocks -%}
+          <div {{ block.shopify_attributes }} data-reveal><dt>{{ block.settings.label }}</dt><dd>{{ block.settings.value }}</dd></div>
+        {%- endfor -%}
+      </dl>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Shadeline · Specs",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Engineering" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Built like architecture." },
+    { "type": "textarea", "id": "text", "label": "Text" },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "asset", "label": "Fallback asset", "default": "shadeline-top" },
+    { "type": "text", "id": "image_alt", "label": "Image alt", "default": "Louvres open, seen from above" }
+  ],
+  "blocks": [
+    { "type": "spec", "name": "Spec", "settings": [{ "type": "text", "id": "label", "label": "Label" }, { "type": "text", "id": "value", "label": "Value" }] }
+  ],
+  "max_blocks": 8,
+  "presets": [{ "name": "Shadeline · Specs" }]
+}
+{% endschema %}
