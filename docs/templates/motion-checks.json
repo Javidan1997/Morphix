@@ -1,0 +1,22 @@
+[
+  {
+    "slug": "forma",
+    "videoTime": 2.957777,
+    "slide": 65.13888888888889,
+    "desktop": "1440x900",
+    "mobile": "390x844",
+    "cart": "passed",
+    "reducedMotion": "passed",
+    "errors": []
+  },
+  {
+    "slug": "edito",
+    "videoTime": 2.963888,
+    "slide": 70.33110119047619,
+    "desktop": "1440x900",
+    "mobile": "390x844",
+    "cart": "passed",
+    "reducedMotion": "passed",
+    "errors": []
+  }
+]

@@ -1,11 +1,11 @@
 <!doctype html>
 {%- comment -%}
-  One layout serves all five concept brands. The brand comes from the
+  One layout serves the concept brands. The brand comes from the
   template suffix (product.vela → "vela"), so a single installed theme can run
   every concept side by side; settings.brand covers un-suffixed templates.
 {%- endcomment -%}
 {%- liquid
-  assign brands = 'vela,shadeline,northgate,linkcore,aurel' | split: ','
+  assign brands = 'vela,shadeline,northgate,linkcore,aurel,forma,edito' | split: ','
   assign brand = settings.brand
   if brands contains template.suffix
     assign brand = template.suffix
@@ -59,6 +59,8 @@
       {%- when 'northgate' -%}{% sections 'northgate-header-group' %}
       {%- when 'linkcore' -%}{% sections 'linkcore-header-group' %}
       {%- when 'aurel' -%}{% sections 'aurel-header-group' %}
+      {%- when 'forma' -%}{% sections 'forma-header-group' %}
+      {%- when 'edito' -%}{% sections 'edito-header-group' %}
     {%- endcase %}
     <main id="MainContent" tabindex="-1">
       {{ content_for_layout }}
@@ -69,6 +71,8 @@
       {%- when 'northgate' -%}{% sections 'northgate-footer-group' %}
       {%- when 'linkcore' -%}{% sections 'linkcore-footer-group' %}
       {%- when 'aurel' -%}{% sections 'aurel-footer-group' %}
+      {%- when 'forma' -%}{% sections 'forma-footer-group' %}
+      {%- when 'edito' -%}{% sections 'edito-footer-group' %}
     {%- endcase %}
     {%- render 'cfg-cart-drawer' %}
   </body>

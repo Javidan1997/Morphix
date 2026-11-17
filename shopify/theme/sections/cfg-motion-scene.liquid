@@ -1,0 +1,29 @@
+{%- assign story_brand = template.suffix | default: settings.brand -%}
+<section id="editorial" class="motion-scene" data-motion-scene aria-labelledby="Scene-{{ section.id }}">
+  <div class="motion-scene__stage">
+    {%- for block in section.blocks -%}
+      <div class="motion-scene__panel" data-scene-panel {{ block.shopify_attributes }}>
+        {%- assign scene_asset = story_brand | append: '-' | append: block.settings.asset -%}
+        {%- render 'cfg-image', image: block.settings.image, asset: scene_asset, width: 1600, height: 900, alt: block.settings.alt -%}
+        <h2 id="{% if forloop.first %}Scene-{{ section.id }}{% else %}Chapter-{{ block.id }}{% endif %}">{{ block.settings.heading | escape }}</h2>
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Sliding story chapters",
+  "settings": [],
+  "blocks": [{
+    "type": "chapter", "name": "Chapter",
+    "settings": [
+      { "type": "text", "id": "heading", "label": "Heading", "default": "Space to make your own." },
+      { "type": "image_picker", "id": "image", "label": "Background image" },
+      { "type": "text", "id": "alt", "label": "Image description", "default": "Campaign photograph" },
+      { "type": "select", "id": "asset", "label": "Bundled photograph", "options": [{"value":"hero","label":"Campaign wide"},{"value":"scene","label":"Campaign close"}], "default": "scene" }
+    ]
+  }],
+  "max_blocks": 3,
+  "presets": [{ "name": "Sliding story chapters", "blocks": [{"type":"chapter"},{"type":"chapter"}] }]
+}
+{% endschema %}

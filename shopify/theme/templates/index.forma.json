@@ -1,0 +1,94 @@
+{
+  "sections": {
+    "hero": {
+      "type": "cfg-motion-hero",
+      "settings": {
+        "heading": "A slower way to live.",
+        "button_label": "Explore the collection",
+        "image_alt": "Sculptural cream sofa, travertine table and walnut chair in a sunlit architectural room"
+      }
+    },
+    "editorial": {
+      "type": "cfg-motion-editorial",
+      "settings": {
+        "heading": "Objects with a sense of belonging."
+      },
+      "blocks": {
+        "image0": {
+          "type": "image",
+          "settings": {
+            "asset": "detail",
+            "alt": "Travertine material detail"
+          }
+        }
+      },
+      "block_order": [
+        "image0"
+      ]
+    },
+    "scene": {
+      "type": "cfg-motion-scene",
+      "settings": {},
+      "blocks": {
+        "first": {
+          "type": "chapter",
+          "settings": {
+            "heading": "Space to make your own.",
+            "asset": "scene",
+            "alt": "Sculptural cream sofa, travertine table and walnut chair in a sunlit architectural room"
+          }
+        },
+        "second": {
+          "type": "chapter",
+          "settings": {
+            "heading": "A different perspective.",
+            "asset": "hero",
+            "alt": "Sculptural cream sofa, travertine table and walnut chair in a sunlit architectural room"
+          }
+        }
+      },
+      "block_order": [
+        "first",
+        "second"
+      ]
+    },
+    "products": {
+      "type": "cfg-motion-products",
+      "settings": {},
+      "blocks": {
+        "product1": {
+          "type": "product",
+          "settings": {
+            "demo_handle": "arc-chair",
+            "title": "Arc lounge chair"
+          }
+        },
+        "product2": {
+          "type": "product",
+          "settings": {
+            "demo_handle": "low-table",
+            "title": "Low table"
+          }
+        },
+        "product3": {
+          "type": "product",
+          "settings": {
+            "demo_handle": "cloud-sofa",
+            "title": "Cloud sofa"
+          }
+        }
+      },
+      "block_order": [
+        "product1",
+        "product2",
+        "product3"
+      ]
+    }
+  },
+  "order": [
+    "hero",
+    "editorial",
+    "scene",
+    "products"
+  ]
+}

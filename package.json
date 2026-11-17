@@ -12,7 +12,9 @@
     "templates:build": "node scripts/templates/build-demos.mjs",
     "theme:zip": "node scripts/templates/zip-theme.mjs",
     "templates:images": "node scripts/templates/images.mjs",
-    "theme:viewer": "vite build -c shopify/vite.viewer.config.js"
+    "theme:viewer": "vite build -c shopify/vite.viewer.config.js",
+    "templates:check-motion": "node scripts/templates/check-motion.mjs",
+    "templates:capture-motion": "node scripts/templates/capture-motion.mjs"
   },
   "dependencies": {
     "@fontsource-variable/geist": "^5.3.0",

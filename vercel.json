@@ -21,7 +21,7 @@
       "destination": "/pergola-configurator.html"
     },
     {
-      "source": "/shopify-templates/:slug(shadeline|vela|northgate|linkcore|aurel)",
+      "source": "/shopify-templates/:slug(shadeline|vela|northgate|linkcore|aurel|forma|edito)",
       "destination": "/shopify-templates/:slug.html"
     },
     {

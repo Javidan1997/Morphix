@@ -1,0 +1,47 @@
+{%- assign story_brand = template.suffix | default: settings.brand -%}
+<section id="collection" class="motion-collection" aria-label="{{ 'motion.collection' | t }}">
+  <div class="motion-collection__rail">
+    {%- for block in section.blocks -%}
+      {%- assign item = block.settings.product -%}
+      {%- if item == blank and settings.demo_mode -%}{%- assign item = all_products[block.settings.demo_handle] -%}{%- endif -%}
+      <article class="motion-product" {{ block.shopify_attributes }}>
+        {%- assign product_asset = story_brand | append: '-product-' | append: forloop.index -%}
+        {%- render 'cfg-image', image: item.featured_image, asset: product_asset, width: 800, height: 1000, widths: '480,800', alt: item.title, sizes: '(min-width: 760px) 33vw, 82vw' -%}
+        <div class="motion-product__caption">
+          <h2>{{ item.title | default: block.settings.title | escape }}</h2>
+          {%- if item != blank -%}
+            <p>{{ item.price | money_without_trailing_zeros }}</p>
+            <script type="application/json" data-cfg-product>{{ item | json }}</script>
+            <cfg-product-form>
+              {% form 'product', item %}
+                {%- if item.variants.size > 1 -%}
+                  <label class="visually-hidden" for="Variant-{{ section.id }}-{{ block.id }}">{{ 'motion.options' | t }}</label>
+                  <select name="id" id="Variant-{{ section.id }}-{{ block.id }}">
+                    {%- for variant in item.variants -%}
+                      <option value="{{ variant.id }}"{% unless variant.available %} disabled{% endunless %}>{{ variant.title | escape }} — {{ variant.price | money_without_trailing_zeros }}</option>
+                    {%- endfor -%}
+                  </select>
+                {%- else -%}<input type="hidden" name="id" value="{{ item.selected_or_first_available_variant.id }}">{%- endif -%}
+                <button class="motion-link" type="submit"{% unless item.available %} disabled{% endunless %}>{{ 'motion.add' | t }}{% render 'cfg-icon', name: 'plus' %}</button>
+                <p data-form-error role="alert" hidden></p>
+              {% endform %}
+            </cfg-product-form>
+          {%- else -%}<p>{{ 'motion.choose_product' | t }}</p>{%- endif -%}
+        </div>
+      </article>
+    {%- endfor -%}
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Editorial collection rail",
+  "settings": [],
+  "blocks": [{ "type": "product", "name": "Product", "settings": [
+    { "type": "product", "id": "product", "label": "Product" },
+    { "type": "text", "id": "title", "label": "Placeholder title", "default": "Select a product" },
+    { "type": "text", "id": "demo_handle", "label": "Concept fixture handle", "info": "Only used in demo mode." }
+  ] }],
+  "max_blocks": 6,
+  "presets": [{ "name": "Editorial collection rail", "blocks": [{"type":"product"},{"type":"product"},{"type":"product"}] }]
+}
+{% endschema %}

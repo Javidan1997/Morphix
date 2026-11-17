@@ -11,9 +11,55 @@ export const templateFilters = [
   { id: "b2b", label: "B2B" },
   { id: "catalog", label: "Catalog" },
   { id: "premium", label: "Premium brand" },
+  { id: "furniture", label: "Furniture" },
+  { id: "fashion", label: "Fashion" },
+  { id: "motion", label: "Scroll storytelling" },
 ];
 
 export const templates = [
+  {
+    "slug": "forma",
+    "name": "Forma",
+    "sector": "Luxury furniture",
+    "oneLiner": "A cinematic furniture showroom with scroll-controlled film, drifting material details and sliding room chapters.",
+    "tags": [
+      "Scroll video",
+      "Sliding scenes",
+      "Shop the collection"
+    ],
+    "filters": [
+      "premium",
+      "landing",
+      "motion",
+      "furniture"
+    ],
+    "hook": "Pinned story chapters + scroll-linked video + accessible motion controls",
+    "accent": "#9a8065",
+    "title": "Forma — A slower way to live | Concept store by Configuro",
+    "description": "Original luxury furniture Shopify concept by Configuro with scroll-linked video, sliding campaign imagery and a shoppable collection."
+  },
+  {
+    "slug": "edito",
+    "name": "Édito",
+    "sector": "Editorial fashion",
+    "oneLiner": "A fashion editorial with scroll-controlled film, drifting image rows and a horizontal shoppable collection.",
+    "tags": [
+      "Scroll video",
+      "Moving lookbook",
+      "Shop the collection"
+    ],
+    "filters": [
+      "premium",
+      "landing",
+      "motion",
+      "fashion"
+    ],
+    "hook": "Drifting editorial + horizontal collection + native size variants",
+    "accent": "#302d28",
+    "title": "Édito — Wear your own point of view | Concept store by Configuro",
+    "description": "Original luxury fashion Shopify concept by Configuro with scroll-linked video, sliding campaign imagery and a shoppable collection."
+  },
+
   {
     slug: "vela",
     name: "Vela",

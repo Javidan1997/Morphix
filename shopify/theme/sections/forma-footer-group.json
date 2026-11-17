@@ -1,0 +1,19 @@
+{
+  "type": "footer",
+  "name": "Forma footer",
+  "sections": {
+    "footer": {
+      "type": "cfg-footer",
+      "settings": {
+        "logo_text": "Forma",
+        "blurb": "",
+        "legal": ""
+      },
+      "blocks": {},
+      "block_order": []
+    }
+  },
+  "order": [
+    "footer"
+  ]
+}

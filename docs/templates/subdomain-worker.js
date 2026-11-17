@@ -11,7 +11,7 @@
 // Route: *.configuro.studio/*   (see docs/templates/README.md → Subdomains)
 
 const ORIGIN = "https://configuro.studio";
-const SLUGS = new Set(["shadeline", "vela", "northgate", "linkcore", "aurel"]);
+const SLUGS = new Set(["shadeline", "vela", "northgate", "linkcore", "aurel", "forma", "edito"]);
 
 export default {
   async fetch(request) {

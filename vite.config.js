@@ -3,6 +3,7 @@ import react from "@vitejs/plugin-react";
 import { createReadStream, existsSync } from "node:fs";
 import { extname, join } from "node:path";
 import { pathToFileURL } from "node:url";
+import { serveVideo } from "./scripts/templates/serve-video.mjs";
 
 // The pergola landing page is a separate, lightweight HTML entry so a direct
 // visit loads only its own code, not the whole site bundle.
@@ -29,8 +30,8 @@ function pergolaDevRoutes() {
 // /shopify-templates/<slug> demos are static pages rendered from the Shopify theme
 // (scripts/templates/build-demos.mjs). In dev, render them on request and serve
 // theme assets live, so edits to shopify/theme show on reload.
-const TEMPLATE_SLUGS = /^\/shopify-templates\/(shadeline|vela|northgate|linkcore|aurel)\/?$/;
-const ASSET_TYPES = { ".css": "text/css", ".js": "text/javascript", ".svg": "image/svg+xml", ".webp": "image/webp", ".jpg": "image/jpeg", ".woff2": "font/woff2" };
+const TEMPLATE_SLUGS = /^\/shopify-templates\/(shadeline|vela|northgate|linkcore|aurel|forma|edito)\/?$/;
+const ASSET_TYPES = { ".css": "text/css", ".js": "text/javascript", ".svg": "image/svg+xml", ".webp": "image/webp", ".jpg": "image/jpeg", ".woff2": "font/woff2", ".mp4": "video/mp4" };
 function templateDemoRoutes() {
   return {
     name: "template-demo-routes",
@@ -41,6 +42,7 @@ function templateDemoRoutes() {
         if (asset) {
           const file = join(process.cwd(), "shopify", "theme", "assets", asset[1]);
           if (!existsSync(file)) return next();
+          if (extname(file) === '.mp4') return serveVideo(req, res, file);
           res.setHeader("Content-Type", ASSET_TYPES[extname(file)] || "application/octet-stream");
           return createReadStream(file).pipe(res);
         }

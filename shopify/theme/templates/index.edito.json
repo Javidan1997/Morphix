@@ -1,0 +1,110 @@
+{
+  "sections": {
+    "hero": {
+      "type": "cfg-motion-hero",
+      "settings": {
+        "heading": "Wear your own point of view.",
+        "button_label": "Discover the edit",
+        "image_alt": "Models wearing ivory tailoring and a black dress in a Paris limestone courtyard"
+      }
+    },
+    "editorial": {
+      "type": "cfg-motion-editorial",
+      "settings": {
+        "heading": "A study in movement."
+      },
+      "blocks": {
+        "image0": {
+          "type": "image",
+          "settings": {
+            "asset": "product-1",
+            "alt": "The tailored jacket"
+          }
+        },
+        "image1": {
+          "type": "image",
+          "settings": {
+            "asset": "product-2",
+            "alt": "The column dress"
+          }
+        },
+        "image2": {
+          "type": "image",
+          "settings": {
+            "asset": "product-3",
+            "alt": "The wide-leg trouser"
+          }
+        }
+      },
+      "block_order": [
+        "image0",
+        "image1",
+        "image2"
+      ]
+    },
+    "scene": {
+      "type": "cfg-motion-scene",
+      "settings": {},
+      "blocks": {
+        "first": {
+          "type": "chapter",
+          "settings": {
+            "heading": "Between moments.",
+            "asset": "scene",
+            "alt": "Models wearing ivory tailoring and a black dress in a Paris limestone courtyard"
+          }
+        },
+        "second": {
+          "type": "chapter",
+          "settings": {
+            "heading": "An everyday kind of extraordinary.",
+            "asset": "hero",
+            "alt": "Models wearing ivory tailoring and a black dress in a Paris limestone courtyard"
+          }
+        }
+      },
+      "block_order": [
+        "first",
+        "second"
+      ]
+    },
+    "products": {
+      "type": "cfg-motion-products",
+      "settings": {},
+      "blocks": {
+        "product1": {
+          "type": "product",
+          "settings": {
+            "demo_handle": "tailored-jacket",
+            "title": "The tailored jacket"
+          }
+        },
+        "product2": {
+          "type": "product",
+          "settings": {
+            "demo_handle": "column-dress",
+            "title": "The column dress"
+          }
+        },
+        "product3": {
+          "type": "product",
+          "settings": {
+            "demo_handle": "wide-leg-trouser",
+            "title": "The wide-leg trouser"
+          }
+        }
+      },
+      "block_order": [
+        "product1",
+        "product2",
+        "product3"
+      ]
+    }
+  },
+  "order": [
+    "hero",
+    "editorial",
+    "scene",
+    "products"
+  ]
+}

@@ -1,10 +1,12 @@
 # Shopify Templates — configuro.studio/shopify-templates
 
-Five concept Shopify storefronts for invented brands, published as a gallery
+Seven concept Shopify storefronts for invented brands, published as a gallery
 on configuro.studio and shipped as one installable Online Store 2.0 theme.
 
 | Demo | URL | Engineering hook | Lighthouse mobile (P / A / BP / SEO) |
 |---|---|---|---|
+| Forma | `/shopify-templates/forma` | Scroll-controlled film, sliding room chapters, collection cart | Not measured |
+| Édito | `/shopify-templates/edito` | Scroll film, drifting editorial, horizontal collection, size variants | Not measured |
 | Vela | `/shopify-templates/vela` | 1/2/3-pack variants + native selling plans, sticky ATC | 100 / 100 / 100 / 100 |
 | Shadeline | `/shopify-templates/shadeline` | Configuro's production pergola engine, metafield price rules, line-item properties | 100 / 100 / 100 / 100 |
 | Northgate Supply | `/shopify-templates/northgate` | customer-tag gated tiers, quick order, HubSpot webhook, discount Function | 100 / 100 / 100 / 100 |
@@ -71,7 +73,7 @@ faces from Fontsource, so demos make no third-party requests.
 and Twitter tags with a 1200×630 image (`public/shopify-templates/og/<slug>.jpg`, also
 in theme assets as `<slug>-og.jpg`), an SVG favicon, and FAQPage JSON-LD
 where relevant. The gallery has its own OG image and an `ItemList` in its
-JSON-LD, and all five URLs are added to `sitemap.xml`.
+JSON-LD, and all seven URLs are added to `sitemap.xml`.
 
 ### Commands
 
@@ -97,7 +99,7 @@ on push to `main`; `public/CNAME` = `configuro.studio`).
 | `/templates` | unchanged | the existing Template Studio builder |
 
 `vercel.json` gets the matching rewrite
-(`/shopify-templates/:slug(shadeline|vela|northgate|linkcore|aurel)` →
+(`/shopify-templates/:slug(shadeline|vela|northgate|linkcore|aurel|forma|edito)` →
 `/shopify-templates/:slug.html`), so the site still works if it's deployed to Vercel.
 The Vite dev server renders demos on request (`templateDemoRoutes()` in
 `vite.config.js`).
@@ -132,7 +134,7 @@ Check with `curl -sI https://vela.configuro.studio/` (expect 200 plus a
 
 On **Vercel** instead: point the nameservers at Vercel, add
 `*.configuro.studio` as a wildcard domain, and use a rewrite with a `has`
-host condition (`{ "type": "host", "value": "(?<slug>vela|shadeline|northgate|linkcore|aurel)\\.configuro\\.studio" }`)
+host condition (`{ "type": "host", "value": "(?<slug>vela|shadeline|northgate|linkcore|aurel|forma|edito)\\.configuro\\.studio" }`)
 to `/shopify-templates/:slug.html`.
 
 ## Deliverables in this folder
