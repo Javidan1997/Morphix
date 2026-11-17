@@ -181,8 +181,8 @@ function App() {
           <Route path="/work" element={<Work content={content} />} />
           <Route path="/pricing" element={<Pricing content={content} />} />
           <Route path="/playground" element={<Playground content={content} />} />
-          <Route path="/templates" element={<TemplateGallery content={content} language={language} />} />
-          <Route path="/template-studio" element={<Templates content={content} language={language} />} />
+          <Route path="/templates" element={<Templates content={content} language={language} />} />
+          <Route path="/shopify-templates" element={<TemplateGallery content={content} language={language} />} />
           <Route path="/about" element={<About content={content} />} />
           <Route path="/contact" element={<Contact content={content} />} />
           <Route path="/insights" element={<Insights content={content} />} />

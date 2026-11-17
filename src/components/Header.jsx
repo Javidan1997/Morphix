@@ -47,10 +47,11 @@ function Header({ language, setLanguage }) {
     };
   }, [mobileMenuOpen]);
 
+  // Trimmed primary nav for clarity (Templates moved to footer-only access).
   const navLinks = [
     { to: "/", label: content.nav.home },
     { to: "/work", label: content.nav.work },
-    { to: "/templates", label: content.nav.templates },
+    { to: "/shopify-templates", label: content.nav.shopifyTemplates },
     { to: "/services", label: content.nav.services },
     { to: "/playground", label: content.nav.playground },
     { to: "/pricing", label: content.nav.pricing },

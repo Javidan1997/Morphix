@@ -18,6 +18,7 @@ const az = {
     services: "Xidmətlər",
     playground: "Playground",
     templates: "Şablonlar",
+    shopifyTemplates: "Shopify Şablonları",
     work: "İşlər",
     pricing: "Qiymətlər",
     about: "Haqqımızda",

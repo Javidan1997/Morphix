@@ -26,10 +26,10 @@ function pergolaDevRoutes() {
   };
 }
 
-// /templates/<slug> demos are static pages rendered from the Shopify theme
+// /shopify-templates/<slug> demos are static pages rendered from the Shopify theme
 // (scripts/templates/build-demos.mjs). In dev, render them on request and serve
 // theme assets live, so edits to shopify/theme show on reload.
-const TEMPLATE_SLUGS = /^\/templates\/(shadeline|vela|northgate|linkcore|aurel)\/?$/;
+const TEMPLATE_SLUGS = /^\/shopify-templates\/(shadeline|vela|northgate|linkcore|aurel)\/?$/;
 const ASSET_TYPES = { ".css": "text/css", ".js": "text/javascript", ".svg": "image/svg+xml", ".webp": "image/webp", ".jpg": "image/jpeg", ".woff2": "font/woff2" };
 function templateDemoRoutes() {
   return {
@@ -37,7 +37,7 @@ function templateDemoRoutes() {
     configureServer(server) {
       server.middlewares.use(async (req, res, next) => {
         const [path] = req.url.split("?");
-        const asset = path.match(/^\/templates\/assets\/([\w.-]+)$/);
+        const asset = path.match(/^\/shopify-templates\/assets\/([\w.-]+)$/);
         if (asset) {
           const file = join(process.cwd(), "shopify", "theme", "assets", asset[1]);
           if (!existsSync(file)) return next();

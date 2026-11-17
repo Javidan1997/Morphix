@@ -18,6 +18,7 @@ const en = {
     services: "Services",
     playground: "Live demo",
     templates: "Templates",
+    shopifyTemplates: "Shopify Templates",
     work: "Work",
     pricing: "Pricing",
     about: "About",

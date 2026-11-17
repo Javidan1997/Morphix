@@ -1,12 +1,12 @@
 // Renders the public concept demos from the Shopify theme.
 //
-//   node scripts/templates/build-demos.mjs            # → dist/templates/<slug>.html
+//   node scripts/templates/build-demos.mjs            # → dist/shopify-templates/<slug>.html
 //   node scripts/templates/build-demos.mjs --out tmp  # another output root
 //
 // For each demo in src/data/templateGallery.js it loads the fixture in
 // shopify/demo/<slug>.mjs, renders the theme's JSON template through the
 // Shopify-compatible engine and writes a static page. Theme assets are copied
-// verbatim to /templates/assets/, so the demo runs the exact CSS/JS a store
+// verbatim to /shopify-templates/assets/, so the demo runs the exact CSS/JS a store
 // installing shopify/theme would. Also appends the demo URLs to sitemap.xml.
 
 import { cpSync, existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync, statSync } from "node:fs";
@@ -20,10 +20,10 @@ const root = join(here, "..", "..");
 const themeDir = join(root, "shopify", "theme");
 const demoDir = join(root, "shopify", "demo");
 
-const { templates, templateUrl, TEMPLATE_ORIGIN } = await import(pathToFileURL(join(root, "src", "data", "templateGallery.js")).href);
+const { templates, templateUrl, TEMPLATE_ORIGIN, TEMPLATES_PATH } = await import(pathToFileURL(join(root, "src", "data", "templateGallery.js")).href);
 const { shop } = await import(pathToFileURL(join(demoDir, "shop.mjs")).href);
 
-export const ASSET_BASE = "/templates/assets/";
+export const ASSET_BASE = "/shopify-templates/assets/";
 
 function assetVersion() {
   const hash = createHash("sha1");
@@ -41,7 +41,7 @@ export async function renderDemo(slug, { version = assetVersion() } = {}) {
   // Cache-bust fixtures in dev so edits show without a restart.
   const fixture = (await import(`${pathToFileURL(join(demoDir, `${slug}.mjs`)).href}?t=${Date.now()}`)).default;
   const locale = JSON.parse(readFileSync(join(themeDir, "locales", "en.default.json"), "utf8"));
-  const settings = { ...themeSettings(themeDir), demo_mode: true, demo_back_url: `${TEMPLATE_ORIGIN}/templates` };
+  const settings = { ...themeSettings(themeDir), demo_mode: true, demo_back_url: `${TEMPLATE_ORIGIN}${TEMPLATES_PATH}` };
   const data = { shop, all_products: fixture.products || {}, collections: fixture.collections || {} };
   const { renderTemplate, renderSection } = createShopifyEngine({ themeDir, assetBase: ASSET_BASE, assetVersion: version, locale, data });
 
@@ -57,7 +57,7 @@ export async function renderDemo(slug, { version = assetVersion() } = {}) {
     page_title: meta.title,
     page_description: meta.description,
     canonical_url: templateUrl(slug),
-    page_image: `${TEMPLATE_ORIGIN}/templates/og/${slug}.jpg`,
+    page_image: `${TEMPLATE_ORIGIN}${TEMPLATES_PATH}/og/${slug}.jpg`,
     content_for_header: "",
     all_products: data.all_products,
     collections: data.collections,
@@ -88,16 +88,16 @@ function tidy(html) {
 }
 
 export async function buildDemos(outRoot, only = []) {
-  const outDir = join(outRoot, "templates");
+  const outDir = join(outRoot, TEMPLATES_PATH.slice(1));
   mkdirSync(join(outDir, "assets"), { recursive: true });
   cpSync(join(themeDir, "assets"), join(outDir, "assets"), { recursive: true });
   const version = assetVersion();
   for (const t of templates) {
     if (only.length && !only.includes(t.slug)) continue;
     const html = await renderDemo(t.slug, { version });
-    // GitHub Pages serves templates/vela.html at /templates/vela with a 200.
+    // GitHub Pages serves shopify-templates/vela.html at /shopify-templates/vela with a 200.
     writeFileSync(join(outDir, `${t.slug}.html`), html, "utf8");
-    console.log(`  templates/${t.slug}.html  ${(Buffer.byteLength(html) / 1024).toFixed(1)} KB`);
+    console.log(`  ${TEMPLATES_PATH.slice(1)}/${t.slug}.html  ${(Buffer.byteLength(html) / 1024).toFixed(1)} KB`);
   }
 
   const sitemap = join(outRoot, "sitemap.xml");

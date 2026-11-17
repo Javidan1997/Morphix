@@ -81,4 +81,6 @@ export const templates = [
   },
 ];
 
-export const templateUrl = (slug) => `${TEMPLATE_ORIGIN}/templates/${slug}`;
+// Demos live under their own page, separate from the existing /templates builder.
+export const TEMPLATES_PATH = "/shopify-templates";
+export const templateUrl = (slug) => `${TEMPLATE_ORIGIN}${TEMPLATES_PATH}/${slug}`;

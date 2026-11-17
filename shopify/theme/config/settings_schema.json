@@ -4,7 +4,7 @@
     "theme_name": "Configuro Concepts",
     "theme_version": "1.0.0",
     "theme_author": "Configuro",
-    "theme_documentation_url": "https://configuro.studio/templates",
+    "theme_documentation_url": "https://configuro.studio/shopify-templates",
     "theme_support_url": "https://configuro.studio/contact"
   },
   {
@@ -38,7 +38,7 @@
         "info": "Shows the 'Concept demo' bar and footer note. Cart, subscribe and forms work visually but nothing is sent and checkout is disabled.",
         "default": false
       },
-      { "type": "text", "id": "demo_back_url", "label": "Back to templates URL", "default": "https://configuro.studio/templates" }
+      { "type": "text", "id": "demo_back_url", "label": "Back to templates URL", "default": "https://configuro.studio/shopify-templates" }
     ]
   },
   {

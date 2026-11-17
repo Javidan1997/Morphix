@@ -14,7 +14,7 @@ Goal: a single-product supplement page that sells bundles and subscriptions with
 
 **Skills:** Shopify, Shopify Theme Development, Liquid, Conversion Rate Optimization, JavaScript
 
-**Project URL:** https://configuro.studio/templates/vela
+**Project URL:** https://configuro.studio/shopify-templates/vela
 
 **Images:** `screenshots/vela-desktop-1440.jpg`, `screenshots/vela-mobile-390.jpg`, `lighthouse/vela-lighthouse-mobile.png`
 
@@ -30,7 +30,7 @@ Goal: let buyers size a louvred pergola and see a real price before ever talking
 
 **Skills:** Shopify, Three.js, Shopify Theme Development, JavaScript, 3D Product Configurator
 
-**Project URL:** https://configuro.studio/templates/shadeline
+**Project URL:** https://configuro.studio/shopify-templates/shadeline
 
 **Images:** `screenshots/shadeline-desktop-1440.jpg`, `screenshots/shadeline-mobile-390.jpg`, `lighthouse/shadeline-lighthouse-mobile.png`
 
@@ -46,7 +46,7 @@ Goal: a wholesale storefront where trade buyers apply once, then reorder in unde
 
 **Skills:** Shopify, B2B Ecommerce, HubSpot, Shopify Functions, Liquid
 
-**Project URL:** https://configuro.studio/templates/northgate
+**Project URL:** https://configuro.studio/shopify-templates/northgate
 
 **Images:** `screenshots/northgate-desktop-1440.jpg`, `screenshots/northgate-mobile-390.jpg`, `lighthouse/northgate-lighthouse-mobile.png`
 
@@ -62,7 +62,7 @@ Goal: reduce wrong-dock returns for an IT hardware catalog. A four-product lineu
 
 **Skills:** Shopify, Python, GraphQL, Shopify API, JavaScript
 
-**Project URL:** https://configuro.studio/templates/linkcore
+**Project URL:** https://configuro.studio/shopify-templates/linkcore
 
 **Images:** `screenshots/linkcore-desktop-1440.jpg`, `screenshots/linkcore-mobile-390.jpg`, `lighthouse/linkcore-lighthouse-mobile.png`
 
@@ -78,6 +78,6 @@ Goal: an editorial product drop for fine jewellery that builds anticipation with
 
 **Skills:** Shopify, Shopify Theme Development, Web Design, Liquid, UX Design
 
-**Project URL:** https://configuro.studio/templates/aurel
+**Project URL:** https://configuro.studio/shopify-templates/aurel
 
 **Images:** `screenshots/aurel-desktop-1440.jpg`, `screenshots/aurel-mobile-390.jpg`, `lighthouse/aurel-lighthouse-mobile.png`

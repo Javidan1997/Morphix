@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { templateFilters, templates } from "../data/templateGallery";
+import { TEMPLATES_PATH, templateFilters, templates } from "../data/templateGallery";
 
 const COPY = {
   en: {
@@ -98,10 +98,10 @@ function TemplateGallery({ content, language }) {
               {visible.map((item, i) => (
                 <li className="tpl-card reveal" key={item.slug} style={{ "--tpl-accent": item.accent, transitionDelay: `${(i % 2) * 0.08}s` }}>
                   {/* Demos are standalone HTML pages, so these are full page loads. */}
-                  <a className="tpl-card-cover" href={`/templates/${item.slug}`} tabIndex={-1} aria-hidden="true">
+                  <a className="tpl-card-cover" href={`${TEMPLATES_PATH}/${item.slug}`} tabIndex={-1} aria-hidden="true">
                     <img
-                      src={`/templates/covers/${item.slug}-800.webp`}
-                      srcSet={`/templates/covers/${item.slug}-800.webp 800w, /templates/covers/${item.slug}-1200.webp 1200w`}
+                      src={`${TEMPLATES_PATH}/covers/${item.slug}-800.webp`}
+                      srcSet={`${TEMPLATES_PATH}/covers/${item.slug}-800.webp 800w, ${TEMPLATES_PATH}/covers/${item.slug}-1200.webp 1200w`}
                       sizes="(min-width: 960px) 540px, 100vw"
                       width="1200"
                       height="750"
@@ -118,7 +118,7 @@ function TemplateGallery({ content, language }) {
                     <p className="tpl-card-hook">
                       <span>{t.hook}</span> {item.hook}
                     </p>
-                    <a className="primary-button tpl-card-cta" href={`/templates/${item.slug}`}>
+                    <a className="primary-button tpl-card-cta" href={`${TEMPLATES_PATH}/${item.slug}`}>
                       {t.open}
                       <span className="visually-hidden">: {item.name}</span>
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
@@ -140,7 +140,7 @@ function TemplateGallery({ content, language }) {
               <h2>{t.studioTitle}</h2>
               <p>{t.studioCopy}</p>
             </div>
-            <Link className="secondary-button" to="/template-studio">
+            <Link className="secondary-button" to="/templates">
               {t.studioCta}
             </Link>
           </div>

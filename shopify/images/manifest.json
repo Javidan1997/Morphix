@@ -1,0 +1,102 @@
+{
+  "_readme": "Image slots for the five concept brands. Generate each prompt with GPT image generation, save the file as shopify/images/<slot>.png (or .jpg/.webp), then run `npm run templates:images`. Missing files get a labelled placeholder. Prompts: docs/templates/image-prompts.md (generated from this file).",
+  "brands": {
+    "vela": {
+      "name": "Vela (supplement)",
+      "direction": "Warm, calm, premium wellness editorial. Soft natural window light, cream and warm sand backgrounds, deep plum accents, champagne-gold details. Clean and minimal, shallow depth of field, photographic realism, no people unless stated, no extra text or logos beyond the jar label.",
+      "product": "a matte deep-plum ceramic supplement jar (about 7 cm wide, 9 cm tall) with a ribbed champagne-gold metal lid and a minimal cream label reading \"vela\" in a soft serif, with \"Evening Calm\" in small italic below",
+      "slots": [
+        { "slot": "vela-hero", "size": [1600, 1600], "gpt": "1024x1024", "focus": "centre", "usedIn": "Hero (right column)",
+          "prompt": "Hero product photograph of {product}, standing on a warm sand-coloured seamless backdrop, a few two-tone lavender-and-cream capsules scattered in front, a large soft pale circle in the background like a rising moon, late-evening warm light from the left casting a long soft shadow. Square composition with the jar slightly right of centre and empty space around it." },
+        { "slot": "vela-pack-1", "size": [1200, 1200], "gpt": "1024x1024", "focus": "centre", "usedIn": "Buy box: 1-jar pack",
+          "prompt": "Clean e-commerce photograph of one {product}, centred on a soft cream seamless background, gentle shadow, front-facing, label fully readable. Square." },
+        { "slot": "vela-pack-2", "size": [1200, 1200], "gpt": "1024x1024", "focus": "centre", "usedIn": "Buy box: 2-jar pack",
+          "prompt": "Clean e-commerce photograph of two identical {product}, side by side and slightly angled towards each other, centred on a soft cream seamless background, gentle shadows, labels readable. Square." },
+        { "slot": "vela-pack-3", "size": [1200, 1200], "gpt": "1024x1024", "focus": "centre", "usedIn": "Buy box: 3-jar pack",
+          "prompt": "Clean e-commerce photograph of three identical {product} in a gentle arc, the middle one slightly forward, on a soft cream seamless background, gentle shadows, labels readable. Square, all three jars fully in frame with margin." },
+        { "slot": "vela-capsules", "size": [1600, 1200], "gpt": "1536x1024", "focus": "centre", "usedIn": "Ingredients section image + buy-box thumbnail",
+          "prompt": "Close-up still life of two-tone vegan capsules (lavender cap, cream body) scattered on warm sand-coloured linen, with the base of {product} out of focus in the top-right corner, soft daylight, shallow depth of field, calm and tactile. Landscape 4:3." },
+        { "slot": "vela-ritual", "size": [1600, 1100], "gpt": "1536x1024", "focus": "centre", "usedIn": "Buy-box thumbnail (evening ritual)",
+          "prompt": "Moody evening lifestyle still life on a bedside table: {product}, a clear glass of water and a small ceramic dish holding two capsules, dim warm lamp light, deep plum and charcoal tones in the background, cosy and quiet. Landscape." }
+      ]
+    },
+    "shadeline": {
+      "name": "Shadeline (pergolas)",
+      "direction": "Architectural photography. Modern residential terrace, large-format stone pavers, rendered white or warm-grey walls, minimal planting, teak outdoor furniture. Crisp late-afternoon sun with louvre shadow stripes, true-to-life colours, eye-level or slightly elevated camera, no people, no visible text or logos.",
+      "product": "a free-standing louvred aluminium pergola about 4.2 m wide and 3.4 m deep, square 16 cm posts, a slim flat perimeter beam and motorised horizontal roof louvres partly open",
+      "slots": [
+        { "slot": "shadeline-hero", "size": [2000, 1125], "gpt": "1536x1024", "focus": "right", "usedIn": "Full-bleed hero (text sits on the left)",
+          "prompt": "Wide architectural photograph of {product} in a sand/beige powder-coat finish over a stone terrace beside a modern house, teak lounge sofa underneath, the pergola placed in the RIGHT half of the frame and the LEFT third kept calm (sky, wall, soft lawn) for headline text, louvre shadows striping the pavers. 16:9." },
+        { "slot": "shadeline-poster-anthracite", "size": [1600, 1200], "gpt": "1536x1024", "focus": "centre", "usedIn": "Configurator stage before 3D loads (Anthracite)",
+          "prompt": "Three-quarter view photograph of {product} in a dark anthracite grey (RAL 7016) matte finish, centred on a light stone terrace against a pale rendered wall, teak sofa and coffee table underneath, soft afternoon light. Landscape 4:3, whole pergola in frame with margin." },
+        { "slot": "shadeline-poster-sand", "size": [1600, 1200], "gpt": "1536x1024", "focus": "centre", "usedIn": "Configurator stage before 3D loads (Sand)",
+          "prompt": "Same composition as the anthracite poster: three-quarter view of {product} in a warm sand beige finish (RAL 1015), centred on a light stone terrace against a pale rendered wall, teak sofa underneath, soft afternoon light. Landscape 4:3, whole pergola in frame." },
+        { "slot": "shadeline-poster-white", "size": [1600, 1200], "gpt": "1536x1024", "focus": "centre", "usedIn": "Configurator stage before 3D loads (Signal white)",
+          "prompt": "Same composition as the anthracite poster: three-quarter view of {product} in a clean signal-white finish (RAL 9016), centred on a light stone terrace against a warm grey rendered wall so the white frame stands out, teak sofa underneath, soft afternoon light. Landscape 4:3." },
+        { "slot": "shadeline-top", "size": [1200, 1200], "gpt": "1024x1024", "focus": "centre", "usedIn": "Engineering section + add-on product images",
+          "prompt": "Elevated three-quarter view from above of {product} in anthracite, louvres open at about 45 degrees so the blade rhythm is clearly visible, striped sun shadows on the stone terrace below. Square." },
+        { "slot": "shadeline-night", "size": [1600, 1000], "gpt": "1536x1024", "focus": "centre", "usedIn": "Delivery section image",
+          "prompt": "Blue-hour photograph of {product} in anthracite with warm LED strip lighting glowing along the inside of the beams, louvres closed, one dark fabric ZIP side screen lowered on the left, glowing windows of the house behind, cosy terrace with sofa. Landscape 16:10." }
+      ]
+    },
+    "northgate": {
+      "name": "Northgate Supply (B2B packaging)",
+      "direction": "Clean industrial catalog photography. Light warm-grey seamless studio background (#e7e5df), soft even light with one key light from the upper left, crisp edges, realistic kraft and plastic materials. Packaging may carry a small black \"NORTHGATE\" wordmark with a short orange bar; no other text or real brands.",
+      "product": "plain brown corrugated kraft shipping boxes",
+      "slots": [
+        { "slot": "northgate-hero", "size": [1600, 1200], "gpt": "1536x1024", "focus": "centre", "usedIn": "Hero image",
+          "prompt": "Catalog photograph of a wooden pallet stacked three layers high with {product} wrapped in clear stretch film, a single loose box and a roll of kraft tape on the floor beside it, three-quarter view, light warm-grey seamless studio background, soft shadows. Landscape 4:3." },
+        { "slot": "northgate-box-s", "size": [1200, 1200], "gpt": "1024x1024", "focus": "centre", "usedIn": "Product: Shipping box S",
+          "prompt": "Catalog photograph of one small closed kraft corrugated shipping box (300 × 200 × 150 mm) sealed with kraft tape, three-quarter view, light warm-grey seamless background, soft shadow. Square, product centred." },
+        { "slot": "northgate-box-m", "size": [1200, 1200], "gpt": "1024x1024", "focus": "centre", "usedIn": "Product: Shipping box M",
+          "prompt": "Catalog photograph of one medium closed kraft corrugated shipping box (400 × 300 × 250 mm) sealed with kraft tape, black \"this side up\" arrows on the side, three-quarter view, light warm-grey seamless background. Square, centred." },
+        { "slot": "northgate-box-l", "size": [1200, 1200], "gpt": "1024x1024", "focus": "centre", "usedIn": "Product: Shipping box L",
+          "prompt": "Catalog photograph of one large double-wall kraft corrugated shipping box (600 × 400 × 400 mm), sealed, three-quarter view, light warm-grey seamless background, soft shadow. Square, centred." },
+        { "slot": "northgate-tape", "size": [1200, 1200], "gpt": "1024x1024", "focus": "centre", "usedIn": "Product: Kraft packing tape",
+          "prompt": "Catalog photograph of three rolls of brown kraft paper packing tape, two lying flat and one standing on its edge, light warm-grey seamless background, soft shadows. Square, centred." },
+        { "slot": "northgate-film", "size": [1200, 1200], "gpt": "1024x1024", "focus": "centre", "usedIn": "Product: Hand stretch film",
+          "prompt": "Catalog photograph of one roll of clear hand stretch film on a brown cardboard core, lying diagonally, glossy translucent plastic with subtle reflections, light warm-grey seamless background. Square, centred." },
+        { "slot": "northgate-mailer", "size": [1200, 1200], "gpt": "1024x1024", "focus": "centre", "usedIn": "Product: Co-ex poly mailer",
+          "prompt": "Catalog photograph of a flat white co-extruded poly mailer bag with a peel-and-seal flap, small black \"NORTHGATE\" wordmark with an orange bar, lying slightly angled, light warm-grey seamless background. Square." },
+        { "slot": "northgate-gloves", "size": [1200, 1200], "gpt": "1024x1024", "focus": "centre", "usedIn": "Product: Nitrile gloves",
+          "prompt": "Catalog photograph of a white dispenser box of blue nitrile disposable gloves with one glove pulled halfway out of the top slot, a blue band along the bottom of the box, three-quarter view, light warm-grey seamless background. Square." },
+        { "slot": "northgate-paper", "size": [1200, 1200], "gpt": "1024x1024", "focus": "centre", "usedIn": "Product: Void-fill kraft paper",
+          "prompt": "Catalog photograph of a large roll of brown kraft void-fill paper lying on its side, with a loose crumpled sheet of the same paper beside it, light warm-grey seamless background, soft shadow. Square." }
+      ]
+    },
+    "linkcore": {
+      "name": "Linkcore (IT hardware)",
+      "direction": "Premium tech product photography on a dark navy-to-charcoal studio sweep (#0a0e15). Dark anodised aluminium, precise edges, subtle electric-lime (#c6f432) and cyan rim lights, port details sharp and believable. No real brand logos; a small lowercase \"linkcore\" wordmark on the top surface is fine.",
+      "product": "slim rectangular dark-grey anodised aluminium docking station",
+      "slots": [
+        { "slot": "linkcore-hero", "size": [1600, 1200], "gpt": "1536x1024", "focus": "centre", "usedIn": "Hero image",
+          "prompt": "Hero product photograph of a {product} (about 22 cm wide, 3 cm tall) lying on a dark studio surface, front ports visible (USB-C, two blue USB-A, SD card slot, audio jack) with a tiny lime status LED, a braided cable curving away, and a small USB-C hub partly in frame on the left, lime and cyan rim light from behind. Landscape 4:3." },
+        { "slot": "linkcore-dock12", "size": [1200, 1200], "gpt": "1024x1024", "focus": "centre", "usedIn": "Product: Dock 12 (Thunderbolt 4)",
+          "prompt": "Product photograph of a {product} (22 cm wide), front three-quarter view with the front ports visible (USB-C, two USB-A, SD slot, audio jack), on a dark studio sweep with subtle lime rim light. Square, centred." },
+        { "slot": "linkcore-dock8", "size": [1200, 1200], "gpt": "1024x1024", "focus": "centre", "usedIn": "Product: Dock 8 (USB-C)",
+          "prompt": "Product photograph of a smaller graphite-grey aluminium USB-C dock (16 cm wide), front three-quarter view showing one USB-C, one USB-A and an audio jack, on a dark studio sweep, cyan rim light. Square, centred." },
+        { "slot": "linkcore-hub7", "size": [1200, 1200], "gpt": "1024x1024", "focus": "centre", "usedIn": "Product: Hub 7",
+          "prompt": "Product photograph of a compact space-grey aluminium USB-C travel hub (11 cm long, very thin) with a short attached USB-C cable, side ports visible (two USB-A, HDMI, SD), on a dark studio sweep. Square, centred." },
+        { "slot": "linkcore-dl2", "size": [1200, 1200], "gpt": "1024x1024", "focus": "centre", "usedIn": "Product: DualLink DL",
+          "prompt": "Product photograph of a silver brushed-aluminium display dock (12 cm wide, rounded corners), front three-quarter view showing a USB-C, a USB-A and an audio jack, on a dark navy studio sweep with a subtle lime edge light. Square, centred." }
+      ]
+    },
+    "aurel": {
+      "name": "Aurel (fine jewellery)",
+      "direction": "High-end editorial jewellery photography. Ivory, bone and travertine tones, soft diffused daylight, gentle shadows, sharp metal reflections and sparkling diamond facets, generous negative space. No text, no logos.",
+      "product": "a solitaire engagement ring: a 2.4 mm comfort-fit domed band with a single round brilliant-cut diamond (about 0.30 ct) held low in a four-claw basket setting",
+      "slots": [
+        { "slot": "aurel-hero", "size": [1600, 2000], "gpt": "1024x1536", "focus": "centre", "usedIn": "Editorial hero (portrait, right half on desktop)",
+          "prompt": "Editorial still life of {product} in 18k yellow gold, standing upright on a cylindrical travertine plinth, a second taller plinth softly out of focus behind, ivory background, soft daylight from the left, lots of calm negative space above. Portrait 4:5." },
+        { "slot": "aurel-ring-yellow", "size": [1200, 1200], "gpt": "1024x1024", "focus": "centre", "usedIn": "Buy box gallery: Yellow gold",
+          "prompt": "Clean product photograph of {product} in 18k yellow gold, standing upright at a slight three-quarter angle on a seamless ivory background, soft reflection and shadow beneath, diamond sparkling. Square, centred, whole ring in frame with margin." },
+        { "slot": "aurel-ring-white", "size": [1200, 1200], "gpt": "1024x1024", "focus": "centre", "usedIn": "Buy box gallery: White gold",
+          "prompt": "Clean product photograph of {product} in 18k white gold, same angle and lighting as the yellow-gold version, seamless ivory background, soft shadow. Square, centred." },
+        { "slot": "aurel-ring-rose", "size": [1200, 1200], "gpt": "1024x1024", "focus": "centre", "usedIn": "Buy box gallery: Rose gold",
+          "prompt": "Clean product photograph of {product} in 18k rose gold, same angle and lighting as the yellow-gold version, seamless ivory background, soft shadow. Square, centred." },
+        { "slot": "aurel-trio", "size": [1600, 1000], "gpt": "1536x1024", "focus": "centre", "usedIn": "Editorial section: the three metals",
+          "prompt": "Editorial photograph of three identical solitaire rings in white gold, yellow gold and rose gold standing upright in a row on an ivory surface, soft daylight, delicate shadows, calm luxurious mood. Landscape 16:10, rings centred with space around." }
+      ]
+    }
+  }
+}

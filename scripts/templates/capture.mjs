@@ -3,9 +3,9 @@
 //   npm run build && node scripts/serve-pages.mjs 4173 &
 //   node scripts/templates/capture.mjs og covers shots   (any subset)
 //
-//   og      → public/templates/og/<slug>.jpg + theme assets/<slug>-og.jpg (1200×630)
-//             public/templates/og/templates.jpg for the gallery page
-//   covers  → public/templates/covers/<slug>-{800,1200}.webp (gallery cards)
+//   og      → public/shopify-templates/og/<slug>.jpg + theme assets/<slug>-og.jpg (1200×630)
+//             public/shopify-templates/og/shopify-templates.jpg for the gallery page
+//   covers  → public/shopify-templates/covers/<slug>-{800,1200}.webp (gallery cards)
 //   shots   → docs/templates/screenshots/<slug>-{desktop-1440,mobile-390}.jpg (2×, full page)
 //
 // Dev-only (outputs are committed). Needs Playwright's Chromium.
@@ -33,7 +33,7 @@ const OG = {
 
 function ogHtml(t) {
   const b = OG[t.slug];
-  const a = `${BASE}/templates/assets/`;
+  const a = `${BASE}/shopify-templates/assets/`;
   return `<!doctype html><html><head><style>
   @font-face{font-family:D;src:url(${a}${b.file})}
   @font-face{font-family:B;src:url(${a}${b.body})}
@@ -50,7 +50,7 @@ function ogHtml(t) {
 }
 
 function galleryOgHtml() {
-  const a = `${BASE}/templates/assets/`;
+  const a = `${BASE}/shopify-templates/assets/`;
   const tiles = templates.map((t) => `<div style="background:url(${a}${OG[t.slug].img}) center/cover"></div>`).join("");
   return `<!doctype html><html><head><style>
   @font-face{font-family:G;src:url(${a}font-space-grotesk.woff2)}*{margin:0;box-sizing:border-box}
@@ -64,7 +64,7 @@ function galleryOgHtml() {
 const browser = await chromium.launch();
 
 if (jobs.has("og")) {
-  const dir = join(root, "public", "templates", "og");
+  const dir = join(root, "public", "shopify-templates", "og");
   mkdirSync(dir, { recursive: true });
   const page = await browser.newPage({ viewport: { width: 1200, height: 630 } });
   // Same origin as the fonts, so @font-face loads (about:blank would block them).
@@ -81,8 +81,8 @@ if (jobs.has("og")) {
   }
   await page.setContent(galleryOgHtml(), { waitUntil: "networkidle" });
   await page.evaluate(() => document.fonts.ready);
-  writeFileSync(join(dir, "templates.jpg"), await page.screenshot({ type: "jpeg", quality: 86 }));
-  console.log("og/templates.jpg");
+  writeFileSync(join(dir, "shopify-templates.jpg"), await page.screenshot({ type: "jpeg", quality: 86 }));
+  console.log("og/shopify-templates.jpg");
   await page.close();
 }
 
@@ -99,12 +99,12 @@ async function settle(page) {
 }
 
 if (jobs.has("covers")) {
-  const dir = join(root, "public", "templates", "covers");
+  const dir = join(root, "public", "shopify-templates", "covers");
   mkdirSync(dir, { recursive: true });
   const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1 });
   const page = await ctx.newPage();
   for (const t of list) {
-    await page.goto(`${BASE}/templates/${t.slug}`, { waitUntil: "networkidle" });
+    await page.goto(`${BASE}/shopify-templates/${t.slug}`, { waitUntil: "networkidle" });
     await page.addStyleTag({ content: ".cfg-demo-bar{display:none!important}" });
     await page.waitForTimeout(600);
     const png = await page.screenshot({ type: "png" });
@@ -141,7 +141,7 @@ if (jobs.has("shots")) {
     const ctx = await browser.newContext(opts);
     const page = await ctx.newPage();
     for (const t of list) {
-      await page.goto(`${BASE}/templates/${t.slug}`, { waitUntil: "networkidle" });
+      await page.goto(`${BASE}/shopify-templates/${t.slug}`, { waitUntil: "networkidle" });
       await settle(page);
       writeFileSync(join(dir, `${t.slug}-${label}.jpg`), await page.screenshot({ fullPage: true, type: "jpeg", quality: 80 }));
       console.log(`screenshots/${t.slug}-${label}.jpg`);

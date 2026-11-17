@@ -2,7 +2,7 @@
 
 One Online Store 2.0 theme that runs five concept brands, plus the backend
 pieces each concept needs. The public demos on
-`configuro.studio/templates/<slug>` are **rendered from this theme** (see
+`configuro.studio/shopify-templates/<slug>` are **rendered from this theme** (see
 `scripts/templates/build-demos.mjs`), so what you see there is what installs.
 
 ```

@@ -43,7 +43,7 @@ function crawlBlock({ heading, description, links }) {
 const SITE_LINKS = [
   { href: "/services", label: "Services" },
   { href: "/work", label: "Work" },
-  { href: "/templates", label: "Shopify templates" },
+  { href: "/shopify-templates", label: "Shopify Templates" },
   { href: "/pricing", label: "Pricing" },
   { href: "/insights", label: "Insights" },
   { href: "/about", label: "About" },
