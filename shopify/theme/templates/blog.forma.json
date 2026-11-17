@@ -1,0 +1,22 @@
+{
+  "sections": {
+    "main": {
+      "type": "cfg-lux-journal",
+      "settings": {
+        "heading": "The journal.",
+        "text": "Materials, spaces and the small details that make a home."
+      }
+    },
+    "newsletter": {
+      "type": "cfg-lux-newsletter",
+      "settings": {
+        "heading": "A little inspiration. Occasionally.",
+        "text": "New collections, considered spaces and the stories behind them."
+      }
+    }
+  },
+  "order": [
+    "main",
+    "newsletter"
+  ]
+}

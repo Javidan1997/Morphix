@@ -1,65 +1,48 @@
 {
   "sections": {
     "hero": {
-      "type": "cfg-motion-hero",
+      "type": "cfg-lux-hero",
       "settings": {
-        "heading": "Wear your own point of view.",
-        "button_label": "Discover the edit",
-        "image_alt": "Models wearing ivory tailoring and a black dress in a Paris limestone courtyard"
+        "heading": "A point of view. Yours.",
+        "cta": "Explore the new edit",
+        "alt": "Ivory tailoring in a Paris limestone courtyard"
       }
     },
-    "editorial": {
-      "type": "cfg-motion-editorial",
+    "intro": {
+      "type": "cfg-lux-intro",
       "settings": {
-        "heading": "A study in movement."
-      },
-      "blocks": {
-        "image0": {
-          "type": "image",
-          "settings": {
-            "asset": "product-1",
-            "alt": "The tailored jacket"
-          }
-        },
-        "image1": {
-          "type": "image",
-          "settings": {
-            "asset": "product-2",
-            "alt": "The column dress"
-          }
-        },
-        "image2": {
-          "type": "image",
-          "settings": {
-            "asset": "product-3",
-            "alt": "The wide-leg trouser"
-          }
-        }
-      },
-      "block_order": [
-        "image0",
-        "image1",
-        "image2"
-      ]
+        "heading": "Not for a moment. For a way of being.",
+        "text": "A wardrobe in conversation. Precise tailoring, easy silhouettes and tactile layers, brought together by your own point of view."
+      }
     },
-    "scene": {
-      "type": "cfg-motion-scene",
-      "settings": {},
+    "products": {
+      "type": "cfg-lux-products",
+      "settings": {
+        "heading": "The everyday, elevated."
+      }
+    },
+    "chapters": {
+      "type": "cfg-lux-chapters",
+      "settings": {
+        "heading": "The art of being yourself"
+      },
       "blocks": {
         "first": {
           "type": "chapter",
           "settings": {
             "heading": "Between moments.",
+            "text": "The city slows. The light changes. Find a little room to be yourself.",
             "asset": "scene",
-            "alt": "Models wearing ivory tailoring and a black dress in a Paris limestone courtyard"
+            "alt": "An intimate campaign portrait in black tailoring"
           }
         },
         "second": {
           "type": "chapter",
           "settings": {
-            "heading": "An everyday kind of extraordinary.",
-            "asset": "hero",
-            "alt": "Models wearing ivory tailoring and a black dress in a Paris limestone courtyard"
+            "heading": "Made to move with you.",
+            "text": "Familiar pieces. Unexpected possibilities. A collection that finds its rhythm in yours.",
+            "asset": "campaign",
+            "alt": "Two models walking in black tailoring and a fluid trench"
           }
         }
       },
@@ -68,43 +51,77 @@
         "second"
       ]
     },
-    "products": {
-      "type": "cfg-motion-products",
-      "settings": {},
+    "feature": {
+      "type": "cfg-lux-feature",
+      "settings": {
+        "label": "The Édito point of view",
+        "heading": "A wardrobe. Never a uniform.",
+        "text": "A precise shoulder beside a softer line. Black against ivory. Pieces that feel considered together and individual apart. The last word is always yours.",
+        "cta": "Explore our world",
+        "alt": "A collection in movement beside a sunlit limestone wall"
+      }
+    },
+    "look": {
+      "type": "cfg-lux-look",
+      "settings": {
+        "heading": "One look. Your interpretation.",
+        "text": "Discover the silhouettes behind the campaign.",
+        "alt": "Shop the campaign"
+      },
       "blocks": {
-        "product1": {
-          "type": "product",
+        "spot0": {
+          "type": "hotspot",
           "settings": {
             "demo_handle": "tailored-jacket",
-            "title": "The tailored jacket"
+            "x": 78,
+            "y": 47
           }
         },
-        "product2": {
-          "type": "product",
-          "settings": {
-            "demo_handle": "column-dress",
-            "title": "The column dress"
-          }
-        },
-        "product3": {
-          "type": "product",
+        "spot1": {
+          "type": "hotspot",
           "settings": {
             "demo_handle": "wide-leg-trouser",
-            "title": "The wide-leg trouser"
+            "x": 85,
+            "y": 76
+          }
+        },
+        "spot2": {
+          "type": "hotspot",
+          "settings": {
+            "demo_handle": "column-dress",
+            "x": 43,
+            "y": 53
           }
         }
       },
       "block_order": [
-        "product1",
-        "product2",
-        "product3"
+        "spot0",
+        "spot1",
+        "spot2"
       ]
+    },
+    "journal": {
+      "type": "cfg-lux-journal",
+      "settings": {
+        "heading": "Notes from our world."
+      }
+    },
+    "newsletter": {
+      "type": "cfg-lux-newsletter",
+      "settings": {
+        "heading": "Stay in the edit.",
+        "text": "New silhouettes, campaign stories and a different way of seeing the everyday."
+      }
     }
   },
   "order": [
     "hero",
-    "editorial",
-    "scene",
-    "products"
+    "intro",
+    "products",
+    "chapters",
+    "feature",
+    "look",
+    "journal",
+    "newsletter"
   ]
 }

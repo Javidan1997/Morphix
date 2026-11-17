@@ -21,11 +21,11 @@ export const templates = [
     "slug": "forma",
     "name": "Forma",
     "sector": "Luxury furniture",
-    "oneLiner": "A cinematic furniture showroom with scroll-controlled film, drifting material details and sliding room chapters.",
+    "oneLiner": "A complete furniture house with cinematic room reveals, a shoppable collection and thoughtful material stories.",
     "tags": [
-      "Scroll video",
-      "Sliding scenes",
-      "Shop the collection"
+      "Curtain reveals",
+      "12-page store",
+      "Shop the room"
     ],
     "filters": [
       "premium",
@@ -33,20 +33,20 @@ export const templates = [
       "motion",
       "furniture"
     ],
-    "hook": "Pinned story chapters + scroll-linked video + accessible motion controls",
+    "hook": "Pinned image chapters + shared-image page transitions + six product pages",
     "accent": "#9a8065",
-    "title": "Forma — A slower way to live | Concept store by Configuro",
-    "description": "Original luxury furniture Shopify concept by Configuro with scroll-linked video, sliding campaign imagery and a shoppable collection."
+    "title": "Forma — Live with intention | Concept store by Configuro",
+    "description": "Original luxury furniture Shopify concept by Configuro with cinematic scroll reveals, six product pages, a studio story and journal."
   },
   {
     "slug": "edito",
     "name": "Édito",
     "sector": "Editorial fashion",
-    "oneLiner": "A fashion editorial with scroll-controlled film, drifting image rows and a horizontal shoppable collection.",
+    "oneLiner": "An editorial fashion house with drifting lookbooks, cinematic campaign reveals and a complete shoppable wardrobe.",
     "tags": [
-      "Scroll video",
       "Moving lookbook",
-      "Shop the collection"
+      "12-page store",
+      "Editorial stories"
     ],
     "filters": [
       "premium",
@@ -54,10 +54,10 @@ export const templates = [
       "motion",
       "fashion"
     ],
-    "hook": "Drifting editorial + horizontal collection + native size variants",
+    "hook": "Drifting editorial + curtain transitions + size guide and persistent demo bag",
     "accent": "#302d28",
-    "title": "Édito — Wear your own point of view | Concept store by Configuro",
-    "description": "Original luxury fashion Shopify concept by Configuro with scroll-linked video, sliding campaign imagery and a shoppable collection."
+    "title": "Édito — A point of view. Yours. | Concept store by Configuro",
+    "description": "Original luxury fashion Shopify concept by Configuro with cinematic scroll reveals, six product pages, a studio story and journal."
   },
 
   {

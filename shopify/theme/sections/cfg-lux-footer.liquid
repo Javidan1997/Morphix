@@ -1,0 +1,9 @@
+{%- assign lb = template.suffix | default: settings.brand | split: '-' | first -%}
+<footer class="lx-footer">
+  <div class="lx-footer__top"><p class="lx-footer__statement">{% if lb == 'forma' %}{{ 'lux.forma_footer' | t }}{% else %}{{ 'lux.edito_footer' | t }}{% endif %}</p><nav aria-label="{{ 'lux.footer_nav' | t }}"><a href="{% render 'cfg-lux-url', brand: lb, path: 'collection' %}">{{ 'lux.collection' | t }}</a><a href="{% render 'cfg-lux-url', brand: lb, path: 'studio' %}">{{ 'lux.about' | t }}</a><a href="{% render 'cfg-lux-url', brand: lb, path: 'journal' %}">{{ 'lux.journal' | t }}</a><a href="#newsletter">{{ 'lux.newsletter' | t }}</a></nav></div>
+  <a class="lx-footer__wordmark" href="{% render 'cfg-lux-url', brand: lb %}">{% if lb == 'forma' %}Forma{% else %}Édito{% endif %}</a>
+  <div class="lx-footer__legal"><p>© {{ 'now' | date: '%Y' }} {% if lb == 'forma' %}Forma{% else %}Édito{% endif %}</p>{% if settings.demo_mode %}<p>{{ 'lux.demo_note' | t }} <a href="/shopify-templates/">Configuro</a></p>{% endif %}<a href="#MainContent">{{ 'lux.top' | t }} {% render 'cfg-icon', name: 'arrow' %}</a></div>
+</footer>
+{% schema %}
+{"name":"Luxury footer","settings":[]}
+{% endschema %}

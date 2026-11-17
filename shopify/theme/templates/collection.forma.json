@@ -1,0 +1,22 @@
+{
+  "sections": {
+    "main": {
+      "type": "cfg-lux-collection",
+      "settings": {
+        "heading": "The collection",
+        "text": "Sculptural forms, tactile materials and a considered way of living."
+      }
+    },
+    "newsletter": {
+      "type": "cfg-lux-newsletter",
+      "settings": {
+        "heading": "A little inspiration. Occasionally.",
+        "text": "New collections, considered spaces and the stories behind them."
+      }
+    }
+  },
+  "order": [
+    "main",
+    "newsletter"
+  ]
+}

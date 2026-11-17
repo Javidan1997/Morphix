@@ -21,6 +21,18 @@
       "destination": "/pergola-configurator.html"
     },
     {
+      "source": "/shopify-templates/:brand(forma|edito)/products/:handle",
+      "destination": "/shopify-templates/:brand/products/:handle.html"
+    },
+    {
+      "source": "/shopify-templates/:brand(forma|edito)/journal/:handle",
+      "destination": "/shopify-templates/:brand/journal/:handle.html"
+    },
+    {
+      "source": "/shopify-templates/:brand(forma|edito)/:page(collection|studio|journal)",
+      "destination": "/shopify-templates/:brand/:page.html"
+    },
+    {
       "source": "/shopify-templates/:slug(shadeline|vela|northgate|linkcore|aurel|forma|edito)",
       "destination": "/shopify-templates/:slug.html"
     },

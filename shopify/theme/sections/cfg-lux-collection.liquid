@@ -1,0 +1,45 @@
+{%- assign lb = template.suffix | default: settings.brand | split: '-' | first -%}
+<section class="lx-shop lx-section">
+  <header class="lx-page-heading">
+    <span class="lx-index">{% if lb == 'forma' %}{{ 'lux.objects' | t }}{% else %}{{ 'lux.new_edit' | t }}{% endif %}</span>
+    <h1>{{ collection.title | default: section.settings.heading | escape }}</h1>
+    <p>{{ section.settings.text | escape }}</p>
+  </header>
+  <div class="lx-shop__toolbar">
+    {% if settings.demo_mode %}
+      {% assign items = collections['luxury'].products %}
+      <div class="lx-filters" role="group" aria-label="{{ 'lux.filter' | t }}">
+        <button data-lx-filter="all" aria-pressed="true">{{ 'lux.view_all' | t }}</button>
+        {% assign categories = items | map: 'category' | uniq %}
+        {% for category in categories %}{% if category != blank %}<button data-lx-filter="{{ category | escape }}" aria-pressed="false">{{ category | escape }}</button>{% endif %}{% endfor %}
+      </div>
+      <label class="lx-sort">{{ 'lux.sort' | t }}<select data-lx-sort><option value="featured">{{ 'lux.featured' | t }}</option><option value="price-asc">{{ 'lux.price_low' | t }}</option><option value="price-desc">{{ 'lux.price_high' | t }}</option><option value="name">{{ 'lux.name_sort' | t }}</option></select></label>
+    {% else %}
+      <div class="lx-filters" aria-label="{{ 'lux.filter' | t }}">
+        <a href="{{ collection.url }}">{{ 'lux.view_all' | t }}</a>
+        {% for filter in collection.filters %}
+          {% if filter.param_name == 'filter.p.product_type' %}
+            {% for value in filter.values %}
+              <a href="{% if value.active %}{{ value.url_to_remove }}{% else %}{{ value.url_to_add }}{% endif %}"{% if value.active %} aria-current="true"{% endif %}>{{ value.label | escape }}</a>
+            {% endfor %}
+          {% endif %}
+        {% endfor %}
+      </div>
+      {% assign current_sort = collection.sort_by | default: collection.default_sort_by %}
+      <label class="lx-sort">{{ 'lux.sort' | t }}<select name="sort_by" data-lx-live-sort>{% for option in collection.sort_options %}<option value="{{ option.value | escape }}"{% if option.value == current_sort %} selected{% endif %}>{{ option.name | escape }}</option>{% endfor %}</select></label>
+    {% endif %}
+  </div>
+  {% if settings.demo_mode %}
+    <p class="lx-count" role="status" data-lx-count data-label="{{ 'lux.pieces' | t }}">{{ items.size }} {{ 'lux.pieces' | t }}</p>
+    <div class="lx-product-grid" data-lx-catalog>{% for item in items %}{% render 'cfg-lux-card', item: item, eager: forloop.first %}{% endfor %}</div>
+  {% else %}
+    {% paginate collection.products by 24 %}
+      <p class="lx-count" role="status">{{ collection.products_count }} {{ 'lux.pieces' | t }}</p>
+      <div class="lx-product-grid">{% for item in collection.products %}{% render 'cfg-lux-card', item: item, eager: forloop.first %}{% endfor %}</div>
+      {% render 'cfg-lux-pagination', paginate: paginate %}
+    {% endpaginate %}
+  {% endif %}
+</section>
+{% schema %}
+{"name":"Luxury collection page","settings":[{"type":"text","id":"heading","label":"Heading","default":"The collection"},{"type":"textarea","id":"text","label":"Introduction"}]}
+{% endschema %}

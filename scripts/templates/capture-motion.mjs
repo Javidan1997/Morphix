@@ -9,7 +9,7 @@ try {
   const page=await browser.newPage();await page.setViewport({width:1440,height:900});
   await page.goto(`${base}/shopify-templates/${slug}`,{waitUntil:'domcontentloaded'});
   await page.evaluate(()=>document.fonts.ready);
-  await page.waitForFunction(()=>document.querySelector('.motion-hero img').complete);
+  await page.waitForFunction(()=>document.querySelector('.lx-hero img').complete && document.querySelector('.lx-hero img').naturalWidth > 0);
   await page.addStyleTag({content:'.cfg-demo-bar{display:none!important}'});
   const buffer=await page.screenshot();
   mkdirSync('public/shopify-templates/covers',{recursive:true});mkdirSync('public/shopify-templates/og',{recursive:true});

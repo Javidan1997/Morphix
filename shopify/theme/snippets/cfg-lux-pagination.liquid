@@ -1,0 +1,13 @@
+{% doc %}
+Renders native Shopify pagination.
+@param {paginate} paginate - Pagination context
+{% enddoc %}
+{% if paginate.pages > 1 %}
+  <nav class="lx-pagination" aria-label="{{ 'lux.pagination' | t }}">
+    {% if paginate.previous %}<a class="lx-link" href="{{ paginate.previous.url }}">{{ 'lux.previous' | t }}</a>{% endif %}
+    {% for part in paginate.parts %}
+      {% if part.is_link %}<a href="{{ part.url }}">{{ part.title }}</a>{% else %}{% assign part_number = part.title | plus: 0 %}<span{% if part_number == paginate.current_page %} aria-current="page"{% endif %}>{{ part.title }}</span>{% endif %}
+    {% endfor %}
+    {% if paginate.next %}<a class="lx-link" href="{{ paginate.next.url }}">{{ 'lux.next' | t }}</a>{% endif %}
+  </nav>
+{% endif %}

@@ -7,8 +7,9 @@
 {%- liquid
   assign brands = 'vela,shadeline,northgate,linkcore,aurel,forma,edito' | split: ','
   assign brand = settings.brand
-  if brands contains template.suffix
-    assign brand = template.suffix
+  assign candidate_brand = template.suffix | split: '-' | first
+  if brands contains candidate_brand
+    assign brand = candidate_brand
   endif
 -%}
 <html lang="{{ request.locale.iso_code }}" class="no-js">
@@ -48,9 +49,12 @@
       };
     </script>
     <script type="module" src="{{ 'cfg-core.js' | asset_url }}"></script>
+    {% if brand == 'forma' or brand == 'edito' %}
+      <script type="module" src="{{ 'cfg-luxury.js' | asset_url }}"></script>
+    {% endif %}
     {{ content_for_header }}
   </head>
-  <body class="cfg brand-{{ brand }} template-{{ template.name }}">
+  <body class="cfg brand-{{ brand }} template-{{ template.name }}{% if template.name == 'index' %} lux-home{% endif %}">
     <a class="cfg-skip" href="#MainContent">{{ 'cfg.a11y.skip' | t }}</a>
     {%- if settings.demo_mode -%}{% render 'cfg-demo-bar' %}{%- endif -%}
     {%- case brand -%}
@@ -59,8 +63,8 @@
       {%- when 'northgate' -%}{% sections 'northgate-header-group' %}
       {%- when 'linkcore' -%}{% sections 'linkcore-header-group' %}
       {%- when 'aurel' -%}{% sections 'aurel-header-group' %}
-      {%- when 'forma' -%}{% sections 'forma-header-group' %}
-      {%- when 'edito' -%}{% sections 'edito-header-group' %}
+      {%- when 'forma' -%}{% section 'cfg-lux-header' %}
+      {%- when 'edito' -%}{% section 'cfg-lux-header' %}
     {%- endcase %}
     <main id="MainContent" tabindex="-1">
       {{ content_for_layout }}
@@ -71,8 +75,8 @@
       {%- when 'northgate' -%}{% sections 'northgate-footer-group' %}
       {%- when 'linkcore' -%}{% sections 'linkcore-footer-group' %}
       {%- when 'aurel' -%}{% sections 'aurel-footer-group' %}
-      {%- when 'forma' -%}{% sections 'forma-footer-group' %}
-      {%- when 'edito' -%}{% sections 'edito-footer-group' %}
+      {%- when 'forma' -%}{% section 'cfg-lux-footer' %}
+      {%- when 'edito' -%}{% section 'cfg-lux-footer' %}
     {%- endcase %}
     {%- render 'cfg-cart-drawer' %}
   </body>

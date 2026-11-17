@@ -1,0 +1,22 @@
+{
+  "sections": {
+    "main": {
+      "type": "cfg-lux-journal",
+      "settings": {
+        "heading": "The journal.",
+        "text": "People, places and a different perspective on getting dressed."
+      }
+    },
+    "newsletter": {
+      "type": "cfg-lux-newsletter",
+      "settings": {
+        "heading": "Stay in the edit.",
+        "text": "New silhouettes, campaign stories and a different way of seeing the everyday."
+      }
+    }
+  },
+  "order": [
+    "main",
+    "newsletter"
+  ]
+}

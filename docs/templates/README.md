@@ -5,8 +5,8 @@ on configuro.studio and shipped as one installable Online Store 2.0 theme.
 
 | Demo | URL | Engineering hook | Lighthouse mobile (P / A / BP / SEO) |
 |---|---|---|---|
-| Forma | `/shopify-templates/forma` | Scroll-controlled film, sliding room chapters, collection cart | Not measured |
-| Édito | `/shopify-templates/edito` | Scroll film, drifting editorial, horizontal collection, size variants | Not measured |
+| Forma | `/shopify-templates/forma` | 12 pages: room reveals, six products, studio and journal | Not measured |
+| Édito | `/shopify-templates/edito` | 12 pages: editorial drift, campaign reveals, size guide and journal | Not measured |
 | Vela | `/shopify-templates/vela` | 1/2/3-pack variants + native selling plans, sticky ATC | 100 / 100 / 100 / 100 |
 | Shadeline | `/shopify-templates/shadeline` | Configuro's production pergola engine, metafield price rules, line-item properties | 100 / 100 / 100 / 100 |
 | Northgate Supply | `/shopify-templates/northgate` | customer-tag gated tiers, quick order, HubSpot webhook, discount Function | 100 / 100 / 100 / 100 |
@@ -50,9 +50,7 @@ tags.
 **Demo mode** (`settings.demo_mode`) shows the "Concept demo by Configuro ·
 Back to templates" bar and the footer note "Demo store, not a real brand".
 In demo mode `cfg-core.js` swaps the Ajax Cart API for an in-memory cart:
-add to cart, subscribe, forms and the waitlist all work visually. Nothing is
-sent, nothing is stored (no cookies, no localStorage), and checkout is
-disabled.
+add to cart, subscribe, forms and the waitlist all work visually. Nothing is sent and checkout is disabled. Forma and Édito store only demo bag lines in tab-scoped `sessionStorage` so the bag follows navigation; other demos use memory. No form input is persisted.
 
 **Shadeline's 3D** is Configuro's production pergola engine
 (`src/pergola/viewer/engine.js`, the same one behind `/pergola-configurator`),
@@ -73,7 +71,7 @@ faces from Fontsource, so demos make no third-party requests.
 and Twitter tags with a 1200×630 image (`public/shopify-templates/og/<slug>.jpg`, also
 in theme assets as `<slug>-og.jpg`), an SVG favicon, and FAQPage JSON-LD
 where relevant. The gallery has its own OG image and an `ItemList` in its
-JSON-LD, and all seven URLs are added to `sitemap.xml`.
+JSON-LD, and all 29 demo page URLs are added to `sitemap.xml`.
 
 ### Commands
 
@@ -86,6 +84,8 @@ npm run theme:zip          # dist/configuro-concepts-theme.zip for Shopify uploa
 node scripts/templates/capture.mjs og covers shots   # with serve-pages running on :4173
 ```
 
+Forma and Édito each have a homepage, collection, six product pages, studio, journal and two articles. See [luxury storefront implementation](motion-templates.md) for routes, motion and verification.
+
 ## Routing and hosting
 
 Production is **GitHub Pages** (`.github/workflows/deploy-pages.yml` builds
@@ -95,6 +95,7 @@ on push to `main`; `public/CNAME` = `configuro.studio`).
 |---|---|---|
 | `/shopify-templates` | `dist/shopify-templates/index.html` (prerendered SPA route) | gallery; Pages redirects to the trailing slash like other routes |
 | `/shopify-templates/vela` … | `dist/shopify-templates/vela.html` | Pages serves `name.html` at the extensionless URL with 200, same trick as `/pergola-configurator` |
+| `/shopify-templates/forma/collection`, `/edito/products/:handle`, etc. | nested `.html` pages; parent directories also get `index.html` | supports Pages directory redirects |
 | `/shopify-templates/assets/*` | theme assets copied verbatim | |
 | `/templates` | unchanged | the existing Template Studio builder |
 

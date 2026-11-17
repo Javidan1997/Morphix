@@ -24,8 +24,8 @@ const only = process.env.ONLY ? process.env.ONLY.split(",") : null;
 const list = templates.filter((t) => !only || only.includes(t.slug));
 
 const OG = {
-  forma: { head: "A slower way to live.", bg: "#f4f0e9", ink: "#241f1a", accent: "#9a8065", file: "font-cormorant-400.woff2", body: "font-jost.woff2", img: "forma-hero-1600.webp", name: "FORMA" },
-  edito: { head: "Wear your own point of view.", bg: "#ffffff", ink: "#171715", accent: "#302d28", file: "font-cormorant-400.woff2", body: "font-jost.woff2", img: "edito-hero-1600.webp", name: "ÉDITO" },
+  forma: { head: "Live with intention.", bg: "#f4f0e9", ink: "#241f1a", accent: "#9a8065", file: "font-cormorant-400.woff2", body: "font-jost.woff2", img: "forma-hero-1600.webp", name: "FORMA" },
+  edito: { head: "A point of view. Yours.", bg: "#ffffff", ink: "#171715", accent: "#302d28", file: "font-cormorant-400.woff2", body: "font-jost.woff2", img: "edito-hero-1600.webp", name: "ÉDITO" },
   vela: { head: "Bundles and subscribe-and-save, from one buy box.", bg: "#f6f0e7", ink: "#2a1f2e", accent: "#7f603b", font: "Fraunces", file: "font-fraunces.woff2", body: "font-inter.woff2", bodyFamily: "Inter", img: "vela-hero-1200.webp", name: "vela" },
   shadeline: { head: "Size it in 3D. See the real price live.", bg: "#14171a", ink: "#f3f1ec", accent: "#c9b99e", font: "Archivo", file: "font-archivo.woff2", body: "font-archivo.woff2", bodyFamily: "Archivo", img: "shadeline-hero-1280.webp", name: "SHADELINE" },
   northgate: { head: "Trade pricing that unlocks at login.", bg: "#f3f2ed", ink: "#111111", accent: "#ff5a1f", font: "Plex", file: "font-plex-sans-600.woff2", body: "font-plex-mono-500.woff2", bodyFamily: "PlexMono", img: "northgate-hero-1200.webp", name: "NORTHGATE SUPPLY" },

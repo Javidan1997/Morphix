@@ -1,0 +1,6 @@
+{% doc %}
+Returns a navigation URL for a luxury concept or installed theme.
+@param {string} brand - Brand slug
+@param {string} [path] - Relative destination
+{% enddoc %}
+{%- if settings.demo_mode -%}/shopify-templates/{{ brand }}{% unless path == blank %}/{{ path }}{% endunless %}{%- else -%}{%- case path -%}{%- when 'collection' -%}/collections/all{%- when 'studio' -%}/pages/studio{%- when 'journal' -%}/blogs/journal{%- else -%}/{%- endcase -%}{%- endif -%}

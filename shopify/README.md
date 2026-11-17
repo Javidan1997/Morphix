@@ -130,17 +130,25 @@ versions before deploying.
 
 ## Forma and Édito — cinematic storefronts
 
-Use `index.forma` or `index.edito` in the theme editor (or select the default
-brand and add the four shared motion sections). Assign actual products in
-**Editorial collection rail**; fixture handles are read only in demo mode.
-Upload campaign posters, chapter backgrounds and a short silent Shopify video
-in the section settings. The bundled five-second MP4s are camera moves across
-original generated campaign photographs, not live-action footage. All imagery
-and fonts are bundled; no reference theme code or photography is reused.
+Each concept now includes 12 public pages: home, collection, six products,
+studio, journal and two articles. The shared `cfg-lux-*` sections provide
+full-height imagery, damped parallax, drifting editorials, pinned curtain
+reveals, a shoppable scene, journal cards and newsletter. Native scrolling
+and cross-document view transitions keep navigation predictable; reduced
+motion and Pause motion restore a static layout.
 
-The hero video follows scroll position. Story chapters slide across a pinned
-viewport; Édito adds drifting editorial images and a horizontal desktop
-collection. Phone collections use native swipe. Pause motion, reduced-motion
-preferences and JavaScript-free rendering show the complete static story.
+Use `index.forma` / `index.edito` for the homepage and assign the matching
+`collection`, `product`, `blog`, `article` and `page.*-studio` templates.
+Choose products, collections, blog and photographs in section settings.
+Live header links use `/collections/all`, `/pages/studio`, `/blogs/journal`;
+create those resources before using the theme. Collection categories use
+product types through Shopify’s native collection filters; enable the product-type filter in Shopify Search & Discovery. Live catalogs paginate 24 products and journal indexes paginate 12 articles. Product variants, prices, galleries and the bag read native
+Shopify objects; the public builds use `demo/luxury.mjs` fixtures.
+
+Hero sections accept an optional muted Shopify-hosted background video.
+Bundled photographs are original generated concept imagery. The public
+demos use image parallax; they no longer seek an MP4 on every scroll.
+Demo bags follow navigation using per-brand sessionStorage; checkout stays
+disabled. Live stores use Shopify's Ajax Cart API.
 
 See [motion implementation and QA](../docs/templates/motion-templates.md).

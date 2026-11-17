@@ -1,0 +1,17 @@
+{%- assign lb = template.suffix | default: settings.brand | split: '-' | first -%}
+{% if settings.demo_mode %}{% for item in collections['luxury'].products %}<script type="application/json" data-cfg-product>{{ item | json }}</script>{% endfor %}{% endif %}
+<header class="lx-header">
+  <a class="lx-wordmark" href="{% render 'cfg-lux-url', brand: lb %}">{% if lb == 'forma' %}Forma{% else %}Édito{% endif %}</a>
+  <nav class="lx-nav" aria-label="{{ 'lux.primary' | t }}">
+    {% if section.settings.menu != blank %}{% for link in section.settings.menu.links %}<a href="{{ link.url }}">{{ link.title | escape }}</a>{% endfor %}{% else %}
+    <a href="{% render 'cfg-lux-url', brand: lb, path: 'collection' %}">{{ 'lux.collection' | t }}</a>
+    <a href="{% render 'cfg-lux-url', brand: lb, path: 'studio' %}">{% if lb == 'forma' %}{{ 'lux.studio' | t }}{% else %}{{ 'lux.world' | t }}{% endif %}</a>
+    <a href="{% render 'cfg-lux-url', brand: lb, path: 'journal' %}">{{ 'lux.journal' | t }}</a>{% endif %}
+  </nav>
+  <div class="lx-header__actions"><button class="lx-bag" data-open-cart>{{ 'lux.bag' | t }} <span data-cart-count-badge{% if cart.item_count == 0 %} hidden{% endif %}>{{ cart.item_count }}</span></button><button class="lx-menu-button" data-lx-menu aria-expanded="false" aria-controls="LuxuryMenu">{{ 'lux.menu' | t }}{% render 'cfg-icon', name: 'plus' %}</button></div>
+</header>
+<dialog id="LuxuryMenu" class="lx-menu"><button class="lx-menu-close" data-lx-menu-close>{{ 'lux.close' | t }}{% render 'cfg-icon', name: 'close' %}</button><nav aria-label="{{ 'lux.mobile_nav' | t }}"><a href="{% render 'cfg-lux-url', brand: lb %}">{{ 'lux.home' | t }}</a><a href="{% render 'cfg-lux-url', brand: lb, path: 'collection' %}">{{ 'lux.collection' | t }}</a><a href="{% render 'cfg-lux-url', brand: lb, path: 'studio' %}">{% if lb == 'forma' %}{{ 'lux.studio' | t }}{% else %}{{ 'lux.world' | t }}{% endif %}</a><a href="{% render 'cfg-lux-url', brand: lb, path: 'journal' %}">{{ 'lux.journal' | t }}</a></nav></dialog>
+<button class="lx-motion-control" data-lx-motion aria-pressed="false" data-pause="{{ 'lux.pause' | t }}" data-resume="{{ 'lux.resume' | t }}">{{ 'lux.pause' | t }}</button>
+{% schema %}
+{"name":"Luxury navigation","settings":[{"type":"link_list","id":"menu","label":"Navigation menu"}]}
+{% endschema %}

@@ -30,7 +30,7 @@ function pergolaDevRoutes() {
 // /shopify-templates/<slug> demos are static pages rendered from the Shopify theme
 // (scripts/templates/build-demos.mjs). In dev, render them on request and serve
 // theme assets live, so edits to shopify/theme show on reload.
-const TEMPLATE_SLUGS = /^\/shopify-templates\/(shadeline|vela|northgate|linkcore|aurel|forma|edito)\/?$/;
+const TEMPLATE_SLUGS = /^\/shopify-templates\/(shadeline|vela|northgate|linkcore|aurel|forma|edito)(\/(?:collection|studio|journal(?:\/[\w-]+)?|products\/[\w-]+))?\/?$/;
 const ASSET_TYPES = { ".css": "text/css", ".js": "text/javascript", ".svg": "image/svg+xml", ".webp": "image/webp", ".jpg": "image/jpeg", ".woff2": "font/woff2", ".mp4": "video/mp4" };
 function templateDemoRoutes() {
   return {
@@ -52,7 +52,7 @@ function templateDemoRoutes() {
           const builder = pathToFileURL(join(process.cwd(), "scripts", "templates", "build-demos.mjs")).href;
           const { renderDemo } = await import(`${builder}?t=${Date.now()}`);
           res.setHeader("Content-Type", "text/html; charset=utf-8");
-          res.end(await renderDemo(demo[1]));
+          res.end(await renderDemo(demo[1] + (demo[2] || '')));
         } catch (error) {
           res.statusCode = 500;
           res.end(`<pre>${String(error.stack || error).replace(/</g, "&lt;")}</pre>`);

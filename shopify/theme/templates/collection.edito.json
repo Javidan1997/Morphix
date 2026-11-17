@@ -1,0 +1,22 @@
+{
+  "sections": {
+    "main": {
+      "type": "cfg-lux-collection",
+      "settings": {
+        "heading": "The collection",
+        "text": "Tailoring, texture and a little everyday possibility. Explore the complete edit."
+      }
+    },
+    "newsletter": {
+      "type": "cfg-lux-newsletter",
+      "settings": {
+        "heading": "Stay in the edit.",
+        "text": "New silhouettes, campaign stories and a different way of seeing the everyday."
+      }
+    }
+  },
+  "order": [
+    "main",
+    "newsletter"
+  ]
+}

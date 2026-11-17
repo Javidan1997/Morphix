@@ -1,0 +1,6 @@
+{%- assign lb = template.suffix | default: settings.brand | split: '-' | first -%}
+{%- assign items = section.settings.collection.products -%}{% if settings.demo_mode %}{% assign items = collections['luxury'].products %}{% endif %}
+<section class="lx-products lx-section" id="collection"><header class="lx-section-heading"><h2 data-lx-reveal>{{ section.settings.heading | escape }}</h2><a class="lx-link" href="{% render 'cfg-lux-url', brand: lb, path: 'collection' %}">{{ 'lux.shop_all' | t }}{% render 'cfg-icon', name: 'arrow' %}</a></header><div class="lx-product-grid">{% for item in items limit: 3 %}{% render 'cfg-lux-card', item: item %}{% else %}<p>{{ 'lux.select_collection' | t }}</p>{% endfor %}</div></section>
+{% schema %}
+{"name":"Luxury featured products","settings":[{"type":"text","id":"heading","label":"Heading","default":"The considered collection."},{"type":"collection","id":"collection","label":"Collection"}],"presets":[{"name":"Luxury featured products"}]}
+{% endschema %}

@@ -5,7 +5,8 @@
 // cart adapter:
 //   live store → Shopify Ajax Cart API (/cart/add.js, /cart.js, /cart/change.js)
 //   demo mode  → an in-memory cart built from the product JSON on the page.
-// In demo mode nothing leaves the browser and nothing is persisted: forms show
+// Luxury demo bags persist only in tab-scoped sessionStorage; other demos use memory.
+// No demo form data leaves the browser: forms show
 // their success state locally and checkout is disabled.
 
 const CFG = window.CFG || { demo: false, moneyFormat: "${{amount}}", routes: { cartAdd: "/cart/add", cart: "/cart", cartChange: "/cart/change" } };
@@ -24,6 +25,9 @@ export function formatMoney(cents, format = CFG.moneyFormat) {
 export const escapeHtml = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
 
 export function emit(name, detail) {
+  if (name === "cfg:cart" && demoSessionKey) {
+    try { sessionStorage.setItem(demoSessionKey, JSON.stringify({items: detail.items})); } catch {}
+  }
   document.dispatchEvent(new CustomEvent(name, { detail }));
 }
 
@@ -83,7 +87,12 @@ const liveCart = {
   },
 };
 
+const demoBrand = location.pathname.match(/^\/shopify-templates\/(forma|edito)(?:\/|$)/)?.[1];
+const demoSessionKey = isDemo && demoBrand ? `cfg-demo-bag-${demoBrand}` : null;
 const demoState = { items: [] };
+if (demoSessionKey) {
+  try { const saved = JSON.parse(sessionStorage.getItem(demoSessionKey)); if (Array.isArray(saved?.items)) demoState.items = saved.items; } catch {}
+}
 function demoSnapshot() {
   const items = demoState.items.map((line) => ({ ...line, final_line_price: line.final_price * line.quantity }));
   return {
