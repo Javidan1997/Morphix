@@ -115,6 +115,9 @@
     "waist": "Waist",
     "hip": "Hip",
     "discover_collection": "Discover the collection",
-    "demo_note": "Original concept store by Configuro. Your demo bag stays in this tab until you close it. No orders or emails are sent."
+    "demo_note": "Original concept store by Configuro. Your demo bag stays in this tab until you close it. No orders or emails are sent.",
+    "pagination": "Pagination",
+    "previous": "Previous",
+    "next": "Next"
   }
 }

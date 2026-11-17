@@ -170,6 +170,39 @@ export function createShopifyEngine({ themeDir, assetBase, assetVersion, locale,
     }
   });
 
+  // Public fixtures use plain arrays; mirror Shopify's paginated object view.
+  engine.registerTag("paginate", class extends BlockTag {
+    constructor(token, remain, liquid, parser) {
+      super(token, remain, liquid, parser, "endpaginate");
+      const match = token.args.match(/^([a-z_]\w*)\.([a-z_]\w*)\s+by\s+(\d+)$/i);
+      if (!match) throw new Error(`Unsupported paginate arguments: ${token.args}`);
+      this.objectName = match[1];
+      this.property = match[2];
+      this.pageSize = Number(match[3]);
+      if (!this.pageSize) throw new Error("Pagination size must be positive");
+    }
+    * render(ctx, emitter) {
+      const resource = ctx.getSync([this.objectName]) || {};
+      const items = resource[this.property] || [];
+      const pages = Math.max(1, Math.ceil(items.length / this.pageSize));
+      const current = Math.max(1, Math.min(pages, Number(ctx.getSync(["current_page"])) || 1));
+      const offset = (current - 1) * this.pageSize;
+      const pageUrl = page => `?page=${page}`;
+      const paginate = {
+        current_page: current, current_offset: offset, items: items.length,
+        page_size: this.pageSize, pages, page_param: "page",
+        previous: current > 1 ? { url: pageUrl(current - 1) } : null,
+        next: current < pages ? { url: pageUrl(current + 1) } : null,
+        parts: Array.from({ length: pages }, (_, i) => ({
+          title: i + 1, is_link: i + 1 !== current, url: pageUrl(i + 1)
+        }))
+      };
+      ctx.push({ paginate, [this.objectName]: { ...resource, [this.property]: items.slice(offset, offset + this.pageSize) } });
+      try { yield this.liquid.renderer.renderTemplates(this.templates, ctx, emitter); }
+      finally { ctx.pop(); }
+    }
+  });
+
   // {% form 'product', product, id: 'x', class: 'y' %}
   engine.registerTag("form", class extends BlockTag {
     constructor(token, remain, liquid, parser) {

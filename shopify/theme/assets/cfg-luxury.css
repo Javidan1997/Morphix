@@ -49,3 +49,5 @@
 .lx-paused [data-lx-parallax],.lx-paused [data-lx-drift]{transform:none!important}.lx-paused .lx-hero__scroll span::after{animation-play-state:paused}
 
 .shopify-section:has(.lx-header){position:sticky;top:0;z-index:50}.lx-header{position:relative}.lx-hotspot--left{flex-direction:row-reverse}.lx-hotspot--left .lx-hotspot__label{transform:translateX(10px)}.lx-hotspot--left:hover .lx-hotspot__label,.lx-hotspot--left:focus .lx-hotspot__label{transform:none}
+
+.lx-filters a{font-size:11px;text-decoration:none;padding:10px 0;border-bottom:1px solid transparent}.lx-filters a[aria-current=true]{border-color:currentColor}.lx-pagination{display:flex;justify-content:center;align-items:center;gap:22px;margin-top:60px;font-size:13px;flex-wrap:wrap}.lx-pagination>a:not(.lx-link){text-decoration:none;padding:10px}.lx-pagination [aria-current=page]{border-bottom:1px solid currentColor;padding:10px}.lx-pagination .lx-link{font-size:12px}

@@ -1,0 +1,19 @@
+{% doc %}
+Renders journal cards for previews and paginated indexes.
+@param {article[]} entries - Articles to display
+@param {string} brand - Concept brand
+@param {number} [limit] - Preview count
+{% enddoc %}
+{% assign story_limit = limit | default: entries.size %}
+{% assign fallback_image = brand | append: '-campaign' %}
+<div class="lx-journal__grid">
+  {% for entry in entries limit: story_limit %}
+    <article data-lx-reveal>
+      <a class="lx-journal__image" href="{{ entry.url }}">{% render 'cfg-image', image: entry.image, asset: fallback_image, width: 1600, height: 900, alt: entry.title %}</a>
+      <p class="lx-index">{{ entry.category | escape }}</p>
+      <h3><a href="{{ entry.url }}">{{ entry.title | escape }}</a></h3>
+      <p>{{ entry.intro | default: entry.excerpt | strip_html | escape }}</p>
+      <a class="lx-link" href="{{ entry.url }}">{{ 'lux.read_story' | t }}{% render 'cfg-icon', name: 'arrow' %}</a>
+    </article>
+  {% endfor %}
+</div>

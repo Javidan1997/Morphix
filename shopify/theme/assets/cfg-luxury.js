@@ -127,6 +127,12 @@ function initLuxury() {
   document.querySelectorAll('[data-lx-quantity]').forEach(button=>button.addEventListener('click',()=>{
     const input=document.querySelector('#LuxuryQuantity');input.value=String(clamp(Number(input.value||1)+Number(button.dataset.lxQuantity),1,10));
   },{signal}));
+  document.querySelector('[data-lx-live-sort]')?.addEventListener('change', event => {
+    const url = new URL(location.href);
+    url.searchParams.set('sort_by', event.target.value);
+    url.searchParams.delete('page');
+    location.assign(url.href);
+  }, {signal});
   const catalog=document.querySelector('[data-lx-catalog]');
   if(catalog){
     const cards=[...catalog.querySelectorAll('.lx-card')];

@@ -142,7 +142,7 @@ Use `index.forma` / `index.edito` for the homepage and assign the matching
 Choose products, collections, blog and photographs in section settings.
 Live header links use `/collections/all`, `/pages/studio`, `/blogs/journal`;
 create those resources before using the theme. Collection categories use
-product types. Product variants, prices, galleries and the bag read native
+product types through Shopify’s native collection filters; enable the product-type filter in Shopify Search & Discovery. Live catalogs paginate 24 products and journal indexes paginate 12 articles. Product variants, prices, galleries and the bag read native
 Shopify objects; the public builds use `demo/luxury.mjs` fixtures.
 
 Hero sections accept an optional muted Shopify-hosted background video.

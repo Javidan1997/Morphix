@@ -50,7 +50,7 @@ Merchants can select an optional muted looping Shopify video for the hero.
 Pause motion and reduced-motion preferences return chapters to normal document
 flow and remove decorative motion. Hero dimensions stay stable during scrolling.
 
-Collections filter and sort six products. Product pages include image/campaign
+Demo collections filter and sort six products. Installed stores use native Shopify filter URLs, server sorting and 24-product pagination; blog indexes paginate 12 stories, while home previews show two. Product-type filters appear when enabled for the collection in Shopify. Product pages include image/campaign
 views, variant selection, quantities, accordions and related pieces. Édito adds
 a size guide. Bags persist across pages per brand in tab-scoped sessionStorage;
 only demo cart lines are stored. No form input is stored or sent. Checkout stays
@@ -99,4 +99,4 @@ npm run templates:capture-motion
 ```
 
 Capture refreshes portfolio covers and social images. Rebuild afterward to copy
-them into `dist`. Shopify CLI validation: `shopify theme check --path shopify/theme`.
+them into `dist`. Native Liquid regressions: `node scripts/templates/check-luxury-liquid.mjs` covers a non-first linked variant, 70 products and 31 journal articles. Shopify CLI validation: `shopify theme check --path shopify/theme`.
