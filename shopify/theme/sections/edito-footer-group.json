@@ -1,0 +1,19 @@
+{
+  "type": "footer",
+  "name": "Édito footer",
+  "sections": {
+    "footer": {
+      "type": "cfg-footer",
+      "settings": {
+        "logo_text": "Édito",
+        "blurb": "",
+        "legal": ""
+      },
+      "blocks": {},
+      "block_order": []
+    }
+  },
+  "order": [
+    "footer"
+  ]
+}

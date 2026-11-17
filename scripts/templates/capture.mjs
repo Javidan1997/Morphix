@@ -24,6 +24,8 @@ const only = process.env.ONLY ? process.env.ONLY.split(",") : null;
 const list = templates.filter((t) => !only || only.includes(t.slug));
 
 const OG = {
+  forma: { head: "A slower way to live.", bg: "#f4f0e9", ink: "#241f1a", accent: "#9a8065", file: "font-cormorant-400.woff2", body: "font-jost.woff2", img: "forma-hero-1600.webp", name: "FORMA" },
+  edito: { head: "Wear your own point of view.", bg: "#ffffff", ink: "#171715", accent: "#302d28", file: "font-cormorant-400.woff2", body: "font-jost.woff2", img: "edito-hero-1600.webp", name: "ÉDITO" },
   vela: { head: "Bundles and subscribe-and-save, from one buy box.", bg: "#f6f0e7", ink: "#2a1f2e", accent: "#7f603b", font: "Fraunces", file: "font-fraunces.woff2", body: "font-inter.woff2", bodyFamily: "Inter", img: "vela-hero-1200.webp", name: "vela" },
   shadeline: { head: "Size it in 3D. See the real price live.", bg: "#14171a", ink: "#f3f1ec", accent: "#c9b99e", font: "Archivo", file: "font-archivo.woff2", body: "font-archivo.woff2", bodyFamily: "Archivo", img: "shadeline-hero-1280.webp", name: "SHADELINE" },
   northgate: { head: "Trade pricing that unlocks at login.", bg: "#f3f2ed", ink: "#111111", accent: "#ff5a1f", font: "Plex", file: "font-plex-sans-600.woff2", body: "font-plex-mono-500.woff2", bodyFamily: "PlexMono", img: "northgate-hero-1200.webp", name: "NORTHGATE SUPPLY" },
@@ -57,8 +59,8 @@ function galleryOgHtml() {
   body{width:1200px;height:630px;background:#0b0c0f;color:#f3f5fa;font-family:G,sans-serif;display:grid;grid-template-rows:1fr 250px;overflow:hidden}
   .t{padding:56px 60px}.k{letter-spacing:.18em;font-size:15px;color:#9aa3b2;text-transform:uppercase}
   h1{font-size:60px;line-height:1.02;letter-spacing:-.03em;margin-top:14px;max-width:960px}
-  .g{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;padding:0 6px 6px}.g div{border-radius:10px}
-  </style></head><body><div class="t"><p class="k">Configuro · Shopify templates</p><h1>Five concept stores, each built as a real Online Store 2.0 theme.</h1></div><div class="g">${tiles}</div></body></html>`;
+  .g{display:grid;grid-template-columns:repeat(${templates.length},1fr);gap:6px;padding:0 6px 6px}.g div{border-radius:10px}
+  </style></head><body><div class="t"><p class="k">Configuro · Shopify templates</p><h1>${templates.length} concept stores, each built as a real Online Store 2.0 theme.</h1></div><div class="g">${tiles}</div></body></html>`;
 }
 
 const browser = await chromium.launch();

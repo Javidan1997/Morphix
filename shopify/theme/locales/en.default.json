@@ -42,5 +42,13 @@
       "email": "Email",
       "required": "Required"
     }
+  },
+  "motion": {
+    "pause": "Pause motion",
+    "resume": "Resume motion",
+    "collection": "The collection",
+    "options": "Choose an option",
+    "add": "Add to bag",
+    "choose_product": "Select a product in the theme editor."
   }
 }

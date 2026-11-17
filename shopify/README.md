@@ -1,6 +1,6 @@
 # Configuro Concepts — Shopify theme + tooling
 
-One Online Store 2.0 theme that runs five concept brands, plus the backend
+One Online Store 2.0 theme that runs seven concept brands, plus the backend
 pieces each concept needs. The public demos on
 `configuro.studio/shopify-templates/<slug>` are **rendered from this theme** (see
 `scripts/templates/build-demos.mjs`), so what you see there is what installs.
@@ -127,3 +127,20 @@ Scripts default to Admin API `2026-10` (`SHOPIFY_API_VERSION` overrides).
 The Function targets the Discount API (`cart.lines.discounts.generate.run`,
 `api_version = "2025-07"`). Check both against the store's supported
 versions before deploying.
+
+## Forma and Édito — cinematic storefronts
+
+Use `index.forma` or `index.edito` in the theme editor (or select the default
+brand and add the four shared motion sections). Assign actual products in
+**Editorial collection rail**; fixture handles are read only in demo mode.
+Upload campaign posters, chapter backgrounds and a short silent Shopify video
+in the section settings. The bundled five-second MP4s are camera moves across
+original generated campaign photographs, not live-action footage. All imagery
+and fonts are bundled; no reference theme code or photography is reused.
+
+The hero video follows scroll position. Story chapters slide across a pinned
+viewport; Édito adds drifting editorial images and a horizontal desktop
+collection. Phone collections use native swipe. Pause motion, reduced-motion
+preferences and JavaScript-free rendering show the complete static story.
+
+See [motion implementation and QA](../docs/templates/motion-templates.md).

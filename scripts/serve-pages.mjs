@@ -13,6 +13,7 @@ import { createReadStream, existsSync, statSync } from "node:fs";
 import { extname, join, normalize } from "node:path";
 import { fileURLToPath } from "node:url";
 import { createGzip } from "node:zlib";
+import { serveVideo } from "./templates/serve-video.mjs";
 
 // DIST_DIR serves another build (e.g. a saved baseline) for comparisons.
 const dist = process.env.DIST_DIR ? normalize(process.env.DIST_DIR) : fileURLToPath(new URL("../dist", import.meta.url));
@@ -47,6 +48,7 @@ function send(req, res, file, status = 200) {
     return res.end("dist is rebuilding");
   }
   const ext = extname(file);
+  if (ext === '.mp4') return serveVideo(req, res, file);
   const headers = { "Content-Type": TYPES[ext] || "application/octet-stream", "Cache-Control": "max-age=600" };
   const gzip = COMPRESSIBLE.has(ext) && /\bgzip\b/.test(req.headers["accept-encoding"] || "");
   if (gzip) headers["Content-Encoding"] = "gzip";

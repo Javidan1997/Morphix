@@ -1,0 +1,37 @@
+{
+  "type": "header",
+  "name": "Forma header",
+  "sections": {
+    "header": {
+      "type": "cfg-header",
+      "settings": {
+        "logo_text": "Forma",
+        "logo_url": "/shopify-templates/forma",
+        "sticky": false
+      },
+      "blocks": {
+        "l0": {
+          "type": "link",
+          "settings": {
+            "label": "Collection",
+            "url": "#collection"
+          }
+        },
+        "l1": {
+          "type": "link",
+          "settings": {
+            "label": "Our approach",
+            "url": "#approach"
+          }
+        }
+      },
+      "block_order": [
+        "l0",
+        "l1"
+      ]
+    }
+  },
+  "order": [
+    "header"
+  ]
+}

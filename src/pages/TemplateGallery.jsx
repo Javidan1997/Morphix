@@ -5,7 +5,7 @@ import { TEMPLATES_PATH, templateFilters, templates } from "../data/templateGall
 const COPY = {
   en: {
     eyebrow: "Shopify templates",
-    title: "Five concept stores. Each one ships as real theme code.",
+    title: `${templates.length} concept stores. Each one ships as real theme code.`,
     subtitle:
       "Every demo is an invented brand with its own design, rendered from the same Online Store 2.0 theme you could install on a Shopify development store today — sections, blocks, JSON templates and metafields included.",
     points: [
@@ -26,7 +26,7 @@ const COPY = {
   },
   az: {
     eyebrow: "Shopify şablonları",
-    title: "Beş konsept mağaza. Hər biri real tema kodu ilə.",
+    title: `${templates.length} konsept mağaza. Hər biri real tema kodu ilə.`,
     subtitle:
       "Hər demo öz dizaynı olan uydurma brenddir və bu gün Shopify development mağazasına quraşdıra biləcəyiniz eyni Online Store 2.0 temasından render olunur.",
     points: [

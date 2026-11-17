@@ -1,0 +1,38 @@
+{%- assign story_brand = template.suffix | default: settings.brand -%}
+<section class="motion-hero" data-motion-hero aria-labelledby="MotionHero-{{ section.id }}">
+  <div class="motion-hero__stage">
+    <div class="motion-hero__media" data-hero-media>
+      {%- assign poster_asset = story_brand | append: '-hero' -%}
+      {%- render 'cfg-image', image: section.settings.image, asset: poster_asset, width: 1672, height: 941, alt: section.settings.image_alt, loading: 'eager', priority: true -%}
+      <video class="motion-hero__video" data-scroll-video muted playsinline preload="none" aria-hidden="true" tabindex="-1">
+        {%- if section.settings.video != blank -%}
+          {%- for source in section.settings.video.sources -%}
+            <source data-src="{{ source.url }}" type="{{ source.mime_type }}">
+          {%- endfor -%}
+        {%- else -%}
+          <source data-src="{{ story_brand | append: '-film.mp4' | asset_url }}" type="video/mp4">
+        {%- endif -%}
+      </video>
+    </div>
+    <div class="motion-hero__copy">
+      <h1 id="MotionHero-{{ section.id }}">{{ section.settings.heading | escape }}</h1>
+      <a class="motion-link" href="#collection">{{ section.settings.button_label | escape }}{% render 'cfg-icon', name: 'arrow' %}</a>
+    </div>
+    <button type="button" class="motion-toggle" data-motion-toggle data-pause-label="{{ 'motion.pause' | t }}" data-resume-label="{{ 'motion.resume' | t }}" aria-pressed="false">{{ 'motion.pause' | t }}</button>
+    <div class="motion-progress" aria-hidden="true"><span data-hero-progress></span></div>
+  </div>
+</section>
+<script type="module" src="{{ 'cfg-motion.js' | asset_url }}"></script>
+{% schema %}
+{
+  "name": "Cinematic scroll hero",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "A slower way to live." },
+    { "type": "text", "id": "button_label", "label": "Collection link", "default": "Explore the collection" },
+    { "type": "image_picker", "id": "image", "label": "Poster image" },
+    { "type": "text", "id": "image_alt", "label": "Image description", "default": "Sculptural furniture in a sunlit room" },
+    { "type": "video", "id": "video", "label": "Scroll video", "info": "Use a short, silent MP4. The bundled concept clip pans across the campaign photograph." }
+  ],
+  "presets": [{ "name": "Cinematic scroll hero" }]
+}
+{% endschema %}

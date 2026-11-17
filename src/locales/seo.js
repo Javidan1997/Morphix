@@ -67,9 +67,9 @@ export const pageSeo = {
       keywords: "3D website template, configurator template, product launch template",
     },
     "/shopify-templates": {
-      title: "Shopify Templates — 5 Concept Stores with Real Theme Code | Configuro",
+      title: `Shopify Templates — ${templates.length} Concept Stores with Real Theme Code | Configuro`,
       description:
-        "Five concept Shopify storefronts — a 3D pergola configurator, a subscription supplement page, a B2B trade portal, an IT hardware catalog and a jewellery drop — each built as an Online Store 2.0 theme.",
+        "Seven concept Shopify storefronts — luxury furniture, editorial fashion, a 3D pergola configurator, subscriptions, B2B wholesale, IT hardware and jewellery — built as an Online Store 2.0 theme.",
       keywords: "Shopify templates, Shopify theme development, Shopify configurator, Shopify B2B, Shopify subscriptions, Online Store 2.0 sections",
       itemList: true,
       ogImage: "https://configuro.studio/shopify-templates/og/shopify-templates.jpg",

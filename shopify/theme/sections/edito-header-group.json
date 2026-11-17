@@ -1,0 +1,37 @@
+{
+  "type": "header",
+  "name": "Édito header",
+  "sections": {
+    "header": {
+      "type": "cfg-header",
+      "settings": {
+        "logo_text": "Édito",
+        "logo_url": "/shopify-templates/edito",
+        "sticky": false
+      },
+      "blocks": {
+        "l0": {
+          "type": "link",
+          "settings": {
+            "label": "Collection",
+            "url": "#collection"
+          }
+        },
+        "l1": {
+          "type": "link",
+          "settings": {
+            "label": "The editorial",
+            "url": "#approach"
+          }
+        }
+      },
+      "block_order": [
+        "l0",
+        "l1"
+      ]
+    }
+  },
+  "order": [
+    "header"
+  ]
+}
