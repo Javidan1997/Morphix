@@ -89,7 +89,7 @@
       <div class="ng-locked-grid">
         <div class="ng-locked-grid__rows" aria-hidden="true">
           {%- for product in source.products limit: 5 -%}
-            <div class="ng-ghost-row"><span class="ng-ghost-row__img"></span><span>{{ product.title }}</span><span class="ng-ghost-bar"></span><span class="ng-ghost-qty"></span></div>
+            <div class="ng-ghost-row"><span class="ng-ghost-row__img"></span><span class="ng-ghost-bar ng-ghost-bar--title"></span><span class="ng-ghost-bar"></span><span class="ng-ghost-qty"></span></div>
           {%- endfor -%}
         </div>
         <div class="ng-locked-grid__card">

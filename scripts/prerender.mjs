@@ -62,6 +62,10 @@ function renderRoute(path, seo, jsonLd, heading) {
   html = setMetaContent(html, 'name="twitter:description"', seo.description);
   html = setMetaContent(html, 'property="og:url"', url);
   if (seo.keywords) html = setMetaContent(html, 'name="keywords"', seo.keywords);
+  if (seo.ogImage) {
+    html = setMetaContent(html, 'property="og:image"', seo.ogImage);
+    html = setMetaContent(html, 'name="twitter:image"', seo.ogImage);
+  }
   html = html.replace(/(<link rel="canonical" href=")[^"]*(")/, `$1${url}$2`);
   if (seo.noindex) {
     html = html.replace(/(<meta name="robots" content=")[^"]*(")/, `$1noindex, nofollow$2`);

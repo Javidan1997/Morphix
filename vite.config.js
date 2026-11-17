@@ -2,6 +2,7 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { createReadStream, existsSync } from "node:fs";
 import { extname, join } from "node:path";
+import { pathToFileURL } from "node:url";
 
 // The pergola landing page is a separate, lightweight HTML entry so a direct
 // visit loads only its own code, not the whole site bundle.
@@ -46,7 +47,8 @@ function templateDemoRoutes() {
         const demo = path.match(TEMPLATE_SLUGS);
         if (!demo) return next();
         try {
-          const { renderDemo } = await import(`./scripts/templates/build-demos.mjs?t=${Date.now()}`);
+          const builder = pathToFileURL(join(process.cwd(), "scripts", "templates", "build-demos.mjs")).href;
+          const { renderDemo } = await import(`${builder}?t=${Date.now()}`);
           res.setHeader("Content-Type", "text/html; charset=utf-8");
           res.end(await renderDemo(demo[1]));
         } catch (error) {

@@ -164,3 +164,4 @@ textarea.cfg-input { min-height: 110px; resize: vertical; }
 .cfg-main__search { display: flex; gap: 8px; max-width: 560px; }
 .cfg-main__rte { color: var(--c-muted); max-width: 720px; }
 @media (min-width: 990px) { .cfg-main__product { grid-template-columns: 1fr 1fr; gap: 64px; } }
+.cfg-header__logo, .cfg-header__account { white-space: nowrap; }

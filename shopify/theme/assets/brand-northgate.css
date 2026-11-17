@@ -32,6 +32,7 @@
 .brand-northgate .cfg-header__nav a { color: #111; font-weight: 500; }
 .brand-northgate .cfg-header__nav a:hover { color: #111; text-decoration: underline; text-underline-offset: 6px; text-decoration-thickness: 2px; text-decoration-color: var(--c-accent); }
 .brand-northgate .cfg-header__account { border: 1.5px solid #111; border-radius: 2px; font-family: var(--f-mono); font-size: 13px; padding: 8px 12px; }
+@media (max-width: 420px) { .brand-northgate .cfg-logo-text { font-size: 14px; letter-spacing: 0.02em; } .brand-northgate .cfg-header__account { padding: 6px 8px; font-size: 12px; } .brand-northgate .cfg-header__inner { gap: 12px; } }
 .brand-northgate .cfg-announce { background: #111; color: #f3f2ed; font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.02em; }
 .brand-northgate .cfg-btn { font-weight: 600; letter-spacing: 0; }
 .brand-northgate .cfg-btn--primary { border: 1.5px solid #111; }
@@ -93,7 +94,7 @@
 .ng-prod > span:last-child { display: grid; }
 .ng-prod__title { font-weight: 600; }
 .ng-prod__sku { font-family: var(--f-mono); font-size: 12px; color: var(--c-muted); }
-.ng-locked { display: inline-grid; place-items: center; width: 28px; height: 28px; color: #77766f; }
+.ng-locked { display: inline-grid; place-items: center; width: 28px; height: 28px; color: #5d5c56; }
 .ng-foot { margin-top: 14px; font-size: 13px; color: var(--c-muted); font-family: var(--f-mono); }
 
 /* ------------------------------------------------------------ quick order */
@@ -118,6 +119,7 @@
 .ng-ghost-row { display: grid; grid-template-columns: 56px 1fr 120px 120px; gap: 16px; align-items: center; padding: 10px 16px; border-bottom: 1px solid var(--c-line); font-size: 14px; }
 .ng-ghost-row__img { height: 40px; background: #ddd9cf; }
 .ng-ghost-bar, .ng-ghost-qty { height: 14px; background: #d8d5cc; }
+.ng-ghost-bar--title { width: 70%; height: 16px; background: #c9c5ba; }
 .ng-locked-grid__card { position: absolute; inset: 50% auto auto 50%; transform: translate(-50%, -50%); width: min(460px, calc(100% - 32px)); padding: 28px; background: #fff; border: 2px solid #111; box-shadow: 6px 6px 0 #111; text-align: center; display: grid; gap: 10px; justify-items: center; }
 .ng-locked-grid__icon { display: grid; place-items: center; width: 44px; height: 44px; background: var(--c-accent); }
 .ng-locked-grid__card h3 { font-size: 20px; }

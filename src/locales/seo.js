@@ -66,6 +66,7 @@ export const pageSeo = {
         "Five concept Shopify storefronts — a 3D pergola configurator, a subscription supplement page, a B2B trade portal, an IT hardware catalog and a jewellery drop — each built as an Online Store 2.0 theme.",
       keywords: "Shopify templates, Shopify theme development, Shopify configurator, Shopify B2B, Shopify subscriptions, Online Store 2.0 sections",
       itemList: true,
+      ogImage: "https://configuro.studio/templates/og/templates.jpg",
     },
     "/template-studio": {
       title: "Template Studio — Compose a Storefront Layout | Configuro",
@@ -184,6 +185,7 @@ export const pageSeo = {
         "Beş konsept Shopify mağazası — 3D perqola konfiquratoru, abunəlikli qida əlavəsi səhifəsi, B2B portal, IT avadanlıq kataloqu və zərgərlik buraxılışı — hər biri Online Store 2.0 teması kimi.",
       keywords: "Shopify şablonları, Shopify tema hazırlanması, Shopify konfiqurator",
       itemList: true,
+      ogImage: "https://configuro.studio/templates/og/templates.jpg",
     },
     "/template-studio": {
       title: "Şablon Studiyası — Mağaza Səhifəsini Qurun | Configuro",
