@@ -1,7 +1,7 @@
 {
   "current": {
     "brand": "vela",
-    "demo_mode": true,
+    "demo_mode": false,
     "demo_back_url": "https://configuro.studio/templates",
     "free_shipping_threshold": "7500"
   },

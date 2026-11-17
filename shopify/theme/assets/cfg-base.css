@@ -152,3 +152,15 @@ textarea.cfg-input { min-height: 110px; resize: vertical; }
 .cfg-media { position: relative; overflow: hidden; background: var(--c-surface); }
 .cfg-media img { width: 100%; height: 100%; object-fit: cover; }
 .cfg-table-wrap { position: relative; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+/* ------------------------------------------------------------- generic pages */
+.cfg-main__inner { display: grid; gap: 24px; }
+.cfg-main__title { font-size: clamp(32px, 5vw, 56px); }
+.cfg-main__price { font-size: 22px; margin: 8px 0 20px; }
+.cfg-main__product { display: grid; gap: 32px; }
+.cfg-main__product form { display: grid; gap: 12px; margin-bottom: 24px; }
+.cfg-main__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; }
+.cfg-main__grid a { display: grid; gap: 8px; text-decoration: none; }
+.cfg-main__search { display: flex; gap: 8px; max-width: 560px; }
+.cfg-main__rte { color: var(--c-muted); max-width: 720px; }
+@media (min-width: 990px) { .cfg-main__product { grid-template-columns: 1fr 1fr; gap: 64px; } }

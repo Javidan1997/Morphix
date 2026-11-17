@@ -1,0 +1,40 @@
+[
+  {
+    "type": "ingredient",
+    "name": "Ingredient",
+    "description": "Vela: one supplement ingredient, referenced from product.metafields.custom.ingredients",
+    "displayNameKey": "name",
+    "fieldDefinitions": [
+      {
+        "key": "name",
+        "name": "Name",
+        "type": "single_line_text_field",
+        "required": true
+      },
+      {
+        "key": "dose_mg",
+        "name": "Dose per serving (mg)",
+        "type": "number_integer",
+        "required": true
+      },
+      {
+        "key": "role",
+        "name": "Role",
+        "type": "single_line_text_field"
+      },
+      {
+        "key": "source",
+        "name": "Source",
+        "type": "single_line_text_field"
+      },
+      {
+        "key": "detail",
+        "name": "Detail",
+        "type": "multi_line_text_field"
+      }
+    ],
+    "access": {
+      "storefront": "PUBLIC_READ"
+    }
+  }
+]

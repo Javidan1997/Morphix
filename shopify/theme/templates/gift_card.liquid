@@ -1,0 +1,17 @@
+{%- layout none -%}
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+  <head>
+    <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Gift card · {{ shop.name }}</title>
+    {{ 'cfg-base.css' | asset_url | stylesheet_tag }}
+  </head>
+  <body class="cfg">
+    <main class="cfg-section"><div class="cfg-container">
+      <h1>{{ gift_card.initial_value | money }} gift card</h1>
+      <p>Code: <strong>{{ gift_card.code | format_code }}</strong></p>
+      {%- if gift_card.expired -%}<p>This gift card has expired.</p>{%- endif -%}
+      <p><a class="cfg-btn cfg-btn--primary" href="{{ shop.url }}">Shop now</a></p>
+    </div></main>
+  </body>
+</html>

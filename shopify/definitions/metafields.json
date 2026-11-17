@@ -1,0 +1,37 @@
+{
+  "_comment": "All definitions live in the `custom` namespace. `brand` is documentation only. Run ../scripts/setup_definitions.py to create them (idempotent).",
+  "PRODUCT": [
+    { "brand": "vela", "key": "subtitle", "name": "Subtitle", "type": "single_line_text_field" },
+    { "brand": "vela", "key": "ingredients", "name": "Ingredients", "type": "list.metaobject_reference", "metaobject": "ingredient" },
+
+    { "brand": "shadeline", "key": "price_rules", "name": "Configurator price rules", "type": "json", "description": "Bands, base, per-m² rate, finish surcharges and add-on unit prices. Read by shadeline-pricing.js." },
+
+    { "brand": "northgate", "key": "spec", "name": "Spec line", "type": "single_line_text_field" },
+    { "brand": "northgate", "key": "pack", "name": "Pack size", "type": "single_line_text_field" },
+    { "brand": "northgate", "key": "price_tiers", "name": "Trade price tiers", "type": "json", "description": "[{\"min\":1,\"price\":2490},…] — cents per case. Used by the theme and the tier discount Function." },
+
+    { "brand": "linkcore", "key": "tagline", "name": "Tagline", "type": "single_line_text_field" },
+    { "brand": "linkcore", "key": "badge", "name": "Badge", "type": "single_line_text_field" },
+    { "brand": "linkcore", "key": "highlights", "name": "Highlights", "type": "list.single_line_text_field" },
+    { "brand": "linkcore", "key": "host_interface", "name": "Connects over", "type": "single_line_text_field" },
+    { "brand": "linkcore", "key": "max_displays", "name": "External displays", "type": "single_line_text_field" },
+    { "brand": "linkcore", "key": "max_resolution", "name": "Max resolution", "type": "single_line_text_field" },
+    { "brand": "linkcore", "key": "power_delivery_w", "name": "Laptop charging (W)", "type": "number_integer" },
+    { "brand": "linkcore", "key": "ethernet", "name": "Ethernet", "type": "single_line_text_field" },
+    { "brand": "linkcore", "key": "usb_a", "name": "USB-A ports", "type": "number_integer" },
+    { "brand": "linkcore", "key": "usb_c", "name": "Downstream USB-C", "type": "single_line_text_field" },
+    { "brand": "linkcore", "key": "sd_card", "name": "SD card reader", "type": "boolean" },
+    { "brand": "linkcore", "key": "driver", "name": "Driver needed", "type": "single_line_text_field" },
+    { "brand": "linkcore", "key": "warranty", "name": "Warranty", "type": "single_line_text_field" },
+    { "brand": "linkcore", "key": "compatibility", "name": "Compatibility rules", "type": "json", "description": "Hosts → displays/resolution, MST, DisplayLink, PD watts, Ethernet. Read by linkcore-compat.js." },
+    { "brand": "linkcore", "key": "import_hash", "name": "Supplier import hash", "type": "single_line_text_field", "description": "Written by linkcore_import.py to skip unchanged rows." },
+
+    { "brand": "aurel", "key": "materials", "name": "Materials line", "type": "single_line_text_field" },
+    { "brand": "aurel", "key": "engraving_max", "name": "Engraving character limit", "type": "number_integer", "validations": [{ "name": "min", "value": "1" }, { "name": "max", "value": "40" }] },
+    { "brand": "aurel", "key": "drop_at", "name": "Drop opens at", "type": "date_time" }
+  ],
+  "PRODUCTVARIANT": [
+    { "brand": "vela", "key": "pack_size", "name": "Jars in pack", "type": "number_integer" },
+    { "brand": "vela", "key": "badge", "name": "Pack badge", "type": "single_line_text_field" }
+  ]
+}

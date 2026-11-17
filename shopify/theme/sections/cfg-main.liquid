@@ -1,0 +1,77 @@
+{%- comment -%}
+  Generic main section for the store's non-concept pages (cart, search, 404,
+  blogs, plain pages, default product/collection). Styled by the active brand.
+{%- endcomment -%}
+<section class="cfg-section cfg-main">
+  <div class="cfg-container cfg-main__inner">
+    {%- case template.name -%}
+      {%- when 'product' -%}
+        <div class="cfg-main__product">
+          <div class="cfg-media">{%- render 'cfg-image', image: product.featured_image, widths: '480,800,1200', sizes: '(min-width: 990px) 50vw, 100vw', alt: product.title -%}</div>
+          <div>
+            <h1 class="cfg-main__title">{{ product.title }}</h1>
+            <p class="cfg-main__price">{{ product.selected_or_first_available_variant.price | money }}</p>
+            <cfg-product-form>
+              <script type="application/json" data-cfg-product>{{ product | json }}</script>
+              {%- form 'product', product -%}
+                <select name="id" class="cfg-input" aria-label="Variant">
+                  {%- for v in product.variants -%}<option value="{{ v.id }}"{% unless v.available %} disabled{% endunless %}>{{ v.title }} · {{ v.price | money }}</option>{%- endfor -%}
+                </select>
+                <button class="cfg-btn cfg-btn--primary cfg-btn--block" type="submit">{{ 'cfg.product.add_to_cart' | t }}</button>
+                <p class="cfg-form-error" data-form-error role="alert" hidden></p>
+              {%- endform -%}
+            </cfg-product-form>
+            <div class="cfg-main__rte">{{ product.description }}</div>
+          </div>
+        </div>
+      {%- when 'collection' or 'search' or 'list-collections' -%}
+        <h1 class="cfg-main__title">{% if template.name == 'search' %}Search{% elsif template.name == 'list-collections' %}Collections{% else %}{{ collection.title }}{% endif %}</h1>
+        {%- if template.name == 'search' -%}
+          <form action="{{ routes.search_url }}" method="get" role="search" class="cfg-main__search"><label class="visually-hidden" for="q">Search</label><input class="cfg-input" id="q" type="search" name="q" value="{{ search.terms | escape }}"><button class="cfg-btn cfg-btn--primary">Search</button></form>
+        {%- endif -%}
+        <ul class="cfg-main__grid">
+          {%- if template.name == 'list-collections' -%}
+            {%- for c in collections -%}<li><a href="{{ c.url }}">{{ c.title }}</a></li>{%- endfor -%}
+          {%- else -%}
+            {%- assign items = collection.products | default: search.results -%}
+            {%- for p in items -%}<li><a href="{{ p.url }}"><span class="cfg-media">{%- render 'cfg-image', image: p.featured_image, widths: '480,800', sizes: '(min-width: 990px) 25vw, 50vw', alt: p.title -%}</span><span>{{ p.title }}</span><span class="cfg-muted">{{ p.price | money }}</span></a></li>{%- endfor -%}
+          {%- endif -%}
+        </ul>
+      {%- when 'cart' -%}
+        <h1 class="cfg-main__title">{{ 'cfg.cart.title' | t }}</h1>
+        {%- if cart.item_count == 0 -%}<p>{{ 'cfg.cart.empty' | t }}</p>{%- else -%}
+          <form action="{{ routes.cart_url }}" method="post">
+            <ul class="cfg-cart__lines">
+              {%- for item in cart.items -%}
+                <li class="cfg-cart__line"><span class="cfg-cart__title">{{ item.product.title }}</span><label>Qty <input class="cfg-input" type="number" name="updates[]" value="{{ item.quantity }}" min="0"></label><span>{{ item.final_line_price | money }}</span></li>
+              {%- endfor -%}
+            </ul>
+            <p class="cfg-cart__total"><span>{{ 'cfg.cart.subtotal' | t }}</span><strong>{{ cart.total_price | money }}</strong></p>
+            <button class="cfg-btn cfg-btn--primary" name="checkout">{{ 'cfg.cart.checkout' | t }}</button>
+          </form>
+        {%- endif -%}
+      {%- when '404' -%}
+        <h1 class="cfg-main__title">Page not found</h1>
+        <p><a class="cfg-btn cfg-btn--primary" href="{{ routes.root_url }}">Back to the store</a></p>
+      {%- when 'blog' -%}
+        <h1 class="cfg-main__title">{{ blog.title }}</h1>
+        <ul class="cfg-main__list">{%- for a in blog.articles -%}<li><a href="{{ a.url }}">{{ a.title }}</a></li>{%- endfor -%}</ul>
+      {%- when 'article' -%}
+        <h1 class="cfg-main__title">{{ article.title }}</h1>
+        <div class="cfg-main__rte">{{ article.content }}</div>
+      {%- when 'index' -%}
+        <h1 class="cfg-main__title">{{ shop.name }}</h1>
+        <p class="cfg-muted">{{ section.settings.text }}</p>
+      {%- else -%}
+        <h1 class="cfg-main__title">{{ page.title }}</h1>
+        <div class="cfg-main__rte">{{ page.content }}</div>
+    {%- endcase -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Main content",
+  "settings": [{ "type": "textarea", "id": "text", "label": "Home page text", "default": "Concept storefronts by Configuro. Assign product.vela, product.shadeline, page.northgate, collection.linkcore or product.aurel to see each brand." }]
+}
+{% endschema %}

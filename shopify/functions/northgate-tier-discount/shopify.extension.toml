@@ -1,0 +1,19 @@
+# Northgate trade tier pricing — Shopify Discount Function.
+# Lives inside a (free) custom app: `shopify app generate extension` →
+# Discount, then replace src/ with these files. Create the automatic discount
+# once with discountAutomaticAppCreate pointing at this function.
+api_version = "2025-07"
+
+[[extensions]]
+name = "Northgate trade tiers"
+handle = "northgate-tier-discount"
+type = "function"
+
+  [[extensions.targeting]]
+  target = "cart.lines.discounts.generate.run"
+  input_query = "src/cart_lines_discounts_generate_run.graphql"
+  export = "cart-lines-discounts-generate-run"
+
+  [extensions.build]
+  command = ""
+  path = "dist/function.wasm"

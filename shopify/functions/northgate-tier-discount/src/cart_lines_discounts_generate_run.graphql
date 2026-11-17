@@ -1,0 +1,33 @@
+# Only trade-approved buyers get tiers; each line carries its product's
+# custom.price_tiers metafield (the same JSON the theme renders).
+query CartInput {
+  cart {
+    buyerIdentity {
+      customer {
+        hasAnyTag(tags: ["trade-approved"])
+      }
+    }
+    lines {
+      id
+      quantity
+      cost {
+        amountPerQuantity {
+          amount
+        }
+      }
+      merchandise {
+        __typename
+        ... on ProductVariant {
+          product {
+            tiers: metafield(namespace: "custom", key: "price_tiers") {
+              jsonValue
+            }
+          }
+        }
+      }
+    }
+  }
+  discount {
+    discountClasses
+  }
+}
