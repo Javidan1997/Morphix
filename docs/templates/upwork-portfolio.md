@@ -1,6 +1,6 @@
 # Upwork portfolio entries
 
-Five concept builds for invented brands. No client names, sales figures or results are claimed; the only metric quoted is each page's own Lighthouse mobile run (Lighthouse 12.8, `docs/templates/lighthouse/`). Upload the matching desktop screenshot as the cover and the mobile one as the second image.
+Five concept builds for invented brands. No client names, sales figures or results are claimed; the only metric quoted is each page's own Lighthouse mobile run, measured with image placeholders in place (Lighthouse 12.8, `docs/templates/lighthouse/`). Upload the matching desktop screenshot as the cover and the mobile one as the second image.
 
 ## Vela
 
@@ -24,11 +24,11 @@ Goal: a single-product supplement page that sells bundles and subscriptions with
 
 **Role:** Concept build · design, Shopify theme development and integrations
 
-**Description (89 words):**
+**Description (90 words):**
 
-Goal: let buyers size a louvred pergola and see a real price before ever talking to a salesperson. A full-bleed architectural hero leads straight into a sticky 3D stage beside a three-step configurator: size, finish, add-ons. Prices come from metafield price rules that also generate the variant prices, so the live quote matches checkout. Exact dimensions travel with the order as line-item properties; add-ons are unit-priced cart lines. Three.js loads only after the buyer scrolls, behind instant pre-rendered posters of the same model. Lighthouse mobile: 100 performance, 100 accessibility.
+Goal: let buyers size a louvred pergola and see a real price before ever talking to a salesperson. A full-bleed hero leads into a sticky 3D stage beside a three-step configurator: size, finish, add-ons. The 3D view runs a production pergola engine (bays, ZIP screens, LED lighting) that loads only after the buyer scrolls past the hero. Prices come from metafield rules that also generate variant prices, so the live quote matches checkout; exact dimensions travel as line-item properties and add-ons as unit-priced lines. Lighthouse mobile: 100 performance, 100 accessibility.
 
-**Skills:** Shopify, Three.js, Shopify Theme Development, JavaScript, 3D Product Configurator
+**Skills:** Shopify, Three.js, 3D Product Configurator, Shopify Theme Development, JavaScript
 
 **Project URL:** https://configuro.studio/shopify-templates/shadeline
 
@@ -58,7 +58,7 @@ Goal: a wholesale storefront where trade buyers apply once, then reorder in unde
 
 **Description (89 words):**
 
-Goal: reduce wrong-dock returns for an IT hardware catalog. A four-product lineup sits beside a “will it work with my setup?” checker that ranks products for the buyer's laptop, monitors and needs, explaining caveats such as one-display MacBooks, MST and 4K at 30 Hz. Specs and compatibility rules live in product metafields, so the comparison table needs no code changes. A tested Python script imports the supplier CSV through the Admin GraphQL API as an idempotent upsert by SKU, so reruns change nothing. Lighthouse mobile: 100 performance, 100 accessibility.
+Goal: reduce wrong-dock returns for an IT hardware catalog. A four-product lineup sits beside a “will it work with my setup?” checker that ranks products for the buyer's laptop, monitors and needs, explaining caveats such as one-display MacBooks, MST and 4K at 30 Hz. Specs and compatibility rules live in product metafields, so the comparison table needs no code changes. A tested Python script imports the supplier CSV through the Admin GraphQL API as an idempotent upsert by SKU, so reruns change nothing. Lighthouse mobile: 99 performance, 100 accessibility.
 
 **Skills:** Shopify, Python, GraphQL, Shopify API, JavaScript
 

@@ -48,8 +48,9 @@ shopify/
    | Linkcore | collection | `collection.linkcore` | specs + `custom.compatibility` (run the importer) |
    | Aurel | product, options *Metal / Size* | `product.aurel` | `custom.engraving_max`, `custom.drop_at` |
 
-   Every section falls back to the theme's rendered imagery, so pages look
-   finished before you upload photos.
+   Every section falls back to the theme's image slots
+   (`shopify/images/manifest.json`, prompts in `docs/templates/image-prompts.md`);
+   run `npm run templates:images` after adding your images.
 4. **Demo mode** (Theme settings → Demo mode) adds the "Concept demo" bar and
    footer note, keeps the cart in memory and disables checkout. It is **off**
    by default in `settings_data.json`; the public build turns it on.
@@ -71,9 +72,12 @@ job so the quote always equals checkout. Exact sizes are snapped *up* to a
 manufacturing band (the variant) and travel as `properties[Width (cm)]`,
 `properties[Depth (cm)]`, `properties[Made in band]` and `_config_id`. Add-ons
 are separate per-unit products added in the same `/cart/add.js` call, with
-quantity = metres or m². Three.js (`shadeline-pergola.js`, shared with the
-offline renderer) loads only after scroll or interaction, behind posters of
-the same model.
+quantity = metres or m². The 3D view is Configuro's production pergola
+engine (`src/pergola/viewer/engine.js`) bundled into
+`assets/shadeline-viewer.js` by `npm run theme:viewer`. It loads only after
+scroll or interaction, behind poster images, and reads its environment, sky
+and heater files from the theme assets, or from the *3D asset folder URL*
+theme setting if your store rejects `.glb`/`.hdr` uploads.
 
 **Northgate — B2B.** Gating is server-side Liquid
 (`customer.tags contains 'trade-approved'`): guests never receive tier prices

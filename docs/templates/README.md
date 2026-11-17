@@ -6,16 +6,19 @@ on configuro.studio and shipped as one installable Online Store 2.0 theme.
 | Demo | URL | Engineering hook | Lighthouse mobile (P / A / BP / SEO) |
 |---|---|---|---|
 | Vela | `/shopify-templates/vela` | 1/2/3-pack variants + native selling plans, sticky ATC | 100 / 100 / 100 / 100 |
-| Shadeline | `/shopify-templates/shadeline` | Three.js preview, metafield price rules, line-item properties | 100 / 100 / 100 / 100 |
+| Shadeline | `/shopify-templates/shadeline` | Configuro's production pergola engine, metafield price rules, line-item properties | 100 / 100 / 100 / 100 |
 | Northgate Supply | `/shopify-templates/northgate` | customer-tag gated tiers, quick order, HubSpot webhook, discount Function | 100 / 100 / 100 / 100 |
-| Linkcore | `/shopify-templates/linkcore` | compatibility rules from metafields, Python GraphQL importer | 100 / 100 / 100 / 100 |
+| Linkcore | `/shopify-templates/linkcore` | compatibility rules from metafields, Python GraphQL importer | 99 / 100 / 100 / 100 |
 | Aurel | `/shopify-templates/aurel` | engraving preview + limit, size drawer, drop countdown, waitlist | 100 / 100 / 100 / 100 |
 
 Measured with Lighthouse 12.8 (mobile preset: simulated slow 4G, 4× CPU
 throttle) against the production build served gzipped by
-`scripts/serve-pages.mjs`. In the reports kept in `lighthouse/` every demo has
-LCP ≤ 1.9 s, TBT ≤ 10 ms and CLS 0; across repeated runs performance varied
-by at most one point (one Linkcore run scored 99).
+`scripts/serve-pages.mjs`, **with image placeholders in place**. Every demo
+has LCP ≤ 1.9 s, TBT ≤ 20 ms and CLS 0. Linkcore's hero image paints just
+after the 100 cut-off (consistently 99). Re-run after adding the GPT images:
+they will be heavier than the placeholders, so keep each source under about
+300 KB at 1600 px. The script's WebP quality 82 normally achieves that.
+Reports are in `lighthouse/`.
 
 ## How it is built
 
@@ -48,6 +51,14 @@ In demo mode `cfg-core.js` swaps the Ajax Cart API for an in-memory cart:
 add to cart, subscribe, forms and the waitlist all work visually. Nothing is
 sent, nothing is stored (no cookies, no localStorage), and checkout is
 disabled.
+
+**Shadeline's 3D** is Configuro's production pergola engine
+(`src/pergola/viewer/engine.js`, the same one behind `/pergola-configurator`),
+bundled for the theme by `npm run theme:viewer` (`shopify/vite.viewer.config.js`).
+`three` stays external (the theme importmap serves it), and a build-time
+transform lets the theme point the engine's environment, sky and heater files
+at its own asset folder (`window.CFG_PERGOLA_ASSETS`). The existing
+configurator source is not modified.
 
 **Imagery** is supplied by you: every image is a slot listed in
 `shopify/images/manifest.json` with its size, crop focus and a GPT prompt
