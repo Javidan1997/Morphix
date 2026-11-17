@@ -1,0 +1,44 @@
+{%- comment -%}
+  Responsive <img> for either a Shopify image object or a theme asset.
+  Theme assets ship pre-sized as <name>-<width>.webp, so a fresh install looks
+  finished before the merchant uploads anything.
+
+  Params:
+    image     image object (product media, image_picker) — preferred
+    asset     asset base name, e.g. 'vela-hero' (fallback)
+    widths    comma list, default '480,800,1200,1600' (must exist for assets)
+    width / height   intrinsic size for assets (reserves space: no CLS)
+    alt, sizes, class, loading ('lazy' | 'eager'), priority (true → fetchpriority=high)
+{%- endcomment -%}
+{%- liquid
+  assign ws = widths | default: '480,800,1200,1600' | split: ','
+  assign load = loading | default: 'lazy'
+  assign src = ''
+  assign srcset = ''
+  for w in ws
+    assign wn = w | plus: 0
+    if image != blank
+      assign url = image | image_url: width: wn
+    else
+      assign file = asset | append: '-' | append: w | append: '.webp'
+      assign url = file | asset_url
+    endif
+    if forloop.index == 2 or forloop.length == 1
+      assign src = url
+    endif
+    assign srcset = srcset | append: url | append: ' ' | append: w | append: 'w'
+    unless forloop.last
+      assign srcset = srcset | append: ', '
+    endunless
+  endfor
+  if image != blank
+    assign iw = image.width
+    assign ih = image.height
+    assign alt_text = alt | default: image.alt
+  else
+    assign iw = width
+    assign ih = height
+    assign alt_text = alt
+  endif
+-%}
+<img src="{{ src }}" srcset="{{ srcset }}" sizes="{{ sizes | default: '100vw' }}" width="{{ iw }}" height="{{ ih }}" alt="{{ alt_text | escape }}" loading="{{ load }}"{% if priority %} fetchpriority="high"{% endif %} decoding="async"{% if class %} class="{{ class }}"{% endif %}>

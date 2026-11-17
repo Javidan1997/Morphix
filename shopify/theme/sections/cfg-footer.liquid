@@ -1,0 +1,55 @@
+<footer class="cfg-footer">
+  <div class="cfg-container">
+    <div class="cfg-footer__top">
+      <div class="cfg-footer__brand">
+        <p class="cfg-footer__logo"><span class="cfg-logo-mark" aria-hidden="true"></span>{{ section.settings.logo_text | default: shop.name }}</p>
+        {%- if section.settings.blurb != blank -%}<div class="cfg-footer__blurb">{{ section.settings.blurb }}</div>{%- endif -%}
+      </div>
+      {%- for block in section.blocks -%}
+        <div class="cfg-footer__col" {{ block.shopify_attributes }}>
+          <h2 class="cfg-footer__heading">{{ block.settings.heading }}</h2>
+          <ul>
+            {%- assign lines = block.settings.links | newline_to_br | split: '<br />' -%}
+            {%- for line in lines -%}
+              {%- assign parts = line | strip | split: '|' -%}
+              {%- if parts[0] != blank -%}
+                <li><a href="{{ parts[1] | strip | default: '#' }}">{{ parts[0] | strip }}</a></li>
+              {%- endif -%}
+            {%- endfor -%}
+          </ul>
+        </div>
+      {%- endfor -%}
+    </div>
+    <div class="cfg-footer__bottom">
+      <p>&copy; {{ 'now' | date: '%Y' }} {{ section.settings.logo_text | default: shop.name }}. {{ section.settings.legal }}</p>
+      {%- if settings.demo_mode -%}
+        <p class="cfg-footer__demo">{{ 'cfg.demo.footer' | t }} <a href="{{ settings.demo_back_url }}">Configuro</a></p>
+      {%- endif -%}
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "tag": "div",
+  "class": "cfg-footer-section",
+  "enabled_on": { "groups": ["footer"] },
+  "settings": [
+    { "type": "text", "id": "logo_text", "label": "Brand name" },
+    { "type": "richtext", "id": "blurb", "label": "Brand line" },
+    { "type": "text", "id": "legal", "label": "Legal line", "default": "All rights reserved." }
+  ],
+  "blocks": [
+    {
+      "type": "column",
+      "name": "Link column",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Shop" },
+        { "type": "textarea", "id": "links", "label": "Links", "info": "One per line: Label | /url" }
+      ]
+    }
+  ],
+  "max_blocks": 4
+}
+{% endschema %}

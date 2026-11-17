@@ -1,0 +1,176 @@
+{%- comment -%}
+  Vela — main product buy box.
+
+  • 1/2/3-pack bundles are real variants (option "Pack"); the per-jar price and
+    the saving are computed from the variant prices, so merchants only edit
+    prices in Shopify admin. `custom.pack_size` / `custom.badge` variant
+    metafields drive the labels.
+  • Subscribe-and-save uses native selling plans (product.selling_plan_groups,
+    created by Shopify's free Subscriptions app or the setup script in
+    shopify/scripts). The selected plan is posted as `selling_plan`.
+  • Works without JavaScript: the variant radios are named `id` and the plan
+    <select> is named `selling_plan`; vela.js only adds live price/image swaps,
+    the one-time toggle and the sticky bar.
+{%- endcomment -%}
+{%- liquid
+  assign current = product.selected_or_first_available_variant
+  assign form_id = 'ProductForm-' | append: section.id
+  assign base_price = product.variants.first.price
+  assign group = product.selling_plan_groups.first
+  assign subscribe_default = section.settings.subscribe_default
+  if group == blank
+    assign subscribe_default = false
+  endif
+  assign shown_price = current.price
+  if subscribe_default
+    for alloc in current.selling_plan_allocations
+      if alloc.selling_plan.id == group.selling_plans.first.id
+        assign shown_price = alloc.price
+      endif
+    endfor
+  endif
+-%}
+<section class="cfg-section vela-buy" id="buy" aria-labelledby="BuyTitle-{{ section.id }}">
+  <div class="cfg-container vela-buy__grid">
+    <div class="vela-buy__gallery">
+      <div class="vela-buy__stage">
+        {%- for variant in product.variants -%}
+          {%- assign vimg = variant.featured_image -%}
+          {%- assign fallback = 'vela-pack-' | append: forloop.index -%}
+          {%- assign alt = 'Vela Evening Calm — ' | append: variant.title -%}
+          <div class="vela-buy__frame{% if variant.id == current.id %} is-active{% endif %}" data-variant-image="{{ variant.id }}">
+            {%- render 'cfg-image', image: vimg, asset: fallback, width: 1200, height: 1200, widths: '480,800,1200', alt: alt, sizes: '(min-width: 990px) 46vw, 100vw' -%}
+          </div>
+        {%- endfor -%}
+      </div>
+      <ul class="vela-buy__thumbs" aria-label="More images">
+        <li>{%- render 'cfg-image', asset: 'vela-ritual', width: 1600, height: 1100, widths: '480,800', alt: 'Vela jar beside a glass of water at night', sizes: '(min-width: 990px) 22vw, 50vw' -%}</li>
+        <li>{%- render 'cfg-image', asset: 'vela-capsules', width: 1600, height: 1200, widths: '480,800', alt: 'Close-up of Vela capsules', sizes: '(min-width: 990px) 22vw, 50vw' -%}</li>
+      </ul>
+    </div>
+
+    <div class="vela-buy__panel">
+      <p class="cfg-eyebrow">{{ section.settings.eyebrow }}</p>
+      <h2 id="BuyTitle-{{ section.id }}" class="vela-buy__title">{{ product.title }}</h2>
+      {%- if product.metafields.custom.subtitle != blank -%}<p class="vela-buy__subtitle">{{ product.metafields.custom.subtitle.value }}</p>{%- endif -%}
+
+      <cfg-product-form class="vela-buy__form" data-vela-buy data-section="{{ section.id }}">
+        <script type="application/json" data-cfg-product>{{ product | json }}</script>
+        {%- form 'product', product, id: form_id, class: 'vela-form' -%}
+          <fieldset class="vela-packs">
+            <legend class="cfg-label">{{ section.settings.pack_label }}</legend>
+            {%- for variant in product.variants -%}
+              {%- liquid
+                assign jars = variant.metafields.custom.pack_size.value | default: forloop.index | plus: 0
+                assign per_jar = variant.price | divided_by: jars
+                assign full = base_price | times: jars
+                assign pct = variant.price | times: 100 | divided_by: full
+                assign save = 100 | minus: pct
+              -%}
+              <label class="vela-pack{% if variant.id == current.id %} is-checked{% endif %}">
+                <input type="radio" name="id" value="{{ variant.id }}" {% if variant.id == current.id %}checked{% endif %}{% unless variant.available %} disabled{% endunless %} data-jars="{{ jars }}">
+                <span class="vela-pack__body">
+                  <span class="vela-pack__name">{{ variant.title }}</span>
+                  <span class="vela-pack__meta">{{ jars | times: 30 }} nights · {{ per_jar | money }}/jar</span>
+                </span>
+                <span class="vela-pack__price">
+                  <strong>{{ variant.price | money }}</strong>
+                  {%- if save > 0 -%}<span class="vela-pack__save">Save {{ save }}%</span>{%- endif -%}
+                </span>
+                {%- if variant.metafields.custom.badge != blank -%}<span class="vela-pack__badge">{{ variant.metafields.custom.badge.value }}</span>{%- endif -%}
+              </label>
+            {%- endfor -%}
+          </fieldset>
+
+          {%- if group != blank -%}
+            {%- assign plan_pct = group.selling_plans.first.price_adjustments.first.value -%}
+            <fieldset class="vela-purchase" data-purchase>
+              <legend class="cfg-label">{{ section.settings.purchase_label }}</legend>
+              <div class="vela-option{% if subscribe_default %} is-checked{% endif %}">
+                <label class="vela-option__row">
+                  <input type="radio" name="purchase_type" value="subscribe" {% if subscribe_default %}checked{% endif %}>
+                  <span class="vela-option__body">
+                    <span class="vela-option__title">{{ 'cfg.product.subscribe' | t }} {{ plan_pct }}%</span>
+                    <span class="vela-option__text">{{ section.settings.subscribe_text }}</span>
+                  </span>
+                </label>
+                <div class="vela-option__freq">
+                  <label for="Plan-{{ section.id }}">Deliver</label>
+                  <select id="Plan-{{ section.id }}" name="selling_plan" class="vela-select" data-plan-select{% unless subscribe_default %} disabled{% endunless %}>
+                    {%- for plan in group.selling_plans -%}
+                      <option value="{{ plan.id }}">{{ plan.options.first.value }}</option>
+                    {%- endfor -%}
+                  </select>
+                </div>
+              </div>
+              <div class="vela-option{% unless subscribe_default %} is-checked{% endunless %}">
+                <label class="vela-option__row">
+                  <input type="radio" name="purchase_type" value="once" {% unless subscribe_default %}checked{% endunless %}>
+                  <span class="vela-option__body">
+                    <span class="vela-option__title">{{ 'cfg.product.one_time' | t }}</span>
+                    <span class="vela-option__text">{{ section.settings.once_text }}</span>
+                  </span>
+                </label>
+              </div>
+            </fieldset>
+          {%- endif -%}
+
+          <input type="hidden" name="quantity" value="1">
+          <button type="submit" class="cfg-btn cfg-btn--primary cfg-btn--block vela-buy__cta" data-atc>
+            <span>{{ 'cfg.product.add_to_cart' | t }}</span><span aria-hidden="true">·</span><span data-price>{{ shown_price | money }}</span>
+          </button>
+          <p class="cfg-form-error" data-form-error role="alert" hidden></p>
+        {%- endform -%}
+      </cfg-product-form>
+
+      <ul class="vela-trust">
+        {%- for block in section.blocks -%}
+          <li {{ block.shopify_attributes }}>{% render 'cfg-icon', name: block.settings.icon %}<span><strong>{{ block.settings.title }}</strong> {{ block.settings.text }}</span></li>
+        {%- endfor -%}
+      </ul>
+    </div>
+  </div>
+
+  {%- if section.settings.sticky -%}
+    <div class="vela-sticky" data-sticky aria-hidden="true" inert>
+      <div class="cfg-container vela-sticky__inner">
+        <div class="vela-sticky__info">
+          <p class="vela-sticky__title">{{ product.title }}</p>
+          <p class="vela-sticky__meta" data-sticky-meta>{{ current.title }}{% if subscribe_default %} · {{ 'cfg.product.subscribe' | t }}{% endif %}</p>
+        </div>
+        <button type="submit" form="{{ form_id }}" class="cfg-btn cfg-btn--primary vela-sticky__btn">
+          <span>{{ 'cfg.product.add_to_cart' | t }}</span><span aria-hidden="true">·</span><span data-price>{{ shown_price | money }}</span>
+        </button>
+      </div>
+    </div>
+  {%- endif -%}
+</section>
+<script type="module" src="{{ 'vela.js' | asset_url }}"></script>
+
+{% schema %}
+{
+  "name": "Vela · Buy box",
+  "class": "vela-buy-section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Start tonight" },
+    { "type": "text", "id": "pack_label", "label": "Pack picker label", "default": "Choose your pack" },
+    { "type": "text", "id": "purchase_label", "label": "Purchase type label", "default": "How often?" },
+    { "type": "text", "id": "subscribe_text", "label": "Subscribe description", "default": "Skip, pause or cancel any time." },
+    { "type": "text", "id": "once_text", "label": "One-time description", "default": "Try it once, no commitment." },
+    { "type": "checkbox", "id": "subscribe_default", "label": "Preselect subscription", "default": true },
+    { "type": "checkbox", "id": "sticky", "label": "Sticky add-to-cart bar", "default": true }
+  ],
+  "blocks": [
+    {
+      "type": "trust",
+      "name": "Trust point",
+      "settings": [
+        { "type": "select", "id": "icon", "label": "Icon", "options": [{ "value": "shield", "label": "Shield" }, { "value": "truck", "label": "Truck" }, { "value": "refresh", "label": "Refresh" }, { "value": "leaf", "label": "Leaf" }], "default": "shield" },
+        { "type": "text", "id": "title", "label": "Title", "default": "60-night guarantee." },
+        { "type": "text", "id": "text", "label": "Text" }
+      ]
+    }
+  ],
+  "max_blocks": 4
+}
+{% endschema %}

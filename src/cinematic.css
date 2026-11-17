@@ -815,3 +815,64 @@ html { scroll-padding-top: 84px; }
   .platform-motion-ready .platform-storefront { animation: none; }
   .platform-motion-ready .platform-motion-item { opacity: 1; transform: none; transition: none; }
 }
+
+/* ============================================================
+   /templates — Shopify concept template gallery
+   ============================================================ */
+.page-templates .visually-hidden {
+  position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
+}
+.tpl-points {
+  list-style: none; margin: 2.5rem 0 0; padding: 0;
+  display: grid; gap: 1px; grid-template-columns: 1fr;
+  border: 1px solid rgba(255, 255, 255, 0.14); border-radius: 1.25rem; overflow: hidden;
+  background: rgba(255, 255, 255, 0.14);
+}
+.tpl-points li { display: grid; gap: 0.35rem; padding: 1.25rem 1.4rem; background: rgba(11, 13, 18, 0.78); }
+.tpl-points strong { color: #f3f5fa; font-family: var(--heading); font-size: 1rem; font-weight: 600; }
+.tpl-points span { color: #b9c0cd; font-size: 0.92rem; line-height: 1.5; }
+@media (min-width: 760px) { .tpl-points { grid-template-columns: repeat(3, 1fr); } }
+
+.tpl-gallery { padding-top: 0; }
+.tpl-count { margin: -1.5rem 0 1.5rem; color: #9aa3b2; font-size: 0.85rem; }
+.tpl-grid { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.5rem; }
+@media (min-width: 960px) { .tpl-grid { grid-template-columns: repeat(2, 1fr); gap: 2rem; } }
+.tpl-card {
+  display: flex; flex-direction: column; overflow: hidden;
+  border-radius: 1.5rem; border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(11, 13, 18, 0.82);
+  transition: border-color 0.3s ease, transform 0.3s ease;
+}
+.tpl-card:hover { border-color: rgba(255, 255, 255, 0.3); }
+.tpl-card-cover { position: relative; display: block; aspect-ratio: 16 / 10; overflow: hidden; background: #1a1d23; }
+.tpl-card-cover::after { content: ""; position: absolute; inset: 0; box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.08); }
+.tpl-card-cover img { width: 100%; height: 100%; object-fit: cover; object-position: top center; transition: transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1); }
+.tpl-card:hover .tpl-card-cover img { transform: scale(1.03); }
+.tpl-card-body { display: flex; flex-direction: column; gap: 0.6rem; padding: 1.5rem 1.5rem 1.75rem; flex: 1; }
+.tpl-card-sector { margin: 0; color: #9aa3b2; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; }
+.tpl-card-sector::before { content: ""; display: inline-block; width: 0.55rem; height: 0.55rem; margin-right: 0.55rem; border-radius: 50%; background: var(--tpl-accent); box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.35); vertical-align: 0.05rem; }
+.tpl-card-title { margin: 0; color: #f3f5fa; font-family: var(--heading); font-size: clamp(1.6rem, 3vw, 2rem); letter-spacing: -0.02em; }
+.tpl-card-copy { margin: 0; color: #d4d8e2; line-height: 1.55; }
+.tpl-card-tags { margin: 0.2rem 0 0; color: #c9d5ff; font-size: 0.88rem; font-weight: 600; }
+.tpl-card-hook { margin: 0; padding: 0.8rem 1rem; border-radius: 0.8rem; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); color: #c4cad6; font-size: 0.88rem; line-height: 1.45; }
+.tpl-card-hook span { display: block; margin-bottom: 0.15rem; color: #8f98a8; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; }
+.tpl-card-cta { align-self: flex-start; gap: 0.5rem; margin-top: auto; }
+.tpl-card-body .tpl-card-cta { margin-top: 0.9rem; }
+.tpl-empty { color: #d4d8e2; }
+.tpl-note { margin: 2rem 0 0; color: #9aa3b2; font-size: 0.88rem; max-width: 46rem; }
+.tpl-studio {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.25rem;
+  margin-top: 3rem; padding: 1.75rem; border-radius: 1.5rem;
+  border: 1px dashed rgba(255, 255, 255, 0.22); background: rgba(11, 13, 18, 0.6);
+}
+.tpl-studio h2 { margin: 0 0 0.35rem; color: #f3f5fa; font-family: var(--heading); font-size: 1.3rem; }
+.tpl-studio p { margin: 0; color: #c4cad6; }
+
+/* Nav fits eight links (Templates added): no wrapping, tighter gap, and the
+   logo doubles as Home on narrower desktops. */
+.nav-links { gap: clamp(1rem, 1.55vw, 1.75rem); }
+.nav-links a,
+.nav-cta { white-space: nowrap; }
+@media (max-width: 1240px) {
+  .nav-links a[href="/"] { display: none; }
+}

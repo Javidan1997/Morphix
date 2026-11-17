@@ -20,6 +20,7 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Playground from "./pages/Playground";
 import Templates from "./pages/Templates";
+import TemplateGallery from "./pages/TemplateGallery";
 import Insights from "./pages/Insights";
 import InsightArticle from "./pages/InsightArticle";
 import Portal from "./pages/Portal";
@@ -180,7 +181,8 @@ function App() {
           <Route path="/work" element={<Work content={content} />} />
           <Route path="/pricing" element={<Pricing content={content} />} />
           <Route path="/playground" element={<Playground content={content} />} />
-          <Route path="/templates" element={<Templates content={content} language={language} />} />
+          <Route path="/templates" element={<TemplateGallery content={content} language={language} />} />
+          <Route path="/template-studio" element={<Templates content={content} language={language} />} />
           <Route path="/about" element={<About content={content} />} />
           <Route path="/contact" element={<Contact content={content} />} />
           <Route path="/insights" element={<Insights content={content} />} />

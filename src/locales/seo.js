@@ -1,3 +1,5 @@
+import { templates } from "../data/templateGallery.js";
+
 // Per-page SEO metadata. Every route gets a unique, keyword-rich title and
 // description (search engines penalise duplicate titles across pages).
 // Keyed by language, then by pathname. Falls back to content.meta when a
@@ -59,10 +61,17 @@ export const pageSeo = {
       keywords: "3D configurator demo, WebGL product viewer, interactive 3D product",
     },
     "/templates": {
-      title: "Templates — Launch-Ready 3D & Web Starting Points | Configuro",
+      title: "Shopify Templates — 5 Concept Stores with Real Theme Code | Configuro",
       description:
-        "Ready-to-customize starting points for product sites, 3D configurators, and launch experiences.",
-      keywords: "3D website template, configurator template, product launch template",
+        "Five concept Shopify storefronts — a 3D pergola configurator, a subscription supplement page, a B2B trade portal, an IT hardware catalog and a jewellery drop — each built as an Online Store 2.0 theme.",
+      keywords: "Shopify templates, Shopify theme development, Shopify configurator, Shopify B2B, Shopify subscriptions, Online Store 2.0 sections",
+      itemList: true,
+    },
+    "/template-studio": {
+      title: "Template Studio — Compose a Storefront Layout | Configuro",
+      description:
+        "Compose a storefront-style page: pick a preset, swap palettes, reorder sections and send the layout to Configuro.",
+      keywords: "storefront template builder, page layout builder, Shopify theme layout",
     },
     "/insights": {
       title: "Insights — App, CRM Automation & 3D Guides | Configuro",
@@ -170,9 +179,16 @@ export const pageSeo = {
       keywords: "3D konfiqurator demo, WebGL məhsul görüntüləyici",
     },
     "/templates": {
-      title: "Şablonlar — Buraxılışa Hazır 3D və Veb Başlanğıc Nöqtələri | Configuro",
-      description: "Məhsul saytları, 3D konfiquratorlar və buraxılış təcrübələri üçün hazır şablonlar.",
-      keywords: "3D sayt şablonu, konfiqurator şablonu",
+      title: "Shopify Şablonları — Real Tema Kodu ilə 5 Konsept Mağaza | Configuro",
+      description:
+        "Beş konsept Shopify mağazası — 3D perqola konfiquratoru, abunəlikli qida əlavəsi səhifəsi, B2B portal, IT avadanlıq kataloqu və zərgərlik buraxılışı — hər biri Online Store 2.0 teması kimi.",
+      keywords: "Shopify şablonları, Shopify tema hazırlanması, Shopify konfiqurator",
+      itemList: true,
+    },
+    "/template-studio": {
+      title: "Şablon Studiyası — Mağaza Səhifəsini Qurun | Configuro",
+      description: "Preset seçin, palitranı dəyişin, bölmələri sıralayın və dizaynı Configuro-ya göndərin.",
+      keywords: "mağaza şablonu qurucusu",
     },
     "/insights": {
       title: "Məqalələr — Tətbiq, CRM Avtomatlaşdırma və 3D Bələdçiləri | Configuro",
@@ -198,7 +214,8 @@ export const breadcrumbLabels = {
   "/about": "About",
   "/contact": "Contact",
   "/playground": "Live demo",
-  "/templates": "Templates",
+  "/templates": "Shopify templates",
+  "/template-studio": "Template Studio",
   "/insights": "Insights",
   "/portal": "Client portal",
   "/freelance": "Freelance platforms",
@@ -240,6 +257,19 @@ export function buildJsonLd(pathname, seo) {
         },
       ],
     });
+    if (seo.itemList) {
+      graph.push({
+        "@type": "ItemList",
+        "@id": `${url}#templates`,
+        name: "Shopify concept templates",
+        itemListElement: templates.map((t, i) => ({
+          "@type": "ListItem",
+          position: i + 1,
+          name: `${t.name} — ${t.sector}`,
+          url: `${ORIGIN}/templates/${t.slug}`,
+        })),
+      });
+    }
     if (seo.serviceName) {
       graph.push({
         "@type": "Service",

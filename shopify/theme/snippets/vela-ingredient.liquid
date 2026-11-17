@@ -1,0 +1,27 @@
+{%- liquid
+  assign dose_n = dose | plus: 0
+  assign pct = 0
+  if max > 0
+    assign pct = dose_n | times: 100 | divided_by: max
+  endif
+  if pct < 6
+    assign pct = 6
+  endif
+-%}
+<li class="vela-ing" {{ attrs }} data-reveal style="--pct: {{ pct }}%">
+  <details>
+    <summary>
+      <span class="vela-ing__index" aria-hidden="true">0{{ index }}</span>
+      <span class="vela-ing__main">
+        <span class="vela-ing__name">{{ name }}</span>
+        <span class="vela-ing__role">{{ role }}</span>
+      </span>
+      <span class="vela-ing__dose">{{ dose_n }}<small> mg</small></span>
+      <span class="vela-ing__bar" aria-hidden="true"><span></span></span>
+    </summary>
+    <div class="vela-ing__detail">
+      <p>{{ detail }}</p>
+      {%- if source != blank -%}<p class="vela-ing__source">{{ source }}</p>{%- endif -%}
+    </div>
+  </details>
+</li>

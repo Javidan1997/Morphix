@@ -1,0 +1,19 @@
+{
+  "type": "header",
+  "name": "Vela header",
+  "sections": {
+    "header": {
+      "type": "cfg-header",
+      "settings": { "logo_text": "vela", "announcement": "Free US shipping over $75 · 60-night calm guarantee", "sticky": true },
+      "blocks": {
+        "l1": { "type": "link", "settings": { "label": "How it feels", "url": "#benefits" } },
+        "l2": { "type": "link", "settings": { "label": "Ingredients", "url": "#ingredients" } },
+        "l3": { "type": "link", "settings": { "label": "Reviews", "url": "#reviews" } },
+        "l4": { "type": "link", "settings": { "label": "Compare", "url": "#compare" } },
+        "l5": { "type": "link", "settings": { "label": "FAQ", "url": "#faq" } }
+      },
+      "block_order": ["l1", "l2", "l3", "l4", "l5"]
+    }
+  },
+  "order": ["header"]
+}

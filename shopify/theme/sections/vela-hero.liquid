@@ -1,0 +1,58 @@
+{%- comment -%} Vela — benefit-led hero. One primary CTA that scrolls to the buy box. {%- endcomment -%}
+<section class="vela-hero" aria-labelledby="HeroTitle-{{ section.id }}">
+  <div class="cfg-container vela-hero__grid">
+    <div class="vela-hero__copy">
+      {%- if section.settings.eyebrow != blank -%}<p class="cfg-eyebrow vela-hero__eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+      <h1 id="HeroTitle-{{ section.id }}" class="vela-hero__title">{{ section.settings.heading }}</h1>
+      <div class="vela-hero__text">{{ section.settings.text }}</div>
+      {%- if section.settings.rating != blank -%}
+        <p class="vela-hero__rating">
+          <span class="cfg-stars" aria-hidden="true">{% for i in (1..5) %}{% render 'cfg-icon', name: 'star' %}{% endfor %}</span>
+          <span>{{ section.settings.rating }}</span>
+        </p>
+      {%- endif -%}
+      <div class="vela-hero__actions">
+        <a class="cfg-btn cfg-btn--primary" href="{{ section.settings.button_link | default: '#buy' }}">{{ section.settings.button_label }}{% render 'cfg-icon', name: 'arrow' %}</a>
+        {%- if section.settings.price_note != blank -%}<p class="vela-hero__price">{{ section.settings.price_note }}</p>{%- endif -%}
+      </div>
+      {%- if section.blocks.size > 0 -%}
+        <ul class="vela-hero__points">
+          {%- for block in section.blocks -%}
+            <li {{ block.shopify_attributes }}>{% render 'cfg-icon', name: 'check' %}{{ block.settings.text }}</li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+    </div>
+    <div class="vela-hero__media">
+      {%- render 'cfg-image', image: section.settings.image, asset: 'vela-hero', width: 1600, height: 1600, alt: section.settings.image_alt, sizes: '(min-width: 990px) 50vw, 100vw', loading: 'eager', priority: true -%}
+      {%- if section.settings.badge != blank -%}
+        <p class="vela-hero__badge"><strong>{{ section.settings.badge }}</strong><span>{{ section.settings.badge_sub }}</span></p>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Vela · Hero",
+  "class": "vela-hero-section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Magnesium + L-Theanine" },
+    { "type": "textarea", "id": "heading", "label": "Heading", "default": "Unwind at night. Wake up clear." },
+    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Two capsules an hour before bed.</p>" },
+    { "type": "text", "id": "rating", "label": "Rating line" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Choose your pack" },
+    { "type": "url", "id": "button_link", "label": "Button link" },
+    { "type": "text", "id": "price_note", "label": "Price note" },
+    { "type": "image_picker", "id": "image", "label": "Image", "info": "Square, 1600px. Falls back to the theme's rendered jar." },
+    { "type": "text", "id": "image_alt", "label": "Image alt text", "default": "Vela Evening Calm jar with capsules" },
+    { "type": "text", "id": "badge", "label": "Image badge" },
+    { "type": "text", "id": "badge_sub", "label": "Image badge subtext" }
+  ],
+  "blocks": [
+    { "type": "point", "name": "Benefit point", "settings": [{ "type": "text", "id": "text", "label": "Text", "default": "No melatonin" }] }
+  ],
+  "max_blocks": 4,
+  "presets": [{ "name": "Vela · Hero", "blocks": [{ "type": "point" }, { "type": "point" }] }]
+}
+{% endschema %}

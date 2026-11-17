@@ -1,0 +1,66 @@
+{%- comment -%}
+  Shared header used by every brand's header group. Styling comes from the
+  brand stylesheet (brand-*.css), so one section serves five different looks.
+{%- endcomment -%}
+{%- if section.settings.announcement != blank -%}
+  <div class="cfg-announce"><p>{{ section.settings.announcement }}</p></div>
+{%- endif -%}
+<header class="cfg-header{% if section.settings.sticky %} cfg-header--sticky{% endif %}">
+  <div class="cfg-container cfg-header__inner">
+    <a class="cfg-header__logo" href="{{ section.settings.logo_url | default: routes.root_url }}">
+      {%- if section.settings.logo != blank -%}
+        <img src="{{ section.settings.logo | image_url: width: 320 }}" alt="{{ shop.name | escape }}" width="{{ section.settings.logo_width }}" height="{{ section.settings.logo_width | divided_by: section.settings.logo.aspect_ratio | round }}">
+      {%- else -%}
+        <span class="cfg-logo-mark" aria-hidden="true"></span><span class="cfg-logo-text">{{ section.settings.logo_text | default: shop.name }}</span>
+      {%- endif -%}
+    </a>
+    {%- if section.blocks.size > 0 -%}
+      <nav class="cfg-header__nav" aria-label="Primary">
+        <ul>
+          {%- for block in section.blocks -%}
+            <li {{ block.shopify_attributes }}><a href="{{ block.settings.url }}">{{ block.settings.label }}</a></li>
+          {%- endfor -%}
+        </ul>
+      </nav>
+    {%- endif -%}
+    <div class="cfg-header__actions">
+      {%- if section.settings.account_label != blank -%}
+        <a class="cfg-header__account" href="{{ section.settings.account_url | default: routes.account_url }}">{{ section.settings.account_label }}</a>
+      {%- endif -%}
+      <button type="button" class="cfg-header__cart" data-open-cart aria-label="{{ 'cfg.a11y.open_cart' | t }}">
+        {%- render 'cfg-icon', name: 'cart' -%}
+        <span class="cfg-header__count" data-cart-count-badge{% if cart.item_count == 0 %} hidden{% endif %}>{{ cart.item_count }}</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "tag": "div",
+  "class": "cfg-header-section",
+  "enabled_on": { "groups": ["header"] },
+  "settings": [
+    { "type": "text", "id": "logo_text", "label": "Logo text", "default": "Brand" },
+    { "type": "image_picker", "id": "logo", "label": "Logo image" },
+    { "type": "range", "id": "logo_width", "label": "Logo width", "min": 60, "max": 240, "step": 4, "unit": "px", "default": 120 },
+    { "type": "url", "id": "logo_url", "label": "Logo link" },
+    { "type": "text", "id": "announcement", "label": "Announcement" },
+    { "type": "text", "id": "account_label", "label": "Account link label" },
+    { "type": "url", "id": "account_url", "label": "Account link" },
+    { "type": "checkbox", "id": "sticky", "label": "Sticky header", "default": true }
+  ],
+  "blocks": [
+    {
+      "type": "link",
+      "name": "Link",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Link" },
+        { "type": "url", "id": "url", "label": "URL" }
+      ]
+    }
+  ],
+  "max_blocks": 6
+}
+{% endschema %}

@@ -1,0 +1,6 @@
+{%- comment -%} Thin bar shown only when settings.demo_mode is on. {%- endcomment -%}
+<div class="cfg-demo-bar" role="note">
+  <span>{{ 'cfg.demo.bar' | t }} <a href="https://configuro.studio/" rel="author">Configuro</a></span>
+  <span class="cfg-demo-bar__sep" aria-hidden="true">·</span>
+  <a href="{{ settings.demo_back_url }}">{{ 'cfg.demo.back' | t }}</a>
+</div>

@@ -1,0 +1,106 @@
+{
+  "sections": {
+    "hero": {
+      "type": "vela-hero",
+      "settings": {
+        "eyebrow": "Magnesium + L-Theanine · 60 capsules",
+        "heading": "Unwind at night. <em>Wake up clear.</em>",
+        "text": "<p>Two capsules an hour before bed. A calm-focused blend of magnesium glycinate, L-theanine and ashwagandha — no melatonin, so there's no heavy-headed morning after.*</p>",
+        "rating": "4.8 / 5 average across sample reviews",
+        "button_label": "Choose your pack",
+        "button_link": "#buy",
+        "price_note": "From $26 a jar with subscribe & save",
+        "badge": "No melatonin",
+        "badge_sub": "Non-habit forming formula"
+      },
+      "blocks": {
+        "p1": { "type": "point", "settings": { "text": "Fall asleep more easily*" } },
+        "p2": { "type": "point", "settings": { "text": "Vegan capsules, third-party tested" } },
+        "p3": { "type": "point", "settings": { "text": "60-night calm guarantee" } }
+      },
+      "block_order": ["p1", "p2", "p3"]
+    },
+    "benefits": {
+      "type": "vela-benefits",
+      "settings": {
+        "eyebrow": "How it feels",
+        "heading": "An evening, rebuilt around calm",
+        "text": "<p>Vela is designed for the hour between “done for the day” and actually being asleep.</p>",
+        "footnote": "*These statements have not been evaluated by the FDA. Individual experiences vary."
+      },
+      "blocks": {
+        "m1": { "type": "moment", "settings": { "time": "9:00 pm", "title": "Two capsules", "text": "With water, about an hour before bed. No sugar, no gummies, no aftertaste." } },
+        "m2": { "type": "moment", "settings": { "time": "9:30 pm", "title": "The volume drops", "text": "L-theanine supports a relaxed-but-clear state, so winding down feels easier.*" } },
+        "m3": { "type": "moment", "settings": { "time": "10:30 pm", "title": "Settled, not sedated", "text": "Magnesium glycinate supports muscle relaxation and a more restful night.*" } },
+        "m4": { "type": "moment", "settings": { "time": "7:00 am", "title": "Clear by morning", "text": "No melatonin means no groggy hangover — just an ordinary, rested start." } }
+      },
+      "block_order": ["m1", "m2", "m3", "m4"]
+    },
+    "ingredients": {
+      "type": "vela-ingredients",
+      "settings": {
+        "eyebrow": "What's inside",
+        "heading": "Four ingredients. Nothing to hide.",
+        "serving": "Per 2-capsule serving · tap an ingredient for the why",
+        "free_from": "No melatonin, Vegan capsule, Non-GMO, Third-party tested"
+      }
+    },
+    "buy": {
+      "type": "vela-buy",
+      "settings": { "eyebrow": "Start tonight", "pack_label": "Choose your pack", "purchase_label": "How would you like it?", "subscribe_default": true, "sticky": true },
+      "blocks": {
+        "t1": { "type": "trust", "settings": { "icon": "shield", "title": "60-night calm guarantee.", "text": "Not for you? Full refund, keep the jar." } },
+        "t2": { "type": "trust", "settings": { "icon": "truck", "title": "Free shipping over $75.", "text": "Ships in 1–2 business days." } },
+        "t3": { "type": "trust", "settings": { "icon": "refresh", "title": "Flexible subscription.", "text": "Skip, pause or cancel from your account." } }
+      },
+      "block_order": ["t1", "t2", "t3"]
+    },
+    "reviews": {
+      "type": "vela-reviews",
+      "settings": {
+        "eyebrow": "Reviews",
+        "heading": "Calmer evenings, in their words",
+        "sample_note": "Illustrative testimonials written for this concept demo — not real customers."
+      },
+      "blocks": {
+        "r1": { "type": "review", "settings": { "quote": "I stopped lying awake replaying my inbox. And I don't feel like I took anything in the morning.", "name": "Maya R.", "detail": "Product manager · sample", "rating": 5 } },
+        "r2": { "type": "review", "settings": { "quote": "I switched from melatonin gummies. Same easy wind-down, none of the fog the next day.", "name": "Daniel K.", "detail": "Father of two · sample", "rating": 5 } },
+        "r3": { "type": "review", "settings": { "quote": "Two capsules, no sugar, a jar that looks good on the nightstand. The subscription just shows up.", "name": "Priya S.", "detail": "Nurse, rotating shifts · sample", "rating": 4 } }
+      },
+      "block_order": ["r1", "r2", "r3"]
+    },
+    "compare": {
+      "type": "vela-compare",
+      "settings": {
+        "eyebrow": "Compare",
+        "heading": "Why not just melatonin?",
+        "col_us": "Vela",
+        "col_a": "Melatonin gummies",
+        "col_b": "Basic magnesium",
+        "footnote": "<p>Comparison based on typical products in each category. *These statements have not been evaluated by the FDA. Not intended to diagnose, treat, cure or prevent any disease.</p>"
+      },
+      "blocks": {
+        "c1": { "type": "row", "settings": { "feature": "Melatonin-free", "us": "yes", "a": "no", "b": "yes" } },
+        "c2": { "type": "row", "settings": { "feature": "Next-morning grogginess", "us": "Unlikely", "a": "Common", "b": "Unlikely" } },
+        "c3": { "type": "row", "settings": { "feature": "Supports relaxation*", "us": "yes", "a": "no", "b": "yes" } },
+        "c4": { "type": "row", "settings": { "feature": "Calm-focus amino acid (L-theanine)", "us": "yes", "a": "no", "b": "no" } },
+        "c5": { "type": "row", "settings": { "feature": "Sugar per serving", "us": "0 g", "a": "2–4 g", "b": "0 g" } },
+        "c6": { "type": "row", "settings": { "feature": "Third-party tested", "us": "yes", "a": "Varies", "b": "Varies" } }
+      },
+      "block_order": ["c1", "c2", "c3", "c4", "c5", "c6"]
+    },
+    "faq": {
+      "type": "cfg-faq",
+      "settings": { "eyebrow": "FAQ", "heading": "Good questions", "text": "<p>Still unsure? Our team answers within one business day.</p>", "open_first": true },
+      "blocks": {
+        "q1": { "type": "question", "settings": { "question": "When should I take Vela?", "answer": "<p>Two capsules with water about 45–60 minutes before bed. Give it a week of consistent use before judging.</p>" } },
+        "q2": { "type": "question", "settings": { "question": "Is it habit-forming?", "answer": "<p>Vela contains no melatonin or sedatives. It's made from a mineral, an amino acid and a botanical extract — you can stop any time.</p>" } },
+        "q3": { "type": "question", "settings": { "question": "How does subscribe & save work?", "answer": "<p>You save 15% on every delivery. Choose every 30 or 60 days, and skip, pause or cancel from your account — no calls, no emails.</p>" } },
+        "q4": { "type": "question", "settings": { "question": "Can I take it with other supplements or medication?", "answer": "<p>Ask your doctor or pharmacist first, especially if you're pregnant, nursing or taking prescription medication.</p>" } },
+        "q5": { "type": "question", "settings": { "question": "What if it doesn't work for me?", "answer": "<p>Try it for 60 nights. If you're not sleeping calmer, email us for a full refund of your first order.</p>" } }
+      },
+      "block_order": ["q1", "q2", "q3", "q4", "q5"]
+    }
+  },
+  "order": ["hero", "benefits", "ingredients", "buy", "reviews", "compare", "faq"]
+}

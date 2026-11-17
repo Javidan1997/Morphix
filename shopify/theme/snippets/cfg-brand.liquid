@@ -1,0 +1,43 @@
+{%- comment -%}
+  Brand tokens that must be known in <head>: theme colour and the fonts worth
+  preloading (only the face used above the fold, to keep LCP cheap).
+  Usage: {% render 'cfg-brand', brand: brand, key: 'preload' %}
+{%- endcomment -%}
+{%- case key -%}
+  {%- when 'theme_color' -%}
+    {%- case brand -%}
+      {%- when 'vela' -%}#f4efe6
+      {%- when 'shadeline' -%}#14171a
+      {%- when 'northgate' -%}#f3f2ed
+      {%- when 'linkcore' -%}#0a0e15
+      {%- when 'aurel' -%}#f8f5ef
+    {%- endcase -%}
+  {%- when 'preload' -%}
+    {%- case brand -%}
+      {%- when 'vela' -%}{{ 'font-fraunces.woff2' | asset_url | preload_tag: as: 'font' }}{{ 'font-inter.woff2' | asset_url | preload_tag: as: 'font' }}
+      {%- when 'shadeline' -%}{{ 'font-archivo.woff2' | asset_url | preload_tag: as: 'font' }}
+      {%- when 'northgate' -%}{{ 'font-plex-sans-600.woff2' | asset_url | preload_tag: as: 'font' }}{{ 'font-plex-sans-400.woff2' | asset_url | preload_tag: as: 'font' }}
+      {%- when 'linkcore' -%}{{ 'font-space-grotesk.woff2' | asset_url | preload_tag: as: 'font' }}
+      {%- when 'aurel' -%}{{ 'font-cormorant-400.woff2' | asset_url | preload_tag: as: 'font' }}{{ 'font-jost.woff2' | asset_url | preload_tag: as: 'font' }}
+    {%- endcase -%}
+  {%- when 'fonts' -%}
+    {%- case brand -%}
+      {%- when 'vela' -%}
+        @font-face { font-family: "Fraunces"; src: url({{ 'font-fraunces.woff2' | asset_url }}) format("woff2"); font-weight: 100 900; font-display: swap; }
+        @font-face { font-family: "Inter"; src: url({{ 'font-inter.woff2' | asset_url }}) format("woff2"); font-weight: 100 900; font-display: swap; }
+      {%- when 'shadeline' -%}
+        @font-face { font-family: "Archivo"; src: url({{ 'font-archivo.woff2' | asset_url }}) format("woff2"); font-weight: 100 900; font-display: swap; }
+      {%- when 'northgate' -%}
+        @font-face { font-family: "IBM Plex Sans"; src: url({{ 'font-plex-sans-400.woff2' | asset_url }}) format("woff2"); font-weight: 400; font-display: swap; }
+        @font-face { font-family: "IBM Plex Sans"; src: url({{ 'font-plex-sans-600.woff2' | asset_url }}) format("woff2"); font-weight: 600; font-display: swap; }
+        @font-face { font-family: "IBM Plex Mono"; src: url({{ 'font-plex-mono-500.woff2' | asset_url }}) format("woff2"); font-weight: 500; font-display: swap; }
+      {%- when 'linkcore' -%}
+        @font-face { font-family: "Space Grotesk"; src: url({{ 'font-space-grotesk.woff2' | asset_url }}) format("woff2"); font-weight: 300 700; font-display: swap; }
+        @font-face { font-family: "JetBrains Mono"; src: url({{ 'font-jetbrains-mono.woff2' | asset_url }}) format("woff2"); font-weight: 100 800; font-display: swap; }
+      {%- when 'aurel' -%}
+        @font-face { font-family: "Cormorant Garamond"; src: url({{ 'font-cormorant-400.woff2' | asset_url }}) format("woff2"); font-weight: 400; font-display: swap; }
+        @font-face { font-family: "Cormorant Garamond"; src: url({{ 'font-cormorant-400i.woff2' | asset_url }}) format("woff2"); font-weight: 400; font-style: italic; font-display: swap; }
+        @font-face { font-family: "Cormorant Garamond"; src: url({{ 'font-cormorant-500.woff2' | asset_url }}) format("woff2"); font-weight: 500; font-display: swap; }
+        @font-face { font-family: "Jost"; src: url({{ 'font-jost.woff2' | asset_url }}) format("woff2"); font-weight: 100 900; font-display: swap; }
+    {%- endcase -%}
+{%- endcase -%}

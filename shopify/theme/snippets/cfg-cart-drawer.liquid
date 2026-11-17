@@ -1,0 +1,31 @@
+{%- comment -%}
+  Cart drawer. Lines are rendered client-side by cfg-core.js from the Ajax Cart
+  API (/cart.js) — or from the in-memory demo cart when settings.demo_mode is on.
+{%- endcomment -%}
+<cfg-cart-drawer>
+  <dialog class="cfg-drawer cfg-drawer--right" id="CartDrawer" aria-labelledby="CartDrawerTitle">
+    <div class="cfg-drawer__inner">
+      <header class="cfg-drawer__head">
+        <h2 id="CartDrawerTitle" class="cfg-drawer__title">{{ 'cfg.cart.title' | t }} <span data-cart-count>({{ cart.item_count }})</span></h2>
+        <button type="button" class="cfg-icon-btn" data-close aria-label="{{ 'cfg.a11y.close' | t }}">{% render 'cfg-icon', name: 'close' %}</button>
+      </header>
+      <div class="cfg-cart__ship" data-cart-shipping hidden>
+        <p data-cart-shipping-text></p>
+        <div class="cfg-cart__ship-bar"><span data-cart-shipping-bar></span></div>
+      </div>
+      <div class="cfg-drawer__body" data-cart-lines aria-live="polite">
+        <p class="cfg-cart__empty">{{ 'cfg.cart.empty' | t }}</p>
+      </div>
+      <footer class="cfg-drawer__foot" data-cart-footer hidden>
+        <div class="cfg-cart__total"><span>{{ 'cfg.cart.subtotal' | t }}</span><strong data-cart-total>{{ cart.total_price | money }}</strong></div>
+        <p class="cfg-cart__note">{{ 'cfg.cart.taxes' | t }}</p>
+        {%- if settings.demo_mode -%}
+          <button type="button" class="cfg-btn cfg-btn--primary cfg-btn--block" data-demo-checkout>{{ 'cfg.cart.checkout' | t }}</button>
+          <p class="cfg-cart__demo" data-demo-checkout-msg hidden role="status">{{ 'cfg.demo.checkout' | t }}</p>
+        {%- else -%}
+          <form action="{{ routes.cart_url }}" method="post"><button type="submit" name="checkout" class="cfg-btn cfg-btn--primary cfg-btn--block">{{ 'cfg.cart.checkout' | t }}</button></form>
+        {%- endif -%}
+      </footer>
+    </div>
+  </dialog>
+</cfg-cart-drawer>

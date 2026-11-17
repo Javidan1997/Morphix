@@ -1,0 +1,46 @@
+{
+  "cfg": {
+    "a11y": {
+      "skip": "Skip to content",
+      "close": "Close",
+      "open_cart": "Open cart",
+      "menu": "Menu",
+      "decrease": "Decrease quantity",
+      "increase": "Increase quantity",
+      "quantity_for": "Quantity for {{ title }}",
+      "remove": "Remove {{ title }}"
+    },
+    "demo": {
+      "bar": "Concept demo by",
+      "back": "Back to templates",
+      "footer": "Demo store, not a real brand. Products, prices and testimonials are illustrative; nothing you enter is stored or sent.",
+      "checkout": "This is a concept demo, so checkout is switched off. On a live store this button goes to Shopify Checkout.",
+      "form_success": "Thanks — in this demo nothing was sent or stored."
+    },
+    "cart": {
+      "title": "Your cart",
+      "empty": "Your cart is empty.",
+      "subtotal": "Subtotal",
+      "taxes": "Taxes and shipping calculated at checkout.",
+      "checkout": "Check out",
+      "added": "Added to cart",
+      "free_shipping_left": "You're {{ amount }} away from free shipping.",
+      "free_shipping_done": "You've unlocked free shipping.",
+      "error": "Couldn't add that item. Please try again."
+    },
+    "product": {
+      "add_to_cart": "Add to cart",
+      "sold_out": "Sold out",
+      "subscribe": "Subscribe & save",
+      "one_time": "One-time purchase",
+      "from": "From",
+      "save": "Save {{ amount }}",
+      "per_unit": "{{ amount }} each",
+      "quantity": "Quantity"
+    },
+    "forms": {
+      "email": "Email",
+      "required": "Required"
+    }
+  }
+}

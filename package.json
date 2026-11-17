@@ -5,10 +5,13 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && vite build --ssr src/pergola/entry-server.jsx && node scripts/prerender.mjs",
+    "build": "vite build && vite build --ssr src/pergola/entry-server.jsx && node scripts/prerender.mjs && node scripts/templates/build-demos.mjs",
     "check:pergola": "node scripts/check-pergola-model.mjs",
     "serve:pages": "node scripts/serve-pages.mjs",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "templates:build": "node scripts/templates/build-demos.mjs",
+    "templates:render": "node scripts/templates/render-assets.mjs",
+    "theme:zip": "node scripts/templates/zip-theme.mjs"
   },
   "dependencies": {
     "@fontsource-variable/geist": "^5.3.0",
@@ -21,6 +24,7 @@
   "devDependencies": {
     "@vitejs/plugin-react": "^4.7.0",
     "ffmpeg-static": "^5.3.0",
+    "liquidjs": "^10.30.1",
     "puppeteer-core": "^24.43.1",
     "vite": "^6.4.1"
   }

@@ -1,0 +1,51 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Configuro Concepts",
+    "theme_version": "1.0.0",
+    "theme_author": "Configuro",
+    "theme_documentation_url": "https://configuro.studio/templates",
+    "theme_support_url": "https://configuro.studio/contact"
+  },
+  {
+    "name": "Brand",
+    "settings": [
+      {
+        "type": "select",
+        "id": "brand",
+        "label": "Default brand",
+        "info": "Used when a template has no brand suffix (e.g. the home page). product.vela, page.northgate etc. pick their own brand from the template name.",
+        "options": [
+          { "value": "vela", "label": "Vela (supplement)" },
+          { "value": "shadeline", "label": "Shadeline (pergolas)" },
+          { "value": "northgate", "label": "Northgate Supply (B2B)" },
+          { "value": "linkcore", "label": "Linkcore (IT hardware)" },
+          { "value": "aurel", "label": "Aurel (fine jewellery)" }
+        ],
+        "default": "vela"
+      },
+      { "type": "image_picker", "id": "favicon", "label": "Favicon", "info": "Falls back to the brand's SVG favicon." },
+      { "type": "image_picker", "id": "share_image", "label": "Social share image", "info": "1200 × 630. Falls back to the brand's Open Graph image." }
+    ]
+  },
+  {
+    "name": "Demo mode",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "demo_mode",
+        "label": "Run as a concept demo",
+        "info": "Shows the 'Concept demo' bar and footer note. Cart, subscribe and forms work visually but nothing is sent and checkout is disabled.",
+        "default": false
+      },
+      { "type": "text", "id": "demo_back_url", "label": "Back to templates URL", "default": "https://configuro.studio/templates" }
+    ]
+  },
+  {
+    "name": "Cart",
+    "settings": [
+      { "type": "text", "id": "free_shipping_threshold", "label": "Free shipping threshold (in cents)", "default": "7500" },
+      { "type": "checkbox", "id": "cart_notes", "label": "Show order note in cart drawer", "default": false }
+    ]
+  }
+]

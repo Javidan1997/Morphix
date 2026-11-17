@@ -1,0 +1,75 @@
+<!doctype html>
+{%- comment -%}
+  One layout serves all five concept brands. The brand comes from the
+  template suffix (product.vela → "vela"), so a single installed theme can run
+  every concept side by side; settings.brand covers un-suffixed templates.
+{%- endcomment -%}
+{%- liquid
+  assign brands = 'vela,shadeline,northgate,linkcore,aurel' | split: ','
+  assign brand = settings.brand
+  if brands contains template.suffix
+    assign brand = template.suffix
+  endif
+-%}
+<html lang="{{ request.locale.iso_code }}" class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="{% render 'cfg-brand', brand: brand, key: 'theme_color' %}">
+    <title>{{ page_title }}{% unless page_title contains shop.name %} | {{ shop.name }}{% endunless %}</title>
+    {%- if page_description %}<meta name="description" content="{{ page_description | escape }}">{% endif %}
+    <link rel="canonical" href="{{ canonical_url }}">
+    {%- render 'cfg-meta-tags', brand: brand %}
+    {%- if settings.favicon != blank -%}
+      <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 64, height: 64 }}">
+    {%- else -%}
+      <link rel="icon" type="image/svg+xml" href="{{ brand | append: '-favicon.svg' | asset_url }}">
+    {%- endif %}
+    {%- render 'cfg-brand', brand: brand, key: 'preload' %}
+    {% style %}{% render 'cfg-brand', brand: brand, key: 'fonts' %}{% endstyle %}
+    {{ 'cfg-base.css' | asset_url | stylesheet_tag }}
+    {{ 'brand-' | append: brand | append: '.css' | asset_url | stylesheet_tag }}
+    <script type="importmap">
+      {
+        "imports": {
+          "cfg-core": "{{ 'cfg-core.js' | asset_url }}",
+          "three": "{{ 'three.module.min.js' | asset_url }}"
+        }
+      }
+    </script>
+    <script>
+      document.documentElement.classList.replace('no-js', 'js');
+      window.CFG = {
+        demo: {{ settings.demo_mode | json }},
+        assetBase: {{ 'cfg-core.js' | asset_url | split: 'cfg-core.js' | first | json }},
+        moneyFormat: {{ shop.money_format | json }},
+        routes: { cartAdd: {{ routes.cart_add_url | json }}, cart: {{ routes.cart_url | json }}, cartChange: {{ routes.cart_change_url | json }} },
+        freeShipping: {{ settings.free_shipping_threshold | plus: 0 | json }}
+      };
+    </script>
+    <script type="module" src="{{ 'cfg-core.js' | asset_url }}"></script>
+    {{ content_for_header }}
+  </head>
+  <body class="cfg brand-{{ brand }} template-{{ template.name }}">
+    <a class="cfg-skip" href="#MainContent">{{ 'cfg.a11y.skip' | t }}</a>
+    {%- if settings.demo_mode -%}{% render 'cfg-demo-bar' %}{%- endif -%}
+    {%- case brand -%}
+      {%- when 'vela' -%}{% sections 'vela-header-group' %}
+      {%- when 'shadeline' -%}{% sections 'shadeline-header-group' %}
+      {%- when 'northgate' -%}{% sections 'northgate-header-group' %}
+      {%- when 'linkcore' -%}{% sections 'linkcore-header-group' %}
+      {%- when 'aurel' -%}{% sections 'aurel-header-group' %}
+    {%- endcase %}
+    <main id="MainContent" tabindex="-1">
+      {{ content_for_layout }}
+    </main>
+    {%- case brand -%}
+      {%- when 'vela' -%}{% sections 'vela-footer-group' %}
+      {%- when 'shadeline' -%}{% sections 'shadeline-footer-group' %}
+      {%- when 'northgate' -%}{% sections 'northgate-footer-group' %}
+      {%- when 'linkcore' -%}{% sections 'linkcore-footer-group' %}
+      {%- when 'aurel' -%}{% sections 'aurel-footer-group' %}
+    {%- endcase %}
+    {%- render 'cfg-cart-drawer' %}
+  </body>
+</html>

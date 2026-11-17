@@ -1,0 +1,45 @@
+{%- comment -%} Vela — evening timeline of benefits. {%- endcomment -%}
+<section class="cfg-section vela-benefits" id="benefits" aria-labelledby="BenefitsTitle-{{ section.id }}">
+  <div class="cfg-container">
+    <div class="vela-head" data-reveal>
+      <p class="cfg-eyebrow">{{ section.settings.eyebrow }}</p>
+      <h2 id="BenefitsTitle-{{ section.id }}" class="vela-h2">{{ section.settings.heading }}</h2>
+      {%- if section.settings.text != blank -%}<div class="vela-lead">{{ section.settings.text }}</div>{%- endif -%}
+    </div>
+    <ol class="vela-timeline">
+      {%- for block in section.blocks -%}
+        <li class="vela-timeline__item" {{ block.shopify_attributes }} data-reveal style="transition-delay: {{ forloop.index0 | times: 80 }}ms">
+          <p class="vela-timeline__time">{{ block.settings.time }}</p>
+          <h3 class="vela-timeline__title">{{ block.settings.title }}</h3>
+          <p class="vela-timeline__text">{{ block.settings.text }}</p>
+        </li>
+      {%- endfor -%}
+    </ol>
+    {%- if section.settings.footnote != blank -%}<p class="vela-footnote">{{ section.settings.footnote }}</p>{%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Vela · Benefits timeline",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "How it feels" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "An evening with Vela" },
+    { "type": "richtext", "id": "text", "label": "Intro" },
+    { "type": "text", "id": "footnote", "label": "Footnote" }
+  ],
+  "blocks": [
+    {
+      "type": "moment",
+      "name": "Moment",
+      "settings": [
+        { "type": "text", "id": "time", "label": "Time", "default": "9:00 pm" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Take two capsules" },
+        { "type": "textarea", "id": "text", "label": "Text" }
+      ]
+    }
+  ],
+  "max_blocks": 5,
+  "presets": [{ "name": "Vela · Benefits timeline", "blocks": [{ "type": "moment" }, { "type": "moment" }, { "type": "moment" }] }]
+}
+{% endschema %}

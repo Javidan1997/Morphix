@@ -1,0 +1,68 @@
+{%- comment -%} Vela — comparison table. Cells accept "yes", "no" or free text. {%- endcomment -%}
+<section class="cfg-section vela-compare" id="compare" aria-labelledby="CmpTitle-{{ section.id }}">
+  <div class="cfg-container">
+    <div class="vela-head" data-reveal>
+      <p class="cfg-eyebrow">{{ section.settings.eyebrow }}</p>
+      <h2 id="CmpTitle-{{ section.id }}" class="vela-h2">{{ section.settings.heading }}</h2>
+    </div>
+    <div class="cfg-table-wrap vela-compare__wrap" data-reveal>
+      <table class="vela-table">
+        <caption class="visually-hidden">{{ section.settings.heading }}</caption>
+        <thead>
+          <tr>
+            <td></td>
+            <th scope="col" class="is-us">{{ section.settings.col_us }}</th>
+            <th scope="col">{{ section.settings.col_a }}</th>
+            <th scope="col">{{ section.settings.col_b }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {%- for block in section.blocks -%}
+            <tr {{ block.shopify_attributes }}>
+              <th scope="row">{{ block.settings.feature }}</th>
+              {%- assign cells = block.settings.us | append: '||' | append: block.settings.a | append: '||' | append: block.settings.b | split: '||' -%}
+              {%- for cell in cells -%}
+                <td{% if forloop.first %} class="is-us"{% endif %}>
+                  {%- case cell -%}
+                    {%- when 'yes' -%}<span class="vela-yes">{% render 'cfg-icon', name: 'check' %}<span class="visually-hidden">Yes</span></span>
+                    {%- when 'no' -%}<span class="vela-no">{% render 'cfg-icon', name: 'x' %}<span class="visually-hidden">No</span></span>
+                    {%- else -%}{{ cell }}
+                  {%- endcase -%}
+                </td>
+              {%- endfor -%}
+            </tr>
+          {%- endfor -%}
+        </tbody>
+      </table>
+    </div>
+    {%- if section.settings.footnote != blank -%}<div class="vela-footnote">{{ section.settings.footnote }}</div>{%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Vela · Comparison",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Compare" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Why not just melatonin?" },
+    { "type": "text", "id": "col_us", "label": "Our column", "default": "Vela" },
+    { "type": "text", "id": "col_a", "label": "Column B", "default": "Melatonin gummies" },
+    { "type": "text", "id": "col_b", "label": "Column C", "default": "Basic magnesium" },
+    { "type": "richtext", "id": "footnote", "label": "Footnote" }
+  ],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "Row",
+      "settings": [
+        { "type": "text", "id": "feature", "label": "Feature" },
+        { "type": "text", "id": "us", "label": "Our value", "info": "yes / no / text", "default": "yes" },
+        { "type": "text", "id": "a", "label": "Column B value", "default": "no" },
+        { "type": "text", "id": "b", "label": "Column C value", "default": "no" }
+      ]
+    }
+  ],
+  "max_blocks": 10,
+  "presets": [{ "name": "Vela · Comparison", "blocks": [{ "type": "row" }, { "type": "row" }] }]
+}
+{% endschema %}

@@ -106,7 +106,7 @@ const PAGE_COPY_BY_LANGUAGE = {
       successCopy: "The template summary and PNG preview were saved to the inbox.",
     },
     preview: {
-      pathBase: "configuro.studio/templates",
+      pathBase: "configuro.studio/template-studio",
       brand: "Configuro Themes",
       footerNote: "Template system built for premium product storytelling.",
     },
@@ -212,7 +212,7 @@ const PAGE_COPY_BY_LANGUAGE = {
       successCopy: "Şablon xülasəsi və PNG önizləmə inbox-a yazıldı.",
     },
     preview: {
-      pathBase: "configuro.studio/templates",
+      pathBase: "configuro.studio/template-studio",
       brand: "Configuro Themes",
       footerNote: "Premium məhsul hekayəsi üçün qurulmuş template sistemi.",
     },
@@ -318,7 +318,7 @@ const PAGE_COPY_BY_LANGUAGE = {
       successCopy: "Сводка шаблона и PNG-превью сохранены во входящие.",
     },
     preview: {
-      pathBase: "configuro.studio/templates",
+      pathBase: "configuro.studio/template-studio",
       brand: "Configuro Themes",
       footerNote: "Система шаблонов для премиального продуктового сторителлинга.",
     },
@@ -424,7 +424,7 @@ const PAGE_COPY_BY_LANGUAGE = {
       successCopy: "Sablon ozeti ve PNG onizleme gelen kutusuna kaydedildi.",
     },
     preview: {
-      pathBase: "configuro.studio/templates",
+      pathBase: "configuro.studio/template-studio",
       brand: "Configuro Themes",
       footerNote: "Premium urun hikaye anlatimi icin tasarlanmis template sistemi.",
     },

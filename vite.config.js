@@ -1,5 +1,7 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
+import { createReadStream, existsSync } from "node:fs";
+import { extname, join } from "node:path";
 
 // The pergola landing page is a separate, lightweight HTML entry so a direct
 // visit loads only its own code, not the whole site bundle.
@@ -23,8 +25,41 @@ function pergolaDevRoutes() {
   };
 }
 
+// /templates/<slug> demos are static pages rendered from the Shopify theme
+// (scripts/templates/build-demos.mjs). In dev, render them on request and serve
+// theme assets live, so edits to shopify/theme show on reload.
+const TEMPLATE_SLUGS = /^\/templates\/(shadeline|vela|northgate|linkcore|aurel)\/?$/;
+const ASSET_TYPES = { ".css": "text/css", ".js": "text/javascript", ".svg": "image/svg+xml", ".webp": "image/webp", ".jpg": "image/jpeg", ".woff2": "font/woff2" };
+function templateDemoRoutes() {
+  return {
+    name: "template-demo-routes",
+    configureServer(server) {
+      server.middlewares.use(async (req, res, next) => {
+        const [path] = req.url.split("?");
+        const asset = path.match(/^\/templates\/assets\/([\w.-]+)$/);
+        if (asset) {
+          const file = join(process.cwd(), "shopify", "theme", "assets", asset[1]);
+          if (!existsSync(file)) return next();
+          res.setHeader("Content-Type", ASSET_TYPES[extname(file)] || "application/octet-stream");
+          return createReadStream(file).pipe(res);
+        }
+        const demo = path.match(TEMPLATE_SLUGS);
+        if (!demo) return next();
+        try {
+          const { renderDemo } = await import(`./scripts/templates/build-demos.mjs?t=${Date.now()}`);
+          res.setHeader("Content-Type", "text/html; charset=utf-8");
+          res.end(await renderDemo(demo[1]));
+        } catch (error) {
+          res.statusCode = 500;
+          res.end(`<pre>${String(error.stack || error).replace(/</g, "&lt;")}</pre>`);
+        }
+      });
+    },
+  };
+}
+
 export default defineConfig(({ isSsrBuild }) => ({
-  plugins: [react(), pergolaDevRoutes()],
+  plugins: [react(), pergolaDevRoutes(), templateDemoRoutes()],
   assetsInclude: ["**/*.glb"],
   build: isSsrBuild
     ? { outDir: "dist-ssr", emptyOutDir: true }

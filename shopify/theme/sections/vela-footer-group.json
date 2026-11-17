@@ -1,0 +1,21 @@
+{
+  "type": "footer",
+  "name": "Vela footer",
+  "sections": {
+    "footer": {
+      "type": "cfg-footer",
+      "settings": {
+        "logo_text": "vela",
+        "blurb": "<p>Small-batch evening supplements, formulated for calm without the next-morning fog.</p>",
+        "legal": "*These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease."
+      },
+      "blocks": {
+        "c1": { "type": "column", "settings": { "heading": "Shop", "links": "Evening Calm | #buy\nSubscriptions | #buy\nGift a jar | #buy" } },
+        "c2": { "type": "column", "settings": { "heading": "Learn", "links": "Ingredients | #ingredients\nCompare | #compare\nFAQ | #faq" } },
+        "c3": { "type": "column", "settings": { "heading": "Help", "links": "Shipping | #faq\nManage subscription | #faq\nContact | #faq" } }
+      },
+      "block_order": ["c1", "c2", "c3"]
+    }
+  },
+  "order": ["footer"]
+}
