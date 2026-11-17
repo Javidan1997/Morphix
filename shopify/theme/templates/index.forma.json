@@ -1,49 +1,48 @@
 {
   "sections": {
     "hero": {
-      "type": "cfg-motion-hero",
+      "type": "cfg-lux-hero",
       "settings": {
-        "heading": "A slower way to live.",
-        "button_label": "Explore the collection",
-        "image_alt": "Sculptural cream sofa, travertine table and walnut chair in a sunlit architectural room"
+        "heading": "Live with intention.",
+        "cta": "Discover the collection",
+        "alt": "Sculptural furniture in a warm architectural interior"
       }
     },
-    "editorial": {
-      "type": "cfg-motion-editorial",
+    "intro": {
+      "type": "cfg-lux-intro",
       "settings": {
-        "heading": "Objects with a sense of belonging."
-      },
-      "blocks": {
-        "image0": {
-          "type": "image",
-          "settings": {
-            "asset": "detail",
-            "alt": "Travertine material detail"
-          }
-        }
-      },
-      "block_order": [
-        "image0"
-      ]
+        "heading": "Good design is felt. Every day.",
+        "text": "A collection for modern living, grounded in tactile materials — from rich timber and natural stone to woven textures and soft, sculptural forms."
+      }
     },
-    "scene": {
-      "type": "cfg-motion-scene",
-      "settings": {},
+    "products": {
+      "type": "cfg-lux-products",
+      "settings": {
+        "heading": "The considered collection."
+      }
+    },
+    "chapters": {
+      "type": "cfg-lux-chapters",
+      "settings": {
+        "heading": "A story in materials"
+      },
       "blocks": {
         "first": {
           "type": "chapter",
           "settings": {
-            "heading": "Space to make your own.",
+            "heading": "Natural character. Quiet presence.",
+            "text": "Rich walnut. Quiet stone. Every surface has a story worth spending time with.",
             "asset": "scene",
-            "alt": "Sculptural cream sofa, travertine table and walnut chair in a sunlit architectural room"
+            "alt": "Walnut, stone and warm light"
           }
         },
         "second": {
           "type": "chapter",
           "settings": {
-            "heading": "A different perspective.",
-            "asset": "hero",
-            "alt": "Sculptural cream sofa, travertine table and walnut chair in a sunlit architectural room"
+            "heading": "Room for living.",
+            "text": "Open spaces, a softer silhouette and a seat at the table. A room made for the everyday.",
+            "asset": "campaign",
+            "alt": "A Mediterranean dining room with sculptural furniture"
           }
         }
       },
@@ -52,43 +51,77 @@
         "second"
       ]
     },
-    "products": {
-      "type": "cfg-motion-products",
-      "settings": {},
+    "feature": {
+      "type": "cfg-lux-feature",
+      "settings": {
+        "label": "Inside Forma",
+        "heading": "More than a beautiful object.",
+        "text": "We are interested in how a piece lives in a room. The way light falls on its surface. The feel of a curved edge. The quiet confidence of something you keep coming back to.",
+        "cta": "Inside the studio",
+        "alt": "Light, linen and considered furniture in a quiet room"
+      }
+    },
+    "look": {
+      "type": "cfg-lux-look",
+      "settings": {
+        "heading": "A room, considered.",
+        "text": "Explore the pieces that bring the room together.",
+        "alt": "Shop the room"
+      },
       "blocks": {
-        "product1": {
-          "type": "product",
+        "spot0": {
+          "type": "hotspot",
           "settings": {
             "demo_handle": "arc-chair",
-            "title": "Arc lounge chair"
+            "x": 85,
+            "y": 57
           }
         },
-        "product2": {
-          "type": "product",
+        "spot1": {
+          "type": "hotspot",
           "settings": {
             "demo_handle": "low-table",
-            "title": "Low table"
+            "x": 55,
+            "y": 66
           }
         },
-        "product3": {
-          "type": "product",
+        "spot2": {
+          "type": "hotspot",
           "settings": {
             "demo_handle": "cloud-sofa",
-            "title": "Cloud sofa"
+            "x": 30,
+            "y": 46
           }
         }
       },
       "block_order": [
-        "product1",
-        "product2",
-        "product3"
+        "spot0",
+        "spot1",
+        "spot2"
       ]
+    },
+    "journal": {
+      "type": "cfg-lux-journal",
+      "settings": {
+        "heading": "Stories to spend time with."
+      }
+    },
+    "newsletter": {
+      "type": "cfg-lux-newsletter",
+      "settings": {
+        "heading": "A little inspiration. Occasionally.",
+        "text": "New collections, considered spaces and the stories behind them."
+      }
     }
   },
   "order": [
     "hero",
-    "editorial",
-    "scene",
-    "products"
+    "intro",
+    "products",
+    "chapters",
+    "feature",
+    "look",
+    "journal",
+    "newsletter"
   ]
 }

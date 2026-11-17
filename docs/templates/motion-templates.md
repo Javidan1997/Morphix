@@ -1,90 +1,96 @@
-# Forma and Édito
+# Forma and Édito luxury storefronts
 
-Original concept brands added to Configuro's Shopify gallery. The selected
-Be Yours demos informed the interaction direction; no theme source, branding
-or reference photography was copied. The implementation uses the existing
-Liquid theme, demo renderer, cart adapter and self-hosted fonts.
+Two original concept brands in Configuro's Shopify gallery. Forma is furniture;
+Édito is clothing. Both use the shared Liquid theme, self-hosted fonts and
+original generated concept photography. Reference themes informed the direction;
+no reference theme source, brand identity or photographs were copied.
 
-- Forma: `/shopify-templates/forma`, luxury furniture.
-- Édito: `/shopify-templates/edito`, editorial clothing.
-- Gallery: `/shopify-templates/`, both entries first, with Furniture, Fashion
-  and Scroll storytelling filters. Count, metadata and sitemap cover seven demos.
+Each brand now has 12 pages: home, collection, six product pages, studio,
+journal and two articles. The full build produces 29 pages across seven brands.
 
-## Design system and sections
+## Routes and architecture
 
-Forma uses ivory `#f4f0e9`, dark brown `#241f1a`, Cormorant Garamond display type
-and Jost interface type. Édito uses true white `#ffffff` with near-black
-`#171715`. Both use open full-bleed imagery, sharp corners, underlined actions,
-4.7vw desktop gutters and 22px phone gutters. The concept sequence is hero,
-editorial, campaign scene, collection, footer.
+- `/shopify-templates/{forma|edito}`
+- `/shopify-templates/{brand}/collection`
+- `/shopify-templates/{brand}/products/{handle}`
+- `/shopify-templates/{brand}/studio`
+- `/shopify-templates/{brand}/journal`
+- `/shopify-templates/{brand}/journal/{handle}`
 
-The four `cfg-motion-*` Liquid sections expose merchant settings and blocks.
-`cfg-motion.js` batches scroll updates with requestAnimationFrame; video seeks
-coalesce while a previous seek is pending. No animation framework is required.
-Images have dimensions, responsive WebP sources and lazy loading below the
-hero. Video is muted, never auto-playing, and not requested in reduced-motion
-or save-data mode. The local preview and Vite servers support byte-range video
-requests to match production seeking behavior.
+`shopify/demo/luxury.mjs` supplies Shopify-shaped products, collections, blogs,
+articles and pages. Variant IDs are stable across documents. JSON templates use
+`cfg-lux-*` sections; `cfg-luxury.css` and `cfg-luxury.js` are shared by the two
+brands. LiquidJS render snippets receive Shopify global objects through the
+engine's globals option, preserving isolated snippet locals.
 
-Bundled five-second videos are subtle camera moves across original generated
-campaign photographs. They demonstrate actual MP4 seeking, not live-action
-motion. Replace them with real brand film through the section's video setting.
+The static builder writes nested HTML and directory indexes for parent routes
+so GitHub Pages directory redirects work. Vite handles the same routes in
+development; Vercel has matching rewrites. Canonicals and sitemap entries cover
+each page, with brand social previews.
 
-## Functional verification
+## Design and movement
 
-`npm run build` renders all seven demos. `npm run templates:check-motion`
-checks both new demos in Chromium at 1440×900 and 390×844, including:
+Forma uses ivory `#f4f0e9`, brown `#241f1a`, Cormorant Garamond and Jost. Édito
+uses white `#ffffff` and near-black `#171715`. Both use full-bleed photography,
+large serif headlines, sharp corners, understated controls and generous space.
 
-- Hero MP4 currentTime changes with scroll (approximately three seconds at 60%).
-- Chapter panels move horizontally and Édito's desktop collection translates.
-- Furniture adds to cart; clothing size M reaches the cart correctly.
-- Pause restores all chapters to static document flow.
-- Reduced motion avoids video loading and hides the redundant pause control.
-- No unintended mobile document overflow; phone product rails remain swipeable.
-- Gallery has seven cards and the Fashion filter returns Édito.
-- No new-demo runtime errors or failed local asset requests.
+Home sequence: cinematic hero, manifesto, featured pieces, pinned image
+chapters, brand feature, shoppable scene, journal and newsletter. Supporting
+pages carry the same typography, spacing and photographic direction.
 
-Results: [motion-checks.json](motion-checks.json). Theme CLI validation reports
-zero issues. No Lighthouse scores are claimed for these additions. No live
-Shopify development store installation was performed.
+Motion preserves native scrolling. A requestAnimationFrame loop interpolates
+scroll values and writes transform-only parallax and editorial drift; image
+curtains use clip-path in a fixed-height pinned stage. Geometry is cached and
+remeasured on load, resize and collection changes. Reveals use IntersectionObserver.
+Native cross-document view transitions add a short dissolve and shared product
+imagery when supported. Other browsers navigate normally.
 
-Browser extension/connection tools were unavailable, so verification used the
-repository's puppeteer-core with system Chromium. `check-motion.mjs` captures
-hero, editorial, scene, collection, static story and phone screenshots. Images
-are inspected directly with `view_image`, including both concepts and browser
-captures. Concepts are 1024×1536 overview art; desktop captures are 1440×900
-section views and full document views, and phone captures are 390×844. The
-concept overview is not a viewport-sized browser specification.
+The public demos use image movement instead of seeking an MP4 on every scroll.
+Merchants can select an optional muted looping Shopify video for the hero.
+Pause motion and reduced-motion preferences return chapters to normal document
+flow and remove decorative motion. Hero dimensions stay stable during scrolling.
 
-## Visual fidelity ledger
+Collections filter and sort six products. Product pages include image/campaign
+views, variant selection, quantities, accordions and related pieces. Édito adds
+a size guide. Bags persist across pages per brand in tab-scoped sessionStorage;
+only demo cart lines are stored. No form input is stored or sent. Checkout stays
+disabled. Live stores use the existing Shopify Ajax Cart adapter.
 
-The concept art direction was faithfully implemented and visually compared in
-`view_image`. Intentional functional additions are recorded below.
+## Verification and visual review
 
-| Check | Concept evidence | Render evidence / decision |
+`npm run templates:check-motion` runs Chromium at 1440×1000 and 390×844. It
+checks every luxury route, heading structure, internal navigation, local asset
+and runtime errors, stable hero height, parallax, chapter masks, pause/reduced
+motion, collection filters/sorting, galleries, size selection, quantities,
+bag persistence, mobile navigation and overflow. It also checks that the five
+older demos retain disabled demo checkout.
+
+Evidence goes to `/tmp/configuro-luxury-qa` by default, or `EVIDENCE_DIR`.
+`results.json` is written only after all assertions pass. Historical checked-in
+`motion-checks.json` and earlier screenshots document the previous release;
+they are not the results of this upgrade. No Lighthouse score or physical-device
+frame-rate guarantee is claimed. A live Shopify development-store installation
+has not been performed.
+
+The current concept and browser images were inspected directly. The first-screen
+headlines, editorial scale, image-first composition and product-page hierarchy
+follow the new concepts. Original campaign images were generated separately,
+so their contents differ intentionally. Functional navigation, Configuro demo
+disclosure, pause control, quantity/variant controls and demo bag extend the
+static concepts.
+
+| Area | Concept direction | Browser implementation |
 |---|---|---|
-| Typography | Large fine serif headlines and restrained sans UI | Cormorant/Jost, matching headline hierarchy and small underlined actions |
-| Palette | Forma warm ivory; Édito true white | Exact background tokens retained; no default rounded cards |
-| Header | Spaced wordmark, two navigation links, bag | Same structure; existing bag icon opens the working cart |
-| Hero | Full-bleed architectural / courtyard campaign | Original generated campaign assets, same image-first direction; first-screen CTA fit corrected |
-| Editorial | Forma material closeup; Édito staggered portraits | Sharp material photograph and staggered drifting fashion row |
-| Story | Dark campaign scene with light serif text | Pinned image chapters; a second chapter intentionally demonstrates the requested sliding transition |
-| Collection | Three furniture / clothing products | Same product lineup, with price, real variant controls and working cart added |
-| Phone | Editorial hierarchy adapted to narrow screens | Oversized heading retained; fashion image crop corrected to keep the model visible |
-
-Above-the-fold copy matches the concept headline, brand, navigation and CTA.
-Intentional differences: Configuro concept-demo disclosure, accessible motion
-control, bag icon instead of text, original separately generated campaign
-photographs, and an opaque header on Édito for consistent navigation contrast.
-The second story chapter and functional price/variant/cart controls extend the
-static concept to satisfy the requested storefront behavior.
-
-No material layout defects remain in the inspected viewports. Screenshots in
-`screenshots/` and concept images in `concepts/` are retained as review artifacts.
+| Furniture home | Warm architectural room, white serif over image | Full-height room with “Live with intention.” and restrained navigation |
+| Fashion home | Sunlit campaign, large asymmetric serif | “A point of view. Yours.” with transparent navigation over campaign |
+| Editorial | Material pairing / staggered fashion portraits | Parallax material details and two drifting fashion rows |
+| Chapters | Cinematic image change | Two pinned curtain-reveal scenes with chapter controls |
+| Product | Large image beside restrained buy box | Gallery, size/finish, quantity, bag and material details |
+| Phone | Retained hierarchy in narrow columns | Stacked content, two-column catalog, menu dialog and adapted image crops |
 
 ## Reproduce
 
-```
+```sh
 npm ci
 npm run build
 npm run serve:pages
@@ -92,5 +98,5 @@ npm run templates:check-motion
 npm run templates:capture-motion
 ```
 
-Capture refreshes gallery covers and social images for the two new demos.
-Rebuild after capture to copy these public images into `dist/`.
+Capture refreshes portfolio covers and social images. Rebuild afterward to copy
+them into `dist`. Shopify CLI validation: `shopify theme check --path shopify/theme`.

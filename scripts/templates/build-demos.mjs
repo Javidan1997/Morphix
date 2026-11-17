@@ -23,6 +23,8 @@ const demoDir = join(root, "shopify", "demo");
 const { templates, templateUrl, TEMPLATE_ORIGIN, TEMPLATES_PATH } = await import(pathToFileURL(join(root, "src", "data", "templateGallery.js")).href);
 const { shop } = await import(pathToFileURL(join(demoDir, "shop.mjs")).href);
 
+const { luxuryFixture, luxuryRoutes } = await import(pathToFileURL(join(demoDir, 'luxury.mjs')).href);
+
 export const ASSET_BASE = "/shopify-templates/assets/";
 
 function assetVersion() {
@@ -36,10 +38,12 @@ function assetVersion() {
 
 /** Render one demo to an HTML string. Exported for the Vite dev middleware. */
 export async function renderDemo(slug, { version = assetVersion() } = {}) {
-  const meta = templates.find((t) => t.slug === slug);
+  const [brandSlug, ...parts] = slug.split('/');
+  const meta = templates.find((t) => t.slug === brandSlug);
   if (!meta) throw new Error(`Unknown template: ${slug}`);
   // Cache-bust fixtures in dev so edits show without a restart.
-  const fixture = (await import(`${pathToFileURL(join(demoDir, `${slug}.mjs`)).href}?t=${Date.now()}`)).default;
+  const fixture = ['forma','edito'].includes(brandSlug) ? luxuryFixture(brandSlug, parts.join('/')) : (await import(`${pathToFileURL(join(demoDir, `${slug}.mjs`)).href}?t=${Date.now()}`)).default;
+  if (!fixture) throw new Error(`Unknown luxury route: ${slug}`);
   const locale = JSON.parse(readFileSync(join(themeDir, "locales", "en.default.json"), "utf8"));
   const settings = { ...themeSettings(themeDir), demo_mode: true, demo_back_url: `${TEMPLATE_ORIGIN}${TEMPLATES_PATH}` };
   const data = { shop, all_products: fixture.products || {}, collections: fixture.collections || {} };
@@ -54,10 +58,10 @@ export async function renderDemo(slug, { version = assetVersion() } = {}) {
     routes: { root_url: "/", cart_url: "/cart", cart_add_url: "/cart/add", cart_change_url: "/cart/change", account_url: "/account", account_login_url: "/account/login", account_register_url: "/account/register" },
     request: { design_mode: false, page_type: type, locale: { iso_code: "en" }, host: "configuro.studio" },
     template: { name: type, suffix, directory: null },
-    page_title: meta.title,
-    page_description: meta.description,
+    page_title: fixture.title || meta.title,
+    page_description: fixture.description || meta.description,
     canonical_url: templateUrl(slug),
-    page_image: `${TEMPLATE_ORIGIN}${TEMPLATES_PATH}/og/${slug}.jpg`,
+    page_image: `${TEMPLATE_ORIGIN}${TEMPLATES_PATH}/og/${brandSlug}.jpg`,
     content_for_header: "",
     all_products: data.all_products,
     collections: data.collections,
@@ -92,25 +96,31 @@ export async function buildDemos(outRoot, only = []) {
   mkdirSync(join(outDir, "assets"), { recursive: true });
   cpSync(join(themeDir, "assets"), join(outDir, "assets"), { recursive: true });
   const version = assetVersion();
-  for (const t of templates) {
-    if (only.length && !only.includes(t.slug)) continue;
-    const html = await renderDemo(t.slug, { version });
+  const pages = [...templates.map(t=>t.slug), ...luxuryRoutes];
+  for (const slug of pages) {
+    if (only.length && !only.includes(slug.split('/')[0])) continue;
+    const html = await renderDemo(slug, { version });
+    mkdirSync(dirname(join(outDir, `${slug}.html`)), { recursive: true });
+    if (['forma','edito'].includes(slug) || pages.some(page => page.startsWith(slug + '/'))) {
+      mkdirSync(join(outDir,slug),{recursive:true});
+      writeFileSync(join(outDir,slug,'index.html'),html,'utf8');
+    }
     // GitHub Pages serves shopify-templates/vela.html at /shopify-templates/vela with a 200.
-    writeFileSync(join(outDir, `${t.slug}.html`), html, "utf8");
-    console.log(`  ${TEMPLATES_PATH.slice(1)}/${t.slug}.html  ${(Buffer.byteLength(html) / 1024).toFixed(1)} KB`);
+    writeFileSync(join(outDir, `${slug}.html`), html, "utf8");
+    console.log(`  ${TEMPLATES_PATH.slice(1)}/${slug}.html  ${(Buffer.byteLength(html) / 1024).toFixed(1)} KB`);
   }
 
   const sitemap = join(outRoot, "sitemap.xml");
   if (existsSync(sitemap)) {
     const today = new Date().toISOString().slice(0, 10);
     let xml = readFileSync(sitemap, "utf8");
-    const urls = templates
-      .filter((t) => !xml.includes(`<loc>${templateUrl(t.slug)}</loc>`))
-      .map((t) => `  <url><loc>${templateUrl(t.slug)}</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>`);
+    const urls = pages
+      .filter((slug) => !xml.includes(`<loc>${templateUrl(slug)}</loc>`))
+      .map((slug) => `  <url><loc>${templateUrl(slug)}</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>`);
     xml = xml.replace("</urlset>", `${urls.join("\n")}\n</urlset>`);
     writeFileSync(sitemap, xml, "utf8");
   }
-  console.log(`Built ${templates.length} template demos into ${outDir}`);
+  console.log(`Built ${pages.length} pages across ${templates.length} template demos into ${outDir}`);
 }
 
 if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {

@@ -1,0 +1,19 @@
+{
+  "sections": {
+    "main": {
+      "type": "cfg-lux-article",
+      "settings": {}
+    },
+    "newsletter": {
+      "type": "cfg-lux-newsletter",
+      "settings": {
+        "heading": "A little inspiration. Occasionally.",
+        "text": "New collections, considered spaces and the stories behind them."
+      }
+    }
+  },
+  "order": [
+    "main",
+    "newsletter"
+  ]
+}

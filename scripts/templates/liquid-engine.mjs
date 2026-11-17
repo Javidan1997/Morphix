@@ -136,6 +136,17 @@ export function createShopifyEngine({ themeDir, assetBase, assetVersion, locale,
     }
     render() { return ""; }
   });
+  engine.registerTag("doc", class extends Tag {
+    constructor(token, remain, liquid) {
+      super(token, remain, liquid);
+      while (remain.length) {
+        const t = remain.shift();
+        if (t.name === "enddoc") return;
+      }
+      throw new Error("{% doc %} not closed");
+    }
+    render() { return ""; }
+  });
 
   class BlockTag extends Tag {
     constructor(token, remain, liquid, parser, endName) {
@@ -250,7 +261,7 @@ export function createShopifyEngine({ themeDir, assetBase, assetVersion, locale,
       throw new Error(`sections/${entry.type}.liquid allows ${schema.max_blocks} blocks, got ${blocks.length}`);
     }
     const section = { id, settings: settingsFor(schema.settings, entry.settings), blocks };
-    const html = await engine.parseAndRender(src, { ...globals, section });
+    const html = await engine.parseAndRender(src, { ...globals, section }, { globals });
     const tag = schema.tag || "div";
     const cls = ["shopify-section", schema.class].filter(Boolean).join(" ");
     return `<${tag} id="${wrapperId}" class="${cls}">${html}</${tag}>`;
@@ -284,7 +295,7 @@ export function createShopifyEngine({ themeDir, assetBase, assetVersion, locale,
     const content = parts.join("\n");
     if (!layout) return content;
     const layoutSrc = readFileSync(join(themeDir, "layout", `${layout}.liquid`), "utf8");
-    return engine.parseAndRender(layoutSrc, { ...globals, content_for_layout: content });
+    return engine.parseAndRender(layoutSrc, { ...globals, content_for_layout: content }, { globals });
   }
 
   return { engine, renderTemplate, renderSection, settingsFor, sectionSource };

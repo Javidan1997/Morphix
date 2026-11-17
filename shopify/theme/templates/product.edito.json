@@ -1,0 +1,22 @@
+{
+  "sections": {
+    "main": {
+      "type": "cfg-lux-product",
+      "settings": {
+        "story_heading": "A silhouette. A state of mind.",
+        "image_alt": "Édito campaign on a Mediterranean afternoon"
+      }
+    },
+    "newsletter": {
+      "type": "cfg-lux-newsletter",
+      "settings": {
+        "heading": "Stay in the edit.",
+        "text": "New silhouettes, campaign stories and a different way of seeing the everyday."
+      }
+    }
+  },
+  "order": [
+    "main",
+    "newsletter"
+  ]
+}

@@ -1,0 +1,14 @@
+{% doc %}
+Renders an image-led luxury product card.
+@param {product} item - Product
+@param {boolean} [eager] - Prioritize the photograph
+{% enddoc %}
+{% assign card_category = item.type %}{% if settings.demo_mode %}{% assign card_category = item.category %}{% endif %}
+<article class="lx-card" data-category="{{ card_category | escape }}" data-price="{{ item.price }}" data-title="{{ item.title | escape }}" data-lx-reveal>
+  <a class="lx-card__image" style="view-transition-name:product-{{ item.handle }}" href="{{ item.url }}" aria-label="{{ item.title | escape }}">
+    {%- if eager -%}{%- assign load = 'eager' -%}{%- else -%}{%- assign load = 'lazy' -%}{%- endif -%}
+    {% render 'cfg-image', image: item.featured_image, width: 800, height: 1000, widths: '480,800', alt: item.title, sizes: '(min-width: 760px) 33vw, 50vw', loading: load %}
+    <span class="lx-card__discover">{{ 'lux.discover' | t }} {% render 'cfg-icon', name: 'arrow' %}</span>
+  </a>
+  <div class="lx-card__caption"><div><h3><a href="{{ item.url }}">{{ item.title | escape }}</a></h3><p>{{ card_category | escape }}</p></div><span>{{ item.price | money_without_trailing_zeros }}</span></div>
+</article>
